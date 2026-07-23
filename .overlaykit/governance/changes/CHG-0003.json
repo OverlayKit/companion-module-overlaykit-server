@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0003",
+  "title": "Test the change-contract immutability boundary",
+  "status": "approved",
+  "changeClass": "governance",
+  "risk": "critical",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "ADR-0001 declares accepted decisions, accepted specifications, and implemented change contracts immutable.",
+      "evidence": "ADR-0001 policy accepted-records-are-immutable",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The v2 manifest hashes every change contract but does not record the status that determines whether a base change is already immutable.",
+      "evidence": "tools/governance/src/manifest.ts and overlaykit-governance-manifest/v2",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "GitHub Actions run 30033872965 rejected the human-accepted CHG-0002 transition from approved to implemented as a mutation even though governance, quality, build, packaging, and evidence recording otherwise completed.",
+      "evidence": "OverlayKit/companion-module-overlaykit-server Actions run 30033872965",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-032: The governance host can preserve complete change-contract history while allowing a base contract that is not yet implemented to evolve, by resolving and hash-verifying each base change blob and freezing bytes only when that base contract is already implemented.",
+      "evidence": "Human Doctrine approval on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "This Slice does not establish field-level mutation rules for proposed or approved contracts, migration to a new manifest schema, cross-VCS behavior, or acceptance of H-031.",
+      "evidence": "Approved H-032 Slice boundary",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The verifier resolves every historical base change from the exact Git base ref and rejects missing, invalid, identity-mismatched, or manifest-hash-mismatched blobs.",
+      "verification": "Focused repository and hostile base-change tests."
+    },
+    {
+      "id": "SC-002",
+      "statement": "A changed or removed base contract whose base status is implemented remains an immutability violation.",
+      "verification": "Manifest immutability tests for implemented contracts."
+    },
+    {
+      "id": "SC-003",
+      "statement": "A base contract whose base status is approved may change while retaining its historical identity, and all current contract bytes remain bound by the current manifest.",
+      "verification": "Manifest transition tests and deterministic current-manifest verification."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Accepted decisions and accepted specifications retain their existing immutable behavior.",
+      "verification": "Existing and focused regression tests."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The separate governance Slice passes local checks and Linux CI without modifying H-031 product code or claiming H-031 acceptance.",
+      "verification": "Diff review, npm run check, npm run build, and GitHub Actions evidence."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0003 records the approved question, hypothesis, evidence boundary, and unknowns before implementation.",
+      "evidence": "Human Doctrine approval and CHG-0003."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The implementation changes only base change resolution, immutability projection, focused tests, and generated governance artifacts.",
+      "evidence": "Change review against CHG-0003."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "Local governance, quality, build, licensing, and deterministic artifact checks pass.",
+      "evidence": "Future local refutation commands."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No bounded inference, implemented status, ADR, profile activation, merge, or H-031 acceptance is created before separate human evidence review.",
+      "evidence": "Future Human Doctrine evidence review."
+    }
+  ]
+}
