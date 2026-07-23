@@ -1,8 +1,8 @@
 {
   "schemaVersion": "overlaykit-governance-profile/v2",
   "name": "overlaykit-companion-module",
-  "version": "1.0.0",
-  "decisionIds": ["ADR-0001"],
+  "version": "1.1.0",
+  "decisionIds": ["ADR-0001", "ADR-0002"],
   "specificationIds": ["SPEC-0001"],
   "gates": [],
   "artifacts": [],

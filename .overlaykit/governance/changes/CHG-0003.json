@@ -2,11 +2,11 @@
   "schemaVersion": "overlaykit-governance-change/v2",
   "id": "CHG-0003",
   "title": "Test the change-contract immutability boundary",
-  "status": "approved",
+  "status": "implemented",
   "changeClass": "governance",
   "risk": "critical",
   "owner": "@rodrigoteamx",
-  "decisions": ["ADR-0001"],
+  "decisions": ["ADR-0001", "ADR-0002"],
   "specifications": [],
   "claims": [
     {
@@ -31,6 +31,12 @@
       "kind": "assumption",
       "statement": "H-032: The governance host can preserve complete change-contract history while allowing a base contract that is not yet implemented to evolve, by resolving and hash-verifying each base change blob and freezing bytes only when that base contract is already implemented.",
       "evidence": "Human Doctrine approval on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "H-032 is supported for the tested Git-backed governance host at signed head e6a5f52b1d9dba7718d5914fdcf6aa80b9d63ea5: every historical change identity remains present, base blobs are schema-, identity-, and SHA-256-verified, contracts implemented in the base are byte-immutable, non-implemented contracts may evolve while current bytes remain manifest-bound, and missing status evidence fails closed. The evidence does not establish field-level mutation rules for proposed or approved contracts, a new manifest schema, cross-VCS behavior, or acceptance of H-031.",
+      "evidence": "Human Doctrine acceptance on 2026-07-23 after local refutation and GitHub Actions Constitution run 30036275462",
       "blocking": false
     },
     {
@@ -81,12 +87,12 @@
     {
       "id": "DOD-003",
       "statement": "Local governance, quality, build, licensing, and deterministic artifact checks pass.",
-      "evidence": "Future local refutation commands."
+      "evidence": "Clean Node 22 installation, 44 governance tests, licensing, build, origin/main verification, direct H-031 verification, and GitHub Actions run 30036275462."
     },
     {
       "id": "DOD-004",
       "statement": "No bounded inference, implemented status, ADR, profile activation, merge, or H-031 acceptance is created before separate human evidence review.",
-      "evidence": "Future Human Doctrine evidence review."
+      "evidence": "Human Doctrine evidence acceptance on 2026-07-23 and ADR-0002; merge and H-031 acceptance remain separate transitions."
     }
   ]
 }

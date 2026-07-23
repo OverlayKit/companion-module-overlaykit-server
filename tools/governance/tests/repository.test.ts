@@ -44,6 +44,11 @@ describe('OverlayKit governance contract', () => {
         effectiveStatus: 'accepted',
         supersededBy: null,
       }),
+      expect.objectContaining({
+        id: 'ADR-0002',
+        effectiveStatus: 'accepted',
+        supersededBy: null,
+      }),
     ]);
     expect(plan.gates.find((gate) => gate.id === 'signed-identity')).toEqual(
       expect.objectContaining({

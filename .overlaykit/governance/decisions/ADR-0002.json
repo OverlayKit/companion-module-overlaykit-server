@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "overlaykit-governance-decision/v1",
+  "id": "ADR-0002",
+  "title": "Change-contract immutability begins from implemented base evidence",
+  "status": "accepted",
+  "date": "2026-07-23",
+  "supersedes": null,
+  "governs": [
+    "change-contract-history",
+    "change-contract-transitions",
+    "git-base-evidence",
+    "governance-immutability",
+    "manifest-integrity"
+  ],
+  "context": "ADR-0001 declares implemented change contracts immutable, but the original verifier compared hashes for every change in the base manifest without knowing its lifecycle status. GitHub Actions run 30033872965 therefore rejected the human-accepted CHG-0002 transition from approved to implemented even though its governance, quality, build, package, and evidence steps otherwise completed. H-032 tested whether the host could preserve complete history while deriving immutability from the exact base state. Refutation used 44 governance tests, hostile missing-blob, hash-mismatch, and identity-mismatch cases, regression checks for accepted decisions and specifications, an implemented-change mutation and deletion check, direct verification against origin/main, and successful verification of the accepted H-031 head without modifying it. Ubuntu GitHub Actions run 30036275462 passed validate and observe at signed head e6a5f52b1d9dba7718d5914fdcf6aa80b9d63ea5 and verified synthetic merge 83b67c67dfdb4e0d20f35d65b4b034d7901ad2b5. The accepted evidence includes governance run SHA-256 8ed2648cb09c15be3e52500de3e2c3beedc46e413279c6d0815260be496d1570, GitHub evidence SHA-256 995c20d37759b3dcc1d5529d28682212d982c677708ad36d32e9ef2db2624035, and observation SHA-256 1e5e55f8c5d6426103f584025fe8ef2d4a95b4bedae69c1d05a26afb0c8a1afe. The human authority accepted H-032 on 2026-07-23.",
+  "decision": "For Git-backed governance verification, every change contract remains hashed by the current manifest and every change identity present in the base manifest must remain present. The verifier resolves each historical change blob from the exact Git base ref, validates it against the change schema, requires its internal identity to match the manifest key, and requires its raw SHA-256 to match the base manifest. A base change whose verified status is implemented is byte-immutable. A base change that is not yet implemented may evolve while retaining its identity and remaining bound by the current manifest. Missing, invalid, identity-mismatched, hash-mismatched, or status-unproven base evidence fails closed. This decision does not define field-level mutation rules for proposed or approved contracts, a new manifest schema, or behavior outside Git.",
+  "consequences": [
+    "An approved contract can transition to implemented without being falsely treated as an already immutable record.",
+    "Once an implemented contract enters the base branch, later verification rejects any byte change or deletion.",
+    "Every historical change identity remains present even before its content becomes byte-immutable.",
+    "The current manifest continues to bind the exact bytes of every current contract regardless of lifecycle status.",
+    "The verifier reads status only from a schema-valid, identity-matched, manifest-hash-matched blob at the exact base ref.",
+    "Failure to prove a base contract's status cannot weaken immutability.",
+    "Field-level constraints for proposed or approved contracts require a future architectural question and Slice.",
+    "Acceptance of this mechanism does not itself accept, merge, publish, or release H-031."
+  ],
+  "policies": [
+    {
+      "kind": "rule",
+      "id": "change-immutability-starts-from-implemented-base",
+      "statement": "A change contract is byte-immutable when its schema-valid and manifest-hash-matched blob at the exact base ref declares status implemented."
+    },
+    {
+      "kind": "rule",
+      "id": "base-change-status-is-hash-bound",
+      "statement": "Lifecycle status used for immutability must come from the exact base blob whose raw SHA-256 matches the base manifest."
+    },
+    {
+      "kind": "rule",
+      "id": "change-history-cannot-disappear",
+      "statement": "Every change identity present in the base manifest must remain present in the current manifest regardless of lifecycle status."
+    },
+    {
+      "kind": "rule",
+      "id": "current-change-bytes-remain-manifest-bound",
+      "statement": "Every current change contract remains bound to its exact bytes by the current deterministic manifest."
+    },
+    {
+      "kind": "rule",
+      "id": "unproven-base-change-status-fails-closed",
+      "statement": "Missing, invalid, identity-mismatched, hash-mismatched, or status-unproven base change evidence is an immutability violation."
+    },
+    {
+      "kind": "rule",
+      "id": "pre-implementation-field-rules-remain-unknown",
+      "statement": "H-032 does not authorize claims about which individual fields of a proposed or approved contract may change."
+    }
+  ]
+}
