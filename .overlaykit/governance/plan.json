@@ -76,6 +76,14 @@
       "id": "ADR-0001",
       "supersededBy": null,
       "title": "The Companion adapter is evidence-bound translation, not authority"
+    },
+    {
+      "contentHash": "f728ca05d1ed0a7a35fa8e7a55bb34afee94125e2f71e6c9886372c2bf12f87a",
+      "declaredStatus": "accepted",
+      "effectiveStatus": "accepted",
+      "id": "ADR-0002",
+      "supersededBy": null,
+      "title": "The Linux Companion API 2.0 adapter preserves server authority"
     }
   ],
   "engineVersion": "overlaykit-governance-host/v2",
@@ -202,10 +210,10 @@
     }
   ],
   "mechanismsHash": "64141de30d5791ad3f53cf857fa582477413b15e997f7e438de408f1ba328fd4",
-  "planHash": "bc17f18abe30e0e16e689ae43572b2a87d49a980599c6a6a463f6aaac79a5efb",
-  "profileHash": "a5f1930932913acee00ac56542a8d168750ddcc515ac55103ef7635a6ac683c7",
+  "planHash": "40ffdccf9a80f68c1a1fbf89fed4b6ba7194f455677e31d2340a489841e390df",
+  "profileHash": "87322b08cfb7dbcaae8a06c5d3a9905f14955f4e6eac1111ae96e17e7430825e",
   "profileName": "overlaykit-companion-module",
-  "profileVersion": "1.0.0",
+  "profileVersion": "1.1.0",
   "rules": [
     {
       "id": "accepted-records-are-immutable",
@@ -230,6 +238,54 @@
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "Every change separates facts, inferences, assumptions, and unknowns; facts and inferences require evidence."
+    },
+    {
+      "id": "companion-adapter-evidence-does-not-claim-release-or-hardware",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "Build, host, and CI evidence cannot be represented as npm publication, Bitfocus registry admission, release, physical hardware behavior, OBS truth, or operator perception."
+    },
+    {
+      "id": "companion-api2-boundary-is-exact",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "The accepted adapter claim is limited to Node 22 ESM, Companion Module API 2.0, official @companion-module/host 1.0.1, and the tested Linux CI environment."
+    },
+    {
+      "id": "companion-configuration-fails-closed",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "Missing or invalid endpoint, bearer, trust, URL authority, or transport security prevents admission without silently weakening the boundary."
+    },
+    {
+      "id": "companion-feedback-is-not-optimistic",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "Actions do not change projected feedback; feedback transitions require accepted server evidence or an observed transport fact."
+    },
+    {
+      "id": "companion-operational-authority-is-ephemeral",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "The adapter does not persist Show bindings, catalogs, revisions, snapshots, retries, command outcomes, or credentials as operational authority across restart."
+    },
+    {
+      "id": "companion-package-retains-legal-provenance",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "Every distributable module archive retains Apache-2.0, Rodrigo Vicente attribution, and applicable adapted Bitfocus MIT notice."
+    },
+    {
+      "id": "companion-protocol-consumption-is-public-and-pinned",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "The adapter consumes an exact digest-pinned public @overlaykit/protocol artifact and has no workspace, server-source, copied-validator, or repository-source dependency."
+    },
+    {
+      "id": "companion-readiness-requires-server-evidence",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "The adapter remains not ready until it has accepted complete signed bootstrap, acknowledged that exact bootstrap, and received device.ready from the server."
     },
     {
       "id": "evidence-cannot-redefine-law",
