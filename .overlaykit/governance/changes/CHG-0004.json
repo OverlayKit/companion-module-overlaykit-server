@@ -2,11 +2,11 @@
   "schemaVersion": "overlaykit-governance-change/v2",
   "id": "CHG-0004",
   "title": "Test exact governance evidence in multi-subject provenance",
-  "status": "proposed",
+  "status": "implemented",
   "changeClass": "governance",
   "risk": "critical",
   "owner": "@rodrigoteamx",
-  "decisions": ["ADR-0001"],
+  "decisions": ["ADR-0001", "ADR-0004"],
   "specifications": [],
   "claims": [
     {
@@ -24,7 +24,13 @@
     {
       "kind": "assumption",
       "statement": "H-033: The observer can preserve fail-closed governance evidence while accepting a multi-subject statement by selecting exactly one subject whose name and SHA-256 match the GovernanceRun under observation.",
-      "evidence": "Failure analysis of Actions run 30039541525",
+      "evidence": "Failure analysis of Actions run 30039541525 and Human Doctrine acceptance on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "H-033 is supported for the tested GitHub provenance observer at signed head 24b68a9bc5b1956e5a055a529b35c8bea3950731: a statement may contain additional subjects when exactly one governance-run.json subject matches the observed SHA-256, while missing, duplicate, and digest-mismatched governed subjects fail closed and execution identity checks remain exact. The evidence does not establish independent trust, publication, or release provenance for co-attested artifacts.",
+      "evidence": "Human Doctrine acceptance on 2026-07-23 after exact attestation reproduction, local refutation, and GitHub Actions Constitution run 30040028655",
       "blocking": false
     },
     {
@@ -64,18 +70,18 @@
     },
     {
       "id": "DOD-002",
-      "statement": "The Slice changes only attestation subject normalization, focused tests, the proposed change contract, and deterministic generated artifacts.",
+      "statement": "The Slice changes only attestation subject normalization, focused tests, the change contract, and deterministic generated artifacts.",
       "evidence": "Change review against CHG-0004."
     },
     {
       "id": "DOD-003",
       "statement": "Governance, licensing, quality, module, build, package, and GitHub Actions checks pass for the exact Slice head.",
-      "evidence": "Local and GitHub Actions evidence."
+      "evidence": "46 governance tests, 21 module tests, exact run 30039541525 attestation reproduction, licensing, build, package verification, zero-high runtime audit, and GitHub Actions run 30040028655."
     },
     {
       "id": "DOD-004",
-      "statement": "No ADR, implemented status, bounded inference, merge, publication, or release claim is created before separate human evidence review.",
-      "evidence": "CHG-0004 remains proposed pending evidence review."
+      "statement": "ADR-0004, implemented status, bounded inference, and profile activation occur only after evidence acceptance; merge, publication, and release remain separate transitions.",
+      "evidence": "Human Doctrine evidence acceptance on 2026-07-23 and ADR-0004."
     }
   ]
 }

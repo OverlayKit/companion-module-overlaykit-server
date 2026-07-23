@@ -92,6 +92,14 @@
       "id": "ADR-0003",
       "supersededBy": null,
       "title": "The Linux Companion API 2.0 adapter preserves server authority"
+    },
+    {
+      "contentHash": "9eb30ec5ed70d282bb4e96674ea44e9796f95cb3fbd41b45f1f77da51f40812d",
+      "declaredStatus": "accepted",
+      "effectiveStatus": "accepted",
+      "id": "ADR-0004",
+      "supersededBy": null,
+      "title": "Governed evidence is selected exactly within multi-subject provenance"
     }
   ],
   "engineVersion": "overlaykit-governance-host/v2",
@@ -218,10 +226,10 @@
     }
   ],
   "mechanismsHash": "64141de30d5791ad3f53cf857fa582477413b15e997f7e438de408f1ba328fd4",
-  "planHash": "0bda2d4a6a5b45c9d3c2c672d1a0e7130f4ca8eb5efd7845deae432b377c3d42",
-  "profileHash": "3e862069cef05e80c7fe7360c6e29de9d1c978f5ee34aa9f2975c530996f13d8",
+  "planHash": "1412ac37922c10a01ff6478ce00c451aeef11c123a553ac40b3093bbba6944c2",
+  "profileHash": "c8fe5807f3b1f727980c7562f5119171154326771a34d415b8940d6553381e1d",
   "profileName": "overlaykit-companion-module",
-  "profileVersion": "1.2.0",
+  "profileVersion": "1.3.0",
   "rules": [
     {
       "id": "accepted-records-are-immutable",
@@ -240,6 +248,12 @@
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "An agent has no independent project authority and must name its registered human principal."
+    },
+    {
+      "id": "attestation-execution-identity-remains-exact",
+      "kind": "rule",
+      "sourceDecision": "ADR-0004",
+      "statement": "Subject selection cannot weaken exact signer workflow, source, OIDC, runner, event, and invocation verification."
     },
     {
       "id": "base-change-status-is-hash-bound",
@@ -264,6 +278,12 @@
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "Every change separates facts, inferences, assumptions, and unknowns; facts and inferences require evidence."
+    },
+    {
+      "id": "co-attested-subjects-do-not-inherit-governance-trust",
+      "kind": "rule",
+      "sourceDecision": "ADR-0004",
+      "statement": "Subjects other than the exact GovernanceRun remain outside the governance evidence claim even when they share its signed provenance statement."
     },
     {
       "id": "companion-adapter-evidence-does-not-claim-release-or-hardware",
@@ -324,6 +344,18 @@
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "Evidence may answer an approved question only within the law and claim boundary that existed before the experiment."
+    },
+    {
+      "id": "governed-attestation-subject-ambiguity-fails-closed",
+      "kind": "rule",
+      "sourceDecision": "ADR-0004",
+      "statement": "An absent, duplicate, or digest-mismatched GovernanceRun subject is invalid evidence."
+    },
+    {
+      "id": "governed-attestation-subject-is-name-and-digest-bound",
+      "kind": "rule",
+      "sourceDecision": "ADR-0004",
+      "statement": "GovernanceRun provenance is admitted only from exactly one subject named governance-run.json whose SHA-256 equals the observed file bytes."
     },
     {
       "id": "law-is-compiled",

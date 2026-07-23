@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "overlaykit-governance-decision/v1",
+  "id": "ADR-0004",
+  "title": "Governed evidence is selected exactly within multi-subject provenance",
+  "status": "accepted",
+  "date": "2026-07-23",
+  "supersedes": null,
+  "governs": [
+    "attestation-subject-selection",
+    "github-evidence-observation",
+    "multi-subject-provenance",
+    "provenance-failure-boundary"
+  ],
+  "context": "After H-031 merged, protected-main Constitution run 30039541525 successfully governed, built, packaged, recorded evidence, and produced a GitHub/Sigstore provenance statement containing governance-run.json and overlaykit-server-0.1.0.tgz. Its observe job failed because the host required every provenance statement to contain exactly one subject. H-033 tested whether the observer could preserve fail-closed evidence while accepting legitimate co-attestation. Refutation normalized the exact GitHub attestation response from run 30039541525 and exercised absent, duplicate, and SHA-256-mismatched GovernanceRun subjects. Local checks passed 46 governance tests, 21 module tests, licensing, build, package verification, and a zero-high runtime audit. Ubuntu GitHub Actions run 30040028655 passed validate and observe at signed head 24b68a9bc5b1956e5a055a529b35c8bea3950731 with verified synthetic merge 589ace7870caf7d487202b895f5aaddfda3f91c5. The accepted evidence includes governance run SHA-256 b3c5f28a92677cff35c6a149bff8c11f370cc93e8d2eb33b6d8b1878d966ce2a, GitHub evidence SHA-256 9c797f2511e7448d24efac731a2b14fb0f14860de40f4f7f4462abc6100da218, and GitHub observation SHA-256 cfabb4fd8accb65364c1b8d1304a0fe85aa8208bdd75d327597c27cb3e16a02d. The human authority accepted H-033 on 2026-07-23.",
+  "decision": "A verified provenance statement may contain multiple subjects. For GovernanceRun observation, the host selects exactly one subject whose canonical name is governance-run.json and whose SHA-256 equals the bytes being observed. Zero matching subjects, more than one subject with the governed name, or a digest mismatch fails closed. Additional subjects remain signed members of the statement but do not inherit the GovernanceRun's evidentiary meaning or become independently trusted artifacts. Signer workflow, source repository, source commit, source ref, OIDC issuer, runner environment, event, and invocation continue to require exact agreement with the compiled trust anchor and execution under observation. This decision does not establish module release provenance, publication, trust in co-attested artifacts, or generic artifact-discovery semantics.",
+  "consequences": [
+    "A protected workflow may co-attest governance evidence and build artifacts without making statement cardinality an accidental policy constraint.",
+    "The observer admits only the exact governed filename and digest as GovernanceRun evidence.",
+    "A second subject named governance-run.json is ambiguous and fails closed even if one digest matches.",
+    "A correctly named subject with the wrong SHA-256 fails closed before evidence projection.",
+    "Additional statement subjects receive no independent trust, publication status, or release meaning from this decision.",
+    "All existing execution identity and trust-anchor checks remain mandatory.",
+    "Changing the governed artifact name, digest algorithm, release-provenance model, or generic multi-artifact policy requires a new approved question and Slice."
+  ],
+  "policies": [
+    {
+      "kind": "rule",
+      "id": "governed-attestation-subject-is-name-and-digest-bound",
+      "statement": "GovernanceRun provenance is admitted only from exactly one subject named governance-run.json whose SHA-256 equals the observed file bytes."
+    },
+    {
+      "kind": "rule",
+      "id": "governed-attestation-subject-ambiguity-fails-closed",
+      "statement": "An absent, duplicate, or digest-mismatched GovernanceRun subject is invalid evidence."
+    },
+    {
+      "kind": "rule",
+      "id": "co-attested-subjects-do-not-inherit-governance-trust",
+      "statement": "Subjects other than the exact GovernanceRun remain outside the governance evidence claim even when they share its signed provenance statement."
+    },
+    {
+      "kind": "rule",
+      "id": "attestation-execution-identity-remains-exact",
+      "statement": "Subject selection cannot weaken exact signer workflow, source, OIDC, runner, event, and invocation verification."
+    }
+  ]
+}
