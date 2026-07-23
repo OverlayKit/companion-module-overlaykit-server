@@ -25,6 +25,7 @@ import { observeRun } from './projector.js';
 import {
   findRepoRoot,
   loadContract,
+  readBaseChangeRecords,
   readBaseManifest,
   readStoredManifest,
   validateGitHubEvidence,
@@ -265,7 +266,8 @@ function verifyCommand(repoRoot: string, args: ParsedArgs): void {
   if (baseRef) {
     const baseManifest = readBaseManifest(repoRoot, baseRef);
     if (baseManifest) {
-      const violations = immutabilityViolations(baseManifest, storedManifest);
+      const baseChanges = readBaseChangeRecords(repoRoot, baseRef, baseManifest);
+      const violations = immutabilityViolations(baseManifest, storedManifest, baseChanges);
       invariant(
         violations.length === 0,
         'DECISION_MUTATED',

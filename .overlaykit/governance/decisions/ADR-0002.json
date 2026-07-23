@@ -1,70 +1,59 @@
 {
   "schemaVersion": "overlaykit-governance-decision/v1",
   "id": "ADR-0002",
-  "title": "The Linux Companion API 2.0 adapter preserves server authority",
+  "title": "Change-contract immutability begins from implemented base evidence",
   "status": "accepted",
   "date": "2026-07-23",
   "supersedes": null,
   "governs": [
-    "companion-api-boundary",
-    "companion-linux-runtime",
-    "device-configuration",
-    "device-feedback",
-    "device-readiness",
-    "module-packaging",
-    "protocol-consumption"
+    "change-contract-history",
+    "change-contract-transitions",
+    "git-base-evidence",
+    "governance-immutability",
+    "manifest-integrity"
   ],
-  "context": "H-031 asked whether a separately governed public Node 22 ESM module could load through the official Bitfocus Companion API 2.0 host on Linux, consume an exact digest-pinned @overlaykit/protocol 0.1.0 tarball without repository source access, control exactly one Show, and expose three visibility actions and six feedback projections using only signed server evidence. Refutation exercised a clean engine-strict Node 22 install, 42 governance tests, 21 module tests, the official @companion-module/host 1.0.1 against compiled dist/main.js, package and legal provenance checks, hostile configuration and protocol cases, lifecycle and reconnect behavior, and Ubuntu GitHub Actions run 30031342884 at signed head 1f1acb642aadcf4739c7265775304b8a1d6dc084. The accepted record includes governance evidence SHA-256 9e349eda95d819afa06cbfac2a013165e891d2ceb771af1babe014767794ef6e, GitHub observation SHA-256 fa89142a98f1c03ff263610796c6e6e5dbaca203a51a7e264ae41dbe48a8d3e8, Linux module archive SHA-256 4964861dea0304ded54a21620aa43097f29c03610f2efb67e514eec21bb720ad, and protocol artifact SHA-256 10cdf14726134c0686d89abb8a8ef1233d1de216f21a731b23643b53ef436f63. The human authority accepted this bounded evidence on 2026-07-23.",
-  "decision": "Within the exact tested boundary of Node 22 ESM, Companion Module API 2.0, @companion-module/host 1.0.1, Linux CI, and digest-pinned @overlaykit/protocol 0.1.0, one Companion module instance controls exactly one OverlayKit Show. The endpoint, secret bearer, and trust bundle are explicit configuration inputs and fail closed when missing, invalid, ambiguous, or insecure. The adapter becomes ready only after accepted signed bootstrap, its exact acknowledgement, and server device.ready evidence. Stable actions use admitted bindings and expected revisions; feedback changes only from accepted snapshots, deltas, command results, or transport facts and never optimistically. Operational authority, catalogs, retries, snapshots, and credentials are not persisted as authority. The package contains compiled public-boundary code and required Apache-2.0, Rodrigo Vicente, and adapted Bitfocus MIT provenance. This decision does not establish npm publication, Bitfocus registry admission, Companion Module API 2.1, complete Companion application behavior, USB or physical hardware behavior, button pixels, OBS truth, operator perception, trust rotation, or support beyond the tested platform boundary.",
+  "context": "ADR-0001 declares implemented change contracts immutable, but the original verifier compared hashes for every change in the base manifest without knowing its lifecycle status. GitHub Actions run 30033872965 therefore rejected the human-accepted CHG-0002 transition from approved to implemented even though its governance, quality, build, package, and evidence steps otherwise completed. H-032 tested whether the host could preserve complete history while deriving immutability from the exact base state. Refutation used 44 governance tests, hostile missing-blob, hash-mismatch, and identity-mismatch cases, regression checks for accepted decisions and specifications, an implemented-change mutation and deletion check, direct verification against origin/main, and successful verification of the accepted H-031 head without modifying it. Ubuntu GitHub Actions run 30036275462 passed validate and observe at signed head e6a5f52b1d9dba7718d5914fdcf6aa80b9d63ea5 and verified synthetic merge 83b67c67dfdb4e0d20f35d65b4b034d7901ad2b5. The accepted evidence includes governance run SHA-256 8ed2648cb09c15be3e52500de3e2c3beedc46e413279c6d0815260be496d1570, GitHub evidence SHA-256 995c20d37759b3dcc1d5529d28682212d982c677708ad36d32e9ef2db2624035, and observation SHA-256 1e5e55f8c5d6426103f584025fe8ef2d4a95b4bedae69c1d05a26afb0c8a1afe. The human authority accepted H-032 on 2026-07-23.",
+  "decision": "For Git-backed governance verification, every change contract remains hashed by the current manifest and every change identity present in the base manifest must remain present. The verifier resolves each historical change blob from the exact Git base ref, validates it against the change schema, requires its internal identity to match the manifest key, and requires its raw SHA-256 to match the base manifest. A base change whose verified status is implemented is byte-immutable. A base change that is not yet implemented may evolve while retaining its identity and remaining bound by the current manifest. Missing, invalid, identity-mismatched, hash-mismatched, or status-unproven base evidence fails closed. This decision does not define field-level mutation rules for proposed or approved contracts, a new manifest schema, or behavior outside Git.",
   "consequences": [
-    "The adapter boundary is stable only for the exact runtime, host, protocol artifact, and Linux evidence accepted here.",
-    "The server remains the only authority for Show bindings, readiness, revisions, command outcomes, and projected production state.",
-    "The adapter may retain a last verified projection in memory but cannot promote it to current truth without new server evidence.",
-    "Restart discards operational state and requires a new signed bootstrap sequence.",
-    "Any expansion of protocol version, Companion API, platform, persistence, action surface, feedback surface, trust behavior, or packaging claim requires a new approved question and Slice.",
-    "The produced Linux archive is evidence of buildability and legal provenance, not an npm publication, registry admission, release, or hardware claim.",
-    "Evidence acceptance, source merge, publication, release, and hardware validation remain separate human-authorized transitions."
+    "An approved contract can transition to implemented without being falsely treated as an already immutable record.",
+    "Once an implemented contract enters the base branch, later verification rejects any byte change or deletion.",
+    "Every historical change identity remains present even before its content becomes byte-immutable.",
+    "The current manifest continues to bind the exact bytes of every current contract regardless of lifecycle status.",
+    "The verifier reads status only from a schema-valid, identity-matched, manifest-hash-matched blob at the exact base ref.",
+    "Failure to prove a base contract's status cannot weaken immutability.",
+    "Field-level constraints for proposed or approved contracts require a future architectural question and Slice.",
+    "Acceptance of this mechanism does not itself accept, merge, publish, or release H-031."
   ],
   "policies": [
     {
       "kind": "rule",
-      "id": "companion-api2-boundary-is-exact",
-      "statement": "The accepted adapter claim is limited to Node 22 ESM, Companion Module API 2.0, official @companion-module/host 1.0.1, and the tested Linux CI environment."
+      "id": "change-immutability-starts-from-implemented-base",
+      "statement": "A change contract is byte-immutable when its schema-valid and manifest-hash-matched blob at the exact base ref declares status implemented."
     },
     {
       "kind": "rule",
-      "id": "companion-protocol-consumption-is-public-and-pinned",
-      "statement": "The adapter consumes an exact digest-pinned public @overlaykit/protocol artifact and has no workspace, server-source, copied-validator, or repository-source dependency."
+      "id": "base-change-status-is-hash-bound",
+      "statement": "Lifecycle status used for immutability must come from the exact base blob whose raw SHA-256 matches the base manifest."
     },
     {
       "kind": "rule",
-      "id": "companion-readiness-requires-server-evidence",
-      "statement": "The adapter remains not ready until it has accepted complete signed bootstrap, acknowledged that exact bootstrap, and received device.ready from the server."
+      "id": "change-history-cannot-disappear",
+      "statement": "Every change identity present in the base manifest must remain present in the current manifest regardless of lifecycle status."
     },
     {
       "kind": "rule",
-      "id": "companion-feedback-is-not-optimistic",
-      "statement": "Actions do not change projected feedback; feedback transitions require accepted server evidence or an observed transport fact."
+      "id": "current-change-bytes-remain-manifest-bound",
+      "statement": "Every current change contract remains bound to its exact bytes by the current deterministic manifest."
     },
     {
       "kind": "rule",
-      "id": "companion-operational-authority-is-ephemeral",
-      "statement": "The adapter does not persist Show bindings, catalogs, revisions, snapshots, retries, command outcomes, or credentials as operational authority across restart."
+      "id": "unproven-base-change-status-fails-closed",
+      "statement": "Missing, invalid, identity-mismatched, hash-mismatched, or status-unproven base change evidence is an immutability violation."
     },
     {
       "kind": "rule",
-      "id": "companion-configuration-fails-closed",
-      "statement": "Missing or invalid endpoint, bearer, trust, URL authority, or transport security prevents admission without silently weakening the boundary."
-    },
-    {
-      "kind": "rule",
-      "id": "companion-package-retains-legal-provenance",
-      "statement": "Every distributable module archive retains Apache-2.0, Rodrigo Vicente attribution, and applicable adapted Bitfocus MIT notice."
-    },
-    {
-      "kind": "rule",
-      "id": "companion-adapter-evidence-does-not-claim-release-or-hardware",
-      "statement": "Build, host, and CI evidence cannot be represented as npm publication, Bitfocus registry admission, release, physical hardware behavior, OBS truth, or operator perception."
+      "id": "pre-implementation-field-rules-remain-unknown",
+      "statement": "H-032 does not authorize claims about which individual fields of a proposed or approved contract may change."
     }
   ]
 }

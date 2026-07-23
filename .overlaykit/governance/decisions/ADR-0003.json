@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "overlaykit-governance-decision/v1",
+  "id": "ADR-0003",
+  "title": "The Linux Companion API 2.0 adapter preserves server authority",
+  "status": "accepted",
+  "date": "2026-07-23",
+  "supersedes": null,
+  "governs": [
+    "companion-api-boundary",
+    "companion-linux-runtime",
+    "device-configuration",
+    "device-feedback",
+    "device-readiness",
+    "module-packaging",
+    "protocol-consumption"
+  ],
+  "context": "H-031 asked whether a separately governed public Node 22 ESM module could load through the official Bitfocus Companion API 2.0 host on Linux, consume an exact digest-pinned @overlaykit/protocol 0.1.0 tarball without repository source access, control exactly one Show, and expose three visibility actions and six feedback projections using only signed server evidence. Refutation exercised a clean engine-strict Node 22 install, 42 governance tests, 21 module tests, the official @companion-module/host 1.0.1 against compiled dist/main.js, package and legal provenance checks, hostile configuration and protocol cases, lifecycle and reconnect behavior, and Ubuntu GitHub Actions run 30031342884 at signed head 1f1acb642aadcf4739c7265775304b8a1d6dc084. The accepted record includes governance evidence SHA-256 9e349eda95d819afa06cbfac2a013165e891d2ceb771af1babe014767794ef6e, GitHub observation SHA-256 fa89142a98f1c03ff263610796c6e6e5dbaca203a51a7e264ae41dbe48a8d3e8, Linux module archive SHA-256 4964861dea0304ded54a21620aa43097f29c03610f2efb67e514eec21bb720ad, and protocol artifact SHA-256 10cdf14726134c0686d89abb8a8ef1233d1de216f21a731b23643b53ef436f63. The human authority accepted this bounded evidence on 2026-07-23.",
+  "decision": "Within the exact tested boundary of Node 22 ESM, Companion Module API 2.0, @companion-module/host 1.0.1, Linux CI, and digest-pinned @overlaykit/protocol 0.1.0, one Companion module instance controls exactly one OverlayKit Show. The endpoint, secret bearer, and trust bundle are explicit configuration inputs and fail closed when missing, invalid, ambiguous, or insecure. The adapter becomes ready only after accepted signed bootstrap, its exact acknowledgement, and server device.ready evidence. Stable actions use admitted bindings and expected revisions; feedback changes only from accepted snapshots, deltas, command results, or transport facts and never optimistically. Operational authority, catalogs, retries, snapshots, and credentials are not persisted as authority. The package contains compiled public-boundary code and required Apache-2.0, Rodrigo Vicente, and adapted Bitfocus MIT provenance. This decision does not establish npm publication, Bitfocus registry admission, Companion Module API 2.1, complete Companion application behavior, USB or physical hardware behavior, button pixels, OBS truth, operator perception, trust rotation, or support beyond the tested platform boundary.",
+  "consequences": [
+    "The adapter boundary is stable only for the exact runtime, host, protocol artifact, and Linux evidence accepted here.",
+    "The server remains the only authority for Show bindings, readiness, revisions, command outcomes, and projected production state.",
+    "The adapter may retain a last verified projection in memory but cannot promote it to current truth without new server evidence.",
+    "Restart discards operational state and requires a new signed bootstrap sequence.",
+    "Any expansion of protocol version, Companion API, platform, persistence, action surface, feedback surface, trust behavior, or packaging claim requires a new approved question and Slice.",
+    "The produced Linux archive is evidence of buildability and legal provenance, not an npm publication, registry admission, release, or hardware claim.",
+    "Evidence acceptance, source merge, publication, release, and hardware validation remain separate human-authorized transitions."
+  ],
+  "policies": [
+    {
+      "kind": "rule",
+      "id": "companion-api2-boundary-is-exact",
+      "statement": "The accepted adapter claim is limited to Node 22 ESM, Companion Module API 2.0, official @companion-module/host 1.0.1, and the tested Linux CI environment."
+    },
+    {
+      "kind": "rule",
+      "id": "companion-protocol-consumption-is-public-and-pinned",
+      "statement": "The adapter consumes an exact digest-pinned public @overlaykit/protocol artifact and has no workspace, server-source, copied-validator, or repository-source dependency."
+    },
+    {
+      "kind": "rule",
+      "id": "companion-readiness-requires-server-evidence",
+      "statement": "The adapter remains not ready until it has accepted complete signed bootstrap, acknowledged that exact bootstrap, and received device.ready from the server."
+    },
+    {
+      "kind": "rule",
+      "id": "companion-feedback-is-not-optimistic",
+      "statement": "Actions do not change projected feedback; feedback transitions require accepted server evidence or an observed transport fact."
+    },
+    {
+      "kind": "rule",
+      "id": "companion-operational-authority-is-ephemeral",
+      "statement": "The adapter does not persist Show bindings, catalogs, revisions, snapshots, retries, command outcomes, or credentials as operational authority across restart."
+    },
+    {
+      "kind": "rule",
+      "id": "companion-configuration-fails-closed",
+      "statement": "Missing or invalid endpoint, bearer, trust, URL authority, or transport security prevents admission without silently weakening the boundary."
+    },
+    {
+      "kind": "rule",
+      "id": "companion-package-retains-legal-provenance",
+      "statement": "Every distributable module archive retains Apache-2.0, Rodrigo Vicente attribution, and applicable adapted Bitfocus MIT notice."
+    },
+    {
+      "kind": "rule",
+      "id": "companion-adapter-evidence-does-not-claim-release-or-hardware",
+      "statement": "Build, host, and CI evidence cannot be represented as npm publication, Bitfocus registry admission, release, physical hardware behavior, OBS truth, or operator perception."
+    }
+  ]
+}

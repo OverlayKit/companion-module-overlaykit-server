@@ -7,6 +7,7 @@ import { canonicalHash, sha256 } from './canonical.js';
 import { GovernanceError, invariant } from './errors.js';
 import type {
   ChangeContract,
+  ChangeRecord,
   GovernanceDecision,
   GitHubEvidence,
   GovernanceManifest,
@@ -354,4 +355,65 @@ export function readBaseManifest(repoRoot: string, baseRef: string): GovernanceM
   } catch {
     return null;
   }
+}
+
+export function readBaseChangeRecords(
+  repoRoot: string,
+  baseRef: string,
+  manifest: GovernanceManifest
+): ChangeRecord[] {
+  const schemaDirectory = join(repoRoot, GOVERNANCE_PATH, 'schemas');
+  const { validators } = compileSchemas(schemaDirectory);
+
+  return Object.entries(manifest.changes ?? {})
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([id, expectedHash]) => {
+      invariant(
+        /^CHG-[0-9]{4}$/.test(id),
+        'BASE_CHANGE_INVALID',
+        `Base manifest contains invalid change id ${id}`
+      );
+
+      const path = join(GOVERNANCE_PATH, 'changes', `${id}.json`);
+      let raw: string;
+
+      try {
+        raw = execFileSync('git', ['show', `${baseRef}:${path}`], {
+          cwd: repoRoot,
+          encoding: 'utf8',
+          stdio: ['ignore', 'pipe', 'ignore'],
+        });
+      } catch {
+        throw new GovernanceError(
+          'BASE_CHANGE_MISSING',
+          `Base manifest references missing ${id} at ${baseRef}:${path}`
+        );
+      }
+
+      let change: unknown;
+      try {
+        change = JSON.parse(raw) as unknown;
+      } catch (error) {
+        const reason = error instanceof Error ? error.message : String(error);
+        throw new GovernanceError('BASE_CHANGE_INVALID', `${baseRef}:${path}: ${reason}`);
+      }
+
+      assertSchema(validators.change, change, `${baseRef}:${path}`);
+      invariant(
+        change.id === id,
+        'BASE_CHANGE_INVALID',
+        `Base change identity mismatch: expected ${id}, received ${change.id}`
+      );
+      invariant(
+        sha256(raw) === expectedHash,
+        'BASE_CHANGE_HASH_MISMATCH',
+        `Base change ${id} does not match its manifest hash`
+      );
+
+      return {
+        change,
+        contentHash: expectedHash,
+        path,
+      };
+    });
 }

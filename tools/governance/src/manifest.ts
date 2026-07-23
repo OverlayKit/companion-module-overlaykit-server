@@ -1,6 +1,7 @@
 import { canonicalHash, canonicalJson, compareById } from './canonical.js';
 import {
   MANIFEST_SCHEMA_VERSION,
+  type ChangeRecord,
   type GovernanceManifest,
   type GovernancePlan,
   type LoadedContract,
@@ -52,13 +53,29 @@ export function verifyManifestIntegrity(
 
 export function immutabilityViolations(
   base: GovernanceManifest,
-  current: GovernanceManifest
+  current: GovernanceManifest,
+  baseChanges: ChangeRecord[]
 ): string[] {
+  const baseChangeStatuses = new Map(
+    baseChanges.map(({ change }) => [change.id, change.status] as const)
+  );
   const decisions = Object.entries(base.decisions)
     .filter(([id, hash]) => current.decisions[id] !== hash)
     .map(([id]) => `decision:${id}`);
   const changes = Object.entries(base.changes ?? {})
-    .filter(([id, hash]) => current.changes[id] !== hash)
+    .filter(([id, hash]) => {
+      const currentHash = current.changes[id];
+      if (currentHash === undefined) {
+        return true;
+      }
+
+      const baseStatus = baseChangeStatuses.get(id);
+      if (baseStatus === undefined) {
+        return true;
+      }
+
+      return baseStatus === 'implemented' && currentHash !== hash;
+    })
     .map(([id]) => `change:${id}`);
   const specifications = Object.entries(base.specifications ?? {})
     .filter(([id, hash]) => current.specifications?.[id] !== hash)
