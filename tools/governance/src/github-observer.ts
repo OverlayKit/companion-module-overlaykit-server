@@ -311,7 +311,11 @@ export function collectGitHubRulesets(
     .sort((left, right) => left.id - right.id);
 }
 
-function normalizeAttestationResult(value: unknown): GitHubAttestationEvidence {
+function normalizeAttestationResult(
+  value: unknown,
+  expectedSubjectName: string,
+  expectedSubjectDigest: string
+): GitHubAttestationEvidence {
   const result = object(value, 'attestation result');
   const verification = object(
     property(result, 'verificationResult', 'attestation result'),
@@ -330,17 +334,30 @@ function normalizeAttestationResult(value: unknown): GitHubAttestationEvidence {
     'attestation statement'
   );
   const subjects = array(property(statement, 'subject', 'attestation statement'), 'subjects');
+  const matchingSubjects = subjects
+    .map((value) => object(value, 'attestation subject'))
+    .filter(
+      (subject) =>
+        string(property(subject, 'name', 'attestation subject'), 'attestation subject name') ===
+        expectedSubjectName
+    );
   invariant(
-    subjects.length === 1,
+    matchingSubjects.length === 1,
     'GITHUB_EVIDENCE_INVALID',
-    `Expected exactly one attestation subject, received ${subjects.length}`
+    `Expected exactly one ${expectedSubjectName} attestation subject, received ${matchingSubjects.length}`
   );
-  const subject = object(subjects[0], 'attestation subject');
+  const subject = matchingSubjects[0]!;
   const digest = object(property(subject, 'digest', 'attestation subject'), 'subject digest');
+  const subjectDigest = string(property(digest, 'sha256', 'subject digest'), 'subject digest');
+  invariant(
+    subjectDigest === expectedSubjectDigest,
+    'GITHUB_EVIDENCE_INVALID',
+    `Expected ${expectedSubjectName} SHA-256 ${expectedSubjectDigest}, received ${subjectDigest}`
+  );
 
   return {
     subjectName: string(property(subject, 'name', 'attestation subject'), 'subject name'),
-    subjectDigest: string(property(digest, 'sha256', 'subject digest'), 'subject digest'),
+    subjectDigest,
     signerWorkflow: string(
       property(certificate, 'buildSignerURI', 'attestation certificate'),
       'attestation signer workflow'
@@ -376,12 +393,14 @@ function normalizeAttestationResult(value: unknown): GitHubAttestationEvidence {
   };
 }
 
-function normalizeAttestation(
+export function normalizeAttestation(
   value: unknown,
-  expectedInvocation: string
+  expectedInvocation: string,
+  expectedSubjectName: string,
+  expectedSubjectDigest: string
 ): GitHubAttestationEvidence {
   const matching = array(value, 'attestation verification')
-    .map(normalizeAttestationResult)
+    .map((result) => normalizeAttestationResult(result, expectedSubjectName, expectedSubjectDigest))
     .filter((attestation) => attestation.invocation === expectedInvocation);
   invariant(
     matching.length === 1,
@@ -471,7 +490,9 @@ export function collectGitHubEvidence(
         ]),
         'gh attestation verify'
       ),
-      `https://github.com/${anchor.repository}/actions/runs/${runId}/attempts/${attempt}`
+      `https://github.com/${anchor.repository}/actions/runs/${runId}/attempts/${attempt}`,
+      basename(absoluteRunPath),
+      runFileHash
     );
   }
 
