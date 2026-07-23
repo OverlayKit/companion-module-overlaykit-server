@@ -79,6 +79,11 @@ describe('OverlayKit governance contract', () => {
         effectiveStatus: 'accepted',
         userStoryIds: ['US-001'],
       }),
+      expect.objectContaining({
+        id: 'SPEC-0002',
+        effectiveStatus: 'accepted',
+        userStoryIds: ['US-002'],
+      }),
     ]);
     const storedPlan = JSON.parse(
       readFileSync(join(root, '.overlaykit/governance/plan.json'), 'utf8')

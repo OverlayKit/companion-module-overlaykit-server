@@ -226,10 +226,10 @@
     }
   ],
   "mechanismsHash": "64141de30d5791ad3f53cf857fa582477413b15e997f7e438de408f1ba328fd4",
-  "planHash": "1412ac37922c10a01ff6478ce00c451aeef11c123a553ac40b3093bbba6944c2",
-  "profileHash": "c8fe5807f3b1f727980c7562f5119171154326771a34d415b8940d6553381e1d",
+  "planHash": "18b9836c6254dfcc72d6c50c0e686d585fd0bc3980e2fefc1b680c4e9d2b3ca1",
+  "profileHash": "8e5cb899b7625709394f5627dcdd1c9608ad37b5e1e9bbedb96ccbf89889953e",
   "profileName": "overlaykit-companion-module",
-  "profileVersion": "1.3.0",
+  "profileVersion": "1.4.0",
   "rules": [
     {
       "id": "accepted-records-are-immutable",
@@ -423,6 +423,28 @@
       ],
       "workflowIds": [
         "WF-001"
+      ]
+    },
+    {
+      "contentHash": "d15b1cbf7e97bd92aadf40342421161a0955e210b8566f7ae870dc78c05e89f6",
+      "declaredStatus": "accepted",
+      "effectiveStatus": "accepted",
+      "id": "SPEC-0002",
+      "requirementIds": [
+        "REQ-DOM-004",
+        "REQ-INT-003",
+        "REQ-INT-004",
+        "REQ-RUN-005",
+        "REQ-RUN-006",
+        "REQ-SEC-004"
+      ],
+      "supersededBy": null,
+      "title": "Reproducible complete Companion integration evidence",
+      "userStoryIds": [
+        "US-002"
+      ],
+      "workflowIds": [
+        "WF-002"
       ]
     }
   ],

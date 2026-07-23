@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "overlaykit-product-specification/v1",
+  "id": "SPEC-0002",
+  "title": "Reproducible complete Companion integration evidence",
+  "status": "accepted",
+  "date": "2026-07-23",
+  "supersedes": null,
+  "scope": "A self-contained canonical integration lab that lets any maintainer independently exercise the real Bitfocus Companion application and the real OverlayKit OSS server across a non-loopback Ubuntu 24.04 LTS network boundary.",
+  "summary": "A maintainer starts two clean Linux nodes from public inputs, provisions ephemeral local device authority, loads the exact OverlayKit module into the actual Companion application, invokes Show-scoped visibility commands, and obtains causally bound visual and machine-readable evidence for every supported feedback state and timing claim.",
+  "actors": [
+    {
+      "id": "maintainer",
+      "label": "OverlayKit maintainer",
+      "description": "Reproduces and reviews the complete integration evidence without private infrastructure or undocumented knowledge."
+    },
+    {
+      "id": "linux-operator",
+      "label": "Linux operator",
+      "description": "Invokes virtual Companion buttons and observes their projected production state."
+    },
+    {
+      "id": "companion-application",
+      "label": "Bitfocus Companion application",
+      "description": "Loads the OverlayKit module, invokes actions, and renders feedback states in its real user interface."
+    },
+    {
+      "id": "overlaykit-server",
+      "label": "OverlayKit OSS server",
+      "description": "Owns local device admission, command outcomes, and authoritative production state."
+    }
+  ],
+  "terms": [
+    {
+      "id": "canonical-integration-lab",
+      "name": "Canonical Integration Lab",
+      "definition": "A clean, reproducible two-node Ubuntu 24.04 LTS environment whose Companion and OverlayKit traffic crosses a non-loopback network boundary."
+    },
+    {
+      "id": "causal-evidence-receipt",
+      "name": "Causal Evidence Receipt",
+      "definition": "A machine-readable record from one run that binds expected and observed UI state to the server event that justified it, the accepted evidence hash, timestamps, run identity, and exact component versions."
+    },
+    {
+      "id": "authoritative-ui-projection",
+      "name": "Authoritative UI Projection",
+      "definition": "A Companion-visible state derived from accepted OverlayKit server evidence rather than optimistic UI, transport acknowledgement, or command result alone."
+    },
+    {
+      "id": "supplemental-lab-validation",
+      "name": "Supplemental Lab Validation",
+      "definition": "Additional evidence from a real host or private network that may corroborate but never replace the canonical publicly reproducible lab."
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-DOM-004",
+      "category": "domain",
+      "statement": "The canonical lab proves the complete Companion-to-OverlayKit application path rather than substituting the module host harness for either real product.",
+      "verification": "Process identity, runtime version, loaded-module, endpoint, and traffic receipts from the same lab run."
+    },
+    {
+      "id": "REQ-INT-003",
+      "category": "integration",
+      "statement": "The lab uses the actual Bitfocus Companion application, the actual OverlayKit OSS server, and the exact governed module package with immutable build or artifact identities.",
+      "verification": "Pinned Companion build or image digest, runtime-reported version, OverlayKit commit, module archive digest, and process inspection."
+    },
+    {
+      "id": "REQ-INT-004",
+      "category": "integration",
+      "statement": "Canonical evidence runs on two isolated Ubuntu 24.04 LTS nodes and crosses a non-loopback network boundary without depending on Tailscale.",
+      "verification": "Node OS receipts, interface and route capture, non-loopback endpoint assertion, and packet or connection evidence."
+    },
+    {
+      "id": "REQ-RUN-005",
+      "category": "runtime",
+      "statement": "The real Companion UI visibly projects active, inactive, unknown, disconnected, failed, and unavailable, with every capture bound to a causal evidence receipt from the same run.",
+      "verification": "Six UI captures plus validated receipts containing expected and observed state, server event, accepted evidence hash, timestamps, run identity, and exact versions."
+    },
+    {
+      "id": "REQ-RUN-006",
+      "category": "runtime",
+      "statement": "After a virtual button invocation, authoritative server state must be visible in Companion within three seconds; acknowledgement or result alone does not stop the timer, expiry projects unknown and fails that measurement, and later evidence cannot retroactively pass it.",
+      "verification": "Monotonic invocation, server-evidence, and UI-observation timestamps with deterministic timeout and delayed-evidence cases."
+    },
+    {
+      "id": "REQ-SEC-004",
+      "category": "security",
+      "statement": "The canonical lab is self-contained and starts from public inputs with ephemeral local credentials and trust; it requires no cloud account, private service, private network identity, or maintainer-specific secret.",
+      "verification": "Clean-room setup review, generated credential receipts, secret scan, and successful reproduction without external authentication."
+    }
+  ],
+  "userStories": [
+    {
+      "id": "US-002",
+      "actor": "maintainer",
+      "need": "independently reproduce the complete Bitfocus Companion-to-OverlayKit integration over a non-loopback LAN",
+      "outcome": "the project can distinguish demonstrated application behavior from adapter assumptions without relying on a production workstation or private infrastructure",
+      "surface": "integration",
+      "preconditions": [
+        "The maintainer has a clean Linux machine capable of running two isolated Ubuntu 24.04 LTS nodes.",
+        "The repository and every required input are publicly obtainable.",
+        "The two nodes can communicate over a non-loopback local network."
+      ],
+      "acceptanceCriteria": [
+        {
+          "id": "AC-005",
+          "given": "two clean Ubuntu 24.04 LTS nodes and only public repository inputs",
+          "when": "the maintainer starts the canonical lab",
+          "then": "the actual OverlayKit server and actual Companion application become ready over a non-loopback network using locally provisioned ephemeral authority",
+          "verification": "Automated setup plus OS, process, version, endpoint, trust, and readiness receipts."
+        },
+        {
+          "id": "AC-006",
+          "given": "the real Companion application has loaded the exact governed OverlayKit module and reached device.ready",
+          "when": "the operator invokes show, hide, and toggle from virtual buttons",
+          "then": "the real OverlayKit server applies each command and Companion changes state only from accepted authoritative evidence",
+          "verification": "Command, server-state, signed-evidence, and Companion UI receipts for all three actions."
+        },
+        {
+          "id": "AC-007",
+          "given": "the lab can inject controlled state, disconnect, authority, and protocol conditions",
+          "when": "each supported feedback condition is exercised",
+          "then": "the actual Companion UI visibly shows active, inactive, unknown, disconnected, failed, and unavailable with one causal receipt per capture",
+          "verification": "Six visual captures whose receipt hashes and run identity validate against the machine-readable evidence bundle."
+        },
+        {
+          "id": "AC-008",
+          "given": "a virtual visibility action is invoked",
+          "when": "authoritative server state is or is not projected before the three-second deadline",
+          "then": "the measurement passes only for timely authoritative projection; otherwise Companion shows unknown and the failed measurement remains failed after any late evidence",
+          "verification": "Monotonic timing receipts for timely, acknowledgement-only, result-only, timeout, and late-evidence cases."
+        },
+        {
+          "id": "AC-009",
+          "given": "a maintainer begins from a clean supported machine with no Rodrigo-specific identity or private network access",
+          "when": "the documented reproduction is followed from zero",
+          "then": "the same assertions and evidence schema can be regenerated, while any llama or Tailscale run remains separately labeled supplemental",
+          "verification": "Second clean-room execution and comparison of semantic assertions rather than environment-specific hashes."
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "WF-002",
+      "title": "Reproduce complete Companion integration evidence",
+      "actors": ["maintainer", "linux-operator", "companion-application", "overlaykit-server"],
+      "steps": [
+        "The maintainer obtains the repository and pinned public inputs on a clean Linux machine.",
+        "The lab creates two isolated Ubuntu 24.04 LTS nodes on a non-loopback local network.",
+        "The OverlayKit node generates ephemeral local device authority and starts the actual OSS server.",
+        "The Companion node starts the pinned actual application and loads the exact governed module package through the documented local-module path.",
+        "The module completes signed bootstrap, acknowledgement, and readiness against the OverlayKit node.",
+        "The operator invokes show, hide, and toggle from Companion virtual buttons.",
+        "The lab exercises normal, delayed, disconnected, failed, and unavailable conditions.",
+        "The evidence collector binds each visible UI state to the exact server event, evidence hash, time, run, and versions.",
+        "The verifier rejects missing, stale, mismatched, loopback-only, late, private-input, or semantically incomplete evidence.",
+        "An optional llama or Tailscale run is recorded separately as supplemental corroboration."
+      ],
+      "invariants": [
+        "REQ-DOM-004",
+        "REQ-INT-003",
+        "REQ-INT-004",
+        "REQ-RUN-005",
+        "REQ-RUN-006",
+        "REQ-SEC-004"
+      ]
+    }
+  ],
+  "outOfScope": [
+    "USB access, Stream Deck discovery, and physical key presses",
+    "Physical device button pixels and operator perception",
+    "npm publication and Bitfocus module registry admission",
+    "Linux distributions other than Ubuntu 24.04 LTS",
+    "Tailscale or the llama host as a canonical reproduction dependency",
+    "OBS renderer or output truth",
+    "Cloud deployment and production credentials",
+    "Support beyond the exact Companion, OverlayKit, module, Node, and container or VM identities exercised by the Slice"
+  ]
+}
