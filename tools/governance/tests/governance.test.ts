@@ -115,6 +115,42 @@ function changeRecord(value: ChangeContract): ChangeRecord {
   };
 }
 
+function change(id: string, status: ChangeContract['status']): ChangeContract {
+  return {
+    schemaVersion: 'overlaykit-governance-change/v2',
+    id,
+    title: `Change ${id}`,
+    status,
+    changeClass: 'governance',
+    risk: 'critical',
+    owner: '@owner',
+    decisions: ['ADR-0001'],
+    specifications: [],
+    claims: [
+      {
+        kind: 'assumption',
+        statement: 'The transition preserves history.',
+        evidence: null,
+        blocking: false,
+      },
+    ],
+    successCriteria: [
+      {
+        id: 'SC-001',
+        statement: 'History remains verifiable.',
+        verification: 'Manifest comparison.',
+      },
+    ],
+    definitionOfDone: [
+      {
+        id: 'DOD-001',
+        statement: 'Tests pass.',
+        evidence: 'npm test',
+      },
+    ],
+  };
+}
+
 function profile(decisionIds: string[], specificationIds: string[] = []): GovernanceProfile {
   return {
     schemaVersion: 'overlaykit-governance-profile/v2',
@@ -162,12 +198,13 @@ function contract(
   activeIds: string[],
   registry = mechanisms,
   specifications: SpecificationRecord[] = [],
-  activeSpecificationIds = specifications.map(({ specification }) => specification.id)
+  activeSpecificationIds = specifications.map(({ specification }) => specification.id),
+  changes: ChangeRecord[] = []
 ): LoadedContract {
   return {
     decisions,
     specifications,
-    changes: [],
+    changes,
     profile: profile(activeIds, activeSpecificationIds),
     mechanisms: registry,
     schemas: { 'test.schema.json': 'a'.repeat(64) },
@@ -429,10 +466,12 @@ describe('manifest', () => {
     const currentPlan = compileGovernance(currentContract);
     const current = buildManifest(currentContract, currentPlan);
 
-    expect(immutabilityViolations(base, current)).toEqual([]);
+    expect(immutabilityViolations(base, current, baseContract.changes)).toEqual([]);
 
     current.decisions['ADR-0001'] = 'f'.repeat(64);
-    expect(immutabilityViolations(base, current)).toEqual(['decision:ADR-0001']);
+    expect(immutabilityViolations(base, current, baseContract.changes)).toEqual([
+      'decision:ADR-0001',
+    ]);
   });
 
   it('detects changed or removed accepted specifications', () => {
@@ -444,7 +483,54 @@ describe('manifest', () => {
     const current = buildManifest(currentContract, compileGovernance(currentContract));
 
     current.specifications['SPEC-0001'] = 'f'.repeat(64);
-    expect(immutabilityViolations(base, current)).toEqual(['specification:SPEC-0001']);
+    expect(immutabilityViolations(base, current, baseContract.changes)).toEqual([
+      'specification:SPEC-0001',
+    ]);
+  });
+
+  it('freezes implemented base changes while allowing approved changes to evolve', () => {
+    const item = record(decision('ADR-0001'));
+    const implemented = changeRecord(change('CHG-0001', 'implemented'));
+    const approved = changeRecord(change('CHG-0002', 'approved'));
+    const baseContract = contract(
+      [item],
+      ['ADR-0001'],
+      mechanisms,
+      [],
+      [],
+      [implemented, approved]
+    );
+    const base = buildManifest(baseContract, compileGovernance(baseContract));
+    const currentContract = contract(
+      [item],
+      ['ADR-0001'],
+      mechanisms,
+      [],
+      [],
+      [
+        { ...implemented, contentHash: 'd'.repeat(64) },
+        {
+          ...approved,
+          change: { ...approved.change, status: 'implemented' },
+          contentHash: 'e'.repeat(64),
+        },
+      ]
+    );
+    const current = buildManifest(currentContract, compileGovernance(currentContract));
+
+    expect(immutabilityViolations(base, current, baseContract.changes)).toEqual([
+      'change:CHG-0001',
+    ]);
+    expect(immutabilityViolations(base, current, [])).toEqual([
+      'change:CHG-0001',
+      'change:CHG-0002',
+    ]);
+
+    current.changes['CHG-0001'] = base.changes['CHG-0001']!;
+    delete current.changes['CHG-0002'];
+    expect(immutabilityViolations(base, current, baseContract.changes)).toEqual([
+      'change:CHG-0002',
+    ]);
   });
 });
 

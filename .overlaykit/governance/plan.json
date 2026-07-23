@@ -76,6 +76,14 @@
       "id": "ADR-0001",
       "supersededBy": null,
       "title": "The Companion adapter is evidence-bound translation, not authority"
+    },
+    {
+      "contentHash": "6e99edcf98a6ec3a91c1d74be8fbe2f87b5108de6cc2f240671451b635875a00",
+      "declaredStatus": "accepted",
+      "effectiveStatus": "accepted",
+      "id": "ADR-0002",
+      "supersededBy": null,
+      "title": "Change-contract immutability begins from implemented base evidence"
     }
   ],
   "engineVersion": "overlaykit-governance-host/v2",
@@ -202,10 +210,10 @@
     }
   ],
   "mechanismsHash": "64141de30d5791ad3f53cf857fa582477413b15e997f7e438de408f1ba328fd4",
-  "planHash": "bc17f18abe30e0e16e689ae43572b2a87d49a980599c6a6a463f6aaac79a5efb",
-  "profileHash": "a5f1930932913acee00ac56542a8d168750ddcc515ac55103ef7635a6ac683c7",
+  "planHash": "73d6db61455530245eec7d74e35df918f86f534a908236f6fea46eeb89734f48",
+  "profileHash": "1d14a3f49e5db76ccb95e5306d5c98f66781669c15eed8e78b1ecf102ed04e0e",
   "profileName": "overlaykit-companion-module",
-  "profileVersion": "1.0.0",
+  "profileVersion": "1.1.0",
   "rules": [
     {
       "id": "accepted-records-are-immutable",
@@ -226,10 +234,34 @@
       "statement": "An agent has no independent project authority and must name its registered human principal."
     },
     {
+      "id": "base-change-status-is-hash-bound",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "Lifecycle status used for immutability must come from the exact base blob whose raw SHA-256 matches the base manifest."
+    },
+    {
+      "id": "change-history-cannot-disappear",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "Every change identity present in the base manifest must remain present in the current manifest regardless of lifecycle status."
+    },
+    {
+      "id": "change-immutability-starts-from-implemented-base",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "A change contract is byte-immutable when its schema-valid and manifest-hash-matched blob at the exact base ref declares status implemented."
+    },
+    {
       "id": "claims-are-typed",
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "Every change separates facts, inferences, assumptions, and unknowns; facts and inferences require evidence."
+    },
+    {
+      "id": "current-change-bytes-remain-manifest-bound",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "Every current change contract remains bound to its exact bytes by the current deterministic manifest."
     },
     {
       "id": "evidence-cannot-redefine-law",
@@ -250,6 +282,12 @@
       "statement": "Apache-2.0 licensing, Rodrigo Vicente attribution, and applicable upstream notices must exist before adapter product code enters history."
     },
     {
+      "id": "pre-implementation-field-rules-remain-unknown",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "H-032 does not authorize claims about which individual fields of a proposed or approved contract may change."
+    },
+    {
       "id": "server-is-operational-authority",
       "kind": "rule",
       "sourceDecision": "ADR-0001",
@@ -260,6 +298,12 @@
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "No projected state transition exists without accepted evidence that justifies it."
+    },
+    {
+      "id": "unproven-base-change-status-fails-closed",
+      "kind": "rule",
+      "sourceDecision": "ADR-0002",
+      "statement": "Missing, invalid, identity-mismatched, hash-mismatched, or status-unproven base change evidence is an immutability violation."
     }
   ],
   "schemasHash": "7fb3449b50610de900959d2335cc3720b32dd2974453ae9370db4183ba11b675",
