@@ -7,6 +7,7 @@ import { compileGovernance } from '../src/compiler.js';
 import {
   assertGitHubIdentityVerified,
   collectGitHubEvidence,
+  normalizeAttestation,
   verifyGitHubEvidence,
   type GitHubCommandRunner,
 } from '../src/github-observer.js';
@@ -211,7 +212,93 @@ function protectedPushRun(): GovernanceRun {
   return run;
 }
 
+function attestationResult(subjects: unknown[]): unknown {
+  return {
+    verificationResult: {
+      signature: {
+        certificate: {
+          buildSignerURI: `https://github.com/${anchor.repository}/${anchor.workflowPath}@${anchor.protectedRef}`,
+          sourceRepositoryURI: `https://github.com/${anchor.repository}`,
+          sourceRepositoryDigest: 'e'.repeat(40),
+          sourceRepositoryRef: anchor.protectedRef,
+          issuer: anchor.oidcIssuer,
+          runnerEnvironment: anchor.runnerEnvironment,
+          githubWorkflowTrigger: 'push',
+          runInvocationURI: `https://github.com/${anchor.repository}/actions/runs/42/attempts/1`,
+        },
+      },
+      statement: {
+        subject: subjects,
+      },
+    },
+  };
+}
+
 describe('GitHub root of trust observer', () => {
+  it('selects exact governance evidence from a multi-subject provenance statement', () => {
+    const invocation = `https://github.com/${anchor.repository}/actions/runs/42/attempts/1`;
+    const attestation = normalizeAttestation(
+      [
+        attestationResult([
+          {
+            name: 'governance-run.json',
+            digest: { sha256: runFileHash },
+          },
+          {
+            name: 'overlaykit-server-0.1.0.tgz',
+            digest: { sha256: 'a'.repeat(64) },
+          },
+        ]),
+      ],
+      invocation,
+      'governance-run.json',
+      runFileHash
+    );
+
+    expect(attestation).toEqual(
+      expect.objectContaining({
+        subjectName: 'governance-run.json',
+        subjectDigest: runFileHash,
+        invocation,
+      })
+    );
+  });
+
+  it('rejects missing, duplicate, or digest-mismatched governance subjects', () => {
+    const invocation = `https://github.com/${anchor.repository}/actions/runs/42/attempts/1`;
+    const normalize = (subjects: unknown[]) =>
+      normalizeAttestation(
+        [attestationResult(subjects)],
+        invocation,
+        'governance-run.json',
+        runFileHash
+      );
+    const governanceSubject = {
+      name: 'governance-run.json',
+      digest: { sha256: runFileHash },
+    };
+
+    expect(() =>
+      normalize([
+        {
+          name: 'overlaykit-server-0.1.0.tgz',
+          digest: { sha256: 'a'.repeat(64) },
+        },
+      ])
+    ).toThrowError(/Expected exactly one governance-run.json attestation subject, received 0/);
+    expect(() => normalize([governanceSubject, governanceSubject])).toThrowError(
+      /Expected exactly one governance-run.json attestation subject, received 2/
+    );
+    expect(() =>
+      normalize([
+        {
+          name: 'governance-run.json',
+          digest: { sha256: 'f'.repeat(64) },
+        },
+      ])
+    ).toThrowError(/Expected governance-run.json SHA-256/);
+  });
+
   it('collects normalized GitHub API evidence through an injected adapter', () => {
     const run = pullRequestRun();
     const directory = mkdtempSync(join(tmpdir(), 'overlaykit-governance-'));

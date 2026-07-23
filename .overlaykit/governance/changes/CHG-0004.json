@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0004",
+  "title": "Test exact governance evidence in multi-subject provenance",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "critical",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Protected-main Constitution run 30039541525 produced one verified provenance statement containing governance-run.json and overlaykit-server-0.1.0.tgz as two subjects.",
+      "evidence": "OverlayKit/companion-module-overlaykit-server Actions run 30039541525 and GitHub attestation verification",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The GitHub observer rejected that verified statement before evidence projection because it required every provenance statement to contain exactly one subject.",
+      "evidence": "Actions run 30039541525 observe job 89316026923: Expected exactly one attestation subject, received 2",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-033: The observer can preserve fail-closed governance evidence while accepting a multi-subject statement by selecting exactly one subject whose name and SHA-256 match the GovernanceRun under observation.",
+      "evidence": "Failure analysis of Actions run 30039541525",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "This Slice does not establish independent release provenance for the module artifact, artifact publication, or trust in any subject other than the exact GovernanceRun.",
+      "evidence": "H-033 proposed Slice boundary",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "A verified provenance statement may contain additional subjects when exactly one subject matches governance-run.json and its observed SHA-256.",
+      "verification": "Focused multi-subject normalization test."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The observer rejects provenance with no governance-run.json subject, duplicate governance-run.json subjects, or a mismatched governance-run.json SHA-256.",
+      "verification": "Focused hostile attestation tests."
+    },
+    {
+      "id": "SC-003",
+      "statement": "Signer workflow, source repository, source commit, source ref, OIDC issuer, runner environment, event, and invocation retain their existing exact verification.",
+      "verification": "Existing GitHub root-of-trust tests and evidence projection."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The correction changes no protocol, module runtime, action, feedback, packaging, or authority behavior.",
+      "verification": "Diff review and complete repository checks."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0004 records the observed failure, proposed hypothesis, success criteria, and unknowns before evidence acceptance.",
+      "evidence": "CHG-0004 and Actions run 30039541525."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The Slice changes only attestation subject normalization, focused tests, the proposed change contract, and deterministic generated artifacts.",
+      "evidence": "Change review against CHG-0004."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "Governance, licensing, quality, module, build, package, and GitHub Actions checks pass for the exact Slice head.",
+      "evidence": "Local and GitHub Actions evidence."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No ADR, implemented status, bounded inference, merge, publication, or release claim is created before separate human evidence review.",
+      "evidence": "CHG-0004 remains proposed pending evidence review."
+    }
+  ]
+}
