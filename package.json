@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Governed Bitfocus Companion module for OverlayKit production control.",
   "private": true,
+  "main": "dist/main.js",
   "type": "module",
   "license": "Apache-2.0",
   "author": {
@@ -23,9 +24,13 @@
     "tools/governance"
   ],
   "scripts": {
-    "build": "npm run build --workspace @overlaykit/governance-host",
-    "check": "npm run check:licensing && npm run governance:check",
+    "build": "npm run build:module && npm run build:governance",
+    "build:governance": "npm run build --workspace @overlaykit/governance-host",
+    "build:module": "node scripts/clean-module.mjs && tsc -p tsconfig.build.json",
+    "check": "npm run check:licensing && npm run governance:check && npm run check:module",
     "check:licensing": "node --test scripts/verify-licensing.test.mjs && node scripts/verify-licensing.mjs",
+    "check:module": "npm run verify:protocol && npm run verify:source-boundary && npm run audit:runtime && npm run lint:module && npm run type-check:module && npm run test:module && npm run package:module && npm run verify:package",
+    "audit:runtime": "npm audit --omit=dev --audit-level=high",
     "format": "prettier --write .",
     "governance:compile": "npm run compile --workspace @overlaykit/governance-host",
     "governance:verify": "npm run verify --workspace @overlaykit/governance-host",
@@ -34,12 +39,29 @@
     "governance:observe:github": "npm run observe:github --workspace @overlaykit/governance-host --",
     "governance:verify:signatures": "npm run verify:signatures --workspace @overlaykit/governance-host --",
     "governance:ruleset:plan": "npm run ruleset:plan --workspace @overlaykit/governance-host --",
-    "governance:ruleset:apply": "npm run ruleset:apply --workspace @overlaykit/governance-host --"
+    "governance:ruleset:apply": "npm run ruleset:apply --workspace @overlaykit/governance-host --",
+    "lint:module": "eslint src tests --ext .ts",
+    "package:module": "npm run build:module && node scripts/prepare-package-dir.mjs && companion-module-build --output pkg/overlaykit-server-0.1.0",
+    "test:module": "npm run build:module && vitest run --config vitest.config.ts",
+    "type-check:module": "tsc --noEmit -p tsconfig.json",
+    "verify:package": "node scripts/verify-module-package.mjs",
+    "verify:protocol": "node scripts/verify-protocol-artifact.mjs",
+    "verify:source-boundary": "node scripts/verify-source-boundary.mjs"
+  },
+  "dependencies": {
+    "@companion-module/base": "2.0.4",
+    "@overlaykit/protocol": "file:vendor/overlaykit-protocol-0.1.0.tgz",
+    "ws": "8.21.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.65.0",
-    "@typescript-eslint/parser": "^8.65.0",
-    "eslint": "^8.57.1",
-    "prettier": "^3.8.3"
+    "@companion-module/host": "1.0.1",
+    "@companion-module/tools": "3.0.1",
+    "@types/node": "22.19.17",
+    "@types/ws": "8.18.1",
+    "eslint": "9.39.4",
+    "prettier": "^3.8.3",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.65.0",
+    "vitest": "4.1.10"
   }
 }

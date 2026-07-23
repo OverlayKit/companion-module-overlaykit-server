@@ -33,7 +33,7 @@ describe('OverlayKit governance contract', () => {
     );
     expect(headChangeStatuses).toMatchObject({
       'CHG-0001': 'implemented',
-      'CHG-0002': 'approved',
+      'CHG-0002': 'implemented',
     });
 
     const plan = compileGovernance(contract);
@@ -46,6 +46,11 @@ describe('OverlayKit governance contract', () => {
       }),
       expect.objectContaining({
         id: 'ADR-0002',
+        effectiveStatus: 'accepted',
+        supersededBy: null,
+      }),
+      expect.objectContaining({
+        id: 'ADR-0003',
         effectiveStatus: 'accepted',
         supersededBy: null,
       }),

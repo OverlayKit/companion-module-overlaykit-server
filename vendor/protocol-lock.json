@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "overlaykit-protocol-artifact-lock/v1",
+  "package": "@overlaykit/protocol",
+  "version": "0.1.0",
+  "sourceRepository": "OverlayKit/overlaykit",
+  "sourceCommit": "201cd15ceee487b5a305efd2684e52970d5d6c15",
+  "sourceCommitVerified": true,
+  "sourceCommitVerifiedAt": "2026-07-23T15:54:54Z",
+  "filename": "overlaykit-protocol-0.1.0.tgz",
+  "sha256": "10cdf14726134c0686d89abb8a8ef1233d1de216f21a731b23643b53ef436f63",
+  "sha512": "9ccae4621561601e8ccccb97f6238b90f67c295dfc803a04ba51e342b76ab207c907aceceadef3c953e1e46a64aea2f7a80be204db96ec323370e0eaf0d30adf",
+  "npmShasum": "e8a7112b096e6f49efc7b5cef63d15b3b53e2d4e",
+  "npmIntegrity": "sha512-nMrkYhVhYB6MzMuX9iOLkPZ8KV38gDoEulHjQrdqsgfJB6zs6t7zyVPh5GpkrqL3qAviBNuW7DIzcODq8NMK3w=="
+}

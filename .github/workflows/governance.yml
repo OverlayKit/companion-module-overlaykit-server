@@ -56,6 +56,11 @@ jobs:
         continue-on-error: true
         run: npm run build
 
+      - name: Package module
+        id: package
+        continue-on-error: true
+        run: npm run package:module && npm run verify:package
+
       - name: Record evidence
         if: always()
         run: >-
@@ -84,16 +89,28 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
+      - name: Upload module package
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: companion-module-${{ github.run_id }}
+          path: pkg/overlaykit-server-0.1.0.tgz
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Attest evidence
         if: >-
           github.event_name == 'push' &&
           github.ref == 'refs/heads/main' &&
           steps.governance.outcome == 'success' &&
           steps.quality.outcome == 'success' &&
-          steps.build.outcome == 'success'
+          steps.build.outcome == 'success' &&
+          steps.package.outcome == 'success'
         uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45
         with:
-          subject-path: artifacts/governance-run.json
+          subject-path: |
+            artifacts/governance-run.json
+            pkg/overlaykit-server-0.1.0.tgz
 
       - name: Enforce outcomes
         if: always()
@@ -101,10 +118,12 @@ jobs:
           GOVERNANCE_OUTCOME: ${{ steps.governance.outcome }}
           QUALITY_OUTCOME: ${{ steps.quality.outcome }}
           BUILD_OUTCOME: ${{ steps.build.outcome }}
+          PACKAGE_OUTCOME: ${{ steps.package.outcome }}
         run: |
           test "$GOVERNANCE_OUTCOME" = "success"
           test "$QUALITY_OUTCOME" = "success"
           test "$BUILD_OUTCOME" = "success"
+          test "$PACKAGE_OUTCOME" = "success"
 
   observe:
     name: observe

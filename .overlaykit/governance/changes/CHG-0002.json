@@ -2,11 +2,11 @@
   "schemaVersion": "overlaykit-governance-change/v2",
   "id": "CHG-0002",
   "title": "Test the Bitfocus Companion adapter boundary",
-  "status": "approved",
+  "status": "implemented",
   "changeClass": "architecture",
   "risk": "critical",
   "owner": "@rodrigoteamx",
-  "decisions": ["ADR-0001"],
+  "decisions": ["ADR-0001", "ADR-0003"],
   "specifications": ["SPEC-0001"],
   "claims": [
     {
@@ -43,6 +43,12 @@
       "kind": "assumption",
       "statement": "H-031: A separately governed public Node 22 ESM module can load through the official Bitfocus Companion API 2.0 host on Linux, consume the exact digest-pinned npm tarball of @overlaykit/protocol without workspace or repository source access, connect one module instance to one OverlayKit Show, and expose visibility actions and feedback using only signed server evidence without creating a second operational authority.",
       "evidence": "H-031 and Slice 1 explicitly approved by Human Doctrine review on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "H-031 is supported only for signed head 1f1acb642aadcf4739c7265775304b8a1d6dc084 under a clean engine-strict Node 22 install, official @companion-module/host 1.0.1 loading compiled dist/main.js, exact digest-pinned @overlaykit/protocol 0.1.0, one Show per module instance, three visibility actions, six feedback projections, fail-closed configuration, signed bootstrap readiness, non-optimistic state, bounded expiry and reconnect behavior, no persisted operational authority, legal provenance, and Ubuntu GitHub Actions. It does not establish npm publication, Bitfocus registry admission, Companion Module API 2.1, the complete Companion application, USB or physical hardware, button pixels, OBS truth, operator perception, trust rotation, or support outside the tested boundary.",
+      "evidence": "Human Doctrine acceptance on 2026-07-23 after local refutation evidence and GitHub Actions Constitution run 30031342884",
       "blocking": false
     },
     {
@@ -103,12 +109,12 @@
     {
       "id": "DOD-003",
       "statement": "Governance, quality, build, packaging, dependency audit, signatures, and GitHub Actions evidence pass for the exact Slice head.",
-      "evidence": "Local commands and future GitHub Actions run."
+      "evidence": "Clean Node 22 install, 42 governance tests, 21 module tests, official host 1.0.1 load, package and legal checks, zero-vulnerability audit, verified signatures, and GitHub Actions run 30031342884 at signed head 1f1acb642aadcf4739c7265775304b8a1d6dc084."
     },
     {
       "id": "DOD-004",
-      "statement": "No bounded inference, implemented status, ADR, profile activation, merge, publication, release, or hardware claim is created before separate human review and authorization.",
-      "evidence": "Future Human Doctrine evidence review."
+      "statement": "ADR-0003, implemented status, bounded inference, and profile activation occur only after evidence acceptance; merge, publication, release, and hardware claims remain future separately authorized transitions.",
+      "evidence": "Human Doctrine evidence acceptance on 2026-07-23 and ADR-0003."
     }
   ]
 }
