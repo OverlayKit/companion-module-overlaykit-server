@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0001",
+  "title": "Bootstrap the Companion module constitution",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "critical",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001"],
+  "specifications": ["SPEC-0001"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "OverlayKit/companion-module-overlaykit-server was created as an empty public repository with no prior commits, code, workflows, releases, packages, or rulesets.",
+      "evidence": "GitHub repository creation and empty local git initialization on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The parent OverlayKit project already accepts deterministic governance, Apache-2.0 licensing, Rodrigo Vicente attribution, public protocol authority, signed device evidence, and a separate Companion adapter repository.",
+      "evidence": "OverlayKit ADR-0001, ADR-0018, ADR-0019, ADR-0020, ADR-0031, ADR-0032, ADR-0033, ADR-0034, and CHG-0040",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Bootstrapping this repository with its own deterministic plan, manifest, specification, mechanisms, CI evidence, legal provenance, and signed history makes later adapter claims attributable without importing the parent repository's mutable context.",
+      "evidence": "ADR-0001 and bootstrap verification",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The project owner directly accepts the initial constitution, specification, and bootstrap sequence before remote enforcement exists.",
+      "evidence": "Human Doctrine approval on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether repeated cross-repository use will later justify publishing the private governance host as a reusable package.",
+      "evidence": null,
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The repository begins with a signed commit containing executable governance and legal provenance before adapter product code.",
+      "verification": "Git history, GitHub commit verification, and absence of src and Companion manifest files in the bootstrap commit."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The same semantic inputs compile deterministically to the stored planHash and manifestHash.",
+      "verification": "Governance host determinism tests and npm run governance:verify."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The bootstrap validates immutable records, producer bindings, stale evidence, and dishonest enforcement claims.",
+      "verification": "Governance host test suite."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Apache-2.0, Rodrigo Vicente attribution, and the Bitfocus MIT notice are machine-checked.",
+      "verification": "npm run check:licensing."
+    },
+    {
+      "id": "SC-005",
+      "statement": "GitHub Actions validates governance, quality, and builds and attests the main-branch GovernanceRun before a main ruleset is activated.",
+      "verification": "First main push workflow, attestation, and external GitHub observation."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "Governance lint, type-check, tests, compilation, and verification pass.",
+      "evidence": "npm run governance:check"
+    },
+    {
+      "id": "DOD-002",
+      "statement": "Licensing tests and repository builds pass.",
+      "evidence": "npm run check && npm run build"
+    },
+    {
+      "id": "DOD-003",
+      "statement": "plan.json and manifest.json match deterministic compilation.",
+      "evidence": ".overlaykit/governance/plan.json and .overlaykit/governance/manifest.json"
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The bootstrap commit is signed, pushed to main, observed, and attested before the configured ruleset is activated.",
+      "evidence": "GitHub commit, Actions artifacts, attestation verification, and ruleset activation receipt."
+    }
+  ]
+}

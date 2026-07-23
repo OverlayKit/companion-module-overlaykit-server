@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "overlaykit-governance-decision/v1",
+  "id": "ADR-0001",
+  "title": "The Companion adapter is evidence-bound translation, not authority",
+  "status": "accepted",
+  "date": "2026-07-23",
+  "supersedes": null,
+  "governs": [
+    "architecture",
+    "change-control",
+    "evidence",
+    "identity",
+    "licensing",
+    "protocol-authority",
+    "quality"
+  ],
+  "context": "OverlayKit needs a Linux-compatible Bitfocus Companion module so an operator can control live production without changing browser screens. The module crosses three independent authorities: the human-controlled Companion configuration, the public OverlayKit protocol package, and the OverlayKit server that owns admission and production truth. A convenient adapter that caches or invents authority could display a believable but false state during a live production.",
+  "decision": "This repository uses Doctrine-Driven Development under a deterministic TypeScript governance host. The module is a fail-closed translator between Bitfocus Companion and the public OverlayKit protocol: it validates externally pinned server identity, consumes only versioned public protocol artifacts, sends authorized commands, and projects only accepted server evidence and transport facts. It never defines protocol semantics, production state, action authority, or credential authority locally.",
+  "consequences": [
+    "Every product change begins with an approved typed change contract and an explicit architectural question.",
+    "An ADR is created only after a Slice attempts refutation and the human authority accepts bounded evidence.",
+    "Accepted decisions and specifications remain byte-identical; successors derive supersession.",
+    "The module may remember the last verified projection but cannot treat memory, UI configuration, a command acknowledgement, or an open socket as current production truth.",
+    "The module imports public @overlaykit/protocol artifacts and never copies validators or server implementation.",
+    "Invalid, stale, ambiguous, unsigned, or unavailable evidence fails closed.",
+    "Secrets are not logged, exported, interpolated into variables, or represented as ordinary configuration diagnostics.",
+    "Repository creation, evidence acceptance, merge, npm publication, Bitfocus registry admission, and release are separate human-authorized transitions.",
+    "Apache-2.0 and Rodrigo Vicente attribution govern project code; adapted Bitfocus template material preserves its MIT notice.",
+    "Hashes prove integrity and freshness; GitHub signatures and attestations provide external authenticity."
+  ],
+  "policies": [
+    {
+      "kind": "rule",
+      "id": "law-is-compiled",
+      "statement": "Normative governance is the compiled plan derived from immutable accepted decisions, accepted specifications, registered mechanisms, and the active profile."
+    },
+    {
+      "kind": "rule",
+      "id": "evidence-cannot-redefine-law",
+      "statement": "Evidence may answer an approved question only within the law and claim boundary that existed before the experiment."
+    },
+    {
+      "kind": "rule",
+      "id": "accepted-records-are-immutable",
+      "statement": "Accepted decisions, accepted specifications, and implemented change contracts are never edited or deleted; a successor receives a new identifier."
+    },
+    {
+      "kind": "rule",
+      "id": "claims-are-typed",
+      "statement": "Every change separates facts, inferences, assumptions, and unknowns; facts and inferences require evidence."
+    },
+    {
+      "kind": "rule",
+      "id": "agents-are-delegated",
+      "statement": "An agent has no independent project authority and must name its registered human principal."
+    },
+    {
+      "kind": "rule",
+      "id": "server-is-operational-authority",
+      "statement": "Only accepted, signed OverlayKit server evidence may establish Show bindings, catalogs, revisions, command outcomes, and production state."
+    },
+    {
+      "kind": "rule",
+      "id": "adapter-is-not-protocol-authority",
+      "statement": "The adapter consumes exact public @overlaykit/protocol artifacts and may not copy, weaken, or independently implement protocol admission."
+    },
+    {
+      "kind": "rule",
+      "id": "transition-requires-evidence",
+      "statement": "No projected state transition exists without accepted evidence that justifies it."
+    },
+    {
+      "kind": "rule",
+      "id": "legal-provenance-precedes-product-code",
+      "statement": "Apache-2.0 licensing, Rodrigo Vicente attribution, and applicable upstream notices must exist before adapter product code enters history."
+    },
+    {
+      "kind": "gate",
+      "id": "governance-contract",
+      "description": "The deterministic governance host validates and verifies the stored plan and manifest.",
+      "tier": "enforced",
+      "boundTo": "ci:governance"
+    },
+    {
+      "kind": "gate",
+      "id": "change-contract",
+      "description": "Typed change contracts satisfy their schema and epistemic invariants.",
+      "tier": "enforced",
+      "boundTo": "ci:governance"
+    },
+    {
+      "kind": "gate",
+      "id": "quality",
+      "description": "Licensing, lint, type-check, and automated tests pass.",
+      "tier": "enforced",
+      "boundTo": "ci:quality"
+    },
+    {
+      "kind": "gate",
+      "id": "build",
+      "description": "Every buildable workspace builds successfully.",
+      "tier": "enforced",
+      "boundTo": "ci:build"
+    },
+    {
+      "kind": "gate",
+      "id": "independent-review",
+      "description": "A reviewer other than the last producer approves the change.",
+      "tier": "deferred",
+      "boundTo": "github:independent-review"
+    },
+    {
+      "kind": "gate",
+      "id": "signed-identity",
+      "description": "Commits carry an identity signature trusted by the repository root of trust.",
+      "tier": "deferred",
+      "boundTo": "github:signed-commits"
+    },
+    {
+      "kind": "artifact",
+      "id": "governance-plan",
+      "description": "Canonical plan.json and manifest.json generated from the contract.",
+      "tier": "enforced",
+      "producedBy": "repo:governance-compiler"
+    },
+    {
+      "kind": "artifact",
+      "id": "change-contract-artifact",
+      "description": "A typed change contract containing scope, claims, criteria, and definition of done.",
+      "tier": "enforced",
+      "producedBy": "repo:governance-compiler"
+    },
+    {
+      "kind": "artifact",
+      "id": "review-record",
+      "description": "An independent review attached to the proposed change.",
+      "tier": "deferred",
+      "producedBy": "github:independent-review"
+    }
+  ]
+}

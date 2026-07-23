@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "overlaykit-governance-profile/v2",
+  "name": "overlaykit-companion-module",
+  "version": "1.0.0",
+  "decisionIds": ["ADR-0001"],
+  "specificationIds": ["SPEC-0001"],
+  "gates": [],
+  "artifacts": [],
+  "actors": [
+    {
+      "kind": "human",
+      "id": "@rodrigoteamx",
+      "principal": null,
+      "roles": ["owner", "maintainer", "reviewer"]
+    },
+    {
+      "kind": "agent",
+      "id": "codex",
+      "principal": "@rodrigoteamx",
+      "roles": ["author", "investigator", "producer"]
+    },
+    {
+      "kind": "ci",
+      "id": "github-actions",
+      "principal": "@rodrigoteamx",
+      "roles": ["evidence-producer", "gate-runner"]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "bootstrap-authority",
+      "statement": "The initial constitution and H-031 Slice are accepted directly by the project owner before external repository enforcement exists.",
+      "source": "human-doctrine-approval:2026-07-23"
+    },
+    {
+      "id": "single-maintainer-bootstrap",
+      "statement": "The organization currently has one human maintainer available to approve governance changes.",
+      "source": "overlaykit-governance-observation:2026-07-23"
+    }
+  ],
+  "trustAnchors": [
+    {
+      "kind": "github",
+      "id": "github:overlaykit-companion",
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "workflowPath": ".github/workflows/governance.yml",
+      "jobName": "validate",
+      "checkName": "validate",
+      "checkAppId": 15368,
+      "checkAppSlug": "github-actions",
+      "oidcIssuer": "https://token.actions.githubusercontent.com",
+      "runnerEnvironment": "github-hosted",
+      "protectedRef": "refs/heads/main",
+      "ruleset": {
+        "name": "main",
+        "activationChange": "CHG-0001",
+        "requiredRules": [
+          "deletion",
+          "non_fast_forward",
+          "pull_request",
+          "required_signatures",
+          "required_status_checks"
+        ],
+        "requiredStatusChecks": ["validate"],
+        "allowedMergeMethods": ["merge"],
+        "requireReviewThreadResolution": true,
+        "dismissStaleReviewsOnPush": false,
+        "requireCodeOwnerReview": false,
+        "requireLastPushApproval": false,
+        "minimumApprovals": 0,
+        "strictRequiredStatusChecksPolicy": true,
+        "doNotEnforceOnCreate": false,
+        "allowBypassActors": false,
+        "allowAdditionalRulesets": false,
+        "allowAdditionalRules": false
+      }
+    }
+  ]
+}

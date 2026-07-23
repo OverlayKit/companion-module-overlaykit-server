@@ -1,0 +1,45 @@
+{
+  "name": "companion-module-overlaykit-server",
+  "version": "0.1.0",
+  "description": "Governed Bitfocus Companion module for OverlayKit production control.",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Rodrigo Vicente",
+    "url": "https://x.com/rodrigoteamx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OverlayKit/companion-module-overlaykit-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OverlayKit/companion-module-overlaykit-server/issues"
+  },
+  "engines": {
+    "node": "^22.20"
+  },
+  "workspaces": [
+    "tools/governance"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @overlaykit/governance-host",
+    "check": "npm run check:licensing && npm run governance:check",
+    "check:licensing": "node --test scripts/verify-licensing.test.mjs && node scripts/verify-licensing.mjs",
+    "format": "prettier --write .",
+    "governance:compile": "npm run compile --workspace @overlaykit/governance-host",
+    "governance:verify": "npm run verify --workspace @overlaykit/governance-host",
+    "governance:check": "npm run check --workspace @overlaykit/governance-host && npm run governance:verify",
+    "governance:record": "npm run record --workspace @overlaykit/governance-host --",
+    "governance:observe:github": "npm run observe:github --workspace @overlaykit/governance-host --",
+    "governance:verify:signatures": "npm run verify:signatures --workspace @overlaykit/governance-host --",
+    "governance:ruleset:plan": "npm run ruleset:plan --workspace @overlaykit/governance-host --",
+    "governance:ruleset:apply": "npm run ruleset:apply --workspace @overlaykit/governance-host --"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.65.0",
+    "@typescript-eslint/parser": "^8.65.0",
+    "eslint": "^8.57.1",
+    "prettier": "^3.8.3"
+  }
+}

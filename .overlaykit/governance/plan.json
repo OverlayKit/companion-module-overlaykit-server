@@ -1,0 +1,339 @@
+{
+  "actors": [
+    {
+      "id": "@rodrigoteamx",
+      "kind": "human",
+      "principal": null,
+      "roles": [
+        "owner",
+        "maintainer",
+        "reviewer"
+      ]
+    },
+    {
+      "id": "codex",
+      "kind": "agent",
+      "principal": "@rodrigoteamx",
+      "roles": [
+        "author",
+        "investigator",
+        "producer"
+      ]
+    },
+    {
+      "id": "github-actions",
+      "kind": "ci",
+      "principal": "@rodrigoteamx",
+      "roles": [
+        "evidence-producer",
+        "gate-runner"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "description": "A typed change contract containing scope, claims, criteria, and definition of done.",
+      "id": "change-contract-artifact",
+      "kind": "artifact",
+      "producedBy": "repo:governance-compiler",
+      "sourceDecision": "ADR-0001",
+      "tier": "enforced"
+    },
+    {
+      "description": "Canonical plan.json and manifest.json generated from the contract.",
+      "id": "governance-plan",
+      "kind": "artifact",
+      "producedBy": "repo:governance-compiler",
+      "sourceDecision": "ADR-0001",
+      "tier": "enforced"
+    },
+    {
+      "description": "An independent review attached to the proposed change.",
+      "id": "review-record",
+      "kind": "artifact",
+      "producedBy": "github:independent-review",
+      "sourceDecision": "ADR-0001",
+      "tier": "deferred"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "bootstrap-authority",
+      "source": "human-doctrine-approval:2026-07-23",
+      "statement": "The initial constitution and H-031 Slice are accepted directly by the project owner before external repository enforcement exists."
+    },
+    {
+      "id": "single-maintainer-bootstrap",
+      "source": "overlaykit-governance-observation:2026-07-23",
+      "statement": "The organization currently has one human maintainer available to approve governance changes."
+    }
+  ],
+  "decisions": [
+    {
+      "contentHash": "e597cbaa8c69d53e197eb82f3baf71a7626f96db0d28a2b54e91c035bef917d6",
+      "declaredStatus": "accepted",
+      "effectiveStatus": "accepted",
+      "id": "ADR-0001",
+      "supersededBy": null,
+      "title": "The Companion adapter is evidence-bound translation, not authority"
+    }
+  ],
+  "engineVersion": "overlaykit-governance-host/v2",
+  "gates": [
+    {
+      "boundTo": "ci:build",
+      "description": "Every buildable workspace builds successfully.",
+      "id": "build",
+      "kind": "gate",
+      "outcome": null,
+      "sourceDecision": "ADR-0001",
+      "tier": "enforced"
+    },
+    {
+      "boundTo": "ci:governance",
+      "description": "Typed change contracts satisfy their schema and epistemic invariants.",
+      "id": "change-contract",
+      "kind": "gate",
+      "outcome": null,
+      "sourceDecision": "ADR-0001",
+      "tier": "enforced"
+    },
+    {
+      "boundTo": "ci:governance",
+      "description": "The deterministic governance host validates and verifies the stored plan and manifest.",
+      "id": "governance-contract",
+      "kind": "gate",
+      "outcome": null,
+      "sourceDecision": "ADR-0001",
+      "tier": "enforced"
+    },
+    {
+      "boundTo": "github:independent-review",
+      "description": "A reviewer other than the last producer approves the change.",
+      "id": "independent-review",
+      "kind": "gate",
+      "outcome": null,
+      "sourceDecision": "ADR-0001",
+      "tier": "deferred"
+    },
+    {
+      "boundTo": "ci:quality",
+      "description": "Licensing, lint, type-check, and automated tests pass.",
+      "id": "quality",
+      "kind": "gate",
+      "outcome": null,
+      "sourceDecision": "ADR-0001",
+      "tier": "enforced"
+    },
+    {
+      "boundTo": "github:signed-commits",
+      "description": "Commits carry an identity signature trusted by the repository root of trust.",
+      "id": "signed-identity",
+      "kind": "gate",
+      "outcome": null,
+      "sourceDecision": "ADR-0001",
+      "tier": "deferred"
+    }
+  ],
+  "mechanisms": [
+    {
+      "enforcementCapable": true,
+      "expectedCommand": "npm run build",
+      "id": "ci:build",
+      "kind": "github-actions-job",
+      "locator": ".github/workflows/governance.yml#jobs.validate",
+      "subject": "repository-builds"
+    },
+    {
+      "enforcementCapable": true,
+      "expectedCommand": "npm run governance:observe:github -- --run artifacts/governance-run.json --out artifacts/github-evidence.json --observation-out artifacts/github-observation.json",
+      "id": "ci:github-observer",
+      "kind": "github-actions-job",
+      "locator": ".github/workflows/governance.yml#jobs.observe",
+      "subject": "github-root-of-trust-evidence"
+    },
+    {
+      "enforcementCapable": true,
+      "expectedCommand": "npm run governance:check",
+      "id": "ci:governance",
+      "kind": "github-actions-job",
+      "locator": ".github/workflows/governance.yml#jobs.validate",
+      "subject": "governance-contract"
+    },
+    {
+      "enforcementCapable": true,
+      "expectedCommand": "npm run check",
+      "id": "ci:quality",
+      "kind": "github-actions-job",
+      "locator": ".github/workflows/governance.yml#jobs.validate",
+      "subject": "source-quality"
+    },
+    {
+      "enforcementCapable": false,
+      "expectedCommand": null,
+      "id": "github:independent-review",
+      "kind": "github-ruleset",
+      "locator": "github://OverlayKit/companion-module-overlaykit-server/rulesets/main",
+      "subject": "pull-request-review"
+    },
+    {
+      "enforcementCapable": false,
+      "expectedCommand": null,
+      "id": "github:signed-commits",
+      "kind": "github-ruleset",
+      "locator": "github://OverlayKit/companion-module-overlaykit-server/rulesets/main",
+      "subject": "commit-authenticity"
+    },
+    {
+      "enforcementCapable": false,
+      "expectedCommand": "npm run ruleset:apply --workspace @overlaykit/governance-host --",
+      "id": "repo:github-ruleset-controller",
+      "kind": "local-command",
+      "locator": "package.json#scripts.governance:ruleset:apply",
+      "subject": "github-ruleset-activation"
+    },
+    {
+      "enforcementCapable": true,
+      "expectedCommand": "npm run compile --workspace @overlaykit/governance-host",
+      "id": "repo:governance-compiler",
+      "kind": "local-command",
+      "locator": "package.json#scripts.governance:compile",
+      "subject": "governance-plan"
+    }
+  ],
+  "mechanismsHash": "64141de30d5791ad3f53cf857fa582477413b15e997f7e438de408f1ba328fd4",
+  "planHash": "bc17f18abe30e0e16e689ae43572b2a87d49a980599c6a6a463f6aaac79a5efb",
+  "profileHash": "a5f1930932913acee00ac56542a8d168750ddcc515ac55103ef7635a6ac683c7",
+  "profileName": "overlaykit-companion-module",
+  "profileVersion": "1.0.0",
+  "rules": [
+    {
+      "id": "accepted-records-are-immutable",
+      "kind": "rule",
+      "sourceDecision": "ADR-0001",
+      "statement": "Accepted decisions, accepted specifications, and implemented change contracts are never edited or deleted; a successor receives a new identifier."
+    },
+    {
+      "id": "adapter-is-not-protocol-authority",
+      "kind": "rule",
+      "sourceDecision": "ADR-0001",
+      "statement": "The adapter consumes exact public @overlaykit/protocol artifacts and may not copy, weaken, or independently implement protocol admission."
+    },
+    {
+      "id": "agents-are-delegated",
+      "kind": "rule",
+      "sourceDecision": "ADR-0001",
+      "statement": "An agent has no independent project authority and must name its registered human principal."
+    },
+    {
+      "id": "claims-are-typed",
+      "kind": "rule",
+      "sourceDecision": "ADR-0001",
+      "statement": "Every change separates facts, inferences, assumptions, and unknowns; facts and inferences require evidence."
+    },
+    {
+      "id": "evidence-cannot-redefine-law",
+      "kind": "rule",
+      "sourceDecision": "ADR-0001",
+      "statement": "Evidence may answer an approved question only within the law and claim boundary that existed before the experiment."
+    },
+    {
+      "id": "law-is-compiled",
+      "kind": "rule",
+      "sourceDecision": "ADR-0001",
+      "statement": "Normative governance is the compiled plan derived from immutable accepted decisions, accepted specifications, registered mechanisms, and the active profile."
+    },
+    {
+      "id": "legal-provenance-precedes-product-code",
+      "kind": "rule",
+      "sourceDecision": "ADR-0001",
+      "statement": "Apache-2.0 licensing, Rodrigo Vicente attribution, and applicable upstream notices must exist before adapter product code enters history."
+    },
+    {
+      "id": "server-is-operational-authority",
+      "kind": "rule",
+      "sourceDecision": "ADR-0001",
+      "statement": "Only accepted, signed OverlayKit server evidence may establish Show bindings, catalogs, revisions, command outcomes, and production state."
+    },
+    {
+      "id": "transition-requires-evidence",
+      "kind": "rule",
+      "sourceDecision": "ADR-0001",
+      "statement": "No projected state transition exists without accepted evidence that justifies it."
+    }
+  ],
+  "schemasHash": "7fb3449b50610de900959d2335cc3720b32dd2974453ae9370db4183ba11b675",
+  "schemaVersion": "overlaykit-governance-plan/v2",
+  "specifications": [
+    {
+      "contentHash": "917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179",
+      "declaredStatus": "accepted",
+      "effectiveStatus": "accepted",
+      "id": "SPEC-0001",
+      "requirementIds": [
+        "REQ-DOM-001",
+        "REQ-DOM-002",
+        "REQ-DOM-003",
+        "REQ-INT-001",
+        "REQ-INT-002",
+        "REQ-RUN-001",
+        "REQ-RUN-002",
+        "REQ-RUN-003",
+        "REQ-RUN-004",
+        "REQ-SEC-001",
+        "REQ-SEC-002",
+        "REQ-SEC-003"
+      ],
+      "supersededBy": null,
+      "title": "Linux production control through Bitfocus Companion",
+      "userStoryIds": [
+        "US-001"
+      ],
+      "workflowIds": [
+        "WF-001"
+      ]
+    }
+  ],
+  "trustAnchors": [
+    {
+      "checkAppId": 15368,
+      "checkAppSlug": "github-actions",
+      "checkName": "validate",
+      "id": "github:overlaykit-companion",
+      "jobName": "validate",
+      "kind": "github",
+      "oidcIssuer": "https://token.actions.githubusercontent.com",
+      "protectedRef": "refs/heads/main",
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "ruleset": {
+        "activationChange": "CHG-0001",
+        "allowAdditionalRules": false,
+        "allowAdditionalRulesets": false,
+        "allowBypassActors": false,
+        "allowedMergeMethods": [
+          "merge"
+        ],
+        "dismissStaleReviewsOnPush": false,
+        "doNotEnforceOnCreate": false,
+        "minimumApprovals": 0,
+        "name": "main",
+        "requireCodeOwnerReview": false,
+        "requiredRules": [
+          "deletion",
+          "non_fast_forward",
+          "pull_request",
+          "required_signatures",
+          "required_status_checks"
+        ],
+        "requiredStatusChecks": [
+          "validate"
+        ],
+        "requireLastPushApproval": false,
+        "requireReviewThreadResolution": true,
+        "strictRequiredStatusChecksPolicy": true
+      },
+      "runnerEnvironment": "github-hosted",
+      "workflowPath": ".github/workflows/governance.yml"
+    }
+  ]
+}

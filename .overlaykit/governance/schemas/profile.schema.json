@@ -1,0 +1,230 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "overlaykit-governance-profile/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "name",
+    "version",
+    "decisionIds",
+    "gates",
+    "artifacts",
+    "actors",
+    "assumptions",
+    "trustAnchors"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "enum": ["overlaykit-governance-profile/v1", "overlaykit-governance-profile/v2"]
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "decisionIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^ADR-[0-9]{4}$" }
+    },
+    "specificationIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^SPEC-[0-9]{4}$" }
+    },
+    "gates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gate" }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "actors": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/actor" }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/assumption" }
+    },
+    "trustAnchors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/trustAnchor" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": "overlaykit-governance-profile/v2" }
+        }
+      },
+      "then": {
+        "required": ["specificationIds"],
+        "properties": { "specificationIds": {} }
+      }
+    }
+  ],
+  "$defs": {
+    "tier": {
+      "enum": ["enforced", "advisory", "convention", "deferred"]
+    },
+    "nullableString": {
+      "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1 }]
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "tier", "boundTo"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "tier": { "$ref": "#/$defs/tier" },
+        "boundTo": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "tier", "producedBy"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "tier": { "$ref": "#/$defs/tier" },
+        "producedBy": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "principal", "roles"],
+      "properties": {
+        "kind": { "enum": ["human", "agent", "ci", "service"] },
+        "id": { "type": "string", "minLength": 1 },
+        "principal": { "$ref": "#/$defs/nullableString" },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "source"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "statement": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 }
+      }
+    },
+    "trustAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "id",
+        "repository",
+        "workflowPath",
+        "jobName",
+        "checkName",
+        "checkAppId",
+        "checkAppSlug",
+        "oidcIssuer",
+        "runnerEnvironment",
+        "protectedRef",
+        "ruleset"
+      ],
+      "properties": {
+        "kind": { "const": "github" },
+        "id": { "type": "string", "minLength": 1 },
+        "repository": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "workflowPath": {
+          "type": "string",
+          "pattern": "^\\.github/workflows/[^/]+\\.ya?ml$"
+        },
+        "jobName": { "type": "string", "minLength": 1 },
+        "checkName": { "type": "string", "minLength": 1 },
+        "checkAppId": { "type": "integer", "minimum": 1 },
+        "checkAppSlug": { "type": "string", "minLength": 1 },
+        "oidcIssuer": { "type": "string", "pattern": "^https://.+" },
+        "runnerEnvironment": { "const": "github-hosted" },
+        "protectedRef": { "type": "string", "pattern": "^refs/heads/.+" },
+        "ruleset": { "$ref": "#/$defs/rulesetRequirements" }
+      }
+    },
+    "rulesetRequirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "activationChange",
+        "requiredRules",
+        "requiredStatusChecks",
+        "allowedMergeMethods",
+        "requireReviewThreadResolution",
+        "dismissStaleReviewsOnPush",
+        "requireCodeOwnerReview",
+        "requireLastPushApproval",
+        "minimumApprovals",
+        "strictRequiredStatusChecksPolicy",
+        "doNotEnforceOnCreate",
+        "allowBypassActors",
+        "allowAdditionalRulesets",
+        "allowAdditionalRules"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "activationChange": {
+          "type": "string",
+          "pattern": "^CHG-[0-9]{4}$"
+        },
+        "requiredRules": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "deletion",
+              "non_fast_forward",
+              "pull_request",
+              "required_signatures",
+              "required_status_checks"
+            ]
+          }
+        },
+        "requiredStatusChecks": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "allowedMergeMethods": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["merge", "squash", "rebase"] }
+        },
+        "requireReviewThreadResolution": { "type": "boolean" },
+        "dismissStaleReviewsOnPush": { "type": "boolean" },
+        "requireCodeOwnerReview": { "type": "boolean" },
+        "requireLastPushApproval": { "type": "boolean" },
+        "minimumApprovals": { "type": "integer", "minimum": 0 },
+        "strictRequiredStatusChecksPolicy": { "type": "boolean" },
+        "doNotEnforceOnCreate": { "type": "boolean" },
+        "allowBypassActors": { "type": "boolean" },
+        "allowAdditionalRulesets": { "type": "boolean" },
+        "allowAdditionalRules": { "type": "boolean" }
+      }
+    }
+  }
+}

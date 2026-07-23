@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "overlaykit-governance-mechanisms/v1",
+  "mechanisms": [
+    {
+      "id": "repo:governance-compiler",
+      "kind": "local-command",
+      "locator": "package.json#scripts.governance:compile",
+      "subject": "governance-plan",
+      "enforcementCapable": true,
+      "expectedCommand": "npm run compile --workspace @overlaykit/governance-host"
+    },
+    {
+      "id": "ci:governance",
+      "kind": "github-actions-job",
+      "locator": ".github/workflows/governance.yml#jobs.validate",
+      "subject": "governance-contract",
+      "enforcementCapable": true,
+      "expectedCommand": "npm run governance:check"
+    },
+    {
+      "id": "ci:quality",
+      "kind": "github-actions-job",
+      "locator": ".github/workflows/governance.yml#jobs.validate",
+      "subject": "source-quality",
+      "enforcementCapable": true,
+      "expectedCommand": "npm run check"
+    },
+    {
+      "id": "ci:build",
+      "kind": "github-actions-job",
+      "locator": ".github/workflows/governance.yml#jobs.validate",
+      "subject": "repository-builds",
+      "enforcementCapable": true,
+      "expectedCommand": "npm run build"
+    },
+    {
+      "id": "ci:github-observer",
+      "kind": "github-actions-job",
+      "locator": ".github/workflows/governance.yml#jobs.observe",
+      "subject": "github-root-of-trust-evidence",
+      "enforcementCapable": true,
+      "expectedCommand": "npm run governance:observe:github -- --run artifacts/governance-run.json --out artifacts/github-evidence.json --observation-out artifacts/github-observation.json"
+    },
+    {
+      "id": "repo:github-ruleset-controller",
+      "kind": "local-command",
+      "locator": "package.json#scripts.governance:ruleset:apply",
+      "subject": "github-ruleset-activation",
+      "enforcementCapable": false,
+      "expectedCommand": "npm run ruleset:apply --workspace @overlaykit/governance-host --"
+    },
+    {
+      "id": "github:independent-review",
+      "kind": "github-ruleset",
+      "locator": "github://OverlayKit/companion-module-overlaykit-server/rulesets/main",
+      "subject": "pull-request-review",
+      "enforcementCapable": false,
+      "expectedCommand": null
+    },
+    {
+      "id": "github:signed-commits",
+      "kind": "github-ruleset",
+      "locator": "github://OverlayKit/companion-module-overlaykit-server/rulesets/main",
+      "subject": "commit-authenticity",
+      "enforcementCapable": false,
+      "expectedCommand": null
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "overlaykit-product-specification/v1",
+  "id": "SPEC-0001",
+  "title": "Linux production control through Bitfocus Companion",
+  "status": "accepted",
+  "date": "2026-07-23",
+  "supersedes": null,
+  "scope": "A separately installable Bitfocus Companion module that connects one module instance to one OverlayKit Show, exposes authorized visibility actions, and projects server-known feedback on Linux.",
+  "summary": "A Linux production operator configures one Companion module instance with an OverlayKit device endpoint, secret bearer, and pinned trust bundle. After signed bootstrap and readiness, Companion exposes Show-scoped actions and feedback so one physical or virtual button can perform a production command without requiring the operator to navigate browser screens.",
+  "actors": [
+    {
+      "id": "linux-operator",
+      "label": "Linux operator",
+      "description": "Operates an OverlayKit production through Bitfocus Companion."
+    },
+    {
+      "id": "owner",
+      "label": "Owner",
+      "description": "Provisions the device credential and pinned trust material."
+    },
+    {
+      "id": "overlaykit-server",
+      "label": "OverlayKit server",
+      "description": "Owns device admission, action authority, command outcomes, and production state."
+    }
+  ],
+  "terms": [
+    {
+      "id": "module-instance",
+      "name": "Module Instance",
+      "definition": "One configured Bitfocus Companion connection that controls exactly one OverlayKit Show."
+    },
+    {
+      "id": "verified-projection",
+      "name": "Verified Projection",
+      "definition": "The latest module-visible state derived from accepted signed server evidence and transport lifecycle facts."
+    },
+    {
+      "id": "device-trust-bundle",
+      "name": "DeviceTrustBundle",
+      "definition": "The externally obtained and explicitly pinned Ed25519 public identity used to verify OverlayKit device artifacts."
+    },
+    {
+      "id": "action-binding",
+      "name": "Action Binding",
+      "definition": "A Show-scoped action identity learned from an admitted signed catalog and used to construct commands."
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-DOM-001",
+      "category": "domain",
+      "statement": "One module instance controls exactly one Show learned from verified signed bootstrap.",
+      "verification": "Bootstrap tests reject cross-Show catalogs, state, and commands."
+    },
+    {
+      "id": "REQ-DOM-002",
+      "category": "domain",
+      "statement": "The module exposes stable visibility.show, visibility.hide, and visibility.toggle actions derived from current admitted action bindings.",
+      "verification": "Official host action-definition and catalog replacement tests."
+    },
+    {
+      "id": "REQ-DOM-003",
+      "category": "domain",
+      "statement": "The module projects active, inactive, unknown, disconnected, failed, and unavailable without inventing a production state.",
+      "verification": "Feedback projection tests covering snapshots, deltas, failures, disconnects, and unavailable catalogs."
+    },
+    {
+      "id": "REQ-SEC-001",
+      "category": "security",
+      "statement": "Bearer authority is provided through Companion secrets and is never logged, exported, exposed as a variable, or accepted from URL user information, query, or fragment fields.",
+      "verification": "Configuration, diagnostics, serialization, and hostile URL tests."
+    },
+    {
+      "id": "REQ-SEC-002",
+      "category": "security",
+      "statement": "The module requires an explicit valid DeviceTrustBundle before connecting and never fetches or replaces trust through the device WebSocket.",
+      "verification": "Missing, malformed, substituted, and changed trust tests."
+    },
+    {
+      "id": "REQ-SEC-003",
+      "category": "security",
+      "statement": "WSS is required by default; plain WS is allowed for loopback and requires an explicit persistent warning opt-in for non-loopback endpoints.",
+      "verification": "Endpoint parser and transport admission tests."
+    },
+    {
+      "id": "REQ-RUN-001",
+      "category": "runtime",
+      "statement": "The module remains not ready until a complete signed bootstrap is applied, acknowledged, and followed by device.ready.",
+      "verification": "Lifecycle ordering and pre-ready command rejection tests."
+    },
+    {
+      "id": "REQ-RUN-002",
+      "category": "runtime",
+      "statement": "A command uses a fresh admitted action binding and expected revision; its acknowledgement or result does not change visibility without authoritative state evidence.",
+      "verification": "Command, acknowledgement, result, revision, and delayed-delta tests."
+    },
+    {
+      "id": "REQ-RUN-003",
+      "category": "runtime",
+      "statement": "The last verified state remains projected until newer evidence arrives; disconnection, protocol failure, and unavailable authority remain distinct states.",
+      "verification": "Transport lifecycle and state-retention tests."
+    },
+    {
+      "id": "REQ-RUN-004",
+      "category": "runtime",
+      "statement": "Retryable network and server failures reconnect with bounded jittered backoff, while authorization, trust, protocol, and configuration failures remain closed until reconfiguration or restart.",
+      "verification": "Deterministic scheduler and error classification tests."
+    },
+    {
+      "id": "REQ-INT-001",
+      "category": "integration",
+      "statement": "The module is Node 22 ESM, targets Companion Module API 2.0, and loads through the official @companion-module/host API 2.0 boundary.",
+      "verification": "Engine-strict build and official host lifecycle integration test."
+    },
+    {
+      "id": "REQ-INT-002",
+      "category": "integration",
+      "statement": "Protocol parsing, verification, canonicalization, and admission come only from an exact packed public @overlaykit/protocol dependency.",
+      "verification": "Tarball digest, dependency graph, import boundary, and hostile artifact tests."
+    }
+  ],
+  "userStories": [
+    {
+      "id": "US-001",
+      "actor": "linux-operator",
+      "need": "control OverlayKit visibility from a Companion button",
+      "outcome": "timed production actions do not require changing browser screens",
+      "surface": "integration",
+      "preconditions": [
+        "The Owner has issued a Show-scoped device credential.",
+        "The Owner has provided the matching DeviceTrustBundle through a separate authenticated path.",
+        "OverlayKit and Companion are reachable from the Linux production host."
+      ],
+      "acceptanceCriteria": [
+        {
+          "id": "AC-001",
+          "given": "valid endpoint, secret bearer, pinned trust, and signed bootstrap",
+          "when": "the module reaches device.ready",
+          "then": "Companion exposes the current Show actions and verified feedback",
+          "verification": "Official host integration: configure, bootstrap, acknowledge, ready, and definition inspection."
+        },
+        {
+          "id": "AC-002",
+          "given": "an available visibility action with a current revision",
+          "when": "the operator invokes show, hide, or toggle",
+          "then": "the module sends one authorized command and changes feedback only after accepted server state evidence",
+          "verification": "Integration: action callback, command frame, result, and signed state delta."
+        },
+        {
+          "id": "AC-003",
+          "given": "the connection is open but current state evidence is absent or stale",
+          "when": "Companion evaluates button feedback",
+          "then": "the button projects unknown or unavailable rather than a guessed active state",
+          "verification": "Feedback tests with missing, stale, and unavailable evidence."
+        },
+        {
+          "id": "AC-004",
+          "given": "a retryable disconnect or a terminal trust, authorization, protocol, or configuration failure",
+          "when": "the module classifies the failure",
+          "then": "it reconnects only for the retryable class and exposes disconnected or failed without leaking secrets",
+          "verification": "Deterministic reconnect, status, and log-capture tests."
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "WF-001",
+      "title": "Configure and operate one OverlayKit Show",
+      "actors": ["owner", "linux-operator", "overlaykit-server"],
+      "steps": [
+        "The Owner provisions a Show-scoped bearer and obtains the server DeviceTrustBundle separately.",
+        "The operator configures one module instance with endpoint, secret bearer, and pinned trust.",
+        "The module validates configuration before opening the fixed device WebSocket.",
+        "The server authenticates the upgrade and sends a complete signed bootstrap.",
+        "The module verifies and applies the bootstrap, acknowledges its exact hashes, and waits for device.ready.",
+        "Companion exposes actions and feedback from the admitted catalog and state.",
+        "The operator invokes a visibility action.",
+        "The module sends a command using the current binding and expected revision.",
+        "The server returns command evidence and authoritative signed state.",
+        "The module preserves or changes feedback only as justified by the newest accepted evidence."
+      ],
+      "invariants": [
+        "REQ-DOM-001",
+        "REQ-DOM-002",
+        "REQ-DOM-003",
+        "REQ-SEC-001",
+        "REQ-SEC-002",
+        "REQ-SEC-003",
+        "REQ-RUN-001",
+        "REQ-RUN-002",
+        "REQ-RUN-003",
+        "REQ-RUN-004",
+        "REQ-INT-001",
+        "REQ-INT-002"
+      ]
+    }
+  ],
+  "outOfScope": [
+    "npm registry publication or provenance",
+    "Bitfocus module registry admission",
+    "Companion Module API 2.1 features",
+    "USB access and physical Stream Deck discovery",
+    "Physical key presses and rendered button pixels",
+    "OBS output truth and operator perception",
+    "Credential recovery and DeviceTrustBundle rotation",
+    "Support outside Linux, Node 22, and the tested Companion API 2.0 boundary"
+  ]
+}

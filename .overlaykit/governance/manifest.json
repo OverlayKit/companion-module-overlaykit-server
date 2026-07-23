@@ -1,0 +1,26 @@
+{
+  "changes": {
+    "CHG-0001": "59004fd7ea60fea75e8135e6522e56562364df86dfd8a0adb7a4998dfd23155b",
+    "CHG-0002": "e4e6d7ef97bd67e64f02cb6a985251f2056b2d5a93ff709736db944e34c2d014"
+  },
+  "contentHash": "079f042a0cc416a34d0e6523b85f426073ddedcf81967be800d9bff749d8afcc",
+  "decisions": {
+    "ADR-0001": "e597cbaa8c69d53e197eb82f3baf71a7626f96db0d28a2b54e91c035bef917d6"
+  },
+  "mechanismsHash": "64141de30d5791ad3f53cf857fa582477413b15e997f7e438de408f1ba328fd4",
+  "planHash": "bc17f18abe30e0e16e689ae43572b2a87d49a980599c6a6a463f6aaac79a5efb",
+  "profileHash": "a5f1930932913acee00ac56542a8d168750ddcc515ac55103ef7635a6ac683c7",
+  "schemas": {
+    "change.schema.json": "ebd2261f5f4ed8ec4fc0222f2ae76145810b59b006c05ad53b28daf36ec18146",
+    "decision.schema.json": "560f1fa1722a360a5a596d74408826686943996c9515716cb79b344380763e38",
+    "github-evidence.schema.json": "55c4507cfcf98dee3a5cd8b720dd709a25ee75777e5dabde4e6ad4be6b273b28",
+    "mechanisms.schema.json": "3fabbfb81c511dec96c4990cea093456077402e84643cd61638be66f22c9c9c5",
+    "profile.schema.json": "82360a0c3d3f9e60cf8a5c00bc0d9b0d5eee6de149bba5485db140e3683f5dd2",
+    "run.schema.json": "afec9741ff8249b7728a013455b1337d04b285335d765a8109043b0554a1cb0b",
+    "specification.schema.json": "056bc1460849ece13839cd635f0ce1e2e93cd7d00bf9c0e6622e0a2440f720fc"
+  },
+  "schemaVersion": "overlaykit-governance-manifest/v2",
+  "specifications": {
+    "SPEC-0001": "917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179"
+  }
+}

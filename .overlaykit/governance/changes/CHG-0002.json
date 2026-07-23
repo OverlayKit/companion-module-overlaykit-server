@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0002",
+  "title": "Test the Bitfocus Companion adapter boundary",
+  "status": "approved",
+  "changeClass": "architecture",
+  "risk": "critical",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001"],
+  "specifications": ["SPEC-0001"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "The official Bitfocus TypeScript module template at commit f2c31912a398f4b61706a7323ba7e1074cb56561 targets Node 22 ESM, Companion Module API 2.0, @companion-module/base 2.0.4, and @companion-module/tools 3.0.1.",
+      "evidence": "bitfocus/companion-module-template-ts commit f2c31912a398f4b61706a7323ba7e1074cb56561",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The official @companion-module/host 1.0.1 depends on @companion-module/base ~2.0.0 and executes the host-side API 2.0 boundary under Node 22.",
+      "evidence": "npm registry metadata for @companion-module/host 1.0.1 observed 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "@overlaykit/protocol 0.1.0 is not published to npm. Adapter evidence can consume an exact digest-pinned npm tarball from signed OverlayKit commit 201cd15 without claiming registry publication.",
+      "evidence": "npm registry observation and OverlayKit ADR-0034 on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "One module instance controls exactly one Show and learns Show and action bindings only from accepted signed bootstrap. Bearer and DeviceTrustBundle are configured inputs; operational state, catalogs, retries, and snapshots are not persisted as authority.",
+      "evidence": "SPEC-0001 and Human Doctrine Discovery on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The approved adapter surface contains visibility.show, visibility.hide, visibility.toggle and the active, inactive, unknown, disconnected, failed, and unavailable projections.",
+      "evidence": "SPEC-0001 and Human Doctrine approval on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-031: A separately governed public Node 22 ESM module can load through the official Bitfocus Companion API 2.0 host on Linux, consume the exact digest-pinned npm tarball of @overlaykit/protocol without workspace or repository source access, connect one module instance to one OverlayKit Show, and expose visibility actions and feedback using only signed server evidence without creating a second operational authority.",
+      "evidence": "H-031 and Slice 1 explicitly approved by Human Doctrine review on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "This Slice does not establish npm publication, Bitfocus registry admission, Companion Module API 2.1, the complete Companion application, USB access, physical hardware, button pixels, OBS truth, operator perception, trust rotation, or support outside the tested Linux Node 22 API 2.0 boundary.",
+      "evidence": "Approved H-031 Slice 1 boundary",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "A clean engine-strict Node 22 install builds and packages one ESM Companion API 2.0 module, and official @companion-module/host 1.0.1 loads its compiled entrypoint and exercises lifecycle and definitions.",
+      "verification": "Clean install, TypeScript build, official host harness, and Companion module package checks."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The module consumes one exact protocol tarball from signed OverlayKit commit 201cd15, verifies SHA-256 and SHA-512 identities, uses only public compiled exports, and has no workspace, server-source, copied-validator, or repository-source dependency.",
+      "verification": "Tarball manifest, digest, dependency graph, import boundary, and licensing checks."
+    },
+    {
+      "id": "SC-003",
+      "statement": "Configuration fails closed for invalid endpoint shape, missing secret bearer, missing or invalid trust, URL authority ambiguity, and insecure non-loopback transport without explicit opt-in.",
+      "verification": "Valid and hostile configuration tests."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The module remains not ready until complete signed bootstrap, exact acknowledgement, and device.ready, and it never synthesizes or persists operational authority.",
+      "verification": "Bootstrap, readiness, restart, and hostile artifact tests."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Stable visibility actions send commands from fresh admitted bindings and expected revisions, while state feedback changes only after accepted server snapshots, deltas, results, or transport facts.",
+      "verification": "Official host action and feedback integration tests."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Retryable failures reconnect with bounded jittered backoff and terminal authorization, trust, protocol, and configuration failures remain closed until explicit reconfiguration or restart.",
+      "verification": "Deterministic scheduler and lifecycle tests."
+    },
+    {
+      "id": "SC-007",
+      "statement": "Linux CI proves governance, licensing, clean installation, lint, type-check, tests, build, official host loading, and module packaging without claiming publication or hardware behavior.",
+      "verification": "GitHub Actions evidence and produced module archive inspection."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "The implementation changes only the approved module boundary, exact fixtures, tests, documentation, and CI evidence.",
+      "evidence": "Change review against CHG-0002."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "Review attempts to refute H-031 through clean installation, official host loading, strict trust and configuration rejection, bootstrap ordering, command and feedback authority, reconnect classes, restart behavior, package inspection, and source-boundary checks.",
+      "evidence": "Focused unit, integration, official-host, packaging, and licensing tests."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "Governance, quality, build, packaging, dependency audit, signatures, and GitHub Actions evidence pass for the exact Slice head.",
+      "evidence": "Local commands and future GitHub Actions run."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No bounded inference, implemented status, ADR, profile activation, merge, publication, release, or hardware claim is created before separate human review and authorization.",
+      "evidence": "Future Human Doctrine evidence review."
+    }
+  ]
+}

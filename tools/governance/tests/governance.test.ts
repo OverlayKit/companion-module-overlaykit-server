@@ -1,0 +1,557 @@
+import { describe, expect, it } from 'vitest';
+import { compileGovernance } from '../src/compiler.js';
+import { GovernanceError } from '../src/errors.js';
+import { buildManifest, immutabilityViolations } from '../src/manifest.js';
+import { observeRun } from '../src/projector.js';
+import {
+  ENGINE_VERSION,
+  RUN_SCHEMA_VERSION,
+  type ChangeContract,
+  type ChangeRecord,
+  type DecisionRecord,
+  type GovernanceDecision,
+  type GovernanceManifest,
+  type GovernanceProfile,
+  type GovernanceRun,
+  type LoadedContract,
+  type MechanismRegistry,
+  type ProductSpecification,
+  type SpecificationRecord,
+} from '../src/types.js';
+
+function decision(
+  id: string,
+  policies: GovernanceDecision['policies'] = [],
+  supersedes: string | null = null
+): GovernanceDecision {
+  return {
+    schemaVersion: 'overlaykit-governance-decision/v1',
+    id,
+    title: `Decision ${id}`,
+    status: 'accepted',
+    date: '2026-07-20',
+    supersedes,
+    governs: ['quality'],
+    context: 'Context',
+    decision: 'Decision',
+    consequences: ['Consequence'],
+    policies,
+  };
+}
+
+function record(value: GovernanceDecision): DecisionRecord {
+  return {
+    decision: value,
+    contentHash: value.id.padEnd(64, '0').slice(0, 64),
+    path: `.overlaykit/governance/decisions/${value.id}.json`,
+  };
+}
+
+function specification(id: string): ProductSpecification {
+  return {
+    schemaVersion: 'overlaykit-product-specification/v1',
+    id,
+    title: `Specification ${id}`,
+    status: 'accepted',
+    date: '2026-07-20',
+    supersedes: null,
+    scope: 'Test scope',
+    summary: 'Test summary',
+    actors: [{ id: 'owner', label: 'Owner', description: 'Owns the test.' }],
+    terms: [{ id: 'show', name: 'Show', definition: 'Test workspace.' }],
+    requirements: [
+      {
+        id: 'REQ-DOM-001',
+        category: 'domain',
+        statement: 'A show exists.',
+        verification: 'Test assertion.',
+      },
+    ],
+    userStories: [
+      {
+        id: 'US-001',
+        actor: 'owner',
+        need: 'create a show',
+        outcome: 'a show exists',
+        surface: 'shows',
+        preconditions: [],
+        acceptanceCriteria: [
+          {
+            id: 'AC-001',
+            given: 'no show',
+            when: 'one is created',
+            then: 'it exists',
+            verification: 'Test assertion.',
+          },
+        ],
+      },
+    ],
+    workflows: [
+      {
+        id: 'WF-001',
+        title: 'Create show',
+        actors: ['owner'],
+        steps: ['Create it.'],
+        invariants: ['REQ-DOM-001'],
+      },
+    ],
+    outOfScope: [],
+  };
+}
+
+function specificationRecord(value: ProductSpecification): SpecificationRecord {
+  return {
+    specification: value,
+    contentHash: value.id.padEnd(64, '1').slice(0, 64),
+    path: `.overlaykit/governance/specifications/${value.id}.json`,
+  };
+}
+
+function changeRecord(value: ChangeContract): ChangeRecord {
+  return {
+    change: value,
+    contentHash: value.id.padEnd(64, '2').slice(0, 64),
+    path: `.overlaykit/governance/changes/${value.id}.json`,
+  };
+}
+
+function profile(decisionIds: string[], specificationIds: string[] = []): GovernanceProfile {
+  return {
+    schemaVersion: 'overlaykit-governance-profile/v2',
+    name: 'test',
+    version: '1.0.0',
+    decisionIds,
+    specificationIds,
+    gates: [],
+    artifacts: [],
+    actors: [
+      {
+        kind: 'human',
+        id: '@owner',
+        principal: null,
+        roles: ['owner'],
+      },
+      {
+        kind: 'agent',
+        id: 'codex',
+        principal: '@owner',
+        roles: ['author'],
+      },
+    ],
+    assumptions: [],
+    trustAnchors: [],
+  };
+}
+
+const mechanisms: MechanismRegistry = {
+  schemaVersion: 'overlaykit-governance-mechanisms/v1',
+  mechanisms: [
+    {
+      id: 'ci:test',
+      kind: 'local-command',
+      locator: 'package.json#scripts.test',
+      subject: 'tests',
+      enforcementCapable: true,
+      expectedCommand: 'vitest run',
+    },
+  ],
+};
+
+function contract(
+  decisions: DecisionRecord[],
+  activeIds: string[],
+  registry = mechanisms,
+  specifications: SpecificationRecord[] = [],
+  activeSpecificationIds = specifications.map(({ specification }) => specification.id)
+): LoadedContract {
+  return {
+    decisions,
+    specifications,
+    changes: [],
+    profile: profile(activeIds, activeSpecificationIds),
+    mechanisms: registry,
+    schemas: { 'test.schema.json': 'a'.repeat(64) },
+    schemasHash: 'b'.repeat(64),
+    mechanismsHash: 'c'.repeat(64),
+  };
+}
+
+function currentRun(
+  plan: ReturnType<typeof compileGovernance>,
+  manifest: GovernanceManifest,
+  overrides: Partial<GovernanceRun> = {}
+): GovernanceRun {
+  return {
+    schemaVersion: RUN_SCHEMA_VERSION,
+    runId: 'run-1',
+    profileHash: plan.profileHash,
+    planHash: plan.planHash,
+    manifestHash: manifest.contentHash,
+    invokedBy: { kind: 'agent', id: 'codex', principal: '@owner' },
+    producer: {
+      kind: 'local-cli',
+      id: 'vitest',
+      version: '1',
+      commit: 'a'.repeat(40),
+    },
+    subject: {
+      repository: 'OverlayKit/overlaykit',
+      commit: 'a'.repeat(40),
+      ref: 'refs/heads/test',
+      event: 'local',
+      pullRequest: null,
+    },
+    source: 'local',
+    startedAt: '2026-07-20T00:00:00.000Z',
+    finishedAt: '2026-07-20T00:00:01.000Z',
+    assumptions: plan.assumptions,
+    outcomes: plan.gates.map((gate) => ({
+      gate: gate.id,
+      outcome: 'passed',
+      producerRef: 'test://evidence',
+      justification: null,
+      boundTo: gate.boundTo,
+    })),
+    artifacts: plan.artifacts.map((artifact) => ({
+      artifact: artifact.id,
+      producerRef: 'test://artifact',
+      contentHash: null,
+    })),
+    ...overrides,
+  };
+}
+
+describe('deterministic compiler', () => {
+  it('produces the same planHash regardless of corpus and profile ordering', () => {
+    const first = record(
+      decision('ADR-0001', [
+        { kind: 'rule', id: 'rule-b', statement: 'B' },
+        { kind: 'rule', id: 'rule-a', statement: 'A' },
+      ])
+    );
+    const second = record(decision('ADR-0002'));
+
+    const left = compileGovernance(contract([first, second], ['ADR-0002', 'ADR-0001']));
+    const right = compileGovernance(contract([second, first], ['ADR-0001', 'ADR-0002']));
+
+    expect(left.planHash).toBe(right.planHash);
+    expect(left.engineVersion).toBe(ENGINE_VERSION);
+    expect(left.rules.map((rule) => rule.id)).toEqual(['rule-a', 'rule-b']);
+  });
+
+  it('binds accepted specifications to deterministic plan and profile hashes', () => {
+    const item = record(decision('ADR-0001'));
+    const first = specificationRecord(specification('SPEC-0001'));
+    const secondValue = specification('SPEC-0002');
+    secondValue.requirements[0]!.id = 'REQ-DOM-002';
+    secondValue.userStories[0]!.id = 'US-002';
+    secondValue.userStories[0]!.acceptanceCriteria[0]!.id = 'AC-002';
+    secondValue.workflows[0]!.id = 'WF-002';
+    secondValue.workflows[0]!.invariants = ['REQ-DOM-002'];
+    const second = specificationRecord(secondValue);
+
+    const left = compileGovernance(
+      contract([item], ['ADR-0001'], mechanisms, [first, second], ['SPEC-0002', 'SPEC-0001'])
+    );
+    const right = compileGovernance(
+      contract([item], ['ADR-0001'], mechanisms, [second, first], ['SPEC-0001', 'SPEC-0002'])
+    );
+
+    expect(left.planHash).toBe(right.planHash);
+    expect(left.specifications.map(({ id }) => id)).toEqual(['SPEC-0001', 'SPEC-0002']);
+    expect(left.specifications[0]).toEqual(
+      expect.objectContaining({
+        requirementIds: ['REQ-DOM-001'],
+        userStoryIds: ['US-001'],
+        workflowIds: ['WF-001'],
+      })
+    );
+  });
+
+  it('derives specification supersession without mutating the accepted predecessor', () => {
+    const item = record(decision('ADR-0001'));
+    const previous = specificationRecord(specification('SPEC-0001'));
+    const successorValue = specification('SPEC-0002');
+    successorValue.supersedes = 'SPEC-0001';
+    const successor = specificationRecord(successorValue);
+    const plan = compileGovernance(
+      contract([item], ['ADR-0001'], mechanisms, [previous, successor], ['SPEC-0002'])
+    );
+
+    expect(plan.specifications).toEqual([
+      expect.objectContaining({
+        id: 'SPEC-0001',
+        effectiveStatus: 'superseded',
+        supersededBy: 'SPEC-0002',
+      }),
+      expect.objectContaining({
+        id: 'SPEC-0002',
+        effectiveStatus: 'accepted',
+        supersededBy: null,
+      }),
+    ]);
+  });
+
+  it('fails closed when enforced is not bound to a real mechanism', () => {
+    const item = record(
+      decision('ADR-0001', [
+        {
+          kind: 'gate',
+          id: 'tests',
+          description: 'Tests pass',
+          tier: 'enforced',
+          boundTo: 'ci:missing',
+        },
+      ])
+    );
+
+    expect(() => compileGovernance(contract([item], ['ADR-0001']))).toThrowError(GovernanceError);
+  });
+
+  it('fails when an agent principal is not a registered human actor', () => {
+    const item = record(decision('ADR-0001'));
+    const invalidContract = contract([item], ['ADR-0001']);
+    invalidContract.profile.actors[1] = {
+      kind: 'agent',
+      id: 'codex',
+      principal: '@missing',
+      roles: ['author'],
+    };
+
+    expect(() => compileGovernance(invalidContract)).toThrowError(GovernanceError);
+  });
+
+  it('fails when a version-two product change omits its specification', () => {
+    const item = record(decision('ADR-0001'));
+    const invalidContract = contract([item], ['ADR-0001']);
+    invalidContract.changes = [
+      changeRecord({
+        schemaVersion: 'overlaykit-governance-change/v2',
+        id: 'CHG-0001',
+        title: 'Ungoverned product change',
+        status: 'proposed',
+        changeClass: 'product',
+        risk: 'medium',
+        owner: '@owner',
+        decisions: ['ADR-0001'],
+        specifications: [],
+        claims: [
+          {
+            kind: 'assumption',
+            statement: 'The change is useful.',
+            evidence: null,
+            blocking: false,
+          },
+        ],
+        successCriteria: [
+          { id: 'SC-001', statement: 'It works.', verification: 'Automated test.' },
+        ],
+        definitionOfDone: [{ id: 'DOD-001', statement: 'Tests pass.', evidence: 'npm test' }],
+      }),
+    ];
+
+    expect(() => compileGovernance(invalidContract)).toThrowError(GovernanceError);
+  });
+
+  it('fails when a product change references an unknown specification', () => {
+    const item = record(decision('ADR-0001'));
+    const invalidContract = contract([item], ['ADR-0001']);
+    invalidContract.changes = [
+      changeRecord({
+        schemaVersion: 'overlaykit-governance-change/v2',
+        id: 'CHG-0001',
+        title: 'Unknown specification',
+        status: 'proposed',
+        changeClass: 'product',
+        risk: 'medium',
+        owner: '@owner',
+        decisions: ['ADR-0001'],
+        specifications: ['SPEC-9999'],
+        claims: [
+          {
+            kind: 'assumption',
+            statement: 'The missing specification exists.',
+            evidence: null,
+            blocking: false,
+          },
+        ],
+        successCriteria: [
+          { id: 'SC-001', statement: 'It works.', verification: 'Automated test.' },
+        ],
+        definitionOfDone: [{ id: 'DOD-001', statement: 'Tests pass.', evidence: 'npm test' }],
+      }),
+    ];
+
+    expect(() => compileGovernance(invalidContract)).toThrowError(GovernanceError);
+  });
+
+  it('fails when a user story references an undeclared actor', () => {
+    const item = record(decision('ADR-0001'));
+    const invalidValue = specification('SPEC-0001');
+    invalidValue.userStories[0]!.actor = 'missing-actor';
+    const invalidContract = contract([item], ['ADR-0001'], mechanisms, [
+      specificationRecord(invalidValue),
+    ]);
+
+    expect(() => compileGovernance(invalidContract)).toThrowError(GovernanceError);
+  });
+
+  it('derives supersession without mutating the accepted predecessor', () => {
+    const old = record(decision('ADR-0001'));
+    const next = record(decision('ADR-0002', [], 'ADR-0001'));
+    const plan = compileGovernance(contract([old, next], ['ADR-0002']));
+
+    expect(plan.decisions).toEqual([
+      expect.objectContaining({
+        id: 'ADR-0001',
+        declaredStatus: 'accepted',
+        effectiveStatus: 'superseded',
+        supersededBy: 'ADR-0002',
+      }),
+      expect.objectContaining({
+        id: 'ADR-0002',
+        declaredStatus: 'accepted',
+        effectiveStatus: 'accepted',
+      }),
+    ]);
+  });
+});
+
+describe('manifest', () => {
+  it('allows additions but detects changed or removed historical records', () => {
+    const first = record(decision('ADR-0001'));
+    const baseContract = contract([first], ['ADR-0001']);
+    const basePlan = compileGovernance(baseContract);
+    const base = buildManifest(baseContract, basePlan);
+
+    const added = record(decision('ADR-0002'));
+    const currentContract = contract([first, added], ['ADR-0001']);
+    const currentPlan = compileGovernance(currentContract);
+    const current = buildManifest(currentContract, currentPlan);
+
+    expect(immutabilityViolations(base, current)).toEqual([]);
+
+    current.decisions['ADR-0001'] = 'f'.repeat(64);
+    expect(immutabilityViolations(base, current)).toEqual(['decision:ADR-0001']);
+  });
+
+  it('detects changed or removed accepted specifications', () => {
+    const item = record(decision('ADR-0001'));
+    const selected = specificationRecord(specification('SPEC-0001'));
+    const baseContract = contract([item], ['ADR-0001'], mechanisms, [selected]);
+    const base = buildManifest(baseContract, compileGovernance(baseContract));
+    const currentContract = contract([item], ['ADR-0001'], mechanisms, [selected]);
+    const current = buildManifest(currentContract, compileGovernance(currentContract));
+
+    current.specifications['SPEC-0001'] = 'f'.repeat(64);
+    expect(immutabilityViolations(base, current)).toEqual(['specification:SPEC-0001']);
+  });
+});
+
+describe('evidence projection', () => {
+  const item = record(
+    decision('ADR-0001', [
+      {
+        kind: 'gate',
+        id: 'tests',
+        description: 'Tests pass',
+        tier: 'enforced',
+        boundTo: 'ci:test',
+      },
+      {
+        kind: 'artifact',
+        id: 'report',
+        description: 'Test report',
+        tier: 'enforced',
+        producedBy: 'ci:test',
+      },
+    ])
+  );
+  const evidenceContract = contract([item], ['ADR-0001']);
+  const plan = compileGovernance(evidenceContract);
+  const manifest = buildManifest(evidenceContract, plan);
+
+  it('is ready only with current passing evidence and required artifacts', () => {
+    const run = currentRun(plan, manifest);
+    const observation = observeRun(plan, manifest, run, run.subject);
+    expect(observation.state).toBe('current');
+    expect(observation.ready).toBe(true);
+    expect(observation.blockers).toEqual([]);
+  });
+
+  it('marks evidence for a different plan as stale', () => {
+    const run = currentRun(plan, manifest, { planHash: 'f'.repeat(64) });
+    const observation = observeRun(plan, manifest, run, run.subject);
+    expect(observation.state).toBe('stale');
+    expect(observation.ready).toBe(false);
+  });
+
+  it('rejects evidence that redefines a gate binding', () => {
+    const run = currentRun(plan, manifest);
+    run.outcomes[0] = { ...run.outcomes[0]!, boundTo: 'ci:other' };
+    const observation = observeRun(plan, manifest, run, run.subject);
+    expect(observation.state).toBe('invalid');
+    expect(observation.reason).toContain('redefines boundTo');
+  });
+
+  it('keeps missing evidence pending instead of fabricating success', () => {
+    const run = currentRun(plan, manifest, { outcomes: [], artifacts: [] });
+    const observation = observeRun(plan, manifest, run, run.subject);
+    expect(observation.state).toBe('current');
+    expect(observation.ready).toBe(false);
+    expect(observation.blockers).toEqual(['Gate tests is pending.', 'Artifact report is missing.']);
+  });
+
+  it('rejects an invoker whose delegation differs from the actor profile', () => {
+    const run = currentRun(plan, manifest, {
+      invokedBy: { kind: 'agent', id: 'codex', principal: '@someone-else' },
+    });
+    const observation = observeRun(plan, manifest, run, run.subject);
+
+    expect(observation.state).toBe('invalid');
+    expect(observation.reason).toContain('does not match actor');
+  });
+
+  it('rejects passed outcomes from the wrong producer class', () => {
+    const run = currentRun(plan, manifest, { source: 'ci' });
+    const observation = observeRun(plan, manifest, run, run.subject);
+
+    expect(observation.state).toBe('invalid');
+    expect(observation.reason).toContain('cannot prove gate');
+  });
+
+  it('marks evidence stale when the change manifest differs', () => {
+    const run = currentRun(plan, manifest, { manifestHash: 'f'.repeat(64) });
+    const observation = observeRun(plan, manifest, run, run.subject);
+
+    expect(observation.state).toBe('stale');
+    expect(observation.ready).toBe(false);
+  });
+
+  it('marks content-identical evidence from another commit as stale', () => {
+    const run = currentRun(plan, manifest);
+    const target = {
+      ...run.subject,
+      commit: 'b'.repeat(40),
+    };
+    const observation = observeRun(plan, manifest, run, target);
+
+    expect(observation.state).toBe('stale');
+    expect(observation.reason).toContain('different repository, commit, ref, event');
+  });
+
+  it('rejects a producer commit that differs from its declared subject', () => {
+    const run = currentRun(plan, manifest, {
+      producer: {
+        kind: 'local-cli',
+        id: 'vitest',
+        version: '1',
+        commit: 'b'.repeat(40),
+      },
+    });
+    const observation = observeRun(plan, manifest, run, run.subject);
+
+    expect(observation.state).toBe('invalid');
+    expect(observation.reason).toContain('producer commit differs');
+  });
+});
