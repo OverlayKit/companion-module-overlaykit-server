@@ -2,7 +2,7 @@
   "schemaVersion": "overlaykit-governance-change/v2",
   "id": "CHG-0005",
   "title": "Test reproducible complete Companion integration",
-  "status": "proposed",
+  "status": "approved",
   "changeClass": "architecture",
   "risk": "critical",
   "owner": "@rodrigoteamx",
