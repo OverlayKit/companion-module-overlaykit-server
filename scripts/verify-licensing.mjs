@@ -30,11 +30,27 @@ export async function verifyLicensing(root) {
   const thirdParty = await text(root, 'THIRD_PARTY_NOTICES.md');
   assert.match(thirdParty, /MIT License/);
   assert.match(thirdParty, /f2c31912a398f4b61706a7323ba7e1074cb56561/);
+  assert.match(thirdParty, /@overlaykit\/protocol` 0\.1\.0/);
+  assert.match(thirdParty, /@companion-module\/base` 2\.0\.4/);
+  assert.match(thirdParty, /colord` 2\.9\.3/);
+  assert.match(thirdParty, /tslib` 2\.8\.1/);
+  assert.match(thirdParty, /ws` 8\.21\.1/);
   assert.match(thirdParty, /Copyright \(c\) 2022 Bitfocus AS - Open Source/);
+  assert.match(thirdParty, /Copyright \(c\) 2020 Vlad Shilov/);
+  assert.match(thirdParty, /Copyright \(c\) Microsoft Corporation/);
+  assert.match(thirdParty, /Copyright \(c\) 2016 Luigi Pinca and contributors/);
 
   const readme = await text(root, 'README.md');
   assert.match(readme, /Apache License 2\.0/);
   assert.match(readme, /https:\/\/x\.com\/rodrigoteamx/);
+
+  for (const relativePath of ['LICENSE', 'NOTICE', 'THIRD_PARTY_NOTICES.md']) {
+    assert.equal(
+      await text(root, `companion/${relativePath}`),
+      await text(root, relativePath),
+      `companion/${relativePath} must match the repository legal surface`
+    );
+  }
 
   return { licenseHash };
 }

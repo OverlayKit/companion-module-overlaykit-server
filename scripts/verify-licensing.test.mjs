@@ -14,6 +14,7 @@ async function fixture() {
   for (const relativePath of requiredFiles) {
     await cp(path.join(root, relativePath), path.join(directory, relativePath));
   }
+  await cp(path.join(root, 'companion'), path.join(directory, 'companion'), { recursive: true });
   return directory;
 }
 

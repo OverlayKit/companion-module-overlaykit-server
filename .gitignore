@@ -3,6 +3,8 @@ dist/
 build/
 coverage/
 artifacts/
+/pkg/
+/overlaykit-server-0.1.0.tgz
 *.tsbuildinfo
 *.log
 .DS_Store
