@@ -77,10 +77,8 @@ jobs:
           --outcome change-contract=${{ steps.governance.outcome }}
           --outcome quality=${{ steps.quality.outcome }}
           --outcome build=${{ steps.build.outcome }}
-          --outcome package=${{ steps.package.outcome }}
           --artifact governance-plan=.overlaykit/governance/plan.json
           --artifact change-contract-artifact=.overlaykit/governance/changes
-          --artifact module-package=pkg/overlaykit-server-0.1.0.tgz
 
       - name: Upload evidence
         if: always()
