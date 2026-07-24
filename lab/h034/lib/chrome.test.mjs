@@ -78,7 +78,7 @@ test(
       try {
         process.kill(-child.pid, 'SIGKILL');
       } catch (error) {
-        if (error?.code !== 'ESRCH') throw error;
+        if (!['EPERM', 'ESRCH'].includes(error?.code)) throw error;
       }
       await rm(temporaryRoot, { recursive: true, force: true });
     }

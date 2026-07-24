@@ -970,11 +970,6 @@ async function main() {
       `${satellite.lines.map((line) => JSON.stringify(line)).join('\n')}\n`,
       { mode: 0o600 }
     );
-    stage = 'verify-run';
-    await command('node', [path.join(LAB_DIRECTORY, 'verify.mjs'), completedRunPath], {
-      cwd: REPOSITORY_ROOT,
-      inherit: true,
-    });
   } catch (error) {
     primaryError = error;
     if (satellite) {
@@ -1002,6 +997,24 @@ async function main() {
     if (!cleanup.successful && primaryError === null) {
       throw new Error('H-034 completed but deterministic cleanup failed');
     }
+  }
+  stage = 'verify-run';
+  try {
+    await command('node', [path.join(LAB_DIRECTORY, 'verify.mjs'), completedRunPath], {
+      cwd: REPOSITORY_ROOT,
+      inherit: true,
+    });
+  } catch (error) {
+    await writeJson(path.join(evidenceDirectory, 'failure.json'), {
+      schemaVersion: 'overlaykit-h034-failure/v1',
+      runId,
+      failedAt: wallClock(),
+      stage,
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : null,
+      diagnostics: [],
+    });
+    throw error;
   }
   process.stdout.write(`${completedRunPath}\n`);
 }
