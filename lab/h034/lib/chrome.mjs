@@ -1,7 +1,8 @@
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { readFile, rm, writeFile } from 'node:fs/promises';
+import { access, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import process from 'node:process';
 import { waitFor } from './util.mjs';
 
 function cdpClient(url) {
@@ -43,25 +44,66 @@ function cdpClient(url) {
   };
 }
 
-async function stopChrome(child) {
-  if (child.exitCode !== null || child.signalCode !== null) return;
-  child.kill('SIGTERM');
-  await Promise.race([once(child, 'exit'), new Promise((resolve) => setTimeout(resolve, 2_000))]);
-  if (child.exitCode !== null || child.signalCode !== null) return;
-  child.kill('SIGKILL');
-  await Promise.race([once(child, 'exit'), new Promise((resolve) => setTimeout(resolve, 2_000))]);
-  if (child.exitCode === null && child.signalCode === null) {
-    throw new Error('Chrome did not exit after SIGKILL');
+function processGroupRunning(pid) {
+  try {
+    process.kill(-pid, 0);
+    return true;
+  } catch (error) {
+    if (error?.code === 'ESRCH') return false;
+    throw error;
   }
 }
 
-export async function removeChromeProfile(profile, remove = rm) {
+async function waitForChromeExit(child, grouped, timeoutMs) {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt <= timeoutMs) {
+    const running = grouped
+      ? processGroupRunning(child.pid)
+      : child.exitCode === null && child.signalCode === null;
+    if (!running) return true;
+    await new Promise((resolve) => setTimeout(resolve, 25));
+  }
+  return false;
+}
+
+function signalChrome(child, grouped, signal) {
+  try {
+    if (grouped) process.kill(-child.pid, signal);
+    else child.kill(signal);
+  } catch (error) {
+    if (error?.code !== 'ESRCH') throw error;
+  }
+}
+
+export async function stopChrome(child, timeoutMs = 2_000) {
+  const grouped = process.platform !== 'win32' && Number.isInteger(child.pid);
+  if (!grouped && (child.exitCode !== null || child.signalCode !== null)) return;
+  signalChrome(child, grouped, 'SIGTERM');
+  if (await waitForChromeExit(child, grouped, timeoutMs)) return;
+  signalChrome(child, grouped, 'SIGKILL');
+  if (!(await waitForChromeExit(child, grouped, timeoutMs))) {
+    throw new Error('Chrome process group did not exit after SIGKILL');
+  }
+}
+
+export async function removeChromeProfile(profile, dependencies = {}) {
+  const remove = dependencies.remove ?? rm;
+  const inspect = dependencies.access ?? access;
+  const settleMs = dependencies.settleMs ?? 250;
   await remove(profile, {
     recursive: true,
     force: true,
     maxRetries: 5,
     retryDelay: 100,
   });
+  await new Promise((resolve) => setTimeout(resolve, settleMs));
+  try {
+    await inspect(profile);
+  } catch (error) {
+    if (error?.code === 'ENOENT') return;
+    throw error;
+  }
+  throw new Error(`Chrome profile reappeared after cleanup: ${profile}`);
 }
 
 export async function captureChromePage({
@@ -87,7 +129,10 @@ export async function captureChromePage({
       `--window-size=${width},${height}`,
       url,
     ],
-    { stdio: ['ignore', 'ignore', 'pipe'] }
+    {
+      detached: process.platform !== 'win32',
+      stdio: ['ignore', 'ignore', 'pipe'],
+    }
   );
   let stderr = '';
   child.stderr.on('data', (chunk) => {

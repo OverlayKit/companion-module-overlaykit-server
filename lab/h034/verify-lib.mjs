@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import Ajv2020 from 'ajv/dist/2020.js';
 import { proxyEvents, STATE_STYLE } from './lib/evidence.mjs';
@@ -52,6 +52,15 @@ function eventBySequence(events, sequence) {
   const matches = events.filter((event) => event.eventSequence === sequence);
   assertion(matches.length === 1, `Proxy event sequence ${sequence} is missing or ambiguous`);
   return matches[0];
+}
+
+async function directoryEntries(directory) {
+  try {
+    return await readdir(directory);
+  } catch (error) {
+    if (error?.code === 'ENOENT') return [];
+    throw error;
+  }
 }
 
 async function verifyReceipt(receipt, context) {
@@ -258,6 +267,25 @@ export async function verifyEvidence(runPath) {
   const directory = path.dirname(absoluteRunPath);
   const run = await readJson(absoluteRunPath);
   const lockedInputs = await readJson(INPUT_LOCK_PATH);
+  const cleanup = await readJson(path.join(directory, 'cleanup.json'));
+  assertion(
+    cleanup.schemaVersion === 'overlaykit-h034-cleanup/v1' &&
+      cleanup.keep === false &&
+      cleanup.successful === true,
+    'Run lacks a successful canonical cleanup receipt'
+  );
+  for (const requiredAction of ['buildx-builder-remove', 'compose-down']) {
+    assertion(
+      cleanup.actions?.some(
+        (action) => action.name === requiredAction && action.status === 'completed'
+      ),
+      `Cleanup did not complete ${requiredAction}`
+    );
+  }
+  assertion(
+    (await directoryEntries(path.join(directory, 'chrome-profile'))).length === 0,
+    'Evidence retained a Chrome profile after cleanup'
+  );
   assertion(
     /^[0-9a-f]{40}$/u.test(run.inputs?.overlaykit?.commit ?? ''),
     'Run lacks an exact OverlayKit Git commit'
