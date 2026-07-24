@@ -100,6 +100,14 @@
       "id": "ADR-0004",
       "supersededBy": null,
       "title": "Governed evidence is selected exactly within multi-subject provenance"
+    },
+    {
+      "contentHash": "f59ff9a71f87864fcb2478ce17a92b2f0dc4aa133ca6d01c56fb90ab682cb2d6",
+      "declaredStatus": "accepted",
+      "effectiveStatus": "accepted",
+      "id": "ADR-0005",
+      "supersededBy": null,
+      "title": "Complete Companion integration evidence is clean-room, causal, and bounded"
     }
   ],
   "engineVersion": "overlaykit-governance-host/v2",
@@ -226,10 +234,10 @@
     }
   ],
   "mechanismsHash": "64141de30d5791ad3f53cf857fa582477413b15e997f7e438de408f1ba328fd4",
-  "planHash": "18b9836c6254dfcc72d6c50c0e686d585fd0bc3980e2fefc1b680c4e9d2b3ca1",
-  "profileHash": "8e5cb899b7625709394f5627dcdd1c9608ad37b5e1e9bbedb96ccbf89889953e",
+  "planHash": "568560d620255681477bb1d73c156013666f961da3ccd5dd61c91d95160235f4",
+  "profileHash": "30ed858f45d5ec093de05c2fd9d4b1f159bb7b664ed7caabf39b04c78e1e9ceb",
   "profileName": "overlaykit-companion-module",
-  "profileVersion": "1.4.0",
+  "profileVersion": "1.5.0",
   "rules": [
     {
       "id": "accepted-records-are-immutable",
@@ -278,6 +286,12 @@
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "Every change separates facts, inferences, assumptions, and unknowns; facts and inferences require evidence."
+    },
+    {
+      "id": "clean-room-reproduction-is-semantic",
+      "kind": "rule",
+      "sourceDecision": "ADR-0005",
+      "statement": "Independent reproductions bind their exact module archive hashes and compare governed semantic assertions without assuming byte-identical package output."
     },
     {
       "id": "co-attested-subjects-do-not-inherit-governance-trust",
@@ -334,6 +348,24 @@
       "statement": "The adapter remains not ready until it has accepted complete signed bootstrap, acknowledged that exact bootstrap, and received device.ready from the server."
     },
     {
+      "id": "companion-ui-transition-requires-causal-receipt",
+      "kind": "rule",
+      "sourceDecision": "ADR-0005",
+      "statement": "A Companion UI state is evidence only when its capture is bound to the exact accepted server event, evidence digest, observation, run, and product identities."
+    },
+    {
+      "id": "complete-companion-evidence-does-not-claim-hardware",
+      "kind": "rule",
+      "sourceDecision": "ADR-0005",
+      "statement": "Companion emulator evidence cannot be represented as USB support, physical Stream Deck behavior or pixels, operator perception, OBS truth, publication, registry admission, cloud deployment, or broader platform support."
+    },
+    {
+      "id": "complete-companion-evidence-is-public-clean-room",
+      "kind": "rule",
+      "sourceDecision": "ADR-0005",
+      "statement": "Canonical complete-application evidence uses public immutable inputs, ephemeral local authority, Ubuntu 24.04 LTS, and a non-loopback network without cloud, Tailscale, private services, or maintainer-specific credentials."
+    },
+    {
       "id": "current-change-bytes-remain-manifest-bound",
       "kind": "rule",
       "sourceDecision": "ADR-0002",
@@ -344,6 +376,12 @@
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "Evidence may answer an approved question only within the law and claim boundary that existed before the experiment."
+    },
+    {
+      "id": "feedback-expiry-requires-acknowledged-server-confirmation",
+      "kind": "rule",
+      "sourceDecision": "ADR-0005",
+      "statement": "Unknown-by-expiry is measured from an acknowledged authoritative target confirmation; acknowledgement-only, result-only, early expiry, and late repair cannot satisfy the rule."
     },
     {
       "id": "governed-attestation-subject-ambiguity-fails-closed",
@@ -358,6 +396,18 @@
       "statement": "GovernanceRun provenance is admitted only from exactly one subject named governance-run.json whose SHA-256 equals the observed file bytes."
     },
     {
+      "id": "integration-cleanup-is-evidence",
+      "kind": "rule",
+      "sourceDecision": "ADR-0005",
+      "statement": "Canonical evidence fails closed when lab-owned runtime resources, build state, or browser profiles remain after cleanup."
+    },
+    {
+      "id": "integration-runtime-identity-must-match-input-lock",
+      "kind": "rule",
+      "sourceDecision": "ADR-0005",
+      "statement": "Every locked source and product identity must be passed into the build, cryptographically verified, and matched against the running system before scenarios begin."
+    },
+    {
       "id": "law-is-compiled",
       "kind": "rule",
       "sourceDecision": "ADR-0001",
@@ -368,6 +418,12 @@
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "Apache-2.0 licensing, Rodrigo Vicente attribution, and applicable upstream notices must exist before adapter product code enters history."
+    },
+    {
+      "id": "operator-action-success-requires-authoritative-state",
+      "kind": "rule",
+      "sourceDecision": "ADR-0005",
+      "statement": "Show, hide, and toggle pass timing only when authoritative server state is visibly projected within three seconds of virtual invocation."
     },
     {
       "id": "pre-implementation-field-rules-remain-unknown",

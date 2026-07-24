@@ -2,11 +2,11 @@
   "schemaVersion": "overlaykit-governance-change/v2",
   "id": "CHG-0005",
   "title": "Test reproducible complete Companion integration",
-  "status": "approved",
+  "status": "implemented",
   "changeClass": "architecture",
   "risk": "critical",
   "owner": "@rodrigoteamx",
-  "decisions": ["ADR-0001", "ADR-0003"],
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005"],
   "specifications": ["SPEC-0001", "SPEC-0002"],
   "claims": [
     {
@@ -58,8 +58,14 @@
       "blocking": false
     },
     {
+      "kind": "inference",
+      "statement": "H-034 is supported only for Bitfocus Companion 4.3.3, OverlayKit commit 9a5585de196ff972993c7ff81bf9c1461c47eaae, module Slice head 311a46056ef41ae2b772aad7fccd3e47571befb6, two isolated Ubuntu 24.04 LTS nodes, the exact run-bound module archives, non-loopback Docker networking, public inputs, and ephemeral local authority. Two independent canonical runs reproduced show, hide, and toggle plus active, inactive, unknown, disconnected, failed, and unavailable in the Companion emulator UI with causal receipts, authoritative timing, hostile failure rejection, and verified cleanup. This evidence does not establish physical hardware or any excluded boundary.",
+      "evidence": "Human Doctrine acceptance on 2026-07-24 after canonical H-034 run 30069718742, Constitution run 30069718712, run SHA-256 values d48b1b1244eb38cc785b160afa647e6c1bbf80de0a24a1d91f44c4b48341e802 and 78cab224763680908dc38d7d351dc7415c516bcbc2b32000d829aedeeb7b41a6, and comparison SHA-256 d15ac58ac7c3cea7e3260f3eb0b025aa082f952c9b5dd326da79fd2813bd037d",
+      "blocking": false
+    },
+    {
       "kind": "unknown",
-      "statement": "H-034 remains unproven until refutation evidence is reviewed. This Slice cannot establish USB or physical Stream Deck behavior, physical button pixels, operator perception, npm publication, Bitfocus registry admission, OBS truth, cloud deployment, Tailscale-independent behavior on the llama host, other Linux distributions, or support beyond the exact pinned product and runtime identities.",
+      "statement": "This Slice does not establish USB or physical Stream Deck behavior, physical button pixels, operator perception, npm publication, Bitfocus registry admission, OBS truth, cloud deployment, Tailscale-independent behavior on the llama host, other Linux distributions, byte-for-byte reproducible module archives, or support beyond the exact pinned product and runtime identities.",
       "evidence": "SPEC-0002 bounded scope",
       "blocking": false
     }
@@ -125,12 +131,12 @@
     {
       "id": "DOD-007",
       "statement": "The exact Slice head passes governance, licensing, lint, type-check, tests, builds, package checks, canonical Ubuntu lab execution, evidence verification, and GitHub-hosted CI without claiming physical hardware behavior.",
-      "evidence": "Local and GitHub Actions evidence for the exact future implementation head."
+      "evidence": "Local checks at signed Slice head 311a46056ef41ae2b772aad7fccd3e47571befb6, canonical H-034 run 30069718742, and Constitution run 30069718712."
     },
     {
       "id": "DOD-008",
       "statement": "No bounded inference, ADR, implemented status, merge, publication, release, hardware claim, or broadened platform support is created until H-034 evidence receives separate human review and acceptance.",
-      "evidence": "Proposed CHG-0005, absent H-034 ADR, and explicit future Human Doctrine review."
+      "evidence": "Human Doctrine evidence acceptance on 2026-07-24 and ADR-0005; merge, publication, release, hardware claims, and broadened support remain separately governed."
     }
   ]
 }
