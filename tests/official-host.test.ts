@@ -93,6 +93,13 @@ describe('official Companion API 2.0 host', () => {
       throw new Error('Official host did not expose a binding dropdown');
     }
     const binding = String(bindingOption.choices[0]?.id);
+    const feedbackBindingOption = captured.feedbacks()[0]?.options[0];
+    if (!feedbackBindingOption || feedbackBindingOption.type !== 'dropdown') {
+      throw new Error('Official host did not expose a feedback binding dropdown');
+    }
+    expect(feedbackBindingOption.choices.map(({ id }) => id)).toContain(
+      '__overlaykit_unavailable__'
+    );
 
     await wrapper.updateFeedbacks({
       visibility: {

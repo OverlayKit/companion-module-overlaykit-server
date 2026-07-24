@@ -1,0 +1,9 @@
+.git
+.github
+artifacts
+build
+coverage
+dist
+node_modules
+pkg
+*.log

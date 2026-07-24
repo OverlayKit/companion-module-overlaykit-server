@@ -27,7 +27,7 @@ function choices(instance: ModuleInstance): DropdownChoice<string>[] {
     id: binding.id,
     label: `${binding.target === 'preview' ? 'Preview' : 'Program'}: ${binding.label}`,
   }));
-  return bindings.length > 0 ? bindings : [{ id: EMPTY_BINDING, label: 'No authorized controls' }];
+  return [...bindings, { id: EMPTY_BINDING, label: 'No authorized controls' }];
 }
 
 export function updateFeedbacks(instance: ModuleInstance): void {

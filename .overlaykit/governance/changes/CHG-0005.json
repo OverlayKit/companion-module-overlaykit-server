@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0005",
+  "title": "Test reproducible complete Companion integration",
+  "status": "implemented",
+  "changeClass": "architecture",
+  "risk": "critical",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Accepted H-031 evidence proves the module through official @companion-module/host 1.0.1 on Linux but explicitly does not prove the complete Bitfocus Companion application, the real OverlayKit server integration, USB, physical Stream Deck behavior, rendered button pixels, OBS truth, or operator perception.",
+      "evidence": "ADR-0003, implemented CHG-0002, protected-main Constitution run 30039541525, and H-033 closure run 30042472493",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The parent OverlayKit repository accepted the governed external adapter boundary as ADR-0035 and merged it as verified commit 24e978cfa8e41dd5e1f9c410a4e69c7964bb71ca; protected-main run 30047436601 observed current, ready, and activationReady with zero blockers.",
+      "evidence": "OverlayKit PR 39, GitHub attestation 36851396, governance-run SHA-256 9ccc01b88650325e1f46d49e0f322050a166472a3327813d70b0ccceb6686f89, and Rekor log index 2228670481",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The parent OverlayKit repository corrected public device-command result correlation without replacing internal production authority, accepted the bounded result as ADR-0036 and CHG-0041, and merged verified commit 9a5585de196ff972993c7ff81bf9c1461c47eaae.",
+      "evidence": "OverlayKit PR 40, protected-main Constitution run 30067454123, GitHub attestation 36888591, governance-run SHA-256 a872fbd74b172e6ad98fd131a0d8adec1acbffa48cea8d72d0b9925a78cbcfd6, and Rekor log index 2231146106",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Bitfocus documents Linux operation, an official Companion container whose Admin UI and web API use port 8000, and local module loading through COMPANION_DEV_MODULES or --extra-module-path.",
+      "evidence": "Official Bitfocus Companion installation documentation https://companion.free/user-guide/beta/getting-started/Installation/ and local module documentation https://companion.free/for-developers/module-development/local-modules/ observed 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Bitfocus documents that the Companion Docker image has no USB support, so a containerized complete-application experiment cannot establish physical Stream Deck behavior.",
+      "evidence": "Official Bitfocus Companion Linux installation documentation https://companion.free/user-guide/beta/getting-started/Installation/ observed 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Repeated local package checks and GitHub Actions run 30048340240 produced different module archive SHA-256 identities from unchanged module source content, so current evidence does not establish byte-for-byte reproducible module archives. H-034 must bind the exact archive used by each run and may compare cross-run semantics without assuming equal package hashes.",
+      "evidence": "Local module archive SHA-256 values 4664861f8e9be6be2dc139406ca13bba197e64a56150fd90870a82e5d6189c17 and 8c848d3b52ae7eb4798cc778a251e7292bbf299c27e7273d3ce7d8fc36a7ac73, plus CI SHA-256 f1b08f0eb0a13dfee4e0a237644c780a63ee9898b187b5c5f86bed868cbc7455, observed 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "A Tailscale-connected Linux lab host named llama is available for complementary real-host validation, but access depends on private network identity and therefore cannot satisfy the canonical public reproduction requirement by itself.",
+      "evidence": "Human Doctrine Discovery on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-034: Any maintainer with a clean Linux machine can independently reproduce the complete Bitfocus Companion-to-OverlayKit integration on two isolated Ubuntu 24.04 LTS nodes over a non-loopback local network, from public inputs and without cloud or private credentials, while real show, hide, and toggle commands and all six Companion feedback states produce causally bound evidence within the accepted three-second authoritative-state rule.",
+      "evidence": "SPEC-0002 and explicit Human Doctrine approval on 2026-07-23",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "H-034 is supported only for Bitfocus Companion 4.3.3, OverlayKit commit 9a5585de196ff972993c7ff81bf9c1461c47eaae, module Slice head 311a46056ef41ae2b772aad7fccd3e47571befb6, two isolated Ubuntu 24.04 LTS nodes, the exact run-bound module archives, non-loopback Docker networking, public inputs, and ephemeral local authority. Two independent canonical runs reproduced show, hide, and toggle plus active, inactive, unknown, disconnected, failed, and unavailable in the Companion emulator UI with causal receipts, authoritative timing, hostile failure rejection, and verified cleanup. This evidence does not establish physical hardware or any excluded boundary.",
+      "evidence": "Human Doctrine acceptance on 2026-07-24 after canonical H-034 run 30069718742, Constitution run 30069718712, run SHA-256 values d48b1b1244eb38cc785b160afa647e6c1bbf80de0a24a1d91f44c4b48341e802 and 78cab224763680908dc38d7d351dc7415c516bcbc2b32000d829aedeeb7b41a6, and comparison SHA-256 d15ac58ac7c3cea7e3260f3eb0b025aa082f952c9b5dd326da79fd2813bd037d",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "This Slice does not establish USB or physical Stream Deck behavior, physical button pixels, operator perception, npm publication, Bitfocus registry admission, OBS truth, cloud deployment, Tailscale-independent behavior on the llama host, other Linux distributions, byte-for-byte reproducible module archives, or support beyond the exact pinned product and runtime identities.",
+      "evidence": "SPEC-0002 bounded scope",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-008",
+      "statement": "A documented command starts the canonical lab from a clean supported Linux machine using only public, immutable inputs and produces two isolated Ubuntu 24.04 LTS nodes.",
+      "verification": "Clean-room setup, input lock, OS receipts, and repeat execution from zero."
+    },
+    {
+      "id": "SC-009",
+      "statement": "The actual Bitfocus Companion application and actual OverlayKit OSS server communicate across a non-loopback network boundary, and the exact governed module package is loaded through the documented Companion local-module mechanism.",
+      "verification": "Process, route, socket, runtime, module-load, and endpoint receipts from one run."
+    },
+    {
+      "id": "SC-010",
+      "statement": "The evidence pins and verifies an immutable Companion build or image digest, its runtime-reported version, the OverlayKit commit and build identity, the module archive digest, Node versions, and the lab definition.",
+      "verification": "Machine-readable version and digest manifest checked against running processes and artifacts."
+    },
+    {
+      "id": "SC-011",
+      "statement": "The lab provisions ephemeral local bearer and trust material without cloud accounts, private services, Tailscale, production secrets, or maintainer-specific credentials.",
+      "verification": "Provisioning receipts, dependency and endpoint inventory, environment allowlist, and secret scan."
+    },
+    {
+      "id": "SC-012",
+      "statement": "Real Companion virtual buttons invoke visibility.show, visibility.hide, and visibility.toggle against the real server, and the real UI visibly projects active, inactive, unknown, disconnected, failed, and unavailable.",
+      "verification": "Three action traces, six UI captures, server state receipts, and exact run correlation."
+    },
+    {
+      "id": "SC-013",
+      "statement": "Every UI-state capture is bound to a validated causal receipt containing expected and observed state, the justifying server event, accepted evidence hash, monotonic and wall-clock timestamps, run identity, and exact product versions.",
+      "verification": "Evidence schema validation plus deliberate missing, stale, mismatched-hash, mismatched-run, and mismatched-version rejection cases."
+    },
+    {
+      "id": "SC-014",
+      "statement": "Authoritative state visible within three seconds of virtual invocation passes; acknowledgement-only, result-only, or late state cannot stop or retroactively pass the timer, and timeout visibly projects unknown.",
+      "verification": "Deterministic timely, acknowledgement-only, result-only, timeout, delayed-state, and post-timeout recovery scenarios."
+    },
+    {
+      "id": "SC-015",
+      "statement": "Controlled disconnect, unavailable catalog or authority, protocol failure, stale evidence, and delayed authoritative state produce the specified visible state without optimistic or invented transitions.",
+      "verification": "Hostile failure injection with server, transport, module, UI, and receipt assertions."
+    },
+    {
+      "id": "SC-016",
+      "statement": "A second clean-room execution can reproduce the same semantic assertions without Rodrigo's machine or private network; any llama or Tailscale execution is labeled and evaluated only as supplemental evidence.",
+      "verification": "Independent rerun record and semantic comparison report."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-005",
+      "statement": "The Slice implementation changes only the canonical lab harness, evidence schemas and verifiers, focused integration tests, CI configuration, and documentation authorized by CHG-0005.",
+      "evidence": "Change review against CHG-0005 and repository diff."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "Review attempts to refute H-034 through clean-room setup, loopback rejection, private-input rejection, product identity mismatch, module-load failure, command authority, six UI states, timing boundaries, receipt tampering, failure injection, and repeatability.",
+      "evidence": "Focused integration, evidence-validation, hostile, and reproduction runs."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "The exact Slice head passes governance, licensing, lint, type-check, tests, builds, package checks, canonical Ubuntu lab execution, evidence verification, and GitHub-hosted CI without claiming physical hardware behavior.",
+      "evidence": "Local checks at signed Slice head 311a46056ef41ae2b772aad7fccd3e47571befb6, canonical H-034 run 30069718742, and Constitution run 30069718712."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "No bounded inference, ADR, implemented status, merge, publication, release, hardware claim, or broadened platform support is created until H-034 evidence receives separate human review and acceptance.",
+      "evidence": "Human Doctrine evidence acceptance on 2026-07-24 and ADR-0005; merge, publication, release, hardware claims, and broadened support remain separately governed."
+    }
+  ]
+}

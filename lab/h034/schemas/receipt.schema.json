@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://overlaykit.dev/schemas/h034-receipt.schema.json",
+  "title": "OverlayKit H-034 causal UI receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runId",
+    "scenarioId",
+    "expectedState",
+    "observedState",
+    "invocation",
+    "justification",
+    "acceptedEvidence",
+    "observation",
+    "capture",
+    "timing",
+    "versions"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "overlaykit-h034-causal-receipt/v1" },
+    "runId": { "type": "string", "minLength": 8, "maxLength": 160 },
+    "scenarioId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,79}$" },
+    "expectedState": { "$ref": "#/$defs/state" },
+    "observedState": { "$ref": "#/$defs/state" },
+    "invocation": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["action", "location", "wallClock", "monotonicNs", "httpStatus"],
+          "properties": {
+            "action": {
+              "enum": ["visibility.show", "visibility.hide", "visibility.toggle"]
+            },
+            "location": { "type": "string", "pattern": "^1/[0-9]+/[0-9]+$" },
+            "wallClock": { "type": "string", "format": "date-time" },
+            "monotonicNs": { "$ref": "#/$defs/monotonic" },
+            "httpStatus": { "type": "integer", "minimum": 200, "maximum": 299 }
+          }
+        }
+      ]
+    },
+    "justification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "proxyEventSequence",
+        "serverMessageType",
+        "controlId",
+        "revision",
+        "value",
+        "wallClock",
+        "monotonicNs"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "authoritative-server-state",
+            "accepted-evidence-expired",
+            "authorized-catalog-absence",
+            "transport-closed",
+            "protocol-violation"
+          ]
+        },
+        "proxyEventSequence": { "type": "integer", "minimum": 1 },
+        "serverMessageType": {
+          "enum": ["device.bootstrap.snapshot", "device.state.delta"]
+        },
+        "controlId": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "revision": { "type": "integer", "minimum": 1 },
+        "value": { "enum": ["active", "inactive"] },
+        "wallClock": { "type": "string", "format": "date-time" },
+        "monotonicNs": { "$ref": "#/$defs/monotonic" }
+      }
+    },
+    "acceptedEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["issuerKeyId", "sequence", "sha256", "ackProxyEventSequence", "status"],
+      "properties": {
+        "issuerKeyId": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "sequence": { "type": "integer", "minimum": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "ackProxyEventSequence": { "type": "integer", "minimum": 1 },
+        "status": { "const": "applied" }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "text", "color", "wallClock", "monotonicNs"],
+      "properties": {
+        "source": { "const": "companion-satellite-sub-state" },
+        "text": {
+          "enum": ["ACTIVE", "INACTIVE", "UNKNOWN", "DISCONNECTED", "FAILED", "UNAVAILABLE"]
+        },
+        "color": {
+          "enum": ["#147d3f", "#30343b", "#f0b429", "#35546f", "#b42318", "#6b7280"]
+        },
+        "wallClock": { "type": "string", "format": "date-time" },
+        "monotonicNs": { "$ref": "#/$defs/monotonic" }
+      }
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^captures/[a-z0-9._-]+\\.png$" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "deadlineExpired": { "const": true } },
+            "required": ["deadlineExpired"]
+          },
+          "then": {
+            "properties": {
+              "durationMs": { "type": "number", "minimum": 3000 },
+              "deadlineBasis": { "type": "object" }
+            }
+          },
+          "else": {
+            "properties": {
+              "deadlineBasis": { "type": "null" }
+            }
+          }
+        }
+      ],
+      "required": [
+        "deadlineMs",
+        "durationMs",
+        "authoritativeWithinDeadline",
+        "deadlineExpired",
+        "deadlineBasis",
+        "lateEvidenceCannotPass"
+      ],
+      "properties": {
+        "deadlineMs": { "const": 3000 },
+        "durationMs": { "type": "number", "minimum": 0 },
+        "authoritativeWithinDeadline": { "type": "boolean" },
+        "deadlineExpired": { "type": "boolean" },
+        "deadlineBasis": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "proxyEventSequence",
+                "confirmedAt",
+                "ackProxyEventSequence",
+                "sha256"
+              ],
+              "properties": {
+                "source": { "const": "authoritative-target-confirmation" },
+                "proxyEventSequence": { "type": "integer", "minimum": 1 },
+                "confirmedAt": { "type": "integer", "minimum": 0 },
+                "ackProxyEventSequence": { "type": "integer", "minimum": 1 },
+                "sha256": { "$ref": "#/$defs/sha256" }
+              }
+            }
+          ]
+        },
+        "lateEvidenceCannotPass": { "type": "boolean" }
+      }
+    },
+    "versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["companion", "overlaykitCommit", "moduleArchiveSha256", "labDefinitionSha256"],
+      "properties": {
+        "companion": { "const": "4.3.3" },
+        "overlaykitCommit": { "const": "24e978cfa8e41dd5e1f9c410a4e69c7964bb71ca" },
+        "moduleArchiveSha256": { "$ref": "#/$defs/sha256" },
+        "labDefinitionSha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  },
+  "$defs": {
+    "state": {
+      "enum": ["active", "inactive", "unknown", "disconnected", "failed", "unavailable"]
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "monotonic": { "type": "string", "pattern": "^[0-9]+$" }
+  }
+}

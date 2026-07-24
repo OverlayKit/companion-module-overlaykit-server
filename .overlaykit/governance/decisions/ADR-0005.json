@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "overlaykit-governance-decision/v1",
+  "id": "ADR-0005",
+  "title": "Complete Companion integration evidence is clean-room, causal, and bounded",
+  "status": "accepted",
+  "date": "2026-07-24",
+  "supersedes": null,
+  "governs": [
+    "companion-complete-application-evidence",
+    "companion-ui-state-evidence",
+    "integration-clean-room-reproduction",
+    "integration-evidence-cleanup",
+    "integration-runtime-identity",
+    "operator-action-timing",
+    "semantic-reproduction"
+  ],
+  "context": "H-034 asked whether any maintainer with a clean Linux machine could independently reproduce the complete Bitfocus Companion-to-OverlayKit integration on two isolated Ubuntu 24.04 LTS nodes over a non-loopback local network using only public inputs and ephemeral local authority. Refutation exercised actual Bitfocus Companion 4.3.3, actual OverlayKit OSS commit 9a5585de196ff972993c7ff81bf9c1461c47eaae, and the governed module at signed Slice head 311a46056ef41ae2b772aad7fccd3e47571befb6. GitHub Actions run 30069718742 completed two independent canonical reproductions. Each produced nine causal receipts, the visibility.show, visibility.hide, and visibility.toggle actions, and visible active, inactive, unknown, disconnected, failed, and unavailable Companion emulator states. Successful authoritative projections ranged from 32.160263 ms to 234.390836 ms. Both expiry receipts measured 3026 ms from an acknowledged server target confirmation and rejected acknowledgement-only, result-only, early, and late repair as success. The semantic comparison accepted distinct module archive identities aebd2ff135aea3e4b3bfc6c053641882afe4d81dcb1707537fa2d0be909e90ec and 911bc18072e4920bd14e3ac7866af418ca69dfdf6117f942c22aa249461b2708 while requiring equivalent assertions. Run evidence SHA-256 values were d48b1b1244eb38cc785b160afa647e6c1bbf80de0a24a1d91f44c4b48341e802 and 78cab224763680908dc38d7d351dc7415c516bcbc2b32000d829aedeeb7b41a6; comparison SHA-256 was d15ac58ac7c3cea7e3260f3eb0b025aa082f952c9b5dd326da79fd2813bd037d. Constitution run 30069718712 observed current, ready, and activationReady with zero blockers. The human authority reviewed and accepted this bounded evidence on 2026-07-24.",
+  "decision": "Within the exact tested boundary of Ubuntu 24.04 LTS, Bitfocus Companion 4.3.3, OverlayKit commit 9a5585de196ff972993c7ff81bf9c1461c47eaae, the module Slice at 311a46056ef41ae2b772aad7fccd3e47571befb6, two isolated non-loopback lab nodes, public immutable inputs, and ephemeral local authority, the complete Companion application can load the governed module, connect to the real OverlayKit OSS server, invoke visibility.show, visibility.hide, and visibility.toggle, and visibly project active, inactive, unknown, disconnected, failed, and unavailable in its emulator UI. A successful action claim requires authoritative server state to become visible within three seconds of virtual invocation. A freshness-expiry claim requires at least three seconds from the latest server-confirmed target frame acknowledged as applied by Companion; command acknowledgement or result alone cannot reset that deadline, and later evidence cannot retroactively repair an expired measurement. Every claimed UI transition is bound to the exact server event, applied acknowledgement where required, evidence SHA-256, observation timestamps, run identity, and product identities. Reproduction is semantic across independently packaged module archives, not byte-for-byte archive equality. Cleanup is part of the evidence and fails closed when lab resources or browser profiles remain. This decision establishes complete application behavior only through the tested Companion emulator boundary. It does not establish USB, physical Stream Deck behavior or pixels, operator perception, OBS truth, npm publication, Bitfocus registry admission, cloud deployment, other Linux distributions, or support beyond the exact pinned identities.",
+  "consequences": [
+    "The complete-application claim is stable only for the exact Companion, OverlayKit, module, Ubuntu, network, and authority identities accepted here.",
+    "A declared input identity is insufficient unless the build consumes it, verifies downloaded bytes, and the runtime reports the same identity before provisioning.",
+    "Companion UI feedback cannot be claimed from optimistic state, command acknowledgement, command result, logs, or screenshots without a matching causal receipt.",
+    "Successful action timing and freshness expiry use different explicit causal boundaries and neither may be inferred from the other.",
+    "Independent runs may use different module archive hashes when each exact archive is bound to its run and semantic assertions remain equivalent.",
+    "Browser profiles, containers, images, volumes, networks, builders, and build cache created by the lab must be removed and independently checked.",
+    "Any expansion to physical hardware, OBS, publication, registry admission, cloud, another distribution, or changed pinned identities requires a new approved question and Slice.",
+    "Evidence acceptance, source merge, publication, release, and hardware validation remain separate human-authorized transitions."
+  ],
+  "policies": [
+    {
+      "kind": "rule",
+      "id": "complete-companion-evidence-is-public-clean-room",
+      "statement": "Canonical complete-application evidence uses public immutable inputs, ephemeral local authority, Ubuntu 24.04 LTS, and a non-loopback network without cloud, Tailscale, private services, or maintainer-specific credentials."
+    },
+    {
+      "kind": "rule",
+      "id": "integration-runtime-identity-must-match-input-lock",
+      "statement": "Every locked source and product identity must be passed into the build, cryptographically verified, and matched against the running system before scenarios begin."
+    },
+    {
+      "kind": "rule",
+      "id": "companion-ui-transition-requires-causal-receipt",
+      "statement": "A Companion UI state is evidence only when its capture is bound to the exact accepted server event, evidence digest, observation, run, and product identities."
+    },
+    {
+      "kind": "rule",
+      "id": "operator-action-success-requires-authoritative-state",
+      "statement": "Show, hide, and toggle pass timing only when authoritative server state is visibly projected within three seconds of virtual invocation."
+    },
+    {
+      "kind": "rule",
+      "id": "feedback-expiry-requires-acknowledged-server-confirmation",
+      "statement": "Unknown-by-expiry is measured from an acknowledged authoritative target confirmation; acknowledgement-only, result-only, early expiry, and late repair cannot satisfy the rule."
+    },
+    {
+      "kind": "rule",
+      "id": "clean-room-reproduction-is-semantic",
+      "statement": "Independent reproductions bind their exact module archive hashes and compare governed semantic assertions without assuming byte-identical package output."
+    },
+    {
+      "kind": "rule",
+      "id": "integration-cleanup-is-evidence",
+      "statement": "Canonical evidence fails closed when lab-owned runtime resources, build state, or browser profiles remain after cleanup."
+    },
+    {
+      "kind": "rule",
+      "id": "complete-companion-evidence-does-not-claim-hardware",
+      "statement": "Companion emulator evidence cannot be represented as USB support, physical Stream Deck behavior or pixels, operator perception, OBS truth, publication, registry admission, cloud deployment, or broader platform support."
+    }
+  ]
+}
