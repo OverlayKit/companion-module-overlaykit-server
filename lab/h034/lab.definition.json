@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "overlaykit-h034-lab-definition/v1",
+  "id": "H-034",
+  "version": "1.0.0",
+  "supportedHost": {
+    "os": "linux",
+    "architecture": ["amd64", "arm64"],
+    "containerRuntime": "docker"
+  },
+  "nodes": [
+    {
+      "id": "overlaykit",
+      "os": "Ubuntu 24.04 LTS",
+      "address": "172.31.34.10",
+      "roles": ["overlaykit-server", "transparent-evidence-proxy"]
+    },
+    {
+      "id": "companion",
+      "os": "Ubuntu 24.04 LTS",
+      "address": "172.31.34.20",
+      "roles": ["bitfocus-companion", "overlaykit-local-module", "virtual-buttons"]
+    }
+  ],
+  "network": {
+    "subnet": "172.31.34.0/24",
+    "productEndpoint": "ws://172.31.34.10:8081/device",
+    "tailscale": false,
+    "cloud": false
+  },
+  "deadlineMs": 3000,
+  "actions": ["visibility.show", "visibility.hide", "visibility.toggle"],
+  "uiStates": ["active", "inactive", "unknown", "disconnected", "failed", "unavailable"],
+  "excludedClaims": [
+    "physical USB",
+    "physical Stream Deck",
+    "rendered hardware pixels",
+    "OBS truth",
+    "operator perception",
+    "non-Ubuntu distributions",
+    "npm or Bitfocus registry publication",
+    "cloud operation"
+  ]
+}

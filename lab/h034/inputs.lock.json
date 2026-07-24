@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "overlaykit-h034-input-lock/v1",
+  "ubuntu": {
+    "image": "ubuntu:24.04",
+    "digest": "sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90"
+  },
+  "node22": {
+    "image": "node:22.22.2-bookworm",
+    "digest": "sha256:62e4daa6819762bbd3072af77cc282ab72c631c4aed30dd7980192babaf385b3"
+  },
+  "node24": {
+    "image": "node:24.6.0-bookworm",
+    "digest": "sha256:d2b6b5aedb5b729f68ee1129e0f5a5d4713d93f82448249e82241876d8e8d86e"
+  },
+  "companion": {
+    "version": "4.3.3",
+    "sourceCommit": "06a7406709d6a858039333a8988047296ef3aa4a",
+    "image": "ghcr.io/bitfocus/companion/companion:v4.3.3",
+    "digest": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+  },
+  "overlaykit": {
+    "repository": "https://github.com/OverlayKit/overlaykit",
+    "commit": "9a5585de196ff972993c7ff81bf9c1461c47eaae",
+    "archive": "https://codeload.github.com/OverlayKit/overlaykit/tar.gz/9a5585de196ff972993c7ff81bf9c1461c47eaae",
+    "archiveSha256": "6fe5392143d039c14cd278b82adf37018f1ffed0bea9bf35187606073cc4bffd"
+  }
+}

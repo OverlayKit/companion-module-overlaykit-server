@@ -230,8 +230,9 @@ describe('OverlayKit control runtime', () => {
     const server = new SignedDeviceServer(fixture);
     const endpoint = await server.start();
     const scheduled = vi.fn();
+    const onLog = vi.fn();
     const runtime = new OverlayKitControlRuntime(
-      {},
+      { onLog },
       {
         scheduler: {
           schedule: scheduled,
@@ -247,6 +248,10 @@ describe('OverlayKit control runtime', () => {
     await waitFor(() => runtime.snapshot().status === 'failed');
 
     expect(scheduled).not.toHaveBeenCalled();
+    expect(onLog).toHaveBeenCalledWith(
+      'error',
+      'Signed device protocol processing failed: Device frame trust verification failed'
+    );
     await runtime.stop();
     await server.close();
   });

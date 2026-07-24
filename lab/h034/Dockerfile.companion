@@ -1,0 +1,45 @@
+FROM ghcr.io/bitfocus/companion/companion:v4.3.3@sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e AS official
+
+FROM node:22.22.2-bookworm@sha256:62e4daa6819762bbd3072af77cc282ab72c631c4aed30dd7980192babaf385b3 AS module-builder
+WORKDIR /src
+COPY . .
+RUN npm ci --engine-strict --no-audit --no-fund --maxsockets=1 \
+  && npm run package:module \
+  && sha256sum pkg/overlaykit-server-0.1.0.tgz > /tmp/module.sha256
+
+FROM ubuntu:24.04@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    iputils-ping \
+    libasound2t64 \
+    libfontconfig1 \
+    libudev1 \
+    libusb-1.0-0 \
+    procps \
+  && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY --from=official /app /app
+COPY --from=module-builder /src/pkg/overlaykit-server-0.1.0.tgz /opt/h034/overlaykit-server-0.1.0.tgz
+COPY --from=module-builder /tmp/module.sha256 /opt/h034/module.sha256
+COPY lab/h034/install-companion-module.sh /usr/local/bin/h034-install-companion-module
+RUN chmod 0555 /usr/local/bin/h034-install-companion-module \
+  && mkdir -p /app/module-local-dev /companion /evidence \
+  && h034-install-companion-module \
+    /opt/h034/overlaykit-server-0.1.0.tgz \
+    /app/module-local-dev/overlaykit-server \
+  && useradd --create-home --shell /bin/bash companion \
+  && chown -R companion:companion /companion /evidence
+
+COPY lab/h034/companion-entrypoint.sh /usr/local/bin/h034-companion
+RUN chmod 0555 /usr/local/bin/h034-companion
+
+ENV COMPANION_ADMIN_PORT=8000
+ENV COMPANION_CONFIG_BASEDIR=/companion
+ENV PATH="/app/node-runtimes/main/bin:${PATH}"
+EXPOSE 8000 16622
+USER root
+ENTRYPOINT ["/usr/local/bin/h034-companion"]

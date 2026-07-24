@@ -1,0 +1,35 @@
+# syntax=docker/dockerfile:1.7
+
+FROM overlaykit_source AS source
+
+FROM node:24.6.0-bookworm@sha256:d2b6b5aedb5b729f68ee1129e0f5a5d4713d93f82448249e82241876d8e8d86e AS builder
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends ca-certificates curl \
+  && rm -rf /var/lib/apt/lists/*
+WORKDIR /src
+COPY --from=source / /src
+RUN npm ci --engine-strict --no-audit --no-fund --maxsockets=1 \
+  && npm run server:build
+
+FROM ubuntu:24.04@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90
+ARG DEBIAN_FRONTEND=noninteractive
+ARG OVERLAYKIT_COMMIT
+RUN test -n "${OVERLAYKIT_COMMIT}" \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends ca-certificates curl \
+  && rm -rf /var/lib/apt/lists/* \
+  && useradd --create-home --shell /bin/bash overlaykit
+COPY --from=builder /usr/local /usr/local
+COPY --from=builder /src /opt/overlaykit
+COPY lab/h034/device-proxy.cjs /opt/h034/device-proxy.cjs
+COPY lab/h034/lib/proxy-evidence.cjs /opt/h034/lib/proxy-evidence.cjs
+COPY lab/h034/overlaykit-entrypoint.sh /usr/local/bin/h034-overlaykit
+RUN mkdir -p /data /evidence \
+  && chmod 0555 /usr/local/bin/h034-overlaykit \
+  && chown -R overlaykit:overlaykit /data /evidence
+
+ENV H034_OVERLAYKIT_COMMIT="${OVERLAYKIT_COMMIT}"
+ENV NODE_PATH=/opt/overlaykit/node_modules
+EXPOSE 3000 8081 9090
+USER root
+ENTRYPOINT ["/usr/local/bin/h034-overlaykit"]

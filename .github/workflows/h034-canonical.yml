@@ -1,0 +1,114 @@
+name: H-034 Canonical Lab
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/h034-canonical.yml'
+      - '.dockerignore'
+      - 'lab/h034/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'src/feedbacks.ts'
+      - 'src/runtime.ts'
+      - 'tests/official-host.test.ts'
+      - 'tests/runtime.test.ts'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: h034-canonical-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reproduce:
+    name: reproduce (${{ matrix.execution }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        execution: [1, 2]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.22.2'
+          cache: npm
+
+      - name: Install
+        run: npm ci --engine-strict --no-audit --no-fund --maxsockets=1
+
+      - name: Verify lab implementation
+        run: npm run lab:h034:test
+
+      - name: Execute canonical clean-room lab
+        run: npm run lab:h034:canonical
+
+      - name: Verify canonical evidence
+        run: |
+          RUN_JSON="$(find artifacts/h034 -name run.json -type f -print -quit)"
+          test -n "$RUN_JSON"
+          npm run lab:h034:verify -- "$RUN_JSON"
+
+      - name: Upload clean-room evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: h034-canonical-${{ matrix.execution }}-${{ github.run_id }}
+          path: artifacts/h034
+          if-no-files-found: warn
+          retention-days: 30
+
+  compare:
+    name: compare clean-room evidence
+    needs: reproduce
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.22.2'
+          cache: npm
+
+      - name: Install
+        run: npm ci --engine-strict --no-audit --no-fund --maxsockets=1
+
+      - name: Download first clean-room run
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: h034-canonical-1-${{ github.run_id }}
+          path: artifacts/first
+
+      - name: Download second clean-room run
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: h034-canonical-2-${{ github.run_id }}
+          path: artifacts/second
+
+      - name: Compare semantic evidence
+        run: |
+          FIRST_RUN="$(find artifacts/first -name run.json -type f -print -quit)"
+          SECOND_RUN="$(find artifacts/second -name run.json -type f -print -quit)"
+          test -n "$FIRST_RUN"
+          test -n "$SECOND_RUN"
+          npm run lab:h034:compare -- "$FIRST_RUN" "$SECOND_RUN" artifacts/h034-comparison.json
+
+      - name: Upload comparison
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: h034-comparison-${{ github.run_id }}
+          path: artifacts/h034-comparison.json
+          if-no-files-found: error
+          retention-days: 30

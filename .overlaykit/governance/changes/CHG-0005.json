@@ -23,6 +23,12 @@
     },
     {
       "kind": "fact",
+      "statement": "The parent OverlayKit repository corrected public device-command result correlation without replacing internal production authority, accepted the bounded result as ADR-0036 and CHG-0041, and merged verified commit 9a5585de196ff972993c7ff81bf9c1461c47eaae.",
+      "evidence": "OverlayKit PR 40, protected-main Constitution run 30067454123, GitHub attestation 36888591, governance-run SHA-256 a872fbd74b172e6ad98fd131a0d8adec1acbffa48cea8d72d0b9925a78cbcfd6, and Rekor log index 2231146106",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
       "statement": "Bitfocus documents Linux operation, an official Companion container whose Admin UI and web API use port 8000, and local module loading through COMPANION_DEV_MODULES or --extra-module-path.",
       "evidence": "Official Bitfocus Companion installation documentation https://companion.free/user-guide/beta/getting-started/Installation/ and local module documentation https://companion.free/for-developers/module-development/local-modules/ observed 2026-07-23",
       "blocking": false

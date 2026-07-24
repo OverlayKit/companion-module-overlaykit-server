@@ -1,0 +1,8 @@
+services:
+  overlaykit:
+    build:
+      dockerfile: lab/h034/Dockerfile.overlaykit-local
+      additional_contexts:
+        overlaykit_source: '${H034_OVERLAYKIT_SOURCE_DIR:?H034_OVERLAYKIT_SOURCE_DIR is required}'
+      args:
+        OVERLAYKIT_COMMIT: '${H034_OVERLAYKIT_SOURCE_COMMIT:?H034_OVERLAYKIT_SOURCE_COMMIT is required}'

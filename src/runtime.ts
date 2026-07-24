@@ -49,6 +49,12 @@ const RECONNECT_BASE_MS = 500;
 const RECONNECT_MAX_MS = 10_000;
 const MAX_ACCEPTED_IDENTITIES = 1_000;
 
+function protocolFailureMessage(error: unknown): string {
+  return error instanceof Error && error.message.length > 0
+    ? `Signed device protocol processing failed: ${error.message}`
+    : 'Signed device protocol processing failed: Unknown protocol error';
+}
+
 export type RuntimeConnectionStatus =
   'idle' | 'connecting' | 'open' | 'ready' | 'disconnected' | 'failed';
 export type VisibilityMode = 'show' | 'hide' | 'toggle';
@@ -366,7 +372,7 @@ export class OverlayKitControlRuntime {
       if (socket !== this.socket || this.stopping) return;
       this.messageTail = this.messageTail
         .then(async () => this.receive(data, isBinary))
-        .catch(() => this.failTerminal('Signed device protocol processing failed'));
+        .catch((error: unknown) => this.failTerminal(protocolFailureMessage(error)));
     });
     socket.once('unexpected-response', (_request: ClientRequest, response: IncomingMessage) => {
       response.resume();
