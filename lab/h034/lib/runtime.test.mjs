@@ -3,9 +3,39 @@ import { test } from 'node:test';
 import {
   assertStoragePreflight,
   CANONICAL_MINIMUM_FREE_GIB,
+  lockedOverlayKitBuildEnvironment,
   minimumFreeGiB,
   SUPPLEMENTAL_MINIMUM_FREE_GIB,
 } from './runtime.mjs';
+
+test('binds the locked OverlayKit source identity to the image build environment', () => {
+  assert.deepEqual(
+    lockedOverlayKitBuildEnvironment({
+      overlaykit: {
+        commit: 'a'.repeat(40),
+        archiveSha256: 'b'.repeat(64),
+      },
+    }),
+    {
+      H034_OVERLAYKIT_COMMIT: 'a'.repeat(40),
+      H034_OVERLAYKIT_ARCHIVE_SHA256: 'b'.repeat(64),
+    }
+  );
+});
+
+test('rejects incomplete or malformed locked OverlayKit source identities', () => {
+  assert.throws(
+    () => lockedOverlayKitBuildEnvironment({ overlaykit: { archiveSha256: 'b'.repeat(64) } }),
+    /commit must be a lowercase 40-character Git identity/u
+  );
+  assert.throws(
+    () =>
+      lockedOverlayKitBuildEnvironment({
+        overlaykit: { commit: 'a'.repeat(40), archiveSha256: 'not-a-digest' },
+      }),
+    /archive must have a lowercase SHA-256 digest/u
+  );
+});
 
 test('uses separate canonical and supplemental storage floors', () => {
   assert.equal(minimumFreeGiB(true), CANONICAL_MINIMUM_FREE_GIB);

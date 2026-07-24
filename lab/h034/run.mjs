@@ -19,7 +19,12 @@ import {
   proxyEvents,
   STATE_STYLE,
 } from './lib/evidence.mjs';
-import { assertStoragePreflight, minimumFreeGiB, storagePreflight } from './lib/runtime.mjs';
+import {
+  assertStoragePreflight,
+  lockedOverlayKitBuildEnvironment,
+  minimumFreeGiB,
+  storagePreflight,
+} from './lib/runtime.mjs';
 import {
   command,
   ensureDirectory,
@@ -40,6 +45,8 @@ const COMPOSE_FILE = path.join(LAB_DIRECTORY, 'compose.yaml');
 const INPUT_LOCK = path.join(LAB_DIRECTORY, 'inputs.lock.json');
 const LAB_DEFINITION = path.join(LAB_DIRECTORY, 'lab.definition.json');
 const LOCAL_SOURCE_COMPOSE_FILE = path.join(LAB_DIRECTORY, 'compose.local-source.yaml');
+const LOCKED_INPUTS = await readJson(INPUT_LOCK);
+const LOCKED_OVERLAYKIT_BUILD_ENVIRONMENT = lockedOverlayKitBuildEnvironment(LOCKED_INPUTS);
 const ORIGIN = 'http://h034-maintainer.local';
 const CONTROL_ID = 'lower-third.visibility';
 const BINDING_ID = 'component.visibility/preview/lower-third';
@@ -96,11 +103,13 @@ const composeEnvironment = {
   H034_REST_PORT: String(REST_PORT),
   H034_SATELLITE_PORT: String(SATELLITE_PORT),
   H034_PROXY_CONTROL_PORT: String(PROXY_CONTROL_PORT),
+  ...LOCKED_OVERLAYKIT_BUILD_ENVIRONMENT,
   ...(localOverlayKitSource === null
     ? {}
     : {
         H034_OVERLAYKIT_SOURCE_DIR: localOverlayKitSource,
         H034_OVERLAYKIT_SOURCE_COMMIT: localOverlayKitCommit,
+        H034_OVERLAYKIT_COMMIT: localOverlayKitCommit,
       }),
 };
 const composeArgs = [
@@ -517,12 +526,11 @@ function basicTiming(overrides = {}) {
 
 async function main() {
   const startedAt = wallClock();
-  const lockedInputs = await readJson(INPUT_LOCK);
   const inputs =
     localOverlayKitSource === null
-      ? lockedInputs
+      ? LOCKED_INPUTS
       : {
-          ...lockedInputs,
+          ...LOCKED_INPUTS,
           overlaykit: {
             repository: 'local-supplemental-source',
             commit: localOverlayKitCommit,
@@ -574,6 +582,19 @@ async function main() {
     labStarted = true;
     await compose('up', '--detach', '--wait', '--no-build');
 
+    const companionRuntime = exactRuntimeText(
+      await readFile(path.join(evidenceDirectory, 'companion-runtime.txt'), 'utf8')
+    );
+    const overlaykitRuntime = exactRuntimeText(
+      await readFile(path.join(evidenceDirectory, 'overlaykit-runtime.txt'), 'utf8')
+    );
+    if (overlaykitRuntime.commit !== inputs.overlaykit.commit) {
+      throw new Error(
+        `OverlayKit runtime identity ${overlaykitRuntime.commit} does not match locked input ` +
+          inputs.overlaykit.commit
+      );
+    }
+
     stage = 'provision-overlaykit';
     const api = new OverlayKitApi();
     const provisioning = await provisionOverlayKit(api);
@@ -594,12 +615,6 @@ async function main() {
     const unavailableState = await satellite.waitForState('unavailable', 'UNAVAILABLE', 20_000);
     await satellite.waitForState('show', 'INACTIVE', 20_000);
 
-    const companionRuntime = exactRuntimeText(
-      await readFile(path.join(evidenceDirectory, 'companion-runtime.txt'), 'utf8')
-    );
-    const overlaykitRuntime = exactRuntimeText(
-      await readFile(path.join(evidenceDirectory, 'overlaykit-runtime.txt'), 'utf8')
-    );
     const moduleArchiveSha256 = companionRuntime.module_sha256;
     const versions = {
       companion: '4.3.3',

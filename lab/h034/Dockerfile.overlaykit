@@ -1,11 +1,13 @@
 FROM node:24.6.0-bookworm@sha256:d2b6b5aedb5b729f68ee1129e0f5a5d4713d93f82448249e82241876d8e8d86e AS builder
-ARG OVERLAYKIT_COMMIT=24e978cfa8e41dd5e1f9c410a4e69c7964bb71ca
-ARG OVERLAYKIT_ARCHIVE_SHA256=01116ca338867264720e7dce55b9ba1c0fb6ad6f8314d693216870ab63cd9be6
+ARG OVERLAYKIT_COMMIT
+ARG OVERLAYKIT_ARCHIVE_SHA256
 RUN apt-get update \
   && apt-get install -y --no-install-recommends ca-certificates curl \
   && rm -rf /var/lib/apt/lists/*
 WORKDIR /src
-RUN curl --fail --location --silent --show-error \
+RUN printf '%s' "${OVERLAYKIT_COMMIT}" | grep -Eq '^[0-9a-f]{40}$' \
+  && printf '%s' "${OVERLAYKIT_ARCHIVE_SHA256}" | grep -Eq '^[0-9a-f]{64}$' \
+  && curl --fail --location --silent --show-error \
     "https://codeload.github.com/OverlayKit/overlaykit/tar.gz/${OVERLAYKIT_COMMIT}" \
     --output /tmp/overlaykit.tar.gz \
   && printf '%s  %s\n' "${OVERLAYKIT_ARCHIVE_SHA256}" /tmp/overlaykit.tar.gz | sha256sum --check \
@@ -16,8 +18,9 @@ RUN npm ci --engine-strict --no-audit --no-fund --maxsockets=1 \
 
 FROM ubuntu:24.04@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90
 ARG DEBIAN_FRONTEND=noninteractive
-ARG OVERLAYKIT_COMMIT=24e978cfa8e41dd5e1f9c410a4e69c7964bb71ca
-RUN apt-get update \
+ARG OVERLAYKIT_COMMIT
+RUN printf '%s' "${OVERLAYKIT_COMMIT}" | grep -Eq '^[0-9a-f]{40}$' \
+  && apt-get update \
   && apt-get install -y --no-install-recommends ca-certificates curl \
   && rm -rf /var/lib/apt/lists/* \
   && useradd --create-home --shell /bin/bash overlaykit

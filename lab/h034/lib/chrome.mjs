@@ -47,7 +47,21 @@ async function stopChrome(child) {
   if (child.exitCode !== null || child.signalCode !== null) return;
   child.kill('SIGTERM');
   await Promise.race([once(child, 'exit'), new Promise((resolve) => setTimeout(resolve, 2_000))]);
-  if (child.exitCode === null && child.signalCode === null) child.kill('SIGKILL');
+  if (child.exitCode !== null || child.signalCode !== null) return;
+  child.kill('SIGKILL');
+  await Promise.race([once(child, 'exit'), new Promise((resolve) => setTimeout(resolve, 2_000))]);
+  if (child.exitCode === null && child.signalCode === null) {
+    throw new Error('Chrome did not exit after SIGKILL');
+  }
+}
+
+export async function removeChromeProfile(profile, remove = rm) {
+  await remove(profile, {
+    recursive: true,
+    force: true,
+    maxRetries: 5,
+    retryDelay: 100,
+  });
 }
 
 export async function captureChromePage({
@@ -134,6 +148,6 @@ export async function captureChromePage({
   } finally {
     client?.close();
     await stopChrome(child);
-    await rm(profile, { recursive: true, force: true });
+    await removeChromeProfile(profile);
   }
 }
