@@ -57,6 +57,38 @@ export function acceptedServerEvidence(events, options = {}) {
   return { serverEvent, acknowledgement, observation };
 }
 
+export function acceptedTargetConfirmation(events, options = {}) {
+  const afterEventSequence = options.afterEventSequence ?? 0;
+  const beforeOrAt = options.beforeOrAt ?? Number.MAX_SAFE_INTEGER;
+  const candidates = events.filter(
+    (event) =>
+      event.kind === 'frame.forwarded' &&
+      event.direction === 'server-to-companion' &&
+      (event.messageType === 'device.bootstrap.snapshot' ||
+        event.messageType === 'device.state.delta') &&
+      event.eventSequence > afterEventSequence &&
+      event.eventSequence <= beforeOrAt &&
+      event.target === options.target &&
+      Number.isSafeInteger(event.confirmedAt)
+  );
+  for (const serverEvent of candidates.reverse()) {
+    const acknowledgement = events.find(
+      (event) =>
+        event.kind === 'frame.observed' &&
+        event.direction === 'companion-to-server' &&
+        event.messageType === 'device.state.ack' &&
+        event.issuerKeyId === serverEvent.issuerKeyId &&
+        event.sequence === serverEvent.sequence &&
+        event.evidenceSha256 === serverEvent.evidenceSha256 &&
+        event.status === 'applied' &&
+        event.eventSequence > serverEvent.eventSequence &&
+        event.eventSequence <= beforeOrAt
+    );
+    if (acknowledgement) return { serverEvent, acknowledgement };
+  }
+  throw new Error('No acknowledged authoritative target confirmation was forwarded');
+}
+
 export async function createReceipt(options) {
   const style = STATE_STYLE[options.observedState];
   if (!style) throw new Error(`Unsupported UI state ${options.observedState}`);

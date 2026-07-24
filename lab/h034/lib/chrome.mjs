@@ -50,6 +50,7 @@ function processGroupRunning(pid) {
     return true;
   } catch (error) {
     if (error?.code === 'ESRCH') return false;
+    if (error?.code === 'EPERM' && process.platform === 'darwin') return false;
     throw error;
   }
 }

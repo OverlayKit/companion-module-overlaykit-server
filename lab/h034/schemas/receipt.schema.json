@@ -117,11 +117,31 @@
     "timing": {
       "type": "object",
       "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "deadlineExpired": { "const": true } },
+            "required": ["deadlineExpired"]
+          },
+          "then": {
+            "properties": {
+              "durationMs": { "type": "number", "minimum": 3000 },
+              "deadlineBasis": { "type": "object" }
+            }
+          },
+          "else": {
+            "properties": {
+              "deadlineBasis": { "type": "null" }
+            }
+          }
+        }
+      ],
       "required": [
         "deadlineMs",
         "durationMs",
         "authoritativeWithinDeadline",
         "deadlineExpired",
+        "deadlineBasis",
         "lateEvidenceCannotPass"
       ],
       "properties": {
@@ -129,6 +149,29 @@
         "durationMs": { "type": "number", "minimum": 0 },
         "authoritativeWithinDeadline": { "type": "boolean" },
         "deadlineExpired": { "type": "boolean" },
+        "deadlineBasis": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "proxyEventSequence",
+                "confirmedAt",
+                "ackProxyEventSequence",
+                "sha256"
+              ],
+              "properties": {
+                "source": { "const": "authoritative-target-confirmation" },
+                "proxyEventSequence": { "type": "integer", "minimum": 1 },
+                "confirmedAt": { "type": "integer", "minimum": 0 },
+                "ackProxyEventSequence": { "type": "integer", "minimum": 1 },
+                "sha256": { "$ref": "#/$defs/sha256" }
+              }
+            }
+          ]
+        },
         "lateEvidenceCannotPass": { "type": "boolean" }
       }
     },

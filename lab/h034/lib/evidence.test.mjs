@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { acceptedServerEvidence } from './evidence.mjs';
+import { acceptedServerEvidence, acceptedTargetConfirmation } from './evidence.mjs';
 
-function frame(eventSequence, sequence, value) {
+function frame(eventSequence, sequence, value, observations) {
   return {
     eventSequence,
     kind: 'frame.forwarded',
@@ -12,7 +12,10 @@ function frame(eventSequence, sequence, value) {
     issuerKeyId: 'issuer-1',
     sequence,
     evidenceSha256: String(sequence).repeat(64),
-    observations: [{ controlId: 'lower-third.visibility', value, revision: sequence }],
+    confirmedAt: 1_000,
+    observations: observations ?? [
+      { controlId: 'lower-third.visibility', value, revision: sequence },
+    ],
   };
 }
 
@@ -55,4 +58,20 @@ test('selects accepted server evidence strictly after an experiment boundary', (
       }),
     /No matching authoritative server frame/u
   );
+});
+
+test('selects the latest acknowledged target confirmation even without observations', () => {
+  const events = [
+    frame(1, 7, 'inactive'),
+    acknowledgement(2, 7),
+    frame(3, 8, 'active', []),
+    acknowledgement(4, 8),
+    frame(5, 9, 'active', []),
+  ];
+
+  const selected = acceptedTargetConfirmation(events, { target: 'preview' });
+
+  assert.equal(selected.serverEvent.eventSequence, 3);
+  assert.equal(selected.serverEvent.confirmedAt, 1_000);
+  assert.equal(selected.acknowledgement.eventSequence, 4);
 });

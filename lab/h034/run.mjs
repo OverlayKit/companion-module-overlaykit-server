@@ -15,6 +15,7 @@ import {
 import { SatelliteObserver } from './lib/satellite.mjs';
 import {
   acceptedServerEvidence,
+  acceptedTargetConfirmation,
   createReceipt,
   proxyEvents,
   STATE_STYLE,
@@ -519,9 +520,28 @@ function basicTiming(overrides = {}) {
     durationMs: 0,
     authoritativeWithinDeadline: false,
     deadlineExpired: false,
+    deadlineBasis: null,
     lateEvidenceCannotPass: true,
     ...overrides,
   };
+}
+
+function expiredTiming(evidence, satelliteState) {
+  const duration = Date.parse(satelliteState.wallClock) - evidence.serverEvent.confirmedAt;
+  if (!Number.isFinite(duration) || duration < 0) {
+    throw new Error('Expired evidence timing does not follow its authoritative confirmation');
+  }
+  return basicTiming({
+    durationMs: duration,
+    deadlineExpired: true,
+    deadlineBasis: {
+      source: 'authoritative-target-confirmation',
+      proxyEventSequence: evidence.serverEvent.eventSequence,
+      confirmedAt: evidence.serverEvent.confirmedAt,
+      ackProxyEventSequence: evidence.acknowledgement.eventSequence,
+      sha256: evidence.serverEvent.evidenceSha256,
+    },
+  });
 }
 
 async function main() {
@@ -740,7 +760,9 @@ async function main() {
       }),
     });
 
-    const delayBoundary = (await proxyEvents(evidenceDirectory)).at(-1)?.eventSequence ?? 0;
+    const preDelayEvents = await proxyEvents(evidenceDirectory);
+    const delayBoundary = preDelayEvents.at(-1)?.eventSequence ?? 0;
+    const freshnessEvidence = acceptedTargetConfirmation(preDelayEvents, { target: 'preview' });
     await proxyFault('delay-state', { delayMs: 9000 });
     const delayedStartedAt = wallClock();
     const delayedStartedNs = monotonicNs();
@@ -764,10 +786,7 @@ async function main() {
       invocation: timeoutInvocation,
       justificationKind: 'accepted-evidence-expired',
       evidence: toggleEvidence,
-      timing: basicTiming({
-        durationMs: durationMs(delayedStartedNs, unknownState.monotonicNs),
-        deadlineExpired: true,
-      }),
+      timing: expiredTiming(freshnessEvidence, unknownState),
     });
 
     const expiredEvidence = await waitFor(
@@ -797,10 +816,7 @@ async function main() {
       invocation: timeoutInvocation,
       justificationKind: 'accepted-evidence-expired',
       evidence: expiredEvidence,
-      timing: basicTiming({
-        durationMs: durationMs(delayedStartedNs, lateUnknownState.monotonicNs),
-        deadlineExpired: true,
-      }),
+      timing: expiredTiming(expiredEvidence, lateUnknownState),
     });
 
     const disconnectStartedNs = monotonicNs();
@@ -839,7 +855,8 @@ async function main() {
       value: 'inactive',
       afterEventSequence: expiredEvidence.acknowledgement.eventSequence,
     });
-    const lateDuration = durationMs(delayedStartedNs, recoveredState.monotonicNs);
+    const lateTiming = expiredTiming(expiredEvidence, recoveredState);
+    const lateDuration = lateTiming.durationMs;
     await recordScenario({
       scenarioId: 'late-authoritative-recovery',
       expectedState: 'inactive',
@@ -847,10 +864,7 @@ async function main() {
       invocation: timeoutInvocation,
       justificationKind: 'authoritative-server-state',
       evidence: reconnectedEvidence,
-      timing: basicTiming({
-        durationMs: lateDuration,
-        deadlineExpired: true,
-      }),
+      timing: lateTiming,
     });
 
     const failureStartedNs = monotonicNs();

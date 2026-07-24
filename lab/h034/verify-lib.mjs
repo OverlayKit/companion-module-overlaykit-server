@@ -169,6 +169,42 @@ async function verifyReceipt(receipt, context) {
         receipt.timing.lateEvidenceCannotPass === true,
       `${receipt.scenarioId} permits late evidence to pass`
     );
+    const basis = receipt.timing.deadlineBasis;
+    assertion(basis !== null, `${receipt.scenarioId} lacks an authoritative deadline basis`);
+    const basisEvent = eventBySequence(context.events, basis.proxyEventSequence);
+    assertion(
+      basisEvent.kind === 'frame.forwarded' &&
+        basisEvent.direction === 'server-to-companion' &&
+        (basisEvent.messageType === 'device.bootstrap.snapshot' ||
+          basisEvent.messageType === 'device.state.delta') &&
+        basisEvent.target === 'preview' &&
+        basisEvent.confirmedAt === basis.confirmedAt &&
+        basisEvent.evidenceSha256 === basis.sha256,
+      `${receipt.scenarioId} deadline basis is not an authoritative target confirmation`
+    );
+    const basisAck = eventBySequence(context.events, basis.ackProxyEventSequence);
+    assertion(
+      basisAck.kind === 'frame.observed' &&
+        basisAck.direction === 'companion-to-server' &&
+        basisAck.messageType === 'device.state.ack' &&
+        basisAck.status === 'applied' &&
+        basisAck.issuerKeyId === basisEvent.issuerKeyId &&
+        basisAck.sequence === basisEvent.sequence &&
+        basisAck.evidenceSha256 === basisEvent.evidenceSha256 &&
+        basisAck.eventSequence > basisEvent.eventSequence,
+      `${receipt.scenarioId} deadline basis lacks its applied ACK`
+    );
+    const observedDuration = Date.parse(receipt.observation.wallClock) - basis.confirmedAt;
+    assertion(
+      receipt.timing.durationMs === observedDuration &&
+        observedDuration >= receipt.timing.deadlineMs,
+      `${receipt.scenarioId} expired before its authoritative three-second deadline`
+    );
+  } else {
+    assertion(
+      receipt.timing.deadlineBasis === null,
+      `${receipt.scenarioId} declares a deadline basis without expiry`
+    );
   }
   if (receipt.observedState === 'unknown') {
     assertion(
