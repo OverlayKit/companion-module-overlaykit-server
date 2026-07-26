@@ -38,9 +38,19 @@ describe('OverlayKit governance contract', () => {
     expect(contract.changes.find(({ change }) => change.id === 'CHG-0005')?.change.status).toBe(
       'implemented'
     );
+    expect(contract.changes.find(({ change }) => change.id === 'CHG-0013')).toEqual(
+      expect.objectContaining({
+        contentHash: '6e7050e85f5fa94c2677b1f1a6a400ca1ed0136fffd860c851d6aa8975514b87',
+        change: expect.objectContaining({ status: 'proposed' }),
+      })
+    );
+    expect(contract.changes.find(({ change }) => change.id === 'CHG-0014')?.change.status).toBe(
+      'implemented'
+    );
 
     const plan = compileGovernance(contract);
     const manifest = buildManifest(contract, plan);
+    expect(plan.profileVersion).toBe('1.6.0');
     expect(plan.decisions).toEqual([
       expect.objectContaining({
         id: 'ADR-0001',
@@ -67,7 +77,31 @@ describe('OverlayKit governance contract', () => {
         effectiveStatus: 'accepted',
         supersededBy: null,
       }),
+      expect.objectContaining({
+        id: 'ADR-0006',
+        effectiveStatus: 'accepted',
+        supersededBy: null,
+      }),
     ]);
+    expect(plan.rules.map(({ id }) => id)).toEqual(
+      expect.arrayContaining([
+        'surface-thread-replacement-claim-is-exactly-bounded',
+        'experimental-worker-signal-is-not-production-policy',
+        'physical-mechanism-evidence-does-not-expand-specifications',
+        'production-recovery-requires-successor-slice',
+      ])
+    );
+    expect(contract.profile.specificationIds).toEqual(['SPEC-0001', 'SPEC-0002']);
+    expect(
+      sha256(
+        readFileSync(
+          join(
+            root,
+            'evidence/h042/f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88/replay-15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36.tar.gz'
+          )
+        )
+      )
+    ).toBe('15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36');
     expect(plan.gates.find((gate) => gate.id === 'signed-identity')).toEqual(
       expect.objectContaining({
         tier: 'deferred',

@@ -6,17 +6,20 @@ This repository contains the governed Bitfocus Companion module for controlling 
 The accepted H-031 boundary connects one module instance to one OverlayKit Show, learns controls
 from signed server state, and exposes component visibility actions and feedback through Companion
 Module API 2.0. The accepted H-034 boundary reproduces the complete Companion 4.3.3 application
-against the real OverlayKit OSS server on isolated Ubuntu 24.04 LTS nodes. Neither boundary
-establishes physical Stream Deck behavior.
+against the real OverlayKit OSS server on isolated Ubuntu 24.04 LTS nodes. The accepted H-042
+boundary observes one post-login MK.2 reacquisition after replacement of one revalidated
+SurfaceThread under the exact Fedora 43 and Companion 4.3.3 identities. It does not establish
+physical button delivery, pixels, complete recovery, or a production signal or restart policy.
 
 ## Development Status
 
 - Governance and legal provenance: active
 - Companion adapter host boundary: accepted
 - Complete Companion application lab: H-034 accepted for the pinned emulator boundary
+- Physical reacquisition mechanism: H-042 accepted only for one bounded worker replacement
 - npm publication: not established
 - Bitfocus module registry: not established
-- Physical Stream Deck hardware: not tested
+- Physical button delivery, pixels, and production recovery: not established
 
 ## Accepted Adapter Boundary
 

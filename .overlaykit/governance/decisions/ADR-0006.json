@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "overlaykit-governance-decision/v1",
+  "id": "ADR-0006",
+  "title": "SurfaceThread is the bounded post-login MK.2 reacquisition unit",
+  "status": "accepted",
+  "date": "2026-07-26",
+  "supersedes": null,
+  "governs": [
+    "companion-mk2-post-login-reacquisition-evidence",
+    "companion-surface-worker-replacement-boundary",
+    "physical-hardware-mechanism-evidence",
+    "production-recovery-policy-preconditions"
+  ],
+  "context": "H-042 asked whether one controlled termination of the exact stale SurfaceThread, after a complete negative automatic-reacquisition window in a new MK.2 USB epoch, would cause Companion's existing supervision to replace that worker and reacquire the current device without recreating or restarting the top-level container. The byte-exact pre-experiment contract is CHG-0013 SHA-256 6e7050e85f5fa94c2677b1f1a6a400ca1ed0136fffd860c851d6aa8975514b87 under plan 568560d620255681477bb1d73c156013666f961da3ccd5dd61c91d95160235f4 and signed source anchor 1e3a6c7830ed9df8642b74447ea095df89905f17. Canonical run h042-2026-07-26T16-19-05-858Z-efaf85fa used Fedora 43, the official Companion v4.3.3 image reference ghcr.io/bitfocus/companion/companion:v4.3.3 with image ID sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e, and physical Stream Deck MK.2 serial A00SA5492OQMLF. After USB device 17/HID .0015/inode 1465 changed through exact absence to device 18/HID .0016/inode 1480 with the same serial and rdev f1:0, SurfaceThread PID 73/startTicks 7808716 remained alive without a current descriptor for 30.483981415 seconds. One revalidated SIGTERM reached that exact tuple. Companion retained the same container, PID 1/startTicks 7808679, and restartCount 0, while one replacement SurfaceThread PID 858/startTicks 7817528 acquired FD 20 on inode 1480/rdev f1:0. Serial-specific Opening and Ready markers occurred 1.137914595 and 1.138836576 seconds after signal receipt, and the complete supported state was observed at 1.311634484 seconds. All 37 sources were exact and stable, cleanup was verified, and the independent verifier reported supported. Semantic evidence SHA-256 is f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88; run.json SHA-256 is be39e69140f733e7f56e371f144b6e7b0cd43c05b7be6bfea9850c440679a7b6; verification.json SHA-256 is 0fc4f3cd7f78fe1184331a40f97874521d97d6f5c677a4829588a6dc676e6919. Earlier attempts remain inconclusive and are not reinterpreted as evidence. The registered human authority reviewed and accepted only this bounded evidence on 2026-07-26.",
+  "decision": "Within only the exact tested post-login Fedora 43, Companion 4.3.3, physical MK.2 identity, dynamic-device-view, one-new-epoch, thirty-second-negative-control, one-revalidated-SIGTERM, unchanged-container, and unchanged-PID-1 boundary, SurfaceThread is the minimum observed replaceable unit that restored current-epoch device-descriptor ownership and ordered serial-specific Opening and Ready markers. This mechanism observation changes investigation order: a successor Slice may investigate a safe, explicit recovery controller around worker replacement before considering top-level container restart. The experimental SIGTERM is evidence of one controlled intervention, not an accepted production trigger, supervisor, signal policy, restart policy, device bind, cgroup policy, or complete recovery mechanism. This decision does not establish physical button delivery, OverlayKit configuration continuity, rendered pixels, operator perception, OBS truth, repeated recovery, multiple devices, long outages, pre-login behavior, reboot behavior, security, acceptable downtime, or support beyond the exact pinned identities. SPEC-0001 and SPEC-0002 remain unchanged.",
+  "consequences": [
+    "The accepted mechanism claim is stable only for the exact host, image, principal, device, process, intervention, and timing identities preserved by canonical H-042 evidence.",
+    "Worker replacement is recognized as a smaller observed recovery boundary than top-level container restart, but no production controller or trigger is selected.",
+    "A production recovery proposal must separately refute PID-reuse and race hazards, unsafe or repeated signaling, security exposure, unacceptable downtime, long outages, and multi-device behavior.",
+    "Button-command delivery, OverlayKit configuration continuity, rendered pixels, operator perception, and complete recovery require separate causal evidence.",
+    "Physical mechanism evidence cannot be represented as expansion or satisfaction of SPEC-0001 or SPEC-0002.",
+    "The canonical evidence and its source closure must remain content-addressed; prior inconclusive attempts cannot be promoted or combined with it.",
+    "Evidence acceptance, local source preservation, merge, installation, production policy, publication, and release remain separate human-authorized transitions."
+  ],
+  "policies": [
+    {
+      "kind": "rule",
+      "id": "surface-thread-replacement-claim-is-exactly-bounded",
+      "statement": "The accepted SurfaceThread replacement claim applies only to the exact identities, new USB epoch, complete negative control, single revalidated signal, unchanged container and PID 1, current-epoch descriptor, and ordered serial-specific markers proven by canonical H-042 evidence."
+    },
+    {
+      "kind": "rule",
+      "id": "experimental-worker-signal-is-not-production-policy",
+      "statement": "One successful controlled SIGTERM in H-042 does not authorize a production signal trigger, supervisor, restart policy, device bind, cgroup rule, or complete recovery mechanism."
+    },
+    {
+      "kind": "rule",
+      "id": "physical-mechanism-evidence-does-not-expand-specifications",
+      "statement": "H-042 hardware-mechanism evidence cannot be represented as physical button delivery, rendered pixels, operator perception, complete product acceptance, or a change to SPEC-0001 or SPEC-0002."
+    },
+    {
+      "kind": "rule",
+      "id": "production-recovery-requires-successor-slice",
+      "statement": "Any production worker-recovery proposal requires a successor governed Slice that tests a safe trigger, PID and race handling, repeated recovery, button and configuration continuity, security, acceptable downtime, and its exact deployment identities."
+    }
+  ]
+}

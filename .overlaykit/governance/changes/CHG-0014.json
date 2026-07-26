@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0014",
+  "title": "Accept bounded H-042 SurfaceThread replacement evidence",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "CHG-0013 is the byte-exact pre-experiment contract that governed H-042 and remains proposed and unchanged after evidence review.",
+      "evidence": "CHG-0013 file SHA-256 6e7050e85f5fa94c2677b1f1a6a400ca1ed0136fffd860c851d6aa8975514b87 under compiled plan 568560d620255681477bb1d73c156013666f961da3ccd5dd61c91d95160235f4 and signed source anchor 1e3a6c7830ed9df8642b74447ea095df89905f17.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Canonical H-042 run h042-2026-07-26T16-19-05-858Z-efaf85fa produced a supported and independently verified surface-worker-reacquisition result with all 37 required source hashes exact, artifact hashes valid, the signal and Docker event boundaries exact, cleanup complete, and no failed attempt admitted as canonical evidence.",
+      "evidence": "Semantic evidence SHA-256 f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88; run.json SHA-256 be39e69140f733e7f56e371f144b6e7b0cd43c05b7be6bfea9850c440679a7b6; verification.json SHA-256 0fc4f3cd7f78fe1184331a40f97874521d97d6f5c677a4829588a6dc676e6919.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "On the exact post-login Fedora 43 host, official Companion 4.3.3 image, and physical MK.2 serial A00SA5492OQMLF, the original SurfaceThread PID 73/startTicks 7808716 retained no current device descriptor for 30.483981415 seconds after the new USB epoch. One revalidated SIGTERM caused one replacement PID 858/startTicks 7817528 under the unchanged container and PID 1; the replacement acquired FD 20 on current inode 1480/rdev f1:0 and emitted ordered serial-specific Opening and Ready markers 1.137914595 and 1.138836576 seconds after signal receipt. The complete supported state was observed at 1.311634484 seconds.",
+      "evidence": "Canonical H-042 run and verification bound to image reference ghcr.io/bitfocus/companion/companion:v4.3.3, image ID sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e, and evidence SHA-256 f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The registered human authority @rodrigoteamx accepted the complete bounded H-042 motion on 2026-07-26, including preservation through a reviewed Git-tracked content-addressed bundle and local signed commits, while explicitly withholding authorization for push, merge, publication, release, installation, production signal policy, restart policy, or product-specification expansion.",
+      "evidence": "Human Doctrine review response 'Acepto la moción completa.' on 2026-07-26, anchored by the signed local governance acceptance commit containing this successor record.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The minimum replay closure contains 70 files and is preserved as a deterministic 290821-byte Git-tracked archive after a bounded disclosure scan found no credentials, tokens, passwords, cookies, private keys, email addresses, or MAC addresses.",
+      "evidence": "evidence/h042/f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88/replay-15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36.tar.gz; archive SHA-256 15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Within only the exact tested H-042 boundary, SurfaceThread is the minimum observed replaceable unit that restored current-epoch MK.2 descriptor ownership and serial-specific Opening and Ready markers after automatic reacquisition remained negative; this orders the next investigation toward a safe recovery controller before any top-level container restart mechanism.",
+      "evidence": "Human-accepted bounded inference from canonical H-042 evidence f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88 and ADR-0006.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "No accepted evidence yet establishes a safe production trigger, PID-reuse and race handling, acceptable downtime, security properties, repetition rate, long-outage behavior, multi-device behavior, pre-login behavior, or reboot recovery for worker replacement.",
+      "evidence": "Explicit H-042 claim exclusions and the accepted human motion; these questions require a successor governed Slice.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-042 does not establish physical button command delivery, OverlayKit configuration continuity, rendered pixels, operator perception, OBS truth, or complete production recovery and does not alter SPEC-0001 or SPEC-0002.",
+      "evidence": "Canonical H-042 claimBoundary.excludes, accepted SPEC-0001 and SPEC-0002, and the human acceptance boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The raw replay archive contains publication-sensitive local paths, host and Docker identifiers, hardware serials, group membership, and machine inventory; publication remains unauthorized and requires a separate disclosure decision.",
+      "evidence": "Bounded H-042 archive disclosure review on 2026-07-26 and the explicit no-push/no-publication human acceptance boundary.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0013 remains byte-identical and its 37-source H-042 closure is preserved independently from the governance acceptance transition.",
+      "verification": "Recompute CHG-0013 SHA-256 as 6e7050e85f5fa94c2677b1f1a6a400ca1ed0136fffd860c851d6aa8975514b87 and verify every collector.sourceSha256 entry against the source anchor."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The accepted claim reproduces exactly the canonical H-042 outcome and exclusions without broadening one observed worker replacement into complete recovery or production policy.",
+      "verification": "Independent verification of the canonical run, semantic evidence digest, run digest, verification digest, timing predicates, process lineage, device identity, and claimBoundary arrays."
+    },
+    {
+      "id": "SC-003",
+      "statement": "A content-addressed Git-tracked bundle preserves the canonical run, verification, primary receipts, source map, and review boundary after a secrets and PII review, while prior failed attempts remain separately classified as inconclusive.",
+      "verification": "Archive SHA-256 and member inspection, disclosure review, and confirmation that only h042-2026-07-26T16-19-05-858Z-efaf85fa is identified as canonical."
+    },
+    {
+      "id": "SC-004",
+      "statement": "ADR-0006 activates only the bounded SurfaceThread observation, profile 1.6.0 retains ADR-0001 through ADR-0005 and SPEC-0001 through SPEC-0002 unchanged, and no product specification is added or superseded.",
+      "verification": "Governance source diff plus deterministic plan and manifest compilation."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The activated governance tree, repository quality checks, build, and focused H-042 verifier all pass under Node 22.20.0.",
+      "verification": "Post-activation receipts from governance:verify, governance:check, check, build, focused H-042 tests, and canonical H-042 verification."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Acceptance creates only local signed source/evidence and governance commits; push, merge, publication, release, installation, and production configuration remain separately unauthorized.",
+      "verification": "Human authorization boundary, local signature verification, repository status, and absence of remote or production mutations."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0014 records the registered human acceptance, typed facts, bounded inference, nonblocking unknowns, exact evidence identities, exclusions, and separate transition authorities.",
+      "evidence": "Human Doctrine acceptance by @rodrigoteamx on 2026-07-26 and this implemented successor contract."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "CHG-0013 remains proposed and byte-identical; accepted ADR-0001 through ADR-0005 and SPEC-0001 through SPEC-0002 remain untouched.",
+      "evidence": "Repository diff and CHG-0013 SHA-256 6e7050e85f5fa94c2677b1f1a6a400ca1ed0136fffd860c851d6aa8975514b87."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The canonical H-042 evidence and its complete required-source map are stored in a Git-tracked content-addressed archive and independently verify without admitting failed attempts.",
+      "evidence": "Archive SHA-256 15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36 under evidence/h042/f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88/; run SHA-256 be39e69140f733e7f56e371f144b6e7b0cd43c05b7be6bfea9850c440679a7b6; verification SHA-256 0fc4f3cd7f78fe1184331a40f97874521d97d6f5c677a4829588a6dc676e6919."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "ADR-0006 is accepted, profile overlaykit-companion-module advances from 1.5.0 to 1.6.0, and plan.json and manifest.json are deterministically regenerated.",
+      "evidence": "ADR-0006, profile.json, plan.json, manifest.json, and repository governance assertions."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "Post-activation governance, quality, build, focused H-042, source-hash, artifact-hash, and canonical verification gates pass under Node 22.20.0.",
+      "evidence": "Successful final local gate receipts dated 2026-07-26."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No product code, accepted specification, production configuration, production signal or restart policy, installation, push, merge, publication, or release is created by this acceptance.",
+      "evidence": "Repository diff, unchanged SPEC-0001 and SPEC-0002 hashes, and the explicit human authorization boundary."
+    }
+  ]
+}

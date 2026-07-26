@@ -108,6 +108,14 @@
       "id": "ADR-0005",
       "supersededBy": null,
       "title": "Complete Companion integration evidence is clean-room, causal, and bounded"
+    },
+    {
+      "contentHash": "619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360",
+      "declaredStatus": "accepted",
+      "effectiveStatus": "accepted",
+      "id": "ADR-0006",
+      "supersededBy": null,
+      "title": "SurfaceThread is the bounded post-login MK.2 reacquisition unit"
     }
   ],
   "engineVersion": "overlaykit-governance-host/v2",
@@ -234,10 +242,10 @@
     }
   ],
   "mechanismsHash": "64141de30d5791ad3f53cf857fa582477413b15e997f7e438de408f1ba328fd4",
-  "planHash": "568560d620255681477bb1d73c156013666f961da3ccd5dd61c91d95160235f4",
-  "profileHash": "30ed858f45d5ec093de05c2fd9d4b1f159bb7b664ed7caabf39b04c78e1e9ceb",
+  "planHash": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4",
+  "profileHash": "9b55c034c16a653d497672374c12d94f6f609c77f23aecd0f0d437e230cb4ebd",
   "profileName": "overlaykit-companion-module",
-  "profileVersion": "1.5.0",
+  "profileVersion": "1.6.0",
   "rules": [
     {
       "id": "accepted-records-are-immutable",
@@ -378,6 +386,12 @@
       "statement": "Evidence may answer an approved question only within the law and claim boundary that existed before the experiment."
     },
     {
+      "id": "experimental-worker-signal-is-not-production-policy",
+      "kind": "rule",
+      "sourceDecision": "ADR-0006",
+      "statement": "One successful controlled SIGTERM in H-042 does not authorize a production signal trigger, supervisor, restart policy, device bind, cgroup rule, or complete recovery mechanism."
+    },
+    {
       "id": "feedback-expiry-requires-acknowledged-server-confirmation",
       "kind": "rule",
       "sourceDecision": "ADR-0005",
@@ -426,16 +440,34 @@
       "statement": "Show, hide, and toggle pass timing only when authoritative server state is visibly projected within three seconds of virtual invocation."
     },
     {
+      "id": "physical-mechanism-evidence-does-not-expand-specifications",
+      "kind": "rule",
+      "sourceDecision": "ADR-0006",
+      "statement": "H-042 hardware-mechanism evidence cannot be represented as physical button delivery, rendered pixels, operator perception, complete product acceptance, or a change to SPEC-0001 or SPEC-0002."
+    },
+    {
       "id": "pre-implementation-field-rules-remain-unknown",
       "kind": "rule",
       "sourceDecision": "ADR-0002",
       "statement": "H-032 does not authorize claims about which individual fields of a proposed or approved contract may change."
     },
     {
+      "id": "production-recovery-requires-successor-slice",
+      "kind": "rule",
+      "sourceDecision": "ADR-0006",
+      "statement": "Any production worker-recovery proposal requires a successor governed Slice that tests a safe trigger, PID and race handling, repeated recovery, button and configuration continuity, security, acceptable downtime, and its exact deployment identities."
+    },
+    {
       "id": "server-is-operational-authority",
       "kind": "rule",
       "sourceDecision": "ADR-0001",
       "statement": "Only accepted, signed OverlayKit server evidence may establish Show bindings, catalogs, revisions, command outcomes, and production state."
+    },
+    {
+      "id": "surface-thread-replacement-claim-is-exactly-bounded",
+      "kind": "rule",
+      "sourceDecision": "ADR-0006",
+      "statement": "The accepted SurfaceThread replacement claim applies only to the exact identities, new USB epoch, complete negative control, single revalidated signal, unchanged container and PID 1, current-epoch descriptor, and ordered serial-specific markers proven by canonical H-042 evidence."
     },
     {
       "id": "transition-requires-evidence",
