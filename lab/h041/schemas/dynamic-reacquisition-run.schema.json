@@ -1,0 +1,1078 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h041-dynamic-reacquisition-run/v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "runId",
+    "startedAt",
+    "completedAt",
+    "outcome",
+    "collector",
+    "inputs",
+    "host",
+    "device",
+    "companion",
+    "windows",
+    "observations",
+    "predicates",
+    "invocationAudit",
+    "claimBoundary",
+    "cleanup",
+    "evidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h041-dynamic-reacquisition-run/v1"
+    },
+    "hypothesis": { "const": "H-041" },
+    "runId": {
+      "type": "string",
+      "pattern": "^h041-[0-9TZ-]+-[0-9a-f]{8}$"
+    },
+    "startedAt": { "$ref": "#/$defs/dateTime" },
+    "completedAt": { "$ref": "#/$defs/dateTime" },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "stage", "reason"],
+      "properties": {
+        "status": {
+          "enum": ["supported", "refuted", "inconclusive"]
+        },
+        "stage": {
+          "enum": [
+            "complete",
+            "companion-reacquisition",
+            "preconditions",
+            "contradictory-reacquisition"
+          ]
+        },
+        "reason": { "$ref": "#/$defs/nonEmptyString" }
+      },
+      "additionalProperties": false
+    },
+    "collector": {
+      "type": "object",
+      "required": ["node", "repository", "commit", "sourceSha256", "sourceStable", "governance"],
+      "properties": {
+        "node": {
+          "type": "string",
+          "pattern": "^v22\\.(?:2[0-9]|[3-9][0-9])\\.[0-9]+$"
+        },
+        "repository": { "$ref": "#/$defs/nonEmptyString" },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "sourceSha256": {
+          "type": "object",
+          "minProperties": 12,
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^(?:\\.overlaykit/governance/changes/CHG-0012\\.json|lab/.+)$"
+          },
+          "additionalProperties": { "$ref": "#/$defs/sha256" }
+        },
+        "sourceStable": { "const": true },
+        "governance": {
+          "type": "object",
+          "required": [
+            "manifestSnapshotPath",
+            "manifestFileSha256",
+            "manifestContentHash",
+            "changeSha256",
+            "verifyReceiptPath",
+            "verifyReceiptSha256",
+            "planHash"
+          ],
+          "properties": {
+            "manifestSnapshotPath": {
+              "const": "governance-manifest.json"
+            },
+            "manifestFileSha256": { "$ref": "#/$defs/sha256" },
+            "manifestContentHash": { "$ref": "#/$defs/sha256" },
+            "changeSha256": { "$ref": "#/$defs/sha256" },
+            "verifyReceiptPath": {
+              "const": "governance-verify.txt"
+            },
+            "verifyReceiptSha256": { "$ref": "#/$defs/sha256" },
+            "planHash": { "$ref": "#/$defs/sha256" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "object",
+      "required": ["h037", "h039", "h040"],
+      "properties": {
+        "h037": {
+          "$ref": "#/$defs/predecessorWithValidation"
+        },
+        "h039": {
+          "$ref": "#/$defs/predecessorWithVerification"
+        },
+        "h040": {
+          "$ref": "#/$defs/predecessorWithVerification"
+        }
+      },
+      "additionalProperties": false
+    },
+    "host": {
+      "type": "object",
+      "required": [
+        "observedAt",
+        "osId",
+        "osVersion",
+        "kernel",
+        "architecture",
+        "machine",
+        "principal",
+        "graphicalSession",
+        "docker"
+      ],
+      "properties": {
+        "observedAt": { "$ref": "#/$defs/dateTime" },
+        "osId": { "const": "fedora" },
+        "osVersion": { "const": "43" },
+        "kernel": { "$ref": "#/$defs/nonEmptyString" },
+        "architecture": { "const": "x64" },
+        "machine": { "const": "x86_64" },
+        "principal": {
+          "type": "object",
+          "minProperties": 5
+        },
+        "graphicalSession": {
+          "type": "object",
+          "minProperties": 6
+        },
+        "docker": {
+          "type": "object",
+          "required": ["version", "info"],
+          "properties": {
+            "version": {
+              "type": "object",
+              "required": ["Client", "Server"]
+            },
+            "info": {
+              "type": "object",
+              "required": ["ServerVersion"]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "device": {
+      "type": "object",
+      "required": [
+        "vendorId",
+        "productId",
+        "model",
+        "serial",
+        "initialPath",
+        "returnedPath",
+        "initialRdevHex",
+        "returnedRdevHex",
+        "transition",
+        "initialInventory",
+        "returnedInventory"
+      ],
+      "properties": {
+        "vendorId": { "const": "0fd9" },
+        "productId": { "const": "0080" },
+        "model": { "$ref": "#/$defs/nonEmptyString" },
+        "serial": { "$ref": "#/$defs/nonEmptyString" },
+        "initialPath": {
+          "type": "string",
+          "pattern": "^/dev/hidraw[0-9]+$"
+        },
+        "returnedPath": {
+          "type": "string",
+          "pattern": "^/dev/hidraw[0-9]+$"
+        },
+        "initialRdevHex": { "$ref": "#/$defs/rdevHex" },
+        "returnedRdevHex": { "$ref": "#/$defs/rdevHex" },
+        "transition": {
+          "enum": [
+            "same-path-same-rdev",
+            "same-path-changed-rdev",
+            "changed-path-same-rdev",
+            "changed-path-changed-rdev"
+          ]
+        },
+        "initialInventory": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "object", "minProperties": 8 }
+        },
+        "returnedInventory": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "object", "minProperties": 8 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "companion": {
+      "type": "object",
+      "required": [
+        "name",
+        "containerId",
+        "imageReference",
+        "imageId",
+        "repoDigests",
+        "version",
+        "revision",
+        "dynamicRoot",
+        "dynamicPath",
+        "compatibilityPath",
+        "deviceCgroupRule",
+        "deviceGid",
+        "staticDevices",
+        "initialLifecycle",
+        "absentLifecycle",
+        "finalLifecycle",
+        "workerLifecycle"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^h041-companion-[0-9a-f]{12}$"
+        },
+        "containerId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "imageReference": {
+          "const": "ghcr.io/bitfocus/companion/companion:v4.3.3@sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+        },
+        "imageId": {
+          "const": "sha256:e7d24e3b0e32b0edb799f262493536cb1a47d307af4e6527551427e09266bf10"
+        },
+        "repoDigests": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/nonEmptyString" }
+        },
+        "version": { "const": "v4.3.3" },
+        "revision": {
+          "const": "06a7406709d6a858039333a8988047296ef3aa4a"
+        },
+        "dynamicRoot": { "const": "/host-dev" },
+        "dynamicPath": {
+          "type": "string",
+          "pattern": "^/host-dev/hidraw[0-9]+$"
+        },
+        "compatibilityPath": {
+          "type": "string",
+          "pattern": "^/dev/hidraw[0-9]+$"
+        },
+        "deviceCgroupRule": {
+          "type": "string",
+          "pattern": "^c [1-9][0-9]*:[0-9]+ rw$"
+        },
+        "deviceGid": { "const": 1002 },
+        "staticDevices": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "initialLifecycle": { "$ref": "#/$defs/lifecycle" },
+        "absentLifecycle": { "$ref": "#/$defs/lifecycle" },
+        "finalLifecycle": { "$ref": "#/$defs/lifecycle" },
+        "workerLifecycle": {
+          "type": "object",
+          "required": ["initial", "absent", "final"],
+          "properties": {
+            "initial": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/worker" }
+            },
+            "absent": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/worker" }
+            },
+            "final": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/worker" }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "windows": {
+      "type": "object",
+      "required": ["disconnect", "reconnect", "reacquisition"],
+      "properties": {
+        "disconnect": { "$ref": "#/$defs/humanWindow" },
+        "reconnect": { "$ref": "#/$defs/humanWindow" },
+        "reacquisition": {
+          "type": "object",
+          "required": [
+            "startedAt",
+            "startedMonotonicNs",
+            "completedAt",
+            "completedMonotonicNs",
+            "timeoutSeconds",
+            "deadlineExpired"
+          ],
+          "properties": {
+            "startedAt": { "$ref": "#/$defs/dateTime" },
+            "startedMonotonicNs": { "$ref": "#/$defs/monotonicNs" },
+            "completedAt": { "$ref": "#/$defs/dateTime" },
+            "completedMonotonicNs": { "$ref": "#/$defs/monotonicNs" },
+            "timeoutSeconds": {
+              "type": "integer",
+              "const": 30
+            },
+            "deadlineExpired": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "observations": {
+      "type": "object",
+      "required": ["preflight", "initial", "absent", "returned", "reacquisition", "artifacts"],
+      "properties": {
+        "preflight": {
+          "type": "object",
+          "required": ["host"],
+          "properties": {
+            "host": { "$ref": "#/$defs/hostSnapshot" }
+          },
+          "additionalProperties": false
+        },
+        "initial": {
+          "$ref": "#/$defs/presentStage"
+        },
+        "absent": {
+          "$ref": "#/$defs/absentStage"
+        },
+        "returned": {
+          "$ref": "#/$defs/presentStage"
+        },
+        "reacquisition": {
+          "type": "object",
+          "required": [
+            "currentDescriptorObserved",
+            "postReturnLogMarkersObserved",
+            "initialMarkers",
+            "absentMarkers",
+            "finalMarkers"
+          ],
+          "properties": {
+            "currentDescriptorObserved": { "type": "boolean" },
+            "postReturnLogMarkersObserved": { "type": "boolean" },
+            "initialMarkers": { "$ref": "#/$defs/markers" },
+            "absentMarkers": { "$ref": "#/$defs/markers" },
+            "finalMarkers": { "$ref": "#/$defs/markers" }
+          },
+          "additionalProperties": false
+        },
+        "artifacts": {
+          "type": "object",
+          "required": ["hostPoll", "runtimePoll", "initialLogs", "absentLogs", "finalLogs"],
+          "properties": {
+            "hostPoll": { "$ref": "#/$defs/artifactReceipt" },
+            "runtimePoll": { "$ref": "#/$defs/artifactReceipt" },
+            "initialLogs": { "$ref": "#/$defs/artifactReceipt" },
+            "absentLogs": { "$ref": "#/$defs/artifactReceipt" },
+            "finalLogs": { "$ref": "#/$defs/artifactReceipt" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "predicates": { "$ref": "#/$defs/predicates" },
+    "invocationAudit": {
+      "type": "object",
+      "required": [
+        "mode",
+        "runnerDeviceOpenCount",
+        "runnerDeviceReadCount",
+        "runnerDeviceWriteCount",
+        "virtualInvocationCount",
+        "restartRescanReconfigureCount",
+        "productionConfigurationMutationCount",
+        "interventionFree",
+        "entries",
+        "forbidden",
+        "passed"
+      ],
+      "properties": {
+        "mode": {
+          "const": "runner-metadata-observation-with-bounded-companion-target-io"
+        },
+        "runnerDeviceOpenCount": { "const": 0 },
+        "runnerDeviceReadCount": { "const": 0 },
+        "runnerDeviceWriteCount": { "const": 0 },
+        "virtualInvocationCount": { "const": 0 },
+        "restartRescanReconfigureCount": { "const": 0 },
+        "productionConfigurationMutationCount": { "const": 0 },
+        "interventionFree": { "const": true },
+        "entries": {
+          "type": "array",
+          "minItems": 12,
+          "items": {
+            "type": "object",
+            "required": ["at", "monotonicNs", "kind", "phase"],
+            "properties": {
+              "at": { "$ref": "#/$defs/dateTime" },
+              "monotonicNs": { "$ref": "#/$defs/monotonicNs" },
+              "kind": {
+                "enum": [
+                  "docker-run",
+                  "docker-inspect",
+                  "docker-observe",
+                  "docker-logs",
+                  "physical-disconnect-window",
+                  "physical-reconnect-window",
+                  "docker-stop"
+                ]
+              },
+              "phase": { "$ref": "#/$defs/nonEmptyString" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "forbidden": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "passed": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["proves", "excludes"],
+      "properties": {
+        "proves": { "$ref": "#/$defs/nonEmptyStrings" },
+        "excludes": { "$ref": "#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "cleanup": {
+      "type": "object",
+      "required": [
+        "startedAt",
+        "completedAt",
+        "containerId",
+        "containerRemoved",
+        "host",
+        "owners",
+        "hostConfigurationChanged",
+        "productionConfigurationChanged",
+        "successful",
+        "error"
+      ],
+      "properties": {
+        "startedAt": { "$ref": "#/$defs/dateTime" },
+        "completedAt": { "$ref": "#/$defs/dateTime" },
+        "containerId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "containerRemoved": { "const": true },
+        "host": { "$ref": "#/$defs/presentHost" },
+        "owners": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["devicePath", "owner"],
+            "properties": {
+              "devicePath": {
+                "type": "string",
+                "pattern": "^/dev/hidraw[0-9]+$"
+              },
+              "owner": {
+                "type": "object",
+                "minProperties": 5
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "hostConfigurationChanged": { "const": false },
+        "productionConfigurationChanged": { "const": false },
+        "successful": { "const": true },
+        "error": { "type": "null" }
+      },
+      "additionalProperties": false
+    },
+    "evidenceSha256": { "$ref": "#/$defs/sha256" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": { "status": { "const": "supported" } },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "properties": {
+          "outcome": {
+            "properties": { "stage": { "const": "complete" } }
+          },
+          "predicates": {
+            "properties": {
+              "complete": { "const": true },
+              "interventionFree": { "const": true },
+              "permissionBoundaryExact": { "const": true },
+              "hostEpochChanged": { "const": true },
+              "dynamicViewTracksHost": { "const": true },
+              "topLevelLifecycleUnchanged": { "const": true },
+              "baselineAcquired": { "const": true },
+              "descriptorAbsent": { "const": true },
+              "postReturnDescriptorObserved": { "const": true },
+              "postReturnLogMarkersObserved": { "const": true },
+              "deadlineBoundaryConsistent": { "const": true }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": { "status": { "const": "refuted" } },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "properties": {
+          "outcome": {
+            "properties": {
+              "stage": { "const": "companion-reacquisition" }
+            }
+          },
+          "predicates": {
+            "properties": {
+              "complete": { "const": true },
+              "interventionFree": { "const": true },
+              "permissionBoundaryExact": { "const": true },
+              "hostEpochChanged": { "const": true },
+              "dynamicViewTracksHost": { "const": true },
+              "topLevelLifecycleUnchanged": { "const": true },
+              "baselineAcquired": { "const": true },
+              "descriptorAbsent": { "const": true },
+              "postReturnDescriptorObserved": { "const": false },
+              "postReturnLogMarkersObserved": { "const": false },
+              "deadlineBoundaryConsistent": { "const": true }
+            }
+          },
+          "windows": {
+            "properties": {
+              "reacquisition": {
+                "properties": {
+                  "deadlineExpired": { "const": true }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": { "status": { "const": "inconclusive" } },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "properties": {
+          "outcome": {
+            "properties": {
+              "stage": {
+                "enum": ["preconditions", "contradictory-reacquisition"]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "monotonicNs": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/nonEmptyString" }
+    },
+    "rdevHex": {
+      "type": "string",
+      "pattern": "^[0-9a-f]+:[0-9a-f]+$"
+    },
+    "artifactReceipt": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^[^/].+$"
+        },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "predecessorWithValidation": {
+      "type": "object",
+      "required": ["path", "fileSha256", "evidenceSha256", "validationReceipt"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^artifacts/h037/.+\\.json$"
+        },
+        "fileSha256": { "$ref": "#/$defs/sha256" },
+        "evidenceSha256": { "$ref": "#/$defs/sha256" },
+        "validationReceipt": { "$ref": "#/$defs/artifactReceipt" }
+      },
+      "additionalProperties": false
+    },
+    "predecessorWithVerification": {
+      "type": "object",
+      "required": ["path", "fileSha256", "evidenceSha256", "verificationReceipt"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^artifacts/h0(?:39|40)/.+\\.json$"
+        },
+        "fileSha256": { "$ref": "#/$defs/sha256" },
+        "evidenceSha256": { "$ref": "#/$defs/sha256" },
+        "verificationReceipt": { "$ref": "#/$defs/artifactReceipt" }
+      },
+      "additionalProperties": false
+    },
+    "statValue": {
+      "type": "object",
+      "required": ["stDev", "inode", "ctimeNs", "rdevHex", "major", "minor", "isCharacterDevice"],
+      "properties": {
+        "stDev": { "type": "string", "pattern": "^[0-9]+$" },
+        "inode": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+        "ctimeNs": { "type": "string", "pattern": "^[0-9]+$" },
+        "rdevHex": { "$ref": "#/$defs/rdevHex" },
+        "major": { "type": "integer", "minimum": 0 },
+        "minor": { "type": "integer", "minimum": 0 },
+        "isCharacterDevice": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "statReceipt": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "path", "value"],
+          "properties": {
+            "kind": { "const": "value" },
+            "path": { "$ref": "#/$defs/nonEmptyString" },
+            "value": { "$ref": "#/$defs/statValue" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["kind", "path", "code"],
+          "properties": {
+            "kind": { "const": "missing" },
+            "path": { "$ref": "#/$defs/nonEmptyString" },
+            "code": { "const": "ENOENT" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": [
+        "containerId",
+        "imageId",
+        "startedAt",
+        "restartCount",
+        "hostPid",
+        "pid1StartTicks",
+        "pidNamespace",
+        "mountNamespace",
+        "cgroup",
+        "hostCgroup",
+        "cgroupNamespaceMode"
+      ],
+      "properties": {
+        "containerId": { "$ref": "#/$defs/nonEmptyString" },
+        "imageId": { "$ref": "#/$defs/nonEmptyString" },
+        "startedAt": { "$ref": "#/$defs/dateTime" },
+        "restartCount": { "type": "integer", "minimum": 0 },
+        "hostPid": { "type": "integer", "minimum": 1 },
+        "pid1StartTicks": { "type": "integer", "minimum": 1 },
+        "pidNamespace": { "$ref": "#/$defs/nonEmptyString" },
+        "mountNamespace": { "$ref": "#/$defs/nonEmptyString" },
+        "cgroup": { "$ref": "#/$defs/nonEmptyString" },
+        "hostCgroup": { "$ref": "#/$defs/nonEmptyString" },
+        "cgroupNamespaceMode": { "const": "private" }
+      },
+      "additionalProperties": false
+    },
+    "descriptor": {
+      "type": "object",
+      "required": ["descriptor", "target", "stat", "fdinfoSha256"],
+      "properties": {
+        "descriptor": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "target": { "$ref": "#/$defs/nonEmptyString" },
+        "stat": { "$ref": "#/$defs/statValue" },
+        "fdinfoSha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "worker": {
+      "type": "object",
+      "required": [
+        "pid",
+        "startTicks",
+        "ppid",
+        "parentStartTicks",
+        "uid",
+        "gid",
+        "groups",
+        "command",
+        "cmdline",
+        "cgroup",
+        "pidNamespace",
+        "mountNamespace",
+        "fileDescriptors"
+      ],
+      "properties": {
+        "pid": { "type": "integer", "minimum": 1 },
+        "startTicks": { "type": "integer", "minimum": 1 },
+        "ppid": { "type": "integer", "minimum": 1 },
+        "parentStartTicks": { "type": "integer", "minimum": 1 },
+        "uid": { "type": "integer", "minimum": 0 },
+        "gid": { "type": "integer", "minimum": 0 },
+        "groups": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "integer", "minimum": 0 }
+        },
+        "command": { "$ref": "#/$defs/nonEmptyString" },
+        "cmdline": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/nonEmptyString" }
+        },
+        "cgroup": { "$ref": "#/$defs/nonEmptyString" },
+        "pidNamespace": { "$ref": "#/$defs/nonEmptyString" },
+        "mountNamespace": { "$ref": "#/$defs/nonEmptyString" },
+        "fileDescriptors": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/descriptor" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "markers": {
+      "type": "object",
+      "required": ["opening", "ready", "openFailed", "relevantLines"],
+      "properties": {
+        "opening": { "type": "integer", "minimum": 0 },
+        "ready": { "type": "integer", "minimum": 0 },
+        "openFailed": { "type": "integer", "minimum": 0 },
+        "relevantLines": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/nonEmptyString" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "runtime": {
+      "type": "object",
+      "required": [
+        "capturedAt",
+        "monotonicNs",
+        "phase",
+        "container",
+        "lifecycle",
+        "observer",
+        "markers"
+      ],
+      "properties": {
+        "capturedAt": { "$ref": "#/$defs/dateTime" },
+        "monotonicNs": { "$ref": "#/$defs/monotonicNs" },
+        "phase": {
+          "enum": ["baseline-poll", "absent-poll", "reacquisition-poll"]
+        },
+        "container": {
+          "type": "object",
+          "minProperties": 25
+        },
+        "lifecycle": { "$ref": "#/$defs/lifecycle" },
+        "observer": {
+          "type": "object",
+          "required": [
+            "schemaVersion",
+            "capturedAt",
+            "monotonicNs",
+            "metadataOnly",
+            "paths",
+            "target",
+            "pid1",
+            "processes",
+            "surfaceWorkers"
+          ],
+          "properties": {
+            "schemaVersion": {
+              "const": "overlaykit-h041-container-observation/v1"
+            },
+            "capturedAt": { "$ref": "#/$defs/dateTime" },
+            "monotonicNs": { "$ref": "#/$defs/monotonicNs" },
+            "metadataOnly": { "const": true },
+            "paths": {
+              "type": "object",
+              "required": ["dynamic", "compat"],
+              "properties": {
+                "dynamic": {
+                  "type": "object",
+                  "required": ["path", "lstat", "stat"],
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "pattern": "^/host-dev/hidraw[0-9]+$"
+                    },
+                    "lstat": { "$ref": "#/$defs/statReceipt" },
+                    "stat": { "$ref": "#/$defs/statReceipt" }
+                  },
+                  "additionalProperties": false
+                },
+                "compat": {
+                  "type": "object",
+                  "required": ["path", "linkTarget", "lstat", "stat"],
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "pattern": "^/dev/hidraw[0-9]+$"
+                    },
+                    "linkTarget": {
+                      "type": "string",
+                      "pattern": "^/host-dev/hidraw[0-9]+$"
+                    },
+                    "lstat": { "$ref": "#/$defs/statReceipt" },
+                    "stat": { "$ref": "#/$defs/statReceipt" }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            "target": {
+              "type": "object",
+              "required": ["major", "minor"],
+              "properties": {
+                "major": { "type": "integer", "minimum": 1 },
+                "minor": { "type": "integer", "minimum": 0 }
+              },
+              "additionalProperties": false
+            },
+            "pid1": {
+              "type": "object",
+              "minProperties": 12
+            },
+            "processes": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "object", "minProperties": 10 }
+            },
+            "surfaceWorkers": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/worker" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "markers": { "$ref": "#/$defs/markers" }
+      },
+      "additionalProperties": false
+    },
+    "hostSnapshot": {
+      "type": "object",
+      "required": [
+        "capturedAt",
+        "monotonicNs",
+        "expectedSerial",
+        "scope",
+        "lsusb",
+        "usb",
+        "hidraw",
+        "priorPath",
+        "errors",
+        "state"
+      ],
+      "properties": {
+        "capturedAt": { "$ref": "#/$defs/dateTime" },
+        "monotonicNs": { "$ref": "#/$defs/monotonicNs" },
+        "expectedSerial": { "$ref": "#/$defs/nonEmptyString" },
+        "scope": {
+          "type": "object",
+          "required": ["mountNamespace", "bootId"]
+        },
+        "lsusb": {
+          "type": "object",
+          "required": ["observed", "exitCode", "errorCode", "matches", "stderr"]
+        },
+        "usb": { "type": "array" },
+        "hidraw": { "type": "array" },
+        "priorPath": { "type": "object" },
+        "errors": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "state": {
+          "enum": ["present", "absent"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "presentHost": {
+      "allOf": [
+        { "$ref": "#/$defs/hostSnapshot" },
+        {
+          "properties": {
+            "state": { "const": "present" },
+            "usb": { "minItems": 1 },
+            "hidraw": { "minItems": 1 }
+          }
+        }
+      ]
+    },
+    "absentHost": {
+      "allOf": [
+        { "$ref": "#/$defs/hostSnapshot" },
+        {
+          "properties": {
+            "state": { "const": "absent" },
+            "usb": { "maxItems": 0 },
+            "hidraw": { "maxItems": 0 }
+          }
+        }
+      ]
+    },
+    "presentStage": {
+      "type": "object",
+      "required": ["host", "runtime"],
+      "properties": {
+        "host": { "$ref": "#/$defs/presentHost" },
+        "runtime": { "$ref": "#/$defs/runtime" }
+      },
+      "additionalProperties": false
+    },
+    "absentStage": {
+      "type": "object",
+      "required": ["host", "runtime"],
+      "properties": {
+        "host": { "$ref": "#/$defs/absentHost" },
+        "runtime": { "$ref": "#/$defs/runtime" }
+      },
+      "additionalProperties": false
+    },
+    "humanWindow": {
+      "type": "object",
+      "required": [
+        "stage",
+        "challenge",
+        "timeoutSeconds",
+        "instruction",
+        "openedAt",
+        "openedMonotonicNs",
+        "closedAt",
+        "closedMonotonicNs"
+      ],
+      "properties": {
+        "stage": {
+          "enum": ["disconnect", "reconnect"]
+        },
+        "challenge": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{12}$"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 300
+        },
+        "instruction": { "$ref": "#/$defs/nonEmptyString" },
+        "openedAt": { "$ref": "#/$defs/dateTime" },
+        "openedMonotonicNs": { "$ref": "#/$defs/monotonicNs" },
+        "closedAt": { "$ref": "#/$defs/dateTime" },
+        "closedMonotonicNs": { "$ref": "#/$defs/monotonicNs" }
+      },
+      "additionalProperties": false
+    },
+    "predicates": {
+      "type": "object",
+      "required": [
+        "complete",
+        "interventionFree",
+        "permissionBoundaryExact",
+        "hostEpochChanged",
+        "dynamicViewTracksHost",
+        "topLevelLifecycleUnchanged",
+        "baselineAcquired",
+        "descriptorAbsent",
+        "postReturnDescriptorObserved",
+        "postReturnLogMarkersObserved",
+        "deadlineBoundaryConsistent"
+      ],
+      "properties": {
+        "complete": { "type": "boolean" },
+        "interventionFree": { "type": "boolean" },
+        "permissionBoundaryExact": { "type": "boolean" },
+        "hostEpochChanged": { "type": "boolean" },
+        "dynamicViewTracksHost": { "type": "boolean" },
+        "topLevelLifecycleUnchanged": { "type": "boolean" },
+        "baselineAcquired": { "type": "boolean" },
+        "descriptorAbsent": { "type": "boolean" },
+        "postReturnDescriptorObserved": { "type": "boolean" },
+        "postReturnLogMarkersObserved": { "type": "boolean" },
+        "deadlineBoundaryConsistent": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

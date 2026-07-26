@@ -7,6 +7,7 @@ import { compileGovernance } from '../src/compiler.js';
 import {
   assertGitHubIdentityVerified,
   collectGitHubEvidence,
+  githubRulesetAppliesToRef,
   normalizeAttestation,
   verifyGitHubEvidence,
   type GitHubCommandRunner,
@@ -235,6 +236,36 @@ function attestationResult(subjects: unknown[]): unknown {
 }
 
 describe('GitHub root of trust observer', () => {
+  it('matches protected refs with the exact constrained ruleset pattern semantics', () => {
+    const base = activeRulesets()[0]!;
+    const applies = (include: string[], exclude: string[] = [], ref = 'refs/heads/main'): boolean =>
+      githubRulesetAppliesToRef(
+        {
+          ...base,
+          conditions: { ref_name: { include, exclude } },
+        },
+        ref
+      );
+
+    expect(applies(['refs/heads/main'])).toBe(true);
+    expect(applies(['main'])).toBe(true);
+    expect(applies(['refs/heads/*'])).toBe(true);
+    expect(applies(['~ALL'])).toBe(true);
+    expect(applies(['~DEFAULT_BRANCH'])).toBe(true);
+    expect(applies(['refs/heads/*'], ['refs/heads/main'])).toBe(false);
+    expect(applies(['refs/heads/release/*'])).toBe(false);
+
+    expect(applies(['refs/heads/{main,release}'])).toBe(false);
+    expect(applies(['#refs/heads/main'])).toBe(false);
+    expect(applies(['refs/heads/@(main)'])).toBe(false);
+    expect(applies(['!refs/heads/release'])).toBe(false);
+
+    expect(githubRulesetAppliesToRef({ ...base, enforcement: 'disabled' }, 'refs/heads/main')).toBe(
+      false
+    );
+    expect(githubRulesetAppliesToRef({ ...base, target: 'tag' }, 'refs/heads/main')).toBe(false);
+  });
+
   it('selects exact governance evidence from a multi-subject provenance statement', () => {
     const invocation = `https://github.com/${anchor.repository}/actions/runs/42/attempts/1`;
     const attestation = normalizeAttestation(

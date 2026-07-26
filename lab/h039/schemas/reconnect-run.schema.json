@@ -1,0 +1,880 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://overlaykit.dev/schemas/h039-reconnect-run/v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "runId",
+    "startedAt",
+    "completedAt",
+    "outcome",
+    "collector",
+    "inputs",
+    "host",
+    "runtimeIdentities",
+    "device",
+    "configuration",
+    "lifecycle",
+    "observations",
+    "windows",
+    "baseline",
+    "quietAudit",
+    "postReconnect",
+    "invocationAudit",
+    "provisioning",
+    "claimBoundary",
+    "cleanup",
+    "evidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "overlaykit-h039-reconnect-run/v1" },
+    "hypothesis": { "const": "H-039" },
+    "runId": { "type": "string", "pattern": "^h039-" },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "completedAt": { "type": "string", "format": "date-time" },
+    "outcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["status", "stage", "reason"],
+          "properties": {
+            "status": { "const": "supported" },
+            "stage": { "const": "complete" },
+            "reason": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["status", "stage", "reason"],
+          "properties": {
+            "status": { "const": "refuted" },
+            "stage": {
+              "enum": [
+                "top-level-lifecycle",
+                "configuration-continuity",
+                "companion-reacquisition",
+                "post-reconnect-physical-input"
+              ]
+            },
+            "reason": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "collector": {
+      "type": "object",
+      "required": ["node", "commit", "sourceSha256", "sourceStable", "governance"],
+      "properties": {
+        "node": { "type": "string", "pattern": "^v22\\.(?:2[0-9]|[3-9][0-9])\\.[0-9]+$" },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "sourceSha256": {
+          "type": "object",
+          "minProperties": 9,
+          "additionalProperties": { "$ref": "#/$defs/sha256" }
+        },
+        "sourceStable": { "const": true },
+        "governance": {
+          "type": "object",
+          "required": [
+            "manifestSnapshotPath",
+            "manifestFileSha256",
+            "manifestContentHash",
+            "changeSha256",
+            "verifyReceiptPath",
+            "verifyReceiptSha256",
+            "planHash"
+          ],
+          "properties": {
+            "manifestSnapshotPath": { "const": "governance-manifest.json" },
+            "manifestFileSha256": { "$ref": "#/$defs/sha256" },
+            "manifestContentHash": { "$ref": "#/$defs/sha256" },
+            "changeSha256": { "$ref": "#/$defs/sha256" },
+            "verifyReceiptPath": { "const": "governance-verify.txt" },
+            "verifyReceiptSha256": { "$ref": "#/$defs/sha256" },
+            "planHash": { "$ref": "#/$defs/sha256" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "object",
+      "required": [
+        "h038Path",
+        "h038FileSha256",
+        "h038EvidenceSha256",
+        "h038HistoricalManifestContentHash",
+        "lockedInputs"
+      ],
+      "properties": {
+        "h038Path": { "type": "string", "minLength": 1 },
+        "h038FileSha256": { "$ref": "#/$defs/sha256" },
+        "h038EvidenceSha256": { "$ref": "#/$defs/sha256" },
+        "h038HistoricalManifestContentHash": { "$ref": "#/$defs/sha256" },
+        "lockedInputs": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "host": {
+      "type": "object",
+      "required": [
+        "observedAt",
+        "osId",
+        "osVersion",
+        "kernel",
+        "architecture",
+        "machine",
+        "principal",
+        "graphicalSession"
+      ],
+      "properties": {
+        "observedAt": { "type": "string", "format": "date-time" },
+        "osId": { "const": "fedora" },
+        "osVersion": { "const": "43" },
+        "kernel": { "type": "string", "minLength": 1 },
+        "architecture": { "const": "x64" },
+        "machine": { "const": "x86_64" },
+        "principal": {
+          "type": "object",
+          "required": ["user", "uid", "primaryGroup", "gid", "groups"],
+          "properties": {
+            "user": { "type": "string", "minLength": 1 },
+            "uid": { "type": "integer", "minimum": 0 },
+            "primaryGroup": { "type": "string", "minLength": 1 },
+            "gid": { "type": "integer", "minimum": 0 },
+            "groups": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["gid", "name"],
+                "properties": {
+                  "gid": { "type": "integer", "minimum": 0 },
+                  "name": { "type": "string", "minLength": 1 }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "graphicalSession": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "runtimeIdentities": {
+      "type": "object",
+      "required": ["companion", "overlaykit"],
+      "properties": {
+        "companion": {
+          "type": "object",
+          "required": ["values", "receipt", "moduleArchive"],
+          "properties": {
+            "values": { "type": "object" },
+            "receipt": { "$ref": "#/$defs/artifactReceipt" },
+            "moduleArchive": { "$ref": "#/$defs/artifactReceipt" }
+          },
+          "additionalProperties": false
+        },
+        "overlaykit": {
+          "type": "object",
+          "required": ["values", "receipt"],
+          "properties": {
+            "values": { "type": "object" },
+            "receipt": { "$ref": "#/$defs/artifactReceipt" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "device": {
+      "type": "object",
+      "required": ["vendorId", "productId", "model", "serial", "initialGid", "transition"],
+      "properties": {
+        "vendorId": { "const": "0fd9" },
+        "productId": { "const": "0080" },
+        "model": { "type": "string", "minLength": 1 },
+        "serial": { "type": "string", "minLength": 1 },
+        "initialGid": { "type": "integer", "minimum": 0 },
+        "transition": {
+          "enum": [
+            "same-path-same-rdev",
+            "same-path-changed-rdev",
+            "changed-path-same-rdev",
+            "changed-path-changed-rdev"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "configuration": {
+      "type": "object",
+      "required": ["freeze", "afterReconnect", "final"],
+      "properties": {
+        "freeze": {
+          "type": "object",
+          "required": [
+            "configuration",
+            "configurationSha256",
+            "auditEntryCount",
+            "frozenAt",
+            "frozenMonotonicNs"
+          ],
+          "properties": {
+            "configuration": { "$ref": "#/$defs/completeConfigurationReceipt" },
+            "configurationSha256": { "$ref": "#/$defs/sha256" },
+            "auditEntryCount": { "type": "integer", "minimum": 1 },
+            "frozenAt": { "type": "string", "format": "date-time" },
+            "frozenMonotonicNs": { "$ref": "#/$defs/monotonicNs" }
+          },
+          "additionalProperties": false
+        },
+        "afterReconnect": { "$ref": "#/$defs/configurationObservation" },
+        "final": { "$ref": "#/$defs/configurationObservation" }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": [
+        "before",
+        "afterReconnect",
+        "final",
+        "unchangedAfterReconnect",
+        "unchangedFinal",
+        "automaticSurfaceLifecycle"
+      ],
+      "properties": {
+        "before": { "type": "object" },
+        "afterReconnect": { "type": "object" },
+        "final": { "type": "object" },
+        "unchangedAfterReconnect": { "type": "boolean" },
+        "unchangedFinal": { "type": "boolean" },
+        "automaticSurfaceLifecycle": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "observations": {
+      "type": "object",
+      "required": [
+        "initial",
+        "disconnected",
+        "reconnected",
+        "runtimeBefore",
+        "runtimeDisconnected",
+        "runtimeReconnected",
+        "reacquisition",
+        "runtimeFinal",
+        "hostPollArtifact"
+      ],
+      "properties": {
+        "initial": { "$ref": "#/$defs/presentHostSnapshot" },
+        "disconnected": { "$ref": "#/$defs/absentHostSnapshot" },
+        "reconnected": { "$ref": "#/$defs/presentHostSnapshot" },
+        "runtimeBefore": { "$ref": "#/$defs/runtimeSnapshot" },
+        "runtimeDisconnected": { "$ref": "#/$defs/runtimeSnapshot" },
+        "runtimeReconnected": { "$ref": "#/$defs/runtimeSnapshot" },
+        "reacquisition": {
+          "type": "object",
+          "required": [
+            "startedAt",
+            "startedMonotonicNs",
+            "completedAt",
+            "completedMonotonicNs",
+            "timeoutSeconds",
+            "currentDeviceDescriptorObserved",
+            "timeout",
+            "runtime"
+          ],
+          "properties": {
+            "startedAt": { "type": "string", "format": "date-time" },
+            "startedMonotonicNs": { "$ref": "#/$defs/monotonicNs" },
+            "completedAt": { "type": "string", "format": "date-time" },
+            "completedMonotonicNs": { "$ref": "#/$defs/monotonicNs" },
+            "timeoutSeconds": { "type": "integer", "minimum": 5, "maximum": 120 },
+            "currentDeviceDescriptorObserved": { "type": "boolean" },
+            "timeout": { "type": ["string", "null"] },
+            "runtime": { "$ref": "#/$defs/runtimeSnapshot" }
+          },
+          "additionalProperties": false
+        },
+        "runtimeFinal": { "$ref": "#/$defs/runtimeSnapshot" },
+        "hostPollArtifact": { "$ref": "#/$defs/artifactReceipt" }
+      },
+      "additionalProperties": false
+    },
+    "windows": {
+      "type": "object",
+      "required": ["baseline", "disconnect", "reconnect", "postReconnect"],
+      "properties": {
+        "baseline": { "$ref": "#/$defs/window" },
+        "disconnect": { "$ref": "#/$defs/window" },
+        "reconnect": { "$ref": "#/$defs/window" },
+        "postReconnect": {
+          "oneOf": [{ "$ref": "#/$defs/window" }, { "type": "null" }]
+        }
+      },
+      "additionalProperties": false
+    },
+    "baseline": {
+      "type": "object",
+      "required": ["waitResults", "causalReceipt", "pressCycle", "passed"],
+      "properties": {
+        "waitResults": { "$ref": "#/$defs/successfulWaitResults" },
+        "causalReceipt": { "$ref": "#/$defs/causalReceipt" },
+        "pressCycle": { "$ref": "#/$defs/pressCycle" },
+        "passed": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "quietAudit": {
+      "type": "object",
+      "required": [
+        "openedAt",
+        "openedMonotonicNs",
+        "closedAt",
+        "closedMonotonicNs",
+        "afterEventSequence",
+        "throughEventSequence",
+        "quietSecondsAfterReconnect",
+        "commands",
+        "commandCount",
+        "passed"
+      ],
+      "properties": {
+        "openedAt": { "type": "string", "format": "date-time" },
+        "openedMonotonicNs": { "$ref": "#/$defs/monotonicNs" },
+        "closedAt": { "type": "string", "format": "date-time" },
+        "closedMonotonicNs": { "$ref": "#/$defs/monotonicNs" },
+        "afterEventSequence": { "type": "integer", "minimum": 0 },
+        "throughEventSequence": { "type": "integer", "minimum": 0 },
+        "quietSecondsAfterReconnect": { "type": "integer", "minimum": 2, "maximum": 15 },
+        "commands": { "type": "array", "maxItems": 0 },
+        "commandCount": { "const": 0 },
+        "passed": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "postReconnect": {
+      "type": "object",
+      "required": ["waitResults", "causalReceipt", "pressCycle", "passed"],
+      "properties": {
+        "waitResults": {
+          "oneOf": [{ "$ref": "#/$defs/waitResults" }, { "type": "null" }]
+        },
+        "causalReceipt": {
+          "oneOf": [{ "$ref": "#/$defs/causalReceipt" }, { "type": "null" }]
+        },
+        "pressCycle": {
+          "oneOf": [{ "$ref": "#/$defs/pressCycle" }, { "type": "null" }]
+        },
+        "passed": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "invocationAudit": {
+      "type": "object",
+      "required": ["entries", "forbidden", "virtualInvocationCount", "passed"],
+      "properties": {
+        "entries": { "type": "array" },
+        "forbidden": { "type": "array", "maxItems": 0 },
+        "virtualInvocationCount": { "const": 0 },
+        "passed": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "provisioning": { "type": "object" },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["proves", "excludes"],
+      "properties": {
+        "proves": { "$ref": "#/$defs/nonEmptyStrings" },
+        "excludes": { "$ref": "#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "cleanup": {
+      "type": "object",
+      "required": [
+        "startedAt",
+        "completedAt",
+        "composeRemoved",
+        "host",
+        "owners",
+        "successful",
+        "error"
+      ],
+      "properties": {
+        "startedAt": { "type": "string", "format": "date-time" },
+        "completedAt": { "type": "string", "format": "date-time" },
+        "composeRemoved": { "const": true },
+        "host": { "$ref": "#/$defs/presentHostSnapshot" },
+        "owners": { "type": "array", "minItems": 1 },
+        "successful": { "const": true },
+        "error": { "type": "null" }
+      },
+      "additionalProperties": false
+    },
+    "evidenceSha256": { "$ref": "#/$defs/sha256" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": { "status": { "const": "supported" } },
+            "required": ["status"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "lifecycle": {
+            "properties": {
+              "unchangedAfterReconnect": { "const": true },
+              "unchangedFinal": { "const": true }
+            }
+          },
+          "configuration": {
+            "properties": {
+              "afterReconnect": {
+                "properties": {
+                  "observed": { "const": true },
+                  "expectedConfigurationValid": { "const": true },
+                  "unchanged": { "const": true }
+                }
+              },
+              "final": {
+                "properties": {
+                  "observed": { "const": true },
+                  "expectedConfigurationValid": { "const": true },
+                  "unchanged": { "const": true }
+                }
+              }
+            }
+          },
+          "observations": {
+            "properties": {
+              "reacquisition": {
+                "properties": {
+                  "currentDeviceDescriptorObserved": { "const": true },
+                  "timeout": { "type": "null" }
+                }
+              },
+              "runtimeFinal": {
+                "properties": { "matchesCurrentDevice": { "const": true } }
+              }
+            }
+          },
+          "windows": {
+            "properties": { "postReconnect": { "$ref": "#/$defs/window" } }
+          },
+          "postReconnect": {
+            "properties": {
+              "waitResults": { "$ref": "#/$defs/successfulWaitResults" },
+              "causalReceipt": { "$ref": "#/$defs/causalReceipt" },
+              "pressCycle": { "$ref": "#/$defs/pressCycle" },
+              "passed": { "const": true }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": { "stage": { "const": "companion-reacquisition" } },
+            "required": ["stage"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observations": {
+            "properties": {
+              "reacquisition": {
+                "properties": {
+                  "currentDeviceDescriptorObserved": { "const": false },
+                  "timeout": { "type": "string", "minLength": 1 }
+                }
+              }
+            }
+          },
+          "postReconnect": {
+            "properties": {
+              "waitResults": { "type": "null" },
+              "causalReceipt": { "type": "null" },
+              "pressCycle": { "type": "null" },
+              "passed": { "const": false }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": { "stage": { "const": "post-reconnect-physical-input" } },
+            "required": ["stage"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observations": {
+            "properties": {
+              "reacquisition": {
+                "properties": {
+                  "currentDeviceDescriptorObserved": { "const": true },
+                  "timeout": { "type": "null" }
+                }
+              }
+            }
+          },
+          "windows": {
+            "properties": { "postReconnect": { "$ref": "#/$defs/window" } }
+          },
+          "postReconnect": {
+            "properties": {
+              "waitResults": {
+                "allOf": [
+                  { "$ref": "#/$defs/waitResults" },
+                  {
+                    "properties": {
+                      "causal": {
+                        "properties": {
+                          "status": { "const": "rejected" },
+                          "error": { "type": "string", "minLength": 1 }
+                        }
+                      },
+                      "satellite": {
+                        "properties": {
+                          "status": { "const": "fulfilled" },
+                          "error": { "type": "null" }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "causalReceipt": { "type": "null" },
+              "pressCycle": { "$ref": "#/$defs/pressCycle" },
+              "passed": { "const": false }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "monotonicNs": { "type": "string", "pattern": "^[0-9]+$" },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "artifactReceipt": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "configurationConnection": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "moduleType",
+        "moduleId",
+        "moduleVersionId",
+        "updatePolicy",
+        "enabled",
+        "sortOrder",
+        "collectionId",
+        "config",
+        "secretKeys",
+        "bearerSha256"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "moduleType": { "const": "connection" },
+        "moduleId": { "const": "overlaykit-server" },
+        "moduleVersionId": { "const": "dev" },
+        "updatePolicy": { "const": "stable" },
+        "enabled": { "const": true },
+        "sortOrder": { "type": "number" },
+        "collectionId": { "type": ["string", "null"] },
+        "config": {
+          "type": "object",
+          "required": ["endpoint", "allowInsecureLan", "trustBundle"],
+          "properties": {
+            "endpoint": { "const": "ws://172.30.38.10:8081/device" },
+            "allowInsecureLan": { "const": true },
+            "trustBundle": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": true
+        },
+        "secretKeys": {
+          "type": "array",
+          "prefixItems": [{ "const": "bearer" }],
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "bearerSha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "configurationReceipt": {
+      "type": "object",
+      "required": [
+        "location",
+        "controlId",
+        "actionId",
+        "feedbackId",
+        "controlConfig",
+        "connection"
+      ],
+      "properties": {
+        "location": {
+          "type": "object",
+          "required": ["pageNumber", "row", "column"],
+          "properties": {
+            "pageNumber": { "const": 1 },
+            "row": { "const": 0 },
+            "column": { "const": 0 }
+          },
+          "additionalProperties": false
+        },
+        "controlId": { "type": ["string", "null"], "minLength": 1 },
+        "actionId": { "type": "string", "minLength": 1 },
+        "feedbackId": { "type": "string", "minLength": 1 },
+        "controlConfig": { "type": ["object", "null"] },
+        "connection": {
+          "oneOf": [{ "$ref": "#/$defs/configurationConnection" }, { "type": "null" }]
+        }
+      },
+      "additionalProperties": false
+    },
+    "completeConfigurationReceipt": {
+      "allOf": [
+        { "$ref": "#/$defs/configurationReceipt" },
+        {
+          "properties": {
+            "controlId": { "type": "string", "minLength": 1 },
+            "controlConfig": { "type": "object" },
+            "connection": { "$ref": "#/$defs/configurationConnection" }
+          }
+        }
+      ]
+    },
+    "configurationObservation": {
+      "type": "object",
+      "required": [
+        "observed",
+        "current",
+        "currentSha256",
+        "auditEntryCount",
+        "expectedConfigurationValid",
+        "unchanged",
+        "error"
+      ],
+      "properties": {
+        "observed": { "type": "boolean" },
+        "current": {
+          "oneOf": [{ "$ref": "#/$defs/configurationReceipt" }, { "type": "null" }]
+        },
+        "currentSha256": {
+          "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        },
+        "auditEntryCount": { "type": "integer", "minimum": 1 },
+        "expectedConfigurationValid": { "type": "boolean" },
+        "unchanged": { "type": "boolean" },
+        "error": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "hostSnapshot": {
+      "type": "object",
+      "required": [
+        "capturedAt",
+        "monotonicNs",
+        "expectedSerial",
+        "scope",
+        "lsusb",
+        "usb",
+        "hidraw",
+        "priorPath",
+        "errors",
+        "state"
+      ],
+      "properties": {
+        "capturedAt": { "type": "string", "format": "date-time" },
+        "monotonicNs": { "$ref": "#/$defs/monotonicNs" },
+        "expectedSerial": { "type": "string", "minLength": 1 },
+        "scope": { "type": "object" },
+        "lsusb": {
+          "type": "object",
+          "required": ["observed", "exitCode", "errorCode", "matches", "stderr"],
+          "properties": {
+            "observed": { "const": true },
+            "exitCode": { "const": 0 },
+            "errorCode": { "type": "null" },
+            "matches": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "stderr": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "usb": { "type": "array" },
+        "hidraw": { "type": "array" },
+        "priorPath": { "type": "object" },
+        "errors": { "type": "array", "maxItems": 0 },
+        "state": { "enum": ["present", "absent"] }
+      },
+      "additionalProperties": false
+    },
+    "presentHostSnapshot": {
+      "allOf": [
+        { "$ref": "#/$defs/hostSnapshot" },
+        {
+          "properties": {
+            "state": { "const": "present" },
+            "lsusb": { "properties": { "matches": { "type": "array", "minItems": 1 } } },
+            "usb": { "type": "array", "minItems": 1 },
+            "hidraw": { "type": "array", "minItems": 1 }
+          }
+        }
+      ]
+    },
+    "absentHostSnapshot": {
+      "allOf": [
+        { "$ref": "#/$defs/hostSnapshot" },
+        {
+          "properties": {
+            "state": { "const": "absent" },
+            "lsusb": { "properties": { "matches": { "type": "array", "maxItems": 0 } } },
+            "usb": { "type": "array", "maxItems": 0 },
+            "hidraw": { "type": "array", "maxItems": 0 }
+          }
+        }
+      ]
+    },
+    "runtimeSnapshot": {
+      "type": "object",
+      "required": [
+        "capturedAt",
+        "monotonicNs",
+        "lifecycle",
+        "surfaceProcesses",
+        "logArtifact",
+        "logMarkers",
+        "matchesCurrentDevice"
+      ],
+      "properties": {
+        "capturedAt": { "type": "string", "format": "date-time" },
+        "monotonicNs": { "$ref": "#/$defs/monotonicNs" },
+        "lifecycle": { "type": "object" },
+        "surfaceProcesses": { "type": "array" },
+        "logArtifact": { "$ref": "#/$defs/artifactReceipt" },
+        "logMarkers": { "type": "object" },
+        "matchesCurrentDevice": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "window": {
+      "type": "object",
+      "required": [
+        "stage",
+        "challenge",
+        "openedAt",
+        "openedMonotonicNs",
+        "timeoutSeconds",
+        "instruction",
+        "closedAt",
+        "closedMonotonicNs"
+      ],
+      "properties": {
+        "stage": { "type": "string", "minLength": 1 },
+        "challenge": { "type": "string", "pattern": "^[0-9a-f]{12}$" },
+        "openedAt": { "type": "string", "format": "date-time" },
+        "openedMonotonicNs": { "$ref": "#/$defs/monotonicNs" },
+        "timeoutSeconds": { "type": "integer", "minimum": 10, "maximum": 300 },
+        "instruction": { "type": "string", "minLength": 1 },
+        "closedAt": { "type": "string", "format": "date-time" },
+        "closedMonotonicNs": { "$ref": "#/$defs/monotonicNs" }
+      },
+      "additionalProperties": false
+    },
+    "waitResult": {
+      "type": "object",
+      "required": ["status", "error"],
+      "properties": {
+        "status": { "enum": ["fulfilled", "rejected"] },
+        "error": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "waitResults": {
+      "type": "object",
+      "required": ["causal", "satellite"],
+      "properties": {
+        "causal": { "$ref": "#/$defs/waitResult" },
+        "satellite": { "$ref": "#/$defs/waitResult" }
+      },
+      "additionalProperties": false
+    },
+    "successfulWaitResults": {
+      "allOf": [
+        { "$ref": "#/$defs/waitResults" },
+        {
+          "properties": {
+            "causal": {
+              "properties": {
+                "status": { "const": "fulfilled" },
+                "error": { "type": "null" }
+              }
+            },
+            "satellite": {
+              "properties": {
+                "status": { "const": "fulfilled" },
+                "error": { "type": "null" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "causalReceipt": {
+      "type": "object",
+      "required": ["command", "result", "serverEvent", "acknowledgement"],
+      "properties": {
+        "command": { "type": "object" },
+        "result": { "type": "object" },
+        "serverEvent": { "type": "object" },
+        "acknowledgement": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "pressCycle": {
+      "type": "object",
+      "required": ["pressed", "released"],
+      "properties": {
+        "pressed": { "type": "object" },
+        "released": { "type": "object" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

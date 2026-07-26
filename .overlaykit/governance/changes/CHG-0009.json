@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0009",
+  "title": "Test post-login physical Stream Deck button delivery",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "assumption",
+      "statement": "H-038: after graphical login, the exact physical MK.2 button event can reach the configured official Companion surface and produce a causally bound OverlayKit server observation without a virtual press.",
+      "evidence": "Human requirement resolved on 2026-07-25; H-037 acquisition evidence",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "This Slice does not establish pre-login availability, reconnect or reboot recovery, rendered hardware pixels, operator perception, native versus container production architecture, or OBS truth.",
+      "evidence": "H-038 bounded Slice boundary",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The run starts after graphical login and binds Fedora 43, the exact MK.2 identity, Companion identity, device exposure, effective groups, and configured physical surface location.",
+      "verification": "H-035/H-037 hashes plus process, surface, and configuration receipts."
+    },
+    {
+      "id": "SC-002",
+      "statement": "A human physical button press is observed without invoking Companion's virtual press endpoint, and the same run records the resulting Companion action and authoritative server observation.",
+      "verification": "Physical-input window, virtual-endpoint audit, Companion surface/action receipt, server event, and causal timestamps."
+    },
+    {
+      "id": "SC-003",
+      "statement": "Cleanup removes temporary resources and the claim boundary excludes pixels, perception, reconnect, reboot, pre-login startup, and production support.",
+      "verification": "Before/after cleanup and verifier claim-boundary assertions."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "H-038 is recorded before any physical button experiment.",
+      "evidence": "CHG-0009."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "No ADR, specification, service, udev rule, or production configuration is created before human evidence review.",
+      "evidence": "Human Doctrine review remains pending."
+    }
+  ]
+}

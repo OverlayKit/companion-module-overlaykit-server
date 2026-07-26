@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://overlaykit.dev/schemas/h038-physical-run/v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "runId",
+    "startedAt",
+    "completedAt",
+    "collector",
+    "inputs",
+    "host",
+    "device",
+    "companion",
+    "physicalWindow",
+    "invocationAudit",
+    "causalReceipt",
+    "companionObservation",
+    "provisioning",
+    "before",
+    "claimBoundary",
+    "cleanup",
+    "evidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "overlaykit-h038-physical-run/v1" },
+    "hypothesis": { "const": "H-038" },
+    "runId": { "type": "string", "pattern": "^h038-" },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "completedAt": { "type": "string", "format": "date-time" },
+    "collector": {
+      "type": "object",
+      "required": ["node", "commit", "governanceManifestContentHash", "sourceSha256"],
+      "properties": {
+        "node": { "type": "string", "pattern": "^v22\\." },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "governanceManifestContentHash": { "$ref": "#/$defs/sha256" },
+        "sourceSha256": {
+          "type": "object",
+          "minProperties": 7,
+          "additionalProperties": { "$ref": "#/$defs/sha256" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "object",
+      "required": [
+        "h035Path",
+        "h035FileSha256",
+        "h035EvidenceSha256",
+        "h037Path",
+        "h037FileSha256",
+        "h037EvidenceSha256",
+        "lockedInputs"
+      ],
+      "properties": {
+        "h035Path": { "type": "string", "minLength": 1 },
+        "h035FileSha256": { "$ref": "#/$defs/sha256" },
+        "h035EvidenceSha256": { "$ref": "#/$defs/sha256" },
+        "h037Path": { "type": "string", "minLength": 1 },
+        "h037FileSha256": { "$ref": "#/$defs/sha256" },
+        "h037EvidenceSha256": { "$ref": "#/$defs/sha256" },
+        "lockedInputs": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "host": { "type": "object" },
+    "device": {
+      "type": "object",
+      "required": ["vendorId", "productId", "model", "serial", "devicePath", "gid"],
+      "properties": {
+        "vendorId": { "const": "0fd9" },
+        "productId": { "const": "0080" },
+        "model": { "type": "string", "minLength": 1 },
+        "serial": { "type": "string", "minLength": 1 },
+        "devicePath": { "type": "string", "pattern": "^/dev/hidraw[0-9]+$" },
+        "gid": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "companion": { "type": "object" },
+    "physicalWindow": {
+      "type": "object",
+      "required": ["challenge", "openedAt", "openedMonotonicNs", "timeoutSeconds", "instruction"],
+      "properties": {
+        "challenge": { "type": "string", "pattern": "^[0-9a-f]{12}$" },
+        "openedAt": { "type": "string", "format": "date-time" },
+        "openedMonotonicNs": { "type": "string", "pattern": "^[0-9]+$" },
+        "timeoutSeconds": { "type": "integer", "minimum": 10, "maximum": 120 },
+        "instruction": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "invocationAudit": {
+      "type": "object",
+      "required": ["entries", "forbidden", "virtualInvocationCount", "passed"],
+      "properties": {
+        "entries": { "type": "array" },
+        "forbidden": { "type": "array", "maxItems": 0 },
+        "virtualInvocationCount": { "const": 0 },
+        "passed": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "causalReceipt": {
+      "type": "object",
+      "required": ["command", "result", "serverEvent", "acknowledgement"],
+      "properties": {
+        "command": { "type": "object" },
+        "result": { "type": "object" },
+        "serverEvent": { "type": "object" },
+        "acknowledgement": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "companionObservation": { "type": "object" },
+    "provisioning": { "type": "object" },
+    "before": { "type": "object" },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["proves", "excludes"],
+      "properties": {
+        "proves": { "$ref": "#/$defs/nonEmptyStrings" },
+        "excludes": { "$ref": "#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "cleanup": {
+      "type": "object",
+      "required": ["startedAt", "completedAt", "composeRemoved", "owner", "successful"],
+      "properties": {
+        "startedAt": { "type": "string", "format": "date-time" },
+        "completedAt": { "type": "string", "format": "date-time" },
+        "composeRemoved": { "const": true },
+        "owner": { "type": "object" },
+        "successful": { "const": true }
+      },
+      "additionalProperties": true
+    },
+    "evidenceSha256": { "$ref": "#/$defs/sha256" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0007",
+  "title": "Test fixed minimatch without weakening ruleset observation",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0004"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "The Node 22.20.0 quality gate fails because npm audit reports two high-severity runtime findings for brace-expansion through the governance host's direct minimatch 9.0.9 dependency.",
+      "evidence": "npm run check and npm audit --omit=dev --json on 2026-07-25; GHSA-mh99-v99m-4gvg; dependency path @overlaykit/governance-host -> minimatch 9.0.9 -> brace-expansion 2.1.2",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The governance host uses minimatch only to decide whether an observed GitHub ruleset include or exclude pattern applies to a protected ref, with brace, comment, extglob, and negation syntax disabled.",
+      "evidence": "tools/governance/src/github-observer.ts githubRulesetAppliesToRef and repository-wide minimatch import search on 2026-07-25",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Registry metadata identifies minimatch 10.2.5 as compatible with Node 18, 20, and 22 or newer and dependent on brace-expansion ^5.0.5; npm audit identifies the same version as the available remediation.",
+      "evidence": "npm view minimatch@10.2.5 and npm audit --omit=dev --json on 2026-07-25",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-036: Pinning minimatch 10.2.5 in the governance host can remove the current high-severity runtime audit findings while preserving the exact fail-closed protected-ref matching semantics used by GitHub ruleset observation under Node 22.",
+      "evidence": "Security gate failure analysis authorized by @rodrigoteamx's repeat-the-cycle instruction on 2026-07-25",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "H-036 is supported for the tested Node 22 governance host: exact minimatch 10.2.5 with brace-expansion 5.0.8 preserved the constrained protected-ref matcher corpus, all 47 governance tests passed, and the current runtime audit reported zero vulnerabilities.",
+      "evidence": "Node 22.20.0 npm ls, focused githubRulesetAppliesToRef compatibility test, npm run governance:check, and npm audit --omit=dev --audit-level=high on 2026-07-25",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The major-version change may alter matching behavior for patterns outside the exact literals, branch globs, reserved GitHub tokens, and disabled syntax exercised by this Slice.",
+      "evidence": "H-036 proposed Slice boundary",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "This Slice does not establish a general dependency-update policy, acceptance of arbitrary GitHub ruleset syntax, product runtime behavior, or any physical Stream Deck behavior.",
+      "evidence": "H-036 proposed Slice boundary",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The governance host pins minimatch exactly to 10.2.5 and the installed production dependency graph contains no vulnerable minimatch 9 or brace-expansion 2 path.",
+      "verification": "package manifests, lockfile, npm ls --omit=dev, and dependency identity inspection."
+    },
+    {
+      "id": "SC-002",
+      "statement": "Exact protected refs, branch-name patterns, wildcards, reserved ~ALL and ~DEFAULT_BRANCH tokens, excludes, inactive enforcement, non-branch targets, and disabled brace, comment, extglob, and negation syntax retain explicit fail-closed tests.",
+      "verification": "Focused githubRulesetAppliesToRef compatibility tests under Node 22."
+    },
+    {
+      "id": "SC-003",
+      "statement": "npm audit --omit=dev --audit-level=high reports zero high or critical runtime vulnerabilities.",
+      "verification": "Current registry-backed audit under Node 22."
+    },
+    {
+      "id": "SC-004",
+      "statement": "All governance, quality, module, packaging, and build gates pass without changing protocol, module action, feedback, evidence authority, or product behavior.",
+      "verification": "npm run governance:check, npm run check, npm run build, and repository diff review under Node 22."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0007 records H-036, the audit evidence, compatibility boundary, and success criteria before changing the dependency.",
+      "evidence": "CHG-0007 and pre-change npm audit report from 2026-07-25."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The Slice changes only the governance dependency identity, lockfile, focused matcher tests, this change contract, and deterministic generated governance artifacts.",
+      "evidence": "Repository diff review against CHG-0007 on 2026-07-25."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "H-036 is refuted or supported by focused matcher compatibility evidence and the current runtime audit, both under Node 22.",
+      "evidence": "Node 22.20.0: exact minimatch 10.2.5 and brace-expansion 5.0.8 dependency path, 47 passing governance tests including the constrained matcher corpus, and npm audit reporting zero vulnerabilities on 2026-07-25."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No ADR, implemented status, merge, or broader dependency policy is created before separate human evidence review and acceptance.",
+      "evidence": "Human Doctrine review remains pending."
+    }
+  ]
+}

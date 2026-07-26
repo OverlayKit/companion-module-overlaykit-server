@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://overlaykit.dev/schemas/h037-acquisition/v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "startedAt",
+    "finishedAt",
+    "collector",
+    "input",
+    "before",
+    "noDevice",
+    "deviceWithoutGroup",
+    "positive",
+    "after",
+    "claimBoundary",
+    "evidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "overlaykit-h037-acquisition/v1" },
+    "hypothesis": { "const": "H-037" },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "finishedAt": { "type": "string", "format": "date-time" },
+    "collector": { "$ref": "#/$defs/collector" },
+    "input": { "$ref": "#/$defs/input" },
+    "before": { "$ref": "#/$defs/boundary" },
+    "noDevice": { "$ref": "#/$defs/control" },
+    "deviceWithoutGroup": { "$ref": "#/$defs/control" },
+    "positive": { "$ref": "#/$defs/control" },
+    "after": { "$ref": "#/$defs/boundary" },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["proves", "excludes"],
+      "properties": {
+        "proves": { "$ref": "#/$defs/nonEmptyStrings" },
+        "excludes": { "$ref": "#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "evidenceSha256": { "$ref": "#/$defs/sha256" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "collector": {
+      "type": "object",
+      "required": ["repository", "commit", "node", "sourceSha256", "governanceManifestContentHash"],
+      "properties": {
+        "repository": { "type": "string", "minLength": 1 },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "node": { "type": "string", "pattern": "^v22\\." },
+        "sourceSha256": {
+          "type": "object",
+          "minProperties": 4,
+          "additionalProperties": { "$ref": "#/$defs/sha256" }
+        },
+        "governanceManifestContentHash": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "h035Path",
+        "h035FileSha256",
+        "h035EvidenceSha256",
+        "host",
+        "device",
+        "companion"
+      ],
+      "properties": {
+        "h035Path": { "type": "string", "minLength": 1 },
+        "h035FileSha256": { "$ref": "#/$defs/sha256" },
+        "h035EvidenceSha256": { "$ref": "#/$defs/sha256" },
+        "host": { "type": "object" },
+        "device": { "type": "object" },
+        "companion": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "owner": {
+      "type": "object",
+      "required": ["observed", "usageError", "exitCode", "errorCode", "pids", "stdout", "stderr"],
+      "properties": {
+        "observed": { "type": "boolean" },
+        "usageError": { "type": "boolean" },
+        "exitCode": { "type": ["integer", "null"] },
+        "errorCode": { "type": ["string", "null"] },
+        "pids": { "type": "array", "items": { "type": "integer" } },
+        "stdout": { "type": "string" },
+        "stderr": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "boundary": {
+      "type": "object",
+      "required": [
+        "owner",
+        "noDeviceContainerExists",
+        "noGroupContainerExists",
+        "positiveContainerExists"
+      ],
+      "properties": {
+        "owner": { "$ref": "#/$defs/owner" },
+        "noDeviceContainerExists": { "type": "boolean" },
+        "noGroupContainerExists": { "type": "boolean" },
+        "positiveContainerExists": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "control": {
+      "type": "object",
+      "required": ["name", "containerId", "container", "logs", "signals", "process", "stop"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "containerId": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "container": { "type": "object" },
+        "logs": { "type": "string", "minLength": 1 },
+        "signals": {
+          "type": "object",
+          "required": ["serialDiscovered", "openFailed", "firmware", "panelOpening", "panelReady"],
+          "properties": {
+            "serialDiscovered": { "type": "boolean" },
+            "openFailed": { "type": "boolean" },
+            "firmware": { "type": ["string", "null"] },
+            "panelOpening": { "type": "boolean" },
+            "panelReady": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        },
+        "process": {
+          "type": "object",
+          "required": [
+            "id",
+            "groups",
+            "processes",
+            "surfacePid",
+            "surfaceUid",
+            "surfaceGid",
+            "fileDescriptors",
+            "ownsDevice",
+            "hostProcessTable"
+          ],
+          "properties": {
+            "id": { "type": "string", "minLength": 1 },
+            "groups": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "integer", "minimum": 0 },
+              "uniqueItems": true
+            },
+            "processes": { "type": "array", "minItems": 1 },
+            "surfacePid": { "type": "integer", "minimum": 1 },
+            "surfaceUid": { "type": "integer", "minimum": 0 },
+            "surfaceGid": { "type": "integer", "minimum": 0 },
+            "fileDescriptors": { "type": "array" },
+            "ownsDevice": { "type": "boolean" },
+            "hostProcessTable": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        },
+        "stop": { "type": "object" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

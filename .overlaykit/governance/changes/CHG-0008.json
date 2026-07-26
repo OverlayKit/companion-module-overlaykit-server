@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0008",
+  "title": "Test official Companion acquisition of the physical MK.2",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "H-035 proves that the exact Fedora 43 host enumerates one Stream Deck MK.2 as 0fd9:0080, maps it to the current /dev/hidraw0 node, and permits the unprivileged host principal to open that node; it does not prove Companion acquisition.",
+      "evidence": "Verified H-035 Node 22 host inventory from 2026-07-25 and CHG-0006",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Accepted H-034 evidence binds the actual Bitfocus Companion application to version 4.3.3, source commit 06a7406709d6a858039333a8988047296ef3aa4a, and official GHCR image digest sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e, while explicitly excluding USB and physical hardware.",
+      "evidence": "SPEC-0002, ADR-0005, CHG-0005, and lab/h034/inputs.lock.json",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-037: In the bounded official Companion 4.3.3 container, the physical Stream Deck MK.2 is not acquired without the exact hidraw node or with the node but without its effective plugdev group; it is acquired when both are present, and acquisition can be proven by a causal process file-descriptor and application-visible device observation without pressing a key.",
+      "evidence": "H-035 precondition evidence and @rodrigoteamx's instruction to repeat the governed experiment cycle on 2026-07-25",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The verified H-037 run observed that the no-device and device-without-group controls discovered the exact MK.2 serial but failed to open it, while the non-root device-with-group control opened the exact hidraw descriptor and reported firmware, panel opening, and panel ready before clean removal.",
+      "evidence": "H-037 evidence sha256 3c8fc9346e7f87a61e9938d3ab149c23e0b319fe34ba230e0b6e1b297344f6a2",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Within the exact bounded Companion 4.3.3 container experiment, exposure of the current hidraw node and effective supplementary GID 1002 were jointly sufficient for acquisition and each missing precondition prevented acquisition under the tested controls.",
+      "evidence": "Verified three-arm H-037 evidence sha256 3c8fc9346e7f87a61e9938d3ab149c23e0b319fe34ba230e0b6e1b297344f6a2",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "This Slice does not establish native Fedora packaging, production startup architecture, stable device naming, reconnect or reboot recovery, key delivery, rendered pixels, persisted visual state, OverlayKit behavior, OBS truth, or operator perception.",
+      "evidence": "H-037 proposed Slice boundary",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The experiment binds the exact official Companion 4.3.3 image digest, runtime version, Fedora host identity, MK.2 USB/HID identity, container identity, process UID/GID/groups, and exposed device node.",
+      "verification": "Image inspection, process receipts, H-035 identity comparison, and hash-bound run record."
+    },
+    {
+      "id": "SC-002",
+      "statement": "Separate negative controls without the physical device and with the device but without effective plugdev access do not own the hidraw node or report the MK.2 as acquired.",
+      "verification": "Two bounded negative-control process, file-descriptor, owner, log, and application observations."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The positive run exposes only the exact current hidraw node, runs Companion without root, and proves that the exact Companion process has an open file descriptor for the same device identity and reports the device through an application-visible interface.",
+      "verification": "Host fuser or /proc descriptor evidence causally correlated with container PID, process identity, Companion logs or API inventory, and MK.2 serial/model."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Stopping the bounded positive run releases the hidraw owner and leaves no persistent Companion, USB, udev, OBS, or OverlayKit configuration.",
+      "verification": "Before, during, and after owner observations plus exact temporary-resource cleanup inspection."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Evidence explicitly excludes key presses, pixels, reconnect, reboot, login, startup, state persistence, OverlayKit commands, OBS truth, and production support.",
+      "verification": "Run schema and verifier claim-boundary assertions."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0008 records H-037 and its causal controls before pulling or running the official Companion image against the physical device.",
+      "evidence": "CHG-0008 and repository history."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The experiment uses only temporary configuration and explicitly named Docker resources or an equally bounded official-application extraction.",
+      "evidence": "H-037 runner plus before/after cleanup receipts in evidence sha256 3c8fc9346e7f87a61e9938d3ab149c23e0b319fe34ba230e0b6e1b297344f6a2."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "H-037 is refuted or supported by negative and positive acquisition evidence from the exact Fedora 43 plus MK.2 host.",
+      "evidence": "Verified three-arm H-037 evidence sha256 3c8fc9346e7f87a61e9938d3ab149c23e0b319fe34ba230e0b6e1b297344f6a2 supports the bounded hypothesis."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No ADR, product specification, implemented status, merge, installation, service, udev rule, or production configuration is created before separate human evidence review and acceptance.",
+      "evidence": "Human Doctrine review remains pending."
+    }
+  ]
+}
