@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0013",
+  "title": "Test supervised SurfaceThread replacement and MK.2 reacquisition after a dynamic epoch",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Verified H-037 evidence establishes that the exact official Companion 4.3.3 image discovered, opened, and reported ready for the exact MK.2 serial when Docker exposed its hidraw node and the non-root SurfaceThread had the host plugdev group; the SurfaceThread owned a matching device descriptor.",
+      "evidence": "H-037 run artifacts/h037/acquisition-2026-07-25.json; evidence SHA-256 22d8f1d440a521af2ec8dd75cbfa68db09b7140c85f90bc48310aa78d27d6e9c",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Verified H-039 evidence refutes automatic MK.2 reacquisition by the continuously running Companion 4.3.3 stack with a static Docker devices mapping: the exact serial returned in a new enumeration epoch, but no matching SurfaceThread descriptor returned within 30 seconds.",
+      "evidence": "H-039 run artifacts/h039/h039-2026-07-25T22-12-14-212Z-e6c2b45e/run.json; evidence SHA-256 e78ed04dd10469e863b33e4fa497ddc745a20574fb18095c2bde7cf3fdb594ce",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Verified H-040 metadata-only evidence establishes that a read-only dynamic host-device-directory view observed exact MK.2 absence and the returned host node in a new epoch while a static Docker device mapping retained its original container node identity.",
+      "evidence": "H-040 run artifacts/h040/h040-2026-07-25T22-53-48-398Z-94d8ac80/run.json; evidence SHA-256 04b3b9aedeb51e1bd5d6c1bd4e68e9d284951d2b21276aea3f5a180f0fe2a108",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Verified H-041 evidence refutes automatic Companion 4.3.3 MK.2 reacquisition from dynamic hidraw visibility alone: the exact serial returned in a new epoch, the dynamic view tracked absence and return, and the container, PID 1, and SurfaceThread remained unchanged, but neither a current matching descriptor nor new serial-specific opening and ready markers appeared within the causally bounded 30-second window.",
+      "evidence": "H-041 run artifacts/h041/h041-2026-07-26T00-56-42-118Z-0423725f/run.json and verification.json; evidence SHA-256 c430a034e684dd3d492e1a750aa8ff0fdd6fa5d53f3772ee63b5876040f1392a",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Accepted SPEC-0001 and SPEC-0002 explicitly exclude USB access, Stream Deck discovery, physical key presses, and rendered device pixels, so H-042 is a governed exploratory Slice rather than product acceptance evidence.",
+      "evidence": ".overlaykit/governance/specifications/SPEC-0001.json and SPEC-0002.json accepted out-of-scope boundaries in the verified compiled plan.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Because H-041 retained the same SurfaceThread after the new epoch and observed no automatic rescan, one controlled termination of that exact worker is the minimal next lifecycle intervention that can isolate built-in worker supervision from top-level container recreation; H-041 did not test any signal, replacement, or post-replacement acquisition.",
+      "evidence": "Bounded reading of verified H-041 process continuity, descriptor, marker, and intervention-audit evidence; supervisor behavior remains intentionally unclaimed.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-042: after the exact MK.2 returns in a new physical enumeration epoch visible through the H-041 dynamic device view, one agent-issued SIGTERM delivered to the uniquely identified current SurfaceThread causes automatic replacement under the same continuously running container and PID 1, and the replacement acquires a descriptor matching the current node and emits new serial-specific opening and ready markers no later than 30 seconds after the signal receipt.",
+      "evidence": "D³ minimal refutation Slice registered before H-042 implementation or fault injection.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "A fresh H-042 run may fail to identify exactly one live SurfaceThread tuple or to prove that exactly one SIGTERM reached that tuple; either ambiguity blocks support or refutation and makes the run inconclusive.",
+      "evidence": "H-042 fail-closed target-identity and intervention-audit boundary.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-042 does not yet determine whether Companion PID 1 supervises, replaces, ignores, or terminates with the SurfaceThread, nor whether any replacement can rediscover the current MK.2 within the bounded window.",
+      "evidence": "The worker-supervision question is the subject of the pending H-042 experiment.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-042 does not establish physical button delivery, OverlayKit configuration continuity, rendered pixels, operator perception, production restart policy, acceptable downtime, production security, repeated or multi-device recovery, pre-login behavior, reboot behavior, OBS truth, or complete production recovery.",
+      "evidence": "H-042 explicit minimal-Slice exclusions.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "Before device I/O or fault injection, the run binds verified H-037, H-039, H-040, and H-041 evidence, the active governance manifest, exact H-042 source hashes, exact official Companion image identity, exact Fedora graphical principal, and one present MK.2 serial and hidraw epoch.",
+      "verification": "Canonical predecessor evidence and verification receipts plus fresh governance, repository, image, login-session, USB, sysfs, hidraw, node-stat, and host-scope owner observations."
+    },
+    {
+      "id": "SC-002",
+      "statement": "One lab-owned official Companion 4.3.3 container starts with the exact H-041 dynamic view and permission boundary; baseline evidence proves one unique SurfaceThread, panel opening, readiness, and a SurfaceThread descriptor matching the initial current node without OverlayKit or button configuration.",
+      "verification": "Exact Docker invocation and repeated inspection, container and PID 1 identities, process tuple, namespaces, cgroups, effective UID and groups, descriptor stat, serial-specific logs, and absence of OverlayKit or virtual-invocation tooling."
+    },
+    {
+      "id": "SC-003",
+      "statement": "One human-bounded disconnect and reconnect proves stable exact absence and return of the same serial in a new host epoch, exact dynamic-view tracking, descriptor absence, and no automatic new opening or ready marker through the H-041 30-second boundary while the container, PID 1, and one uniquely identified SurfaceThread remain unchanged.",
+      "verification": "Separate challenge windows, three stable host snapshots per transition, monotonic chronology, host and container node identities, process start ticks, restart count, descriptor polls, serial-specific log deltas, and exact invocation audit."
+    },
+    {
+      "id": "SC-004",
+      "statement": "After the complete negative pre-signal boundary, the agent delivers exactly one SIGTERM to the immediately revalidated SurfaceThread PID and start-ticks tuple and performs no other signal, rescan, restart, recreate, configuration mutation, device I/O, or lifecycle intervention before classification.",
+      "verification": "Adjacent pre-signal process receipt, exact signal command and exit receipt, post-signal process timeline, Docker event and invocation audits, and zero unapproved mutating invocations."
+    },
+    {
+      "id": "SC-005",
+      "statement": "A supported H-042 outcome requires the old SurfaceThread tuple to disappear, exactly one replacement SurfaceThread with a different PID or start ticks to appear under the unchanged container and PID 1, and no later than 30 seconds after the successful signal receipt that replacement owns a descriptor matching the returned dynamic node and produces ordered serial-specific opening then ready markers newer than the signal.",
+      "verification": "Schema-valid supported outcome with independently recomputed top-level continuity, old-worker exit, unique replacement lineage, exact descriptor-to-current-node identity, marker deltas and ordering, and monotonic deadline predicates."
+    },
+    {
+      "id": "SC-006",
+      "statement": "A refuted H-042 outcome requires every precondition, one exact successful SIGTERM, uninterrupted complete observations through the first negative poll at or beyond the 30-second deadline, and zero other interventions, but no complete supported state; target ambiguity, unsuccessful or duplicate signal delivery, collector failure, incomplete chronology, unaccounted lifecycle activity, contradictory evidence, or a first positive observation only after the deadline is inconclusive and cannot support or refute H-042.",
+      "verification": "Fail-closed three-way classifier, negative and contradiction tests, primary receipts bounded by signal and completion monotonic times, and an independent verifier that recomputes every outcome predicate."
+    },
+    {
+      "id": "SC-007",
+      "statement": "Cleanup occurs only after classification, removes the exact H-042 container, leaves the returned MK.2 present, records host-scope ownership without treating an empty result as global proof, and records that no host or production configuration was changed.",
+      "verification": "Exact container absence, final stable host snapshot, host-scope fuser receipt, cleanup status, Docker events, and invocation audit."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0013 records the architectural question, H-042, typed claims, minimal refutation path, exact signal boundary, observable evidence, exclusions, and reorder before implementation.",
+      "evidence": "Before: implement a SurfaceThread fault-injection runner. After reorder: first bind a single-worker, single-signal, same-top-level-lifecycle experiment with a fail-closed outcome contract."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The Slice adds only CHG-0013, bounded directly executable H-042 tooling and tests, physical evidence, and deterministic generated governance artifacts; accepted records and every H-041 source-bound file remain untouched.",
+      "evidence": "Repository diff plus H-041 independent source and evidence verification."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "A physical run produces independently verified supported or refuted H-042 evidence, or records an explicit inconclusive failure without overstating worker supervision or recovery.",
+      "evidence": "Pending physical H-042 run and independent verifier."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Governance, quality, build, predecessor verification, and focused H-042 gates pass under the required Node 22 runtime.",
+      "evidence": "Pending final gate receipts."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No ADR, production specification, accepted or implemented status, merge, installation, udev rule, systemd unit, supervisor, production signal policy, production device bind, or production configuration is created before separate human evidence review and acceptance.",
+      "evidence": "Human Doctrine review remains pending; H-042 may only surface an ADR candidate after verified evidence."
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0010",
+  "title": "Test post-login MK.2 disconnect and reconnect recovery",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "The human principal requires the full physical control stack only after graphical login, rather than before login.",
+      "evidence": "@rodrigoteamx requirement decision on 2026-07-25",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Verified H-038 evidence records one post-login physical top-left MK.2 press reaching official Companion 4.3.3 and producing a causally correlated command, applied result, authoritative active state, and applied acknowledgement with zero virtual-press invocations.",
+      "evidence": "H-038 run artifacts/h038/h038-2026-07-25T21-18-52-919Z-01f784c9/run.json; evidence SHA-256 6a001db7205c5a98b669faf0f29865dc7690cd1c5871107b392008e5f0022fa4",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Accepted SPEC-0001 and SPEC-0002 and accepted ADR-0003 and ADR-0005 exclude USB reconnect recovery and physical Stream Deck behavior from their accepted product boundaries.",
+      "evidence": "SPEC-0001 outOfScope, SPEC-0002 outOfScope, ADR-0003 decision, and ADR-0005 decision",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-039: while the post-login H-038 stack, top-level Companion and OverlayKit processes, and configured physical button remain continuously alive, official Companion 4.3.3 can lose and reacquire the exact MK.2 after one human USB disconnect and reconnect, then deliver a new physical press through the unchanged configuration to causally acknowledged authoritative OverlayKit state.",
+      "evidence": "H-038 bounded physical-input evidence and @rodrigoteamx instruction to continue the governed experiment cycle on 2026-07-25",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the reconnected MK.2 keeps the same hidraw path, device identity, inode, or container-visible mapping, and whether Companion closes the stale descriptor and opens the current device without restart, are intentionally unresolved by this Slice.",
+      "evidence": "H-039 architectural question and the reconnect exclusions in H-035, H-037, and H-038",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "This Slice does not establish reboot recovery, rendered hardware pixels, operator perception, persisted visual state across process restart, native Fedora packaging, a production container or startup architecture, multiple Stream Deck handling, OBS truth, or support beyond the exact tested identities.",
+      "evidence": "H-039 bounded Slice boundary",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "One run binds the active local graphical session, exact Fedora 43 host, exact MK.2 serial, official Companion identity, OverlayKit identity, configured control and connection identities, process identities, initial device acquisition, and one authoritative baseline physical press before asking for disconnect.",
+      "verification": "H-038 input hash plus freshly observed host OS, kernel, architecture, principal, USB, sysfs, Docker, process, file-descriptor, Companion readiness, real control and connection configuration receipts, and a baseline command/result/state/acknowledgement chain."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The run obtains human-bounded disconnect and reconnect observations, proves the target MK.2 disappeared and returned, records its before and after USB, HID, device-node, ownership, and timing identities, and does not restart or reconfigure the bounded stack.",
+      "verification": "Separate challenge windows, unchanged container and top-level process start identities, recorded before/after SurfaceThread identities, canonical digests of Companion's observed persisted control entities/options and redacted connection configuration, invocation audit, and runtime event chronology."
+    },
+    {
+      "id": "SC-003",
+      "statement": "A completed governed run records either a supported outcome in which Companion reacquires the current MK.2 and a subsequent physical press reaches acknowledged authoritative state, or a refuted outcome with the exact failed recovery stage and current host, container, descriptor, and log evidence; observer or human-action ambiguity is recorded only as an inconclusive failure and cannot refute H-039.",
+      "verification": "Schema-valid supported/refuted outcome union with a predeclared reacquisition deadline, an explicit two-observer classification matrix, and fail-closed verifier assertions; ambiguous or instrumentation-only failures produce failure.json rather than run.json."
+    },
+    {
+      "id": "SC-004",
+      "statement": "A supported outcome requires no virtual button invocation, no runner-initiated process or container restart, no Companion reconfiguration, and a post-reconnect command/result/state/acknowledgement chain causally after the physical-press window.",
+      "verification": "Virtual-invocation audit, top-level lifecycle/configuration identities, recorded automatic SurfaceThread lifecycle, current-device descriptor evidence, proxy event sequence and monotonic timestamps, and Companion satellite observation."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Cleanup removes every H-039-owned runtime resource and releases every currently enumerable matching hidraw node, while the claim boundary excludes reboot, pixels, perception, persistence across restart, production architecture, and OBS.",
+      "verification": "Before/after Docker and owner observations plus verifier claim-boundary assertions."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0010 records the architectural question, H-039, typed claims, refutation path, evidence requirements, and exclusions before the disconnect experiment.",
+      "evidence": "CHG-0010."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The Slice adds only bounded H-039 evidence tooling, focused tests, package scripts, this proposed change contract, and deterministic generated governance artifacts.",
+      "evidence": "Repository diff review against CHG-0010."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "A physical post-login run produces independently verified supported or refuted H-039 evidence without changing production USB, Companion, OverlayKit, OBS, udev, or service configuration.",
+      "evidence": "Pending physical H-039 run and independent verifier."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Governance, quality, and build gates pass under the repository-required Node 22 runtime.",
+      "evidence": "Pending local gate receipts."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No ADR, accepted physical product specification, implemented status, merge, installation, udev rule, service, or production configuration is created before separate human evidence review and acceptance.",
+      "evidence": "Human Doctrine review remains pending."
+    }
+  ]
+}

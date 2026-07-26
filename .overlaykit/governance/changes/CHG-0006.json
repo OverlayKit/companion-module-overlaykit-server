@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0006",
+  "title": "Test non-mutating Fedora 43 Stream Deck host evidence",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "The accepted Companion adapter and complete-application evidence explicitly exclude USB access, physical Stream Deck discovery, physical key presses, rendered button pixels, and support outside their tested Linux boundaries.",
+      "evidence": "SPEC-0001 outOfScope, SPEC-0002 outOfScope, ADR-0003, ADR-0005, and implemented CHG-0005",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "On the target Fedora 43 host, lsusb enumerated one Elgato Stream Deck MK.2 as USB 0fd9:0080 and sysfs exposed the same HID identity through /dev/hidraw0 with mode 0660 and root:plugdev ownership.",
+      "evidence": "Host observations on 2026-07-25: lsusb, /sys/class/hidraw/hidraw0/device/uevent, udevadm info, stat, and principal group inspection",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The unprivileged host principal opened and closed the matching hidraw node with both O_RDONLY|O_NONBLOCK and O_RDWR|O_NONBLOCK without reading or writing bytes; no owning process or Companion process was observed during the corrected formal inventory.",
+      "evidence": "Corrected schema-valid H-035 host inventory on 2026-07-25 with evidence SHA-256 06089e2bd553bf8bd83d61dd4f827a9392ec3dc2d20478aacc80a7ed763bde86",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-035: A host-bound, non-mutating collector on the exact Fedora 43 plus Stream Deck MK.2 target can reproducibly bind USB identity 0fd9:0080 to its current hidraw node, prove the unprivileged principal's effective access and open capability, distinguish no owner from an observation failure, and emit a hash-bound claim boundary without asserting Companion ownership or physical behavior.",
+      "evidence": "Doctrine-Driven Discovery framing authorized by @rodrigoteamx on 2026-07-25",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The initial host observation supports the narrow precondition that an unprivileged process can attempt to acquire the MK.2 through the current hidraw node on this exact boot; it does not establish that Companion can acquire or recover the device.",
+      "evidence": "Corrected H-035 host inventory SHA-256 06089e2bd553bf8bd83d61dd4f827a9392ec3dc2d20478aacc80a7ed763bde86 and the accepted hardware evidence exclusions in ADR-0003 and ADR-0005",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The Slice does not establish Companion ownership, key event delivery, rendered button pixels, USB unplug/replug recovery, reboot recovery, persistence, OverlayKit authority behavior, OBS truth, or operator perception.",
+      "evidence": "H-035 Slice boundary",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the production stack must be available before graphical login or only after user login remains unresolved and blocks a future physical-product specification, but it does not block this host-inventory evidence Slice.",
+      "evidence": "Human Doctrine Discovery handoff for Fedora 43 on 2026-07-25",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "One run records the exact Fedora release, kernel, architecture, repository identity, principal UID/GID, and supplementary groups.",
+      "verification": "Schema-valid H-035 host inventory generated on the physical Fedora 43 target."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The collector binds every lsusb 0fd9:0080 observation to matching sysfs HID_ID and current hidraw nodes without assuming a stable bus, device number, or hidraw index.",
+      "verification": "Fixture tests for HID parsing plus host lsusb, sysfs, udev, and device-node receipts."
+    },
+    {
+      "id": "SC-003",
+      "statement": "For every matching node, evidence records ownership, mode, effective read/write access, read-only and read-write nonblocking open results, and before/after identity metadata.",
+      "verification": "Host inventory and verifier reject a missing node, failed access, failed open, or changed identity snapshot."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Process ownership evidence distinguishes an observed empty owner set from unavailable tooling, nonzero errors, and identified owner processes.",
+      "verification": "Structured fuser and process observations plus focused parser tests."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The collector performs no reads from or writes to the HID node and changes no USB, udev, Companion, OBS, or OverlayKit configuration.",
+      "verification": "Code review, open/close-only implementation, stable before/after device snapshots, and repository diff review."
+    },
+    {
+      "id": "SC-006",
+      "statement": "The machine-readable result is schema-valid, self-hashed, and explicitly separates proven preconditions from excluded product and physical-behavior claims.",
+      "verification": "Strict JSON Schema validation, deterministic canonical-hash tests, and claim-boundary assertions."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0006 records H-035, typed claims, success criteria, and unknowns before any Companion ownership, key, pixel, reconnect, or startup experiment.",
+      "evidence": "CHG-0006 and repository history."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The Slice adds only host-inventory evidence tooling, focused tests, the proposed change contract, and deterministic generated governance artifacts.",
+      "evidence": "Change review against CHG-0006."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "A physical-host run and independent verifier satisfy SC-001 through SC-006 for the exact Fedora 43 plus Stream Deck MK.2 tuple.",
+      "evidence": "Corrected H-035 host inventory SHA-256 06089e2bd553bf8bd83d61dd4f827a9392ec3dc2d20478aacc80a7ed763bde86; strict verifier passed for Fedora 43, one USB match, one hidraw match, stable identity, successful nonblocking opens, observed empty owner set, and no Companion process."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Governance, quality, and build gates pass for the exact Slice tree under the repository's required Node 22 runtime.",
+      "evidence": "Pending local gate receipts."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No ADR, accepted hardware claim, product specification, implemented status, merge, USB rule, service configuration, or Companion configuration is created before separate human evidence review and acceptance.",
+      "evidence": "Human Doctrine review remains pending."
+    }
+  ]
+}

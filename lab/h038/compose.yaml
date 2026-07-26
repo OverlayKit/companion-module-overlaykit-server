@@ -1,0 +1,78 @@
+name: overlaykit-h038
+
+services:
+  overlaykit:
+    build:
+      context: ../..
+      dockerfile: lab/h034/Dockerfile.overlaykit
+      args:
+        OVERLAYKIT_COMMIT: '${H034_OVERLAYKIT_COMMIT:?H034_OVERLAYKIT_COMMIT is required}'
+        OVERLAYKIT_ARCHIVE_SHA256: '${H034_OVERLAYKIT_ARCHIVE_SHA256:?H034_OVERLAYKIT_ARCHIVE_SHA256 is required}'
+    environment:
+      COOKIE_SECURE: never
+      CORS_ORIGIN: http://h038-maintainer.local
+      DATA_DIR: /data
+      H034_HOST_GID: '${H034_HOST_GID:?H034_HOST_GID is required}'
+      H034_HOST_UID: '${H034_HOST_UID:?H034_HOST_UID is required}'
+      HOST: 0.0.0.0
+      LOG_LEVEL: info
+      NODE_ENV: production
+      REST_PORT: '3000'
+      WS_HOST: 0.0.0.0
+      WS_PORT: '8080'
+    healthcheck:
+      test: ['CMD', 'curl', '-fsS', 'http://127.0.0.1:3000/health']
+      interval: 2s
+      timeout: 2s
+      retries: 30
+    networks:
+      h038_lan:
+        ipv4_address: 172.30.38.10
+    ports:
+      - '127.0.0.1:${H038_REST_PORT:-33038}:3000'
+    volumes:
+      - overlaykit_data:/data
+      - '${H038_EVIDENCE_DIR:?H038_EVIDENCE_DIR is required}:/evidence'
+
+  companion:
+    build:
+      context: ../..
+      dockerfile: lab/h034/Dockerfile.companion
+    depends_on:
+      overlaykit:
+        condition: service_healthy
+    devices:
+      - '${H038_DEVICE_PATH:?H038_DEVICE_PATH is required}:${H038_DEVICE_PATH}:rwm'
+    entrypoint: ['/bin/bash', '/h038/companion-entrypoint.sh']
+    environment:
+      H034_HOST_GID: '${H034_HOST_GID:?H034_HOST_GID is required}'
+      H034_HOST_UID: '${H034_HOST_UID:?H034_HOST_UID is required}'
+      H038_DEVICE_GID: '${H038_DEVICE_GID:?H038_DEVICE_GID is required}'
+    group_add:
+      - '${H038_DEVICE_GID}'
+    healthcheck:
+      test: ['CMD', 'curl', '-fsS', 'http://127.0.0.1:8000/']
+      interval: 2s
+      timeout: 2s
+      retries: 45
+    networks:
+      h038_lan:
+        ipv4_address: 172.30.38.20
+    ports:
+      - '127.0.0.1:${H038_COMPANION_PORT:-38038}:8000'
+      - '127.0.0.1:${H038_SATELLITE_PORT:-36628}:16622'
+    volumes:
+      - companion_data:/companion
+      - '${H038_EVIDENCE_DIR:?H038_EVIDENCE_DIR is required}:/evidence'
+      - '${H038_LAB_DIR:?H038_LAB_DIR is required}:/h038:ro'
+
+networks:
+  h038_lan:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.38.0/24
+
+volumes:
+  companion_data:
+  overlaykit_data:

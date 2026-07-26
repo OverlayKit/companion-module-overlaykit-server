@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0011",
+  "title": "Isolate static Docker device mapping across one MK.2 enumeration epoch",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Verified H-039 evidence refutes automatic MK.2 reacquisition by the continuously running Companion 4.3.3 container with its static Docker devices mapping: the exact USB serial returned in a new enumeration epoch, configuration and top-level identities remained unchanged, but the unchanged SurfaceThread recovered no hidraw descriptor within 30 seconds.",
+      "evidence": "H-039 run artifacts/h039/h039-2026-07-25T22-12-14-212Z-e6c2b45e/run.json; evidence SHA-256 e78ed04dd10469e863b33e4fa497ddc745a20574fb18095c2bde7cf3fdb594ce",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "H-039 observed the same host pathname and rdev before and after reconnect, while the USB device number, HID sysfs path, inode, and ctime changed; therefore pathname and rdev alone do not identify the current enumeration epoch.",
+      "evidence": "H-039 initial, disconnected, and reconnected host snapshots in the verified run.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The static Docker devices mapping is a plausible stale-device boundary, but H-039 did not isolate it from Companion or its surface module.",
+      "evidence": "H-039 static compose mapping plus the lost descriptor and absent reopen; causal attribution remains intentionally unresolved.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-040: across one exact MK.2 disconnect and reconnect, a probe container started before removal retains its static Docker device node identity while a read-only bind of the host device directory observes absence and then the new host node epoch.",
+      "evidence": "D³ minimal refutation Slice derived from H-039 and a preflight stat comparison; the governed run remains pending.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-040 does not determine whether Companion can recover with dynamic exposure, whether restarting or recreating Companion is required, or whether any dynamic device mount is acceptable production architecture.",
+      "evidence": "H-040 structural-only Slice boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "No udev rule, systemd unit, supervisor, rescan, Companion restart, container recreation, native deployment, reboot behavior, rendered pixels, OBS truth, or security acceptance is established by this Slice.",
+      "evidence": "H-040 explicit exclusions.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The run binds verified H-039 evidence, the exact Fedora host, graphical principal, exact MK.2 serial, initial host node epoch, probe image identity, source hashes, and active governance contract before asking for physical removal.",
+      "verification": "Canonical H-039 and governance receipts plus fresh host USB, sysfs, HID, character-node, owner, session, image, and source observations."
+    },
+    {
+      "id": "SC-002",
+      "statement": "One lab-owned probe container created while the MK.2 is present exposes the initial node both through Docker's static device mapping and through a read-only bind of the host device directory, without reading from or writing to the HID device.",
+      "verification": "Exact docker invocation audit and fs.stat-only receipts for both paths; no Companion, OverlayKit, virtual key invocation, device read, or device write."
+    },
+    {
+      "id": "SC-003",
+      "statement": "During one human-bounded disconnect and reconnect, the host observer proves stable exact absence and a new enumeration epoch, and the probe records both mapping views at initial, absent, and returned stages.",
+      "verification": "Separate challenge windows, three stable host snapshots per transition, host polling chronology, and container stat receipts."
+    },
+    {
+      "id": "SC-004",
+      "statement": "A supported outcome requires the dynamic directory-bind view to disappear with the host node and return with the exact new host st_dev, inode, ctime, and rdev while the static Docker device view remains the original container node identity; any complete contrary observation refutes H-040.",
+      "verification": "Schema-valid supported/refuted outcome with independently recomputed epoch and mapping predicates."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Cleanup removes the exact H-040 probe container, leaves the reconnected MK.2 present with no owner reported by the host-scope fuser observation, and records that no production or host configuration was changed.",
+      "verification": "Exact container absence plus the final host snapshot mount namespace, fuser receipt, and invocation audit; an empty host-scope fuser result does not disprove owners in other namespaces."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0011 records the architectural question, H-040, typed claims, falsification path, evidence requirements, reorder, and exclusions before the physical experiment.",
+      "evidence": "CHG-0011."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The Slice adds only bounded directly executable H-040 evidence tooling, focused tests, this proposed contract, and deterministic generated governance artifacts; accepted records and every H-039 source-bound file remain untouched.",
+      "evidence": "Repository diff and H-039 source verification."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "A physical run produces independently verified supported or refuted H-040 evidence using metadata-only stat observations.",
+      "evidence": "Pending physical H-040 run and independent verifier."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Governance, quality, and build gates pass under the required Node 22 runtime.",
+      "evidence": "Pending final gate receipts."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No ADR, production specification, implemented status, merge, host installation, udev rule, systemd unit, supervisor, or production configuration is created before separate human evidence review and acceptance.",
+      "evidence": "Human Doctrine review remains pending."
+    }
+  ]
+}
