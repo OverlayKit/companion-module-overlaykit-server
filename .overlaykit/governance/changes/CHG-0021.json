@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0021",
+  "title": "Accept bounded H-045 evidence with its H-046 offline prerequisite",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "CHG-0019 and CHG-0020 remain proposed and byte-identical, and the repaired 24-source H-045/H-046 set is covered by a distinct signed source anchor.",
+      "evidence": "CHG-0019 SHA-256 6c83d4b15e82ee3727cc941ffc2b8a9023052ea8a306f2e441953fe044a277fa; CHG-0020 SHA-256 e8c00014e79af95a9a567cbcfca2f054b25c4b807f549df58b7591aca8ae0c6b; source-set SHA-256 8db21fe91325c03aa19cb10937f64b61b2e7de9b80205a581107ac099d0db55b; signed commit 9fc605d428808b571ac5f1709071b4da9c183aef with valid OpenPGP signature and parent 2dc13d02f3d054fe54cb253869134c872e965601.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The repaired pre-live source closure remains an immutable historical input and is not reinterpreted after the replacement run.",
+      "evidence": "Pre-live source archive SHA-256 d8f4a140b26fad1d8859fa3e79d05fcabfde1c8d23d67db3851a73571e31f0f0, 1249280 bytes, 24 members, mode 0600; pre-live closure SHA-256 3f6f3c4ff5ade745f6195d2c877098eb7ad0bdebd891b4e89c04ed468016ac5e. Its replacement-ledger-absent, run-absent, and authorization-unconsumed fields remain exclusively pre-live assertions.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "H-046 is supported exclusively as an offline repair of the H-045 closed command-environment seam: the canonical entry point supplies a fresh empty plain record, inherits no host environment key, preserves the fixed child environment, and invokes no observer runner during construction.",
+      "evidence": "Signed repaired source anchor 9fc605d428808b571ac5f1709071b4da9c183aef; source-set SHA-256 8db21fe91325c03aa19cb10937f64b61b2e7de9b80205a581107ac099d0db55b; 229 focused H-045/H-046 tests passed under Node 22.20.0 before the anchor commit; Node binary SHA-256 b1cbec894e45a5814b6ab756e1e14f8a76516273197e67e0412b57c1e10d0d9f.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The original CHG-0019 grant and the CHG-0020 replacement grant each terminated exactly once in distinct immutable ledgers: the predecessor has reservation plus failure and no completion or run; the replacement has reservation plus completion, no failure, and one canonical run.",
+      "evidence": "Predecessor reservation SHA-256 27ee9aa2c70adb56682564c6ddc80c43cc40e6a5c5e1edacc23327648aad2f24; predecessor failure SHA-256 710b3b28760239f5971c961f8b0011a18c439c10a4974f548c435ff2a4507fc0; replacement reservation SHA-256 f1eec0451f3c894221e5efa22eb7533a3806af73ba60ab0630d23ae28b004da8; replacement completion SHA-256 d84660770beb011f11b7d08d0cd8002cf7eb71e5809a3efb20edd87b42fa0ae2; exact ledger membership and terminal-state checks.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Canonical run h045-2026-07-27T18-07-03-825Z-eb0471d0 supports H-045 only within its dynamic read-only acquisition claim while classifying the live observation as withheld at not-eligible with reason accepted-image-deployment-absent and zero candidate receipts.",
+      "evidence": "Semantic evidence SHA-256 e88dab701123cd23c4c18b480af7303b9242f93b022299493320c04144072fd7; run.json SHA-256 ea913d8c577b85cad52070ab3f8e41b3373881e1308fcadd492180d56f53fbcc; outcome supported; live disposition withheld; stage not-eligible; reason accepted-image-deployment-absent; receipt count zero; authority none; action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The independent H-045 verifier accepted the exact predecessor-to-replacement ledger chain, repaired sources, admission and capability audits, classification, hostile matrix, claim boundary, and producer agreement, with no prohibited capability observed.",
+      "evidence": "verification.json SHA-256 a2214d8d9c6377fa3776b01be0671ff221198b65b344ceacd14d8381f96c8c06; verified true; predecessorAttemptLedgerExact true; replacementAttemptLedgerExact true; sourceSetExact true; sourceStable true; classificationExact true; receiptExact true; producerAgreement true; prohibitedCapabilityObserved false.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The registered human principal accepted H-046 only within its offline boundary, accepted the exact canonical H-045 evidence only within its claim boundary, and separately authorized this local post-live closure, implemented CHG-0021, required gates, and signed local commits.",
+      "evidence": "Local human-acceptance record SHA-256 51be01b76fa0c977235af2db06b6c546002f5b4689aafa92cfeda7a6f59455d0 records the three 2026-07-27 motions by @rodrigoteamx; preservation motion canonical-text SHA-256 e7446e76bc486f0114c51cc52473e2a6a6c2bcf43b83297cfee5905612a547f7.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "A distinct deterministic post-live closure preserves the repaired sources, both attempt ledgers, canonical run, independent verification, signed source anchor, and human acceptance locally with restricted permissions; Git tracks only a non-authorizing receipt.",
+      "evidence": "Local 11-member POSIX ustar archive artifacts/h045/post-live-closures/e88dab701123cd23c4c18b480af7303b9242f93b022299493320c04144072fd7/replay-ebc6b52c4cd138082532cac4ee2288a7ab749f8d5a8763ee82b6c51747d3f690.tar; SHA-256 ebc6b52c4cd138082532cac4ee2288a7ab749f8d5a8763ee82b6c51747d3f690; 1699840 bytes; mode 0600; byte-identical double build; external closure SHA-256 89dcad0c6e1fa2c8b26f6f41522fcf5995e93d01af0de88969da89a65d0e4023; public receipt evidence/h045/e88dab701123cd23c4c18b480af7303b9242f93b022299493320c04144072fd7/README.md.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "No new architectural decision candidate is activated by H-045 or H-046: the observations exercise ADR-0006's existing fail-closed mechanism boundary but select no new architecture, lifecycle owner, action, or production policy.",
+      "evidence": "Canonical H-045 result has zero candidate receipts, authority none, and action null; human motions withhold ADR creation and production policy; accepted ADR-0001 through ADR-0006, SPEC-0001, SPEC-0002, profile 1.6.0, and plan.json remain unchanged; H-047 is reserved for separate CHG-0022 governance.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Within only the accepted H-045 mechanism boundary, dynamic current-target acquisition fails closed correctly when no deployment derived from the exact accepted image is present: absence yields no tuple, authority, or action rather than selector broadening or an unsafe positive.",
+      "evidence": "Human-accepted canonical H-045 evidence e88dab701123cd23c4c18b480af7303b9242f93b022299493320c04144072fd7, independent verification a2214d8d9c6377fa3776b01be0671ff221198b65b344ceacd14d8381f96c8c06, zero receipts, and ADR-0006's bounded successor-slice requirements.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "No accepted evidence establishes why the exact accepted Companion image deployment was absent, whether it is required to exist on this host, who owns its lifecycle, or whether the absence represents intentional topology or drift.",
+      "evidence": "H-045 observes only accepted-image-deployment-absent at one bounded cutoff; SPEC-0001, SPEC-0002, ADR-0005, and ADR-0006 do not declare a persistent host deployment obligation.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-045 and H-046 do not establish a safe signal, pidfd action, watcher, retry, controller, restart, installation, deployment reconciliation, configuration continuity, repeated recovery, security property, acceptable downtime, pre-login behavior, reboot behavior, or production policy.",
+      "evidence": "CHG-0019 and CHG-0020 exclusions, canonical H-045 claim boundary, zero candidate receipts, ADR-0006, and the accepted human motions.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-045 and H-046 do not establish physical button command delivery, rendered pixels, operator perception, OBS truth, complete product recovery, or satisfaction or expansion of SPEC-0001 or SPEC-0002.",
+      "evidence": "Canonical H-045 claim boundary, ADR-0006 physical-mechanism boundary, and accepted SPEC-0001 and SPEC-0002 exclusions.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The raw H-045 replay contains restricted host, USB-inventory, container, process, namespace, cgroup, and hardware identities required for reconstruction; publication remains unauthorized.",
+      "evidence": "Local archive mode 0600, repository artifacts/ ignore boundary, public restricted receipt, bounded credential-signature scan, and exact human authorization boundary.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0019 and CHG-0020 remain byte-identical and proposed, and all 24 repaired H-045/H-046 sources are recoverable from one valid signed source anchor.",
+      "verification": "Recompute both change hashes, all 24 per-source hashes, source-set SHA-256 8db21fe91325c03aa19cb10937f64b61b2e7de9b80205a581107ac099d0db55b, commit tree 5cb21eccdd8f98354cb2b2fedf19a6865f3524b6, and git verify-commit 9fc605d428808b571ac5f1709071b4da9c183aef."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The accepted H-046 claim remains exclusively offline and reproduces the fresh-empty-record environment repair without runner invocation, host environment inheritance, selector expansion, or capability broadening.",
+      "verification": "Pinned Node 22.20.0 regression, exact closed-fixed environment comparison, zero-call construction tests, hostile environment cases, and 229 focused tests at the signed source anchor."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The predecessor and replacement ledgers remain one immutable causal history with exact terminal membership and no reusable grant or third attempt.",
+      "verification": "Recompute all four ledger hashes; verify predecessor reservation plus failure with no completion or run, replacement reservation plus completion with no failure and exactly one canonical run, canonical realpaths, modes, and second-use rejection."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The accepted H-045 claim reproduces exactly the supported hypothesis outcome and withheld accepted-image-deployment-absent classification without creating a tuple, authority, action, continuity claim, or broader recovery conclusion.",
+      "verification": "Independent replay of semantic evidence, temporal governance inputs, both ledgers, admission, command and filesystem audits, capability audit, frames, classification, zero receipt cardinality, hostile matrix, claim boundary, outcome, and producer agreement."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The deterministic post-live closure preserves every exact input required to audit H-046 and H-045 locally, while Git contains only a reviewed non-sensitive restricted receipt.",
+      "verification": "Archive SHA-256 ebc6b52c4cd138082532cac4ee2288a7ab749f8d5a8763ee82b6c51747d3f690; double-build byte comparison; 11-member order, hash, length, type, mode, duplicate, and path audit; closure SHA-256 89dcad0c6e1fa2c8b26f6f41522fcf5995e93d01af0de88969da89a65d0e4023; Git-ignore verification; disclosure scan; public receipt inspection."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Acceptance activates no ADR or product specification and leaves profile 1.6.0, plan.json, ADR-0001 through ADR-0006, and SPEC-0001 through SPEC-0002 unchanged.",
+      "verification": "Governance diff, accepted-record hash comparison, exact plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, profile comparison, and deterministic manifest compilation."
+    },
+    {
+      "id": "SC-007",
+      "statement": "Governance, quality, build, historical verification, H-045/H-046 focused tests, source and ledger verification, and canonical H-045 replay pass at their correct temporal source and governance boundaries.",
+      "verification": "Final local receipts from governance:verify, governance:check, check, build, applicable historical verifiers, focused tests at signed source anchor 9fc605d428808b571ac5f1709071b4da9c183aef, and canonical H-045 verification against its frozen pre-acceptance governance bytes."
+    },
+    {
+      "id": "SC-008",
+      "statement": "Acceptance creates no signal, retry, third attempt, lifecycle or configuration mutation, hidraw I/O, installation, controller, deployment policy, raw-evidence publication, push, merge, release, or H-047 authority.",
+      "verification": "Exact human motions and hashes, immutable two-attempt ledger history, capability audit, restricted-evidence boundary, authority none, action null, repository diff, local-only signed commits, and absence of prohibited artifacts or mutations."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0021 records the three registered human motions, typed facts, one bounded inference, nonblocking unknowns, exact evidence identities, temporal closure distinction, exclusions, and separate transition authorities.",
+      "evidence": "Human-acceptance record SHA-256 51be01b76fa0c977235af2db06b6c546002f5b4689aafa92cfeda7a6f59455d0 and this implemented successor contract."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "CHG-0019 and CHG-0020 remain proposed and byte-identical; accepted ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002 remain untouched.",
+      "evidence": "Repository diff, exact precontract SHA-256 values, accepted-record hashes, and deterministic governance verification."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The exact repaired 24-source H-045/H-046 closure is recoverable from the valid signed source anchor while the pre-live closure remains unchanged as a historical record.",
+      "evidence": "Source set SHA-256 8db21fe91325c03aa19cb10937f64b61b2e7de9b80205a581107ac099d0db55b; signed commit 9fc605d428808b571ac5f1709071b4da9c183aef; source archive d8f4a140b26fad1d8859fa3e79d05fcabfde1c8d23d67db3851a73571e31f0f0; pre-live closure 3f6f3c4ff5ade745f6195d2c877098eb7ad0bdebd891b4e89c04ed468016ac5e."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Both attempt ledgers, canonical H-045 run, semantic evidence, and independent verification are preserved and reproduce the exact accepted outcome without reinterpreting the predecessor failure.",
+      "evidence": "Ledger hashes 27ee9aa2c70adb56682564c6ddc80c43cc40e6a5c5e1edacc23327648aad2f24, 710b3b28760239f5971c961f8b0011a18c439c10a4974f548c435ff2a4507fc0, f1eec0451f3c894221e5efa22eb7533a3806af73ba60ab0630d23ae28b004da8, and d84660770beb011f11b7d08d0cd8002cf7eb71e5809a3efb20edd87b42fa0ae2; evidence e88dab701123cd23c4c18b480af7303b9242f93b022299493320c04144072fd7; run ea913d8c577b85cad52070ab3f8e41b3373881e1308fcadd492180d56f53fbcc; verification a2214d8d9c6377fa3776b01be0671ff221198b65b344ceacd14d8381f96c8c06."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "The restricted post-live replay is locally content-addressed and independently verifiable, while the repository contains only its non-authorizing public receipt.",
+      "evidence": "Local archive SHA-256 ebc6b52c4cd138082532cac4ee2288a7ab749f8d5a8763ee82b6c51747d3f690; closure SHA-256 89dcad0c6e1fa2c8b26f6f41522fcf5995e93d01af0de88969da89a65d0e4023; evidence/h045/e88dab701123cd23c4c18b480af7303b9242f93b022299493320c04144072fd7/README.md; bounded disclosure scan."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No ADR, profile, plan, product specification, product code, or production policy is added or changed; only CHG-0021, its restricted receipt, and the deterministic manifest record acceptance.",
+      "evidence": "Governance and repository diff, exact accepted-record hashes, plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, and deterministic manifest output."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "Final governance, quality, build, temporal replay, focused H-045/H-046, source, ledger, archive, disclosure, schema, hostile, and independent verification gates pass under Node 22.20.0 at their correct boundaries.",
+      "evidence": "Successful final local gate receipts produced before the signed CHG-0021 commit."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "No third attempt, signal, restart, controller, deployment change, installation, raw publication, push, merge, release, product-specification expansion, or H-047 authority is created by this acceptance.",
+      "evidence": "Exact human authority boundaries, immutable two-attempt ledger history, capability audit, repository and remote state, restricted raw-evidence boundary, authority none, action null, and separate CHG-0022 requirement."
+    }
+  ]
+}
