@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0017",
+  "title": "Test bounded live read-only revalidation of one historical worker candidate",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "CHG-0016 implements the human acceptance and content-addressed preservation of canonical H-043 while CHG-0015 remains the byte-exact proposed pre-experiment contract.",
+      "evidence": "Protected-main commit 6c329234caddf9e34126be04149f768673bdb8bf; CHG-0016 SHA-256 b8ea5a54c666047c7c44e322b21bc5f24836d172b4712c7483507bc2d4739ae6; CHG-0015 SHA-256 b2cd667fad87b366163549cdb3b0ffaac95ffd591fc53d6158c229a516ae7e25; post-merge Constitution run 30229198395 succeeded with state current, ready true, activationReady true, and zero blockers.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Canonical H-043 emits exactly one historical worker candidate with requiresRevalidation true, authority none, and action null; it does not establish that any volatile identity remains current after its recorded cutoff.",
+      "evidence": "H-043 run h043-2026-07-26T22-13-38-193Z-b4158eab; semantic evidence SHA-256 64bf41f30dc2d51a2475e6f2e9b79ddebc225c076a87b83c384b3848b1bbecb8; candidate token SHA-256 43f26fc54686331e1d6a4f06d827b92d1975cc1482b2cd2d1795f698a6deac06.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "ADR-0006 accepts SurfaceThread only as a bounded observed replacement unit and requires a successor governed Slice before any production recovery proposal.",
+      "evidence": "ADR-0006 SHA-256 619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360 under verified profile overlaykit-companion-module@1.6.0.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "SPEC-0001 and SPEC-0002 exclude USB access, Stream Deck discovery, physical key presses, and rendered device pixels, so H-044 is supplemental mechanism-governance evidence and cannot satisfy or expand either accepted product specification.",
+      "evidence": "Accepted SPEC-0001 SHA-256 917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179 and SPEC-0002 SHA-256 d15b1cbf7e97bd92aadf40342421161a0955e210b8566f7ae870dc78c05e89f6.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Before constructing a watcher, pidfd guard, or actuator, two adjacent read-only live frames are the smallest Slice that can refute whether the historical candidate's device, container, PID 1, and SurfaceThread identities can still be observed as one coherent current tuple.",
+      "evidence": "D³ reorder from a live collector-controller to a cutoff-bound observation that can return candidate, withheld, or inconclusive without authorizing a later action.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-044: on the currently authorized post-login Linux host, a capability-bounded collector can independently admit canonical H-043, capture two adjacent read-only frames of the current MK.2, Docker lifecycle, PID 1, SurfaceThread, descriptor metadata, and serial-specific logs, and emit exactly one cutoff-bound non-authorizing revalidation receipt only if both complete frames match the entire historical candidate and each other; complete current evidence that proves non-eligibility emits zero receipts and withheld, while incomplete, ambiguous, contradictory, inaccessible, or drifting evidence emits zero receipts and inconclusive.",
+      "evidence": "D³ minimal refutation Slice registered before H-044 implementation or live host observation.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The current host, login session, MK.2 enumeration epoch, Docker lifecycle, PID 1, and SurfaceThread identities have not yet been observed under H-044 and may differ from or no longer contain the historical candidate.",
+      "evidence": "H-044 deliberately records its contract before invoking lsusb, Docker reads, or host filesystem observation.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "A complete live frame may be impossible without privileged or mutating access; H-044 must return inconclusive rather than use docker exec, enter namespaces, open hidraw, weaken permissions, or omit an unavailable field.",
+      "evidence": "H-044 capability and completeness boundary.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Even a supported H-044 receipt proves only stability between two observed frame boundaries and is stale immediately after its cutoff; it does not prove atomicity, race freedom, PID-reuse-safe action, or authority at any later instant.",
+      "evidence": "A read-only observation cannot close the check-action interval and therefore remains authority none, action null, authorizesAction false, and validAtCutoffOnly true.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-044 does not establish a safe signal, watcher, controller, supervisor, restart, repeated recovery, button delivery, configuration continuity, rendered pixels, operator perception, OBS truth, security, acceptable downtime, multiple-device behavior, pre-login behavior, reboot recovery, or production policy.",
+      "evidence": "H-044 explicit minimal-Slice exclusions and ADR-0006.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "Before any live observation, H-044 verifies the accepted H-043 replay archive, canonical run and verification hashes, candidate token, CHG-0016, ADR-0006, protected-main ancestry, current governance manifest, and exact H-044 source set.",
+      "verification": "Content hashes, deterministic archive-member extraction, independent H-043 verification, Git ancestry, governance verification, and exact source map."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The collector records the Linux host and boot identity and enumerates the exact Elgato vendor 0fd9 product 0080 serial through lsusb and read-only sysfs, uevent, symlink, and stat metadata without opening, reading, writing, or issuing ioctl against any hidraw node.",
+      "verification": "One exact audited lsusb enumeration plus file-read and lstat/readlink receipts for /etc, /proc, /sys, and device-node metadata; hidrawOpenCount, hidrawReadCount, hidrawWriteCount, and hidrawIoctlCount remain zero."
+    },
+    {
+      "id": "SC-003",
+      "statement": "Using only Docker version, ps, inspect, and bounded logs queries plus host /proc reads, each frame either identifies one exact official Companion lifecycle, PID 1, and SurfaceThread tuple or records a complete non-eligible absence; container creation, exec, top, attach, signal, stop, restart, recreate, rescan, and namespace entry are prohibited.",
+      "verification": "Exact command allowlist and cardinality, Docker JSON receipts, host process-tree reconstruction, process start ticks, parent identity, UID, GID, groups, command line, cgroup, PID and mount namespaces, and zero prohibited invocation counts."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Two immediately adjacent complete frames bind wall and monotonic start and end times, current device epoch, container and PID 1 lifecycle, full SurfaceThread identity, matching-device descriptor metadata, and serial-specific Opening and Ready marker counts; their exposure interval, bounded to at most 5000 milliseconds, and all inter-frame drift are explicit.",
+      "verification": "Schema-valid ordered frames, independently recomputed frame digests, monotonic exposure interval no greater than 5000 milliseconds, exact tuple comparison, descriptor stat comparison, marker reconstruction, and no unrecorded observation command between frame boundaries."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Classification emits one candidate receipt only when both complete frames and the historical receipt match every required identity and prove current descriptor absence and stable markers; complete evidence proving a stale or non-eligible state emits withheld, while incomplete, ambiguous, contradictory, inaccessible, or inter-frame drift emits inconclusive.",
+      "verification": "Pure deterministic three-way classifier with stable stage and reason codes, exact predicate set, receipt cardinality, and schema conditionals."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Any candidate receipt is valid only at its second-frame cutoff and contains authority none, action null, authorizesAction false, validAtCutoffOnly true, revalidatedAtCutoff true, requiresRevalidation true for every subsequent use, the full observed tuple, exposure interval, source identities, and no command, signal target, executable action, retry, or future validity.",
+      "verification": "Schema consts, field-by-field independent reconstruction, receipt digest, and hostile authority-expansion tests."
+    },
+    {
+      "id": "SC-007",
+      "statement": "A hostile matrix rejects or withholds PID reuse, worker ambiguity, parent or namespace drift, container or PID 1 drift, device absence or epoch drift, current descriptor recovery, marker changes, frame reordering, exposure greater than 5000 milliseconds, missing command audit, duplicate receipts, input tampering, and any prohibited capability without an unsafe positive.",
+      "verification": "Focused mutation tests covering every predicate, disposition, reason code, receipt count, and side-effect boundary."
+    },
+    {
+      "id": "SC-008",
+      "statement": "An independent verifier reconstructs source admission, both live frames, command audit, every predicate, classification, receipt fields, exposure interval, hostile matrix, claim boundary, and semantic evidence digest without importing producer decision constants or trusting declared summaries.",
+      "verification": "Producer-schema-verifier parity tests, independent literals and classifier, artifact hashing, canonical digest recomputation, and negative verifier tests."
+    },
+    {
+      "id": "SC-009",
+      "statement": "H-044 records every allowed observer process, the one lsusb enumeration, and every Docker Unix-socket read with exact arguments, timing, exit status, stdout and stderr digests, and cardinality; all external-network, hidraw-open, hidraw-I/O, signal, lifecycle, configuration, mount, cgroup, sysfs-write, and production mutation counts remain zero.",
+      "verification": "Capability audit, static import review, command-receipt reconstruction, before-and-after Docker lifecycle comparison, exact positive observer cardinalities, and literal zero prohibited counts."
+    },
+    {
+      "id": "SC-010",
+      "statement": "A complete canonical run supports H-044 when its independently verified live classification is either one exact non-authorizing candidate or zero candidates with withheld; a prohibited capability, unsafe positive, duplicate receipt, or producer-verifier disagreement refutes H-044, while incomplete admission, frames, or audit make the hypothesis inconclusive.",
+      "verification": "Canonical H-044 run and verification artifacts independently recompute the separate supported, refuted, or inconclusive hypothesis outcome and candidate, withheld, or inconclusive live classification."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0017 records the architectural question, H-044, typed claims, exact live observation boundary, three-way semantics, hostile refutation path, observable evidence, exclusions, and D³ reorder before implementation or host observation.",
+      "evidence": "Before: build a live collector-controller around the historical candidate. After reorder: first prove a cutoff-bound, authority-void two-frame observation with no action capability."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The Slice adds only CHG-0017, bounded H-044 collector, pure classifier, schema, verifier, tests, local evidence, and deterministic generated governance artifacts; accepted records, product specifications, product code, and source-bound H-043 files remain untouched.",
+      "evidence": "Repository diff, accepted-record hash comparison, and H-043 archive and canonical verification."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "One live read-only run produces independently verified supported, refuted, or inconclusive H-044 evidence and never interprets a candidate receipt as authority after its recorded cutoff.",
+      "evidence": "Pending H-044 run.json and verification.json with exact outcome, classification, exposure interval, command audit, and claim boundary."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Governance, quality, build, canonical H-042 and H-043 verification, focused H-044 tests, hostile matrix, schema validation, and independent H-044 verification pass under Node 22.",
+      "evidence": "Pending final local gate receipts."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No physical disconnect or reconnect, new USB epoch, hidraw open or I/O, USB write outside bounded lsusb enumeration, docker exec, namespace entry, signal, stop, restart, recreate, rescan, installation, configuration change, watcher, supervisor, production policy, product specification, publication, or release is created by H-044.",
+      "evidence": "Capability audit and repository, host, Docker, process, device, and configuration before-and-after comparisons, with one exact lsusb enumeration and zero prohibited capabilities."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No ADR, accepted or implemented successor status, push, merge, production action, or authority promotion is created before separate human review of exact H-044 evidence; only the signed proposed precontract may be committed before the experiment.",
+      "evidence": "Human authorization covers opening and running H-044 read-only; evidence acceptance and every later transition remain pending."
+    }
+  ]
+}
