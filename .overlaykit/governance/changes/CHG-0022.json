@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0022",
+  "title": "Test whether the exact accepted Companion image is repository-governed desired state",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts as the evidence-producing agent for CHG-0022 under the human principal @rodrigoteamx; neither the agent nor this proposed contract may approve its own evidence, create action authority, or select production desired state.",
+      "evidence": "Repository AGENTS.md, compiled governance plan, ADR-0001, and the human instruction to continue with the separately governed CHG-0022 repository-only slice after merging CHG-0021.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immutable H-047 subject is protected-main merge commit a68ab8f2c8a64828c1c685161ef9319bd8a837c7, before CHG-0022 exists in its tree, so the experiment contract cannot become evidence for its own hypothesis.",
+      "evidence": "Subject tree 9ee6e2f74f7fd6272559d1b91fe4005726cc5b18; 238 tracked entries; SHA-256 c9abef88898ec71e5130e041920ca285bce46bbabb08b6a6d885e292295aad05 of the exact NUL-delimited git ls-tree -rz --full-tree stream; compiled plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The exact H-047 image identity is the historical Companion 4.3.3 evidence selector, not an inferred tag or a current host observation.",
+      "evidence": "Image reference ghcr.io/bitfocus/companion/companion:v4.3.3 and image ID sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e as accepted in ADR-0006 and used by H-045.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The H-047 target is the logical Linux production-host role governed by accepted SPEC-0001, not an arbitrary host, the ephemeral lab, or an unstated physical-machine identity.",
+      "evidence": "SPEC-0001 content hash 917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179 and its accepted Linux production scope; an eligible selector must explicitly bind this role or explicitly reference SPEC-0001.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "SPEC-0001 requires only that OverlayKit and Companion be reachable from the Linux production host as an operator-provided precondition; it does not select an image identity, placement, cardinality, persistence rule, lifecycle owner, reconciler, or drift remedy.",
+      "evidence": "Accepted SPEC-0001 scope, preconditions, workflows, and exclusions in the exact subject tree.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "SPEC-0002 and ADR-0005 govern a clean-room ephemeral lab whose pinned images and created resources are evidence inputs subject to verified cleanup, not declarations of persistent production deployment.",
+      "evidence": "Accepted SPEC-0002 laboratory scope and exclusions plus ADR-0005 clean-room identity and cleanup policies in the exact subject tree.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "ADR-0006 binds the exact image to one historical mechanism observation and explicitly selects no production trigger, controller, supervisor, restart policy, device bind, or complete recovery policy.",
+      "evidence": "Accepted ADR-0006 decision, consequences, and production-recovery-requires-successor-slice policy in the exact subject tree.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0021 preserves the accepted H-045 observation as accepted-image-deployment-absent at one cutoff with zero receipts, authority none, and action null, while leaving deployment requirement, lifecycle ownership, topology-versus-drift, and remedy unknown.",
+      "evidence": "Implemented CHG-0021 facts, inference, unknowns, claim boundary, and exclusions in the exact subject tree.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The subject contains 6 accepted ADRs, 2 accepted product specifications, 9 implemented changes, 12 proposed changes, 26 exact-image identity paths, and 8 deployment-shaped paths consisting only of two CI workflows and six Docker or Compose files under lab/h034 and lab/h038.",
+      "evidence": "Deterministic read-only inventory of all 238 subject blobs; the 26 identity paths are the union of 22 reference hits and 25 image-ID hits, with 21 paths containing both. No tracked systemd, Kubernetes, Helm, Terraform, Ansible, production Compose, or production desired-state restart declaration was found. Laboratory and test restartPolicy references are evidence mechanics and remain inventoried as non-production.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Current accepted evidence authorizes no installation, configuration, start, stop, restart, signaling, reconciliation, retry, publication, product-specification change, ADR creation, or other production or host mutation.",
+      "evidence": "CHG-0021 authority none and action null, ADR-0006 exclusions, and the CHG-0022 repository-only claim boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "A complete content-addressed inventory of the pre-contract repository tree is the smallest experiment capable of refuting a repository-governed desired-state obligation before any host observation, installation, restart, signal, or reconciliation is considered.",
+      "evidence": "D³ reorder from host remediation to normative-source discovery, exact subject closure, and ADR-0001 evidence-before-decision ordering.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-047: the exact subject tree contains at least one current, explicit, unambiguous, and fully linked production desired-state chain, rooted in effective accepted authority, requiring the SPEC-0001 Linux production-host role to maintain a deployment derived from the exact accepted Companion image, with presence and cardinality, lifecycle owner, reconciler mechanism, and absence-to-convergence rule.",
+      "evidence": "This is the refutable claim; historical evidence references, implemented evidence records without accepted authority, proposed contracts, lab resources, inferred proximity, arbitrary other hosts, and externally held policy do not satisfy it.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The final H-047 harness source-set digest, independent verifier result, and canonical hypothesis outcome remain unknown until the repository-only sources are frozen in a distinct signed source anchor and executed twice against the exact subject.",
+      "evidence": "Any change to the producer, schema, verifier, tests, review maps, or proposed contract changes the harness source closure.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "This repository-only experiment cannot establish whether desired state exists outside the subject tree, whether the observed deployment absence was intentional, whether the host is compliant or drifted, why the deployment was absent, or whether any repository-declared lifecycle-owner role corresponds to actual external operational ownership.",
+      "evidence": "The immutable subject boundary can inspect a repository-declared lifecycle-owner role but excludes external repositories, operator intent, current host state, actual role assignment, and all live observation.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Any future authority to install, configure, start, stop, restart, signal, reconcile, retry, publish, change a product specification, create an ADR, or otherwise mutate production or the host remains unknown until a separate governed human transition.",
+      "evidence": "CHG-0022 is proposed, repository-only, and explicitly non-authorizing; future human decisions and external state are outside the immutable subject.",
+      "blocking": true
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The producer and verifier bind the subject exactly by commit, tree, 238-member NUL-safe inventory, per-blob Git object and SHA-256, ls-tree stream SHA-256, and compiled plan hash.",
+      "verification": "Independent reconstruction from git ls-tree and git cat-file against a68ab8f2c8a64828c1c685161ef9319bd8a837c7 without reading subject evidence from the worktree."
+    },
+    {
+      "id": "SC-002",
+      "statement": "Every subject blob is covered exactly once and any missing, duplicate, unreadable, traversal, unsupported mode, unknown deployment-like format, unresolved indirection, parser error, ambiguity, or conflict prevents a refuted result.",
+      "verification": "Source-map cardinality and uniqueness checks plus hostile fixtures for omissions, duplicates, bad modes, unknown surfaces, unresolved references, malformed records, and contradictory candidates."
+    },
+    {
+      "id": "SC-003",
+      "statement": "All accepted ADRs, accepted specifications, implemented changes, proposed changes, exact-image identity hits, and deployment-shaped paths are inventoried with their authority and experimental or production disposition.",
+      "verification": "Exact set comparison against the subject tree, governance manifest, compiled plan, structured records, content hits, path taxonomy, and reviewed candidate maps."
+    },
+    {
+      "id": "SC-004",
+      "statement": "A desired-state chain is eligible only when current effective accepted production authority, exact image reference and ID, explicit binding to the SPEC-0001 Linux production-host role, desired presence and cardinality, a repository-declared lifecycle-owner role, reconciler mechanism, absence-to-convergence rule, and explicit link closure are all present without contradiction.",
+      "verification": "Eight-predicate classifier tests cover one accepted-authority positive chain, zero-chain refutation, incomplete chains, inferred links, historical-only records, implemented evidence without accepted authority, proposed records, arbitrary-host selectors, lab-only resources, conflicts, and multiple chains."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Outcome precedence is fail closed: invalid anchors, schemas, or source closures are rejected as invalid evidence; any unresolved, incomplete, ambiguous, conflicting, or unclassified candidate makes H-047 inconclusive even if an otherwise eligible chain exists; only then is H-047 supported by one or more eligible chains or refuted by complete zero-chain coverage.",
+      "verification": "Producer, schema, and verifier parity plus hostile outcome-matrix tests for invalid, conflict-plus-positive, unknown-plus-positive, eligible-only, complete-zero, and incomplete cases."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Every valid H-047 outcome preserves authority none and action null and states that repository-law absence cannot establish external desired-state absence, operator intent, compliance, drift, cause, actual external operational ownership, or remediation authority; it may report only a repository-declared lifecycle-owner role when one is explicit.",
+      "verification": "Schema constants, exact claim-boundary comparison, independent verifier reconstruction, and negative overclaim tests."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The experiment uses only read-only Git repository commands and local ignored evidence writes, with no network, Docker socket, lsusb, procfs, sysfs, devfs, systemd, hidraw, signal, lifecycle, configuration, installation, or production access.",
+      "verification": "Exact command and filesystem capability audit, implementation inspection, hostile environment tests, and repository diff."
+    },
+    {
+      "id": "SC-008",
+      "statement": "The frozen H-047 harness is bound by a distinct valid local signed source anchor whose parent is a68ab8f2c8a64828c1c685161ef9319bd8a837c7 and whose source-set digest is independently reproducible.",
+      "verification": "git verify-commit, parent and tree checks, sorted path-mode-length-SHA-256 source map, and independent source-set digest reconstruction."
+    },
+    {
+      "id": "SC-009",
+      "statement": "Two canonical producer runs against the exact subject yield byte-identical semantic evidence and independently reproduced candidate sets and outcomes.",
+      "verification": "Double execution into separate ignored directories, semantic digest comparison, independent verification outputs, and source-stability checks."
+    },
+    {
+      "id": "SC-010",
+      "statement": "Governance, focused H-047 tests, repository quality checks, and build gates pass without changing any accepted ADR, accepted specification, implemented change, profile, compiled plan, product code, or production configuration.",
+      "verification": "npm run governance:verify, npm run governance:check, focused Node tests, npm run check, npm run build, accepted-record hash comparison, and repository diff."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0022 records the pre-experiment H-047 claim, exact immutable subject, typed epistemic state, eight-predicate eligibility rule, three outcomes, claim boundary, prohibited capabilities, and D³ reorder before execution.",
+      "evidence": "This proposed contract and its deterministic manifest entry."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The exact subject remains a68ab8f2c8a64828c1c685161ef9319bd8a837c7 while CHG-0022 and its harness are frozen separately so the experiment cannot cite itself as subject evidence.",
+      "evidence": "Subject commit, tree, ls-tree digest, source-anchor parent, and source-map checks."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "A minimal producer, schema, reviewed inventory, focused hostile tests, and independent verifier cover every subject blob and fail closed on unknown or incomplete candidates.",
+      "evidence": "Pending frozen lab/h047 source closure, focused test receipts, and static proof that the verifier imports neither the producer nor its classifier and does not trust producer-supplied candidates or outcome."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Canonical repository-only evidence and independent verification reproduce one supported, refuted, or inconclusive H-047 outcome with authority none and action null.",
+      "evidence": "Pending local content-addressed run.json, source-map.json, candidate-index.json, verification.json, and semantic evidence SHA-256."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No accepted or implemented record is edited or deleted; CHG-0019, CHG-0020, CHG-0021, ADR-0001 through ADR-0006, SPEC-0001, SPEC-0002, profile 1.6.0, and compiled plan remain byte-identical.",
+      "evidence": "Repository diff, manifest compilation, accepted-record hashes, and plan-hash comparison."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "The experiment performs no live or host observation and no network, Docker, USB, proc, sysfs, devfs, systemd, hidraw, signal, lifecycle, installation, configuration, reconciliation, publication, or production mutation.",
+      "evidence": "Capability audit, command allowlist, implementation inspection, ignored artifact boundary, and repository diff."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "The ADR assessment distinguishes the bounded repository inventory from a durable architectural choice and creates no ADR unless a later governed Slice selects desired-state authority and the human principal accepts it.",
+      "evidence": "Pending H-047 candidate assessment against ADR-0001, ADR-0005, ADR-0006, SPEC-0001, SPEC-0002, and the exact experiment outcome."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "All required governance, focused, quality, and build gates pass at the frozen source boundary before evidence is handed to the human principal.",
+      "evidence": "Pending final local gate receipts."
+    },
+    {
+      "id": "DOD-009",
+      "statement": "CHG-0022 remains proposed and the evidence remains local until separate human review; no acceptance, ADR, product specification, action authority, push, merge, release, publication, or production policy follows automatically.",
+      "evidence": "Repository and remote state, proposed status, local ignored evidence boundary, and separate human-transition requirement."
+    }
+  ]
+}

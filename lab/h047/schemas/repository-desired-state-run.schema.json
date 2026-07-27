@@ -1,0 +1,748 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h047-repository-desired-state-run/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "subject",
+    "sourceAnchor",
+    "target",
+    "artifacts",
+    "summary",
+    "outcome",
+    "adrAssessment",
+    "capabilityAudit",
+    "authority",
+    "action",
+    "claimBoundary",
+    "semanticEvidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h047-repository-desired-state-run/v1"
+    },
+    "hypothesis": {
+      "const": "H-047"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commit",
+        "tree",
+        "entryCount",
+        "lsTreeSha256",
+        "planHash",
+        "manifestContentHash"
+      ],
+      "properties": {
+        "commit": {
+          "const": "a68ab8f2c8a64828c1c685161ef9319bd8a837c7"
+        },
+        "tree": {
+          "const": "9ee6e2f74f7fd6272559d1b91fe4005726cc5b18"
+        },
+        "entryCount": {
+          "const": 238
+        },
+        "lsTreeSha256": {
+          "const": "c9abef88898ec71e5130e041920ca285bce46bbabb08b6a6d885e292295aad05"
+        },
+        "planHash": {
+          "const": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4"
+        },
+        "manifestContentHash": {
+          "const": "a31de506836ffd12f9b1a2849bdb0c353e886481800a2ab01a3dd293ebb7c87e"
+        }
+      }
+    },
+    "sourceAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commit",
+        "parent",
+        "parentCount",
+        "tree",
+        "signatureVerified",
+        "deltaPaths",
+        "sourceSetSha256",
+        "sources"
+      ],
+      "properties": {
+        "commit": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "parent": {
+          "const": "a68ab8f2c8a64828c1c685161ef9319bd8a837c7"
+        },
+        "parentCount": {
+          "const": 1
+        },
+        "tree": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "signatureVerified": {
+          "const": true
+        },
+        "deltaPaths": {
+          "const": [
+            ".overlaykit/governance/changes/CHG-0022.json",
+            ".overlaykit/governance/manifest.json",
+            "lab/h047/inventory-lib.mjs",
+            "lab/h047/inventory-lib.test.mjs",
+            "lab/h047/review-map.json",
+            "lab/h047/run.mjs",
+            "lab/h047/run.test.mjs",
+            "lab/h047/schema.test.mjs",
+            "lab/h047/schemas/repository-desired-state-run.schema.json",
+            "lab/h047/verify.mjs",
+            "lab/h047/verify.test.mjs"
+          ]
+        },
+        "sourceSetSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 11,
+          "maxItems": 11,
+          "uniqueItems": true,
+          "prefixItems": [
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": ".overlaykit/governance/changes/CHG-0022.json"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": ".overlaykit/governance/manifest.json"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": "lab/h047/inventory-lib.mjs"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": "lab/h047/inventory-lib.test.mjs"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": "lab/h047/review-map.json"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": "lab/h047/run.mjs"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": "lab/h047/run.test.mjs"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": "lab/h047/schema.test.mjs"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": "lab/h047/schemas/repository-desired-state-run.schema.json"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": "lab/h047/verify.mjs"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "const": "lab/h047/verify.test.mjs"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "imageReference",
+        "imageId",
+        "hostRole",
+        "hostRoleSpecification",
+        "hostRoleSpecificationContentHash",
+        "imageInterpretation"
+      ],
+      "properties": {
+        "imageReference": {
+          "const": "ghcr.io/bitfocus/companion/companion:v4.3.3"
+        },
+        "imageId": {
+          "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+        },
+        "hostRole": {
+          "const": "spec-0001-linux-production-host"
+        },
+        "hostRoleSpecification": {
+          "const": "SPEC-0001"
+        },
+        "hostRoleSpecificationContentHash": {
+          "const": "917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179"
+        },
+        "imageInterpretation": {
+          "const": "historical-evidence-selector"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceMap", "candidateIndex"],
+      "properties": {
+        "sourceMap": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "source-map.json"
+                }
+              }
+            }
+          ]
+        },
+        "candidateIndex": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "candidate-index.json"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptedDecisions",
+        "acceptedSpecifications",
+        "implementedChanges",
+        "proposedChanges",
+        "identityPaths",
+        "deploymentSurfaces",
+        "candidates",
+        "unknowns",
+        "eligibleChains",
+        "coverageComplete"
+      ],
+      "properties": {
+        "acceptedDecisions": {
+          "const": 6
+        },
+        "acceptedSpecifications": {
+          "const": 2
+        },
+        "implementedChanges": {
+          "const": 9
+        },
+        "proposedChanges": {
+          "const": 12
+        },
+        "identityPaths": {
+          "const": 26
+        },
+        "deploymentSurfaces": {
+          "const": 8
+        },
+        "candidates": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unknowns": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eligibleChains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "coverageComplete": {
+          "type": "boolean"
+        }
+      }
+    },
+    "outcome": {
+      "oneOf": [
+        {
+          "const": {
+            "status": "supported",
+            "stage": "desired-state-chain",
+            "reasonCode": "eligible-chain-present"
+          }
+        },
+        {
+          "const": {
+            "status": "refuted",
+            "stage": "complete-repository-inventory",
+            "reasonCode": "complete-zero-eligible-chain-coverage"
+          }
+        },
+        {
+          "const": {
+            "status": "inconclusive",
+            "stage": "source-admission",
+            "reasonCode": "incomplete-ambiguous-or-unknown-coverage"
+          }
+        }
+      ]
+    },
+    "adrAssessment": {
+      "const": {
+        "status": "no-decision-candidate-activated",
+        "rationaleCode": "repository-inventory-selects-no-new-architecture",
+        "futureDecisionQuestion": "which accepted source of truth, lifecycle-owner role, reconciler, and convergence policy should govern a persistent Companion deployment if one is desired",
+        "authority": "none",
+        "action": null
+      }
+    },
+    "capabilityAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "gitExecutable",
+        "commandPolicy",
+        "observedInvocationCounts",
+        "gitNoLazyFetch",
+        "gitOptionalLocks",
+        "sourceAnchorSignatureVerified",
+        "sourceAnchorParentCount",
+        "repositoryReadsOnly",
+        "localIgnoredEvidenceWriteOnly",
+        "networkObserved",
+        "dockerObserved",
+        "usbObserved",
+        "procfsObserved",
+        "sysfsObserved",
+        "devfsObserved",
+        "systemdObserved",
+        "hidrawObserved",
+        "signalObserved",
+        "productionMutationObserved"
+      ],
+      "properties": {
+        "mode": {
+          "const": "repository-only-read-only"
+        },
+        "gitExecutable": {
+          "const": "/usr/bin/git"
+        },
+        "commandPolicy": {
+          "const": [
+            "git cat-file blob <oid>",
+            "git cat-file commit <source-anchor>",
+            "git diff-tree --no-commit-id --name-only -r -z <subject> <source-anchor>",
+            "git ls-tree -rz --full-tree <commit>",
+            "git rev-parse <revision>",
+            "git status --porcelain=v1 --untracked-files=all",
+            "git verify-commit <source-anchor>"
+          ]
+        },
+        "observedInvocationCounts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cat-file-blob",
+            "cat-file-commit",
+            "diff-tree",
+            "ls-tree",
+            "rev-parse",
+            "status",
+            "verify-commit"
+          ],
+          "properties": {
+            "cat-file-blob": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "cat-file-commit": {
+              "const": 1
+            },
+            "diff-tree": {
+              "const": 1
+            },
+            "ls-tree": {
+              "const": 2
+            },
+            "rev-parse": {
+              "const": 4
+            },
+            "status": {
+              "const": 1
+            },
+            "verify-commit": {
+              "const": 1
+            }
+          }
+        },
+        "gitNoLazyFetch": {
+          "const": true
+        },
+        "gitOptionalLocks": {
+          "const": false
+        },
+        "sourceAnchorSignatureVerified": {
+          "const": true
+        },
+        "sourceAnchorParentCount": {
+          "const": 1
+        },
+        "repositoryReadsOnly": {
+          "const": true
+        },
+        "localIgnoredEvidenceWriteOnly": {
+          "const": true
+        },
+        "networkObserved": {
+          "const": false
+        },
+        "dockerObserved": {
+          "const": false
+        },
+        "usbObserved": {
+          "const": false
+        },
+        "procfsObserved": {
+          "const": false
+        },
+        "sysfsObserved": {
+          "const": false
+        },
+        "devfsObserved": {
+          "const": false
+        },
+        "systemdObserved": {
+          "const": false
+        },
+        "hidrawObserved": {
+          "const": false
+        },
+        "signalObserved": {
+          "const": false
+        },
+        "productionMutationObserved": {
+          "const": false
+        }
+      }
+    },
+    "authority": {
+      "const": "none"
+    },
+    "action": {
+      "type": "null"
+    },
+    "claimBoundary": {
+      "const": {
+        "proves": [
+          "whether the exact immutable repository subject contains a fully explicit eight-predicate desired-state chain for the exact accepted Companion image",
+          "the exact subject inventory, governance status inventory, image-identity occurrences, and deployment-shaped path inventory"
+        ],
+        "excludes": [
+          "desired state held outside the exact repository subject",
+          "current host state, operator intent, compliance, drift, or cause",
+          "actual or externally held operational lifecycle ownership",
+          "remediation authority, installation, configuration, signaling, restart, reconciliation, or production action"
+        ],
+        "authority": "none",
+        "action": null
+      }
+    },
+    "semanticEvidenceSha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "refuted"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "unknowns": {
+                "const": 0
+              },
+              "eligibleChains": {
+                "const": 0
+              },
+              "coverageComplete": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "supported"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "unknowns": {
+                "const": 0
+              },
+              "eligibleChains": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "coverageComplete": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "inconclusive"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "coverageComplete": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "gitOid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "safePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "mode", "oid", "byteLength", "sha256"],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "mode": {
+          "enum": ["100644", "100755"]
+        },
+        "oid": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "byteLength", "sha256"],
+      "properties": {
+        "file": {
+          "enum": ["source-map.json", "candidate-index.json"]
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}
