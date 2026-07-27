@@ -1,0 +1,2064 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h044-live-readonly-revalidation-run/v1",
+  "title": "OverlayKit H-044 live read-only revalidation evidence",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "runId",
+    "startedAt",
+    "completedAt",
+    "outcome",
+    "collector",
+    "input",
+    "sourceAdmission",
+    "historicalCandidate",
+    "frames",
+    "capabilityAudit",
+    "liveClassification",
+    "hostileMatrix",
+    "claimBoundary",
+    "evidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h044-live-readonly-revalidation-run/v1"
+    },
+    "hypothesis": {
+      "const": "H-044"
+    },
+    "runId": {
+      "type": "string",
+      "pattern": "^h044-[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3])-[0-5][0-9]-[0-5][0-9](?:-[0-9]{1,9})?Z-[0-9a-f]{8}$"
+    },
+    "startedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "completedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "outcome": {
+      "$ref": "#/$defs/outcome"
+    },
+    "collector": {
+      "$ref": "#/$defs/collector"
+    },
+    "input": {
+      "$ref": "#/$defs/input"
+    },
+    "sourceAdmission": {
+      "$ref": "#/$defs/sourceAdmission"
+    },
+    "historicalCandidate": {
+      "$ref": "#/$defs/historicalCandidate"
+    },
+    "frames": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/frame"
+      }
+    },
+    "capabilityAudit": {
+      "$ref": "#/$defs/capabilityAudit"
+    },
+    "liveClassification": {
+      "$ref": "#/$defs/liveClassification"
+    },
+    "hostileMatrix": {
+      "$ref": "#/$defs/hostileMatrix"
+    },
+    "claimBoundary": {
+      "$ref": "#/$defs/claimBoundary"
+    },
+    "evidenceSha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "candidate"
+              }
+            },
+            "required": ["disposition"]
+          }
+        },
+        "required": ["liveClassification"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "predicates": {
+                "$ref": "#/$defs/allTruePredicates"
+              },
+              "receipts": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "$ref": "#/$defs/revalidationReceipt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "enum": ["withheld", "inconclusive"]
+              }
+            },
+            "required": ["disposition"]
+          }
+        },
+        "required": ["liveClassification"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "receipts": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "supported"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "stage": {
+                "const": "live-readonly-revalidation"
+              },
+              "reasonCode": {
+                "const": "complete-live-classification-and-hostile-matrix-exact"
+              }
+            }
+          },
+          "collector": {
+            "type": "object",
+            "properties": {
+              "sourceStable": {
+                "const": true
+              }
+            }
+          },
+          "sourceAdmission": {
+            "$ref": "#/$defs/allExactSourceAdmission"
+          },
+          "capabilityAudit": {
+            "$ref": "#/$defs/exactCapabilityAudit"
+          },
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "enum": ["candidate", "withheld"]
+              }
+            }
+          },
+          "hostileMatrix": {
+            "type": "object",
+            "properties": {
+              "allPassed": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "refuted"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "object",
+                "properties": {
+                  "stage": {
+                    "const": "capability-boundary"
+                  },
+                  "reasonCode": {
+                    "const": "prohibited-capability-observed"
+                  }
+                }
+              },
+              "capabilityAudit": {
+                "$ref": "#/$defs/nonZeroProhibitedAudit"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "object",
+                "properties": {
+                  "stage": {
+                    "const": "hostile-matrix"
+                  },
+                  "reasonCode": {
+                    "const": "hostile-case-failed"
+                  }
+                }
+              },
+              "hostileMatrix": {
+                "type": "object",
+                "properties": {
+                  "allPassed": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "object",
+                "properties": {
+                  "stage": {
+                    "const": "independent-verification"
+                  },
+                  "reasonCode": {
+                    "const": "producer-verifier-disagreement"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "inconclusive"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "sourceAdmission": {
+                "type": "object",
+                "properties": {
+                  "allExact": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "capabilityAudit": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "complete": {
+                        "const": false
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "exact": {
+                        "const": false
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "liveClassification": {
+                "type": "object",
+                "properties": {
+                  "disposition": {
+                    "const": "inconclusive"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gitCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "dateTime": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](?:\\.[0-9]{1,9})?Z$"
+    },
+    "monotonicNs": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)$"
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "stage", "reasonCode"],
+      "properties": {
+        "status": {
+          "enum": ["supported", "refuted", "inconclusive"]
+        },
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reasonCode": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "collector": {
+      "type": "object",
+      "required": ["node", "repository", "baseCommit", "sources", "sourceStable", "governance"],
+      "properties": {
+        "node": {
+          "type": "string",
+          "pattern": "^v22\\."
+        },
+        "repository": {
+          "const": "https://github.com/OverlayKit/companion-module-overlaykit-server.git"
+        },
+        "baseCommit": {
+          "$ref": "#/$defs/gitCommit"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": ["path", "sha256"],
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^(?:\\.overlaykit/governance|evidence/h043|lab/h(?:041|043|044)|package(?:-lock)?\\.json)"
+              },
+              "sha256": {
+                "$ref": "#/$defs/sha256"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "sourceStable": {
+          "type": "boolean"
+        },
+        "governance": {
+          "type": "object",
+          "required": ["changeId", "changeSha256", "planHash", "manifestContentHash"],
+          "properties": {
+            "changeId": {
+              "const": "CHG-0017"
+            },
+            "changeSha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "planHash": {
+              "$ref": "#/$defs/sha256"
+            },
+            "manifestContentHash": {
+              "$ref": "#/$defs/sha256"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "h043ArchivePath",
+        "h043ArchiveSha256",
+        "h043RunId",
+        "h043RunSha256",
+        "h043VerificationSha256",
+        "h043EvidenceSha256",
+        "h043CandidateTokenSha256"
+      ],
+      "properties": {
+        "h043ArchivePath": {
+          "type": "string",
+          "pattern": "^evidence/h043/[0-9a-f]{64}/"
+        },
+        "h043ArchiveSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "h043RunId": {
+          "type": "string",
+          "pattern": "^h043-"
+        },
+        "h043RunSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "h043VerificationSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "h043EvidenceSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "h043CandidateTokenSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceAdmission": {
+      "type": "object",
+      "required": [
+        "h043ArchiveExact",
+        "h043RunExact",
+        "h043VerificationExact",
+        "h043EvidenceExact",
+        "h043CandidateTokenExact",
+        "chg0016Exact",
+        "adr0006Exact",
+        "protectedMainAncestryExact",
+        "governanceExact",
+        "sourceSetExact",
+        "allExact"
+      ],
+      "properties": {
+        "h043ArchiveExact": {
+          "type": "boolean"
+        },
+        "h043RunExact": {
+          "type": "boolean"
+        },
+        "h043VerificationExact": {
+          "type": "boolean"
+        },
+        "h043EvidenceExact": {
+          "type": "boolean"
+        },
+        "h043CandidateTokenExact": {
+          "type": "boolean"
+        },
+        "chg0016Exact": {
+          "type": "boolean"
+        },
+        "adr0006Exact": {
+          "type": "boolean"
+        },
+        "protectedMainAncestryExact": {
+          "type": "boolean"
+        },
+        "governanceExact": {
+          "type": "boolean"
+        },
+        "sourceSetExact": {
+          "type": "boolean"
+        },
+        "allExact": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "allExactSourceAdmission": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sourceAdmission"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "h043ArchiveExact": {
+              "const": true
+            },
+            "h043RunExact": {
+              "const": true
+            },
+            "h043VerificationExact": {
+              "const": true
+            },
+            "h043EvidenceExact": {
+              "const": true
+            },
+            "h043CandidateTokenExact": {
+              "const": true
+            },
+            "chg0016Exact": {
+              "const": true
+            },
+            "adr0006Exact": {
+              "const": true
+            },
+            "protectedMainAncestryExact": {
+              "const": true
+            },
+            "governanceExact": {
+              "const": true
+            },
+            "sourceSetExact": {
+              "const": true
+            },
+            "allExact": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "stat": {
+      "type": "object",
+      "required": [
+        "stDev",
+        "inode",
+        "ctimeNs",
+        "mode",
+        "uid",
+        "gid",
+        "rdev",
+        "rdevHex",
+        "major",
+        "minor",
+        "isCharacterDevice"
+      ],
+      "properties": {
+        "stDev": {
+          "type": "string",
+          "minLength": 1
+        },
+        "inode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ctimeNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "mode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rdev": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rdevHex": {
+          "type": "string",
+          "minLength": 1
+        },
+        "major": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "isCharacterDevice": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "deviceEpoch": {
+      "type": "object",
+      "required": [
+        "serial",
+        "busNumber",
+        "deviceNumber",
+        "usbDevicePath",
+        "usbDev",
+        "hidDevicePath",
+        "devicePath",
+        "stat"
+      ],
+      "properties": {
+        "serial": {
+          "type": "string",
+          "minLength": 1
+        },
+        "busNumber": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deviceNumber": {
+          "type": "string",
+          "minLength": 1
+        },
+        "usbDevicePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "usbDev": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hidDevicePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "devicePath": {
+          "type": "string",
+          "pattern": "^/dev/hidraw[0-9]+$"
+        },
+        "stat": {
+          "$ref": "#/$defs/stat"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": [
+        "containerId",
+        "imageId",
+        "startedAt",
+        "restartCount",
+        "hostPid",
+        "pid1StartTicks",
+        "pidNamespace",
+        "mountNamespace",
+        "cgroup",
+        "hostCgroup",
+        "cgroupNamespaceMode"
+      ],
+      "properties": {
+        "containerId": {
+          "$ref": "#/$defs/sha256"
+        },
+        "imageId": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "startedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "restartCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hostPid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pid1StartTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pidNamespace": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mountNamespace": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cgroup": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hostCgroup": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cgroupNamespaceMode": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "worker": {
+      "type": "object",
+      "required": [
+        "pid",
+        "startTicks",
+        "ppid",
+        "parentStartTicks",
+        "uid",
+        "gid",
+        "groups",
+        "cmdline",
+        "cgroup",
+        "pidNamespace",
+        "mountNamespace"
+      ],
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ppid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parentStartTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "uid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "cmdline": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "cgroup": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pidNamespace": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mountNamespace": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "historicalCandidate": {
+      "type": "object",
+      "required": [
+        "kind",
+        "historical",
+        "requiresRevalidation",
+        "authority",
+        "action",
+        "observedCutoff",
+        "sourceEvidenceSha256",
+        "prefixSha256",
+        "identity",
+        "window",
+        "tokenSha256"
+      ],
+      "properties": {
+        "kind": {
+          "const": "revalidation-required"
+        },
+        "historical": {
+          "const": true
+        },
+        "requiresRevalidation": {
+          "const": true
+        },
+        "authority": {
+          "const": "none"
+        },
+        "action": {
+          "type": "null"
+        },
+        "observedCutoff": {
+          "type": "object",
+          "required": ["at", "monotonicNs"],
+          "properties": {
+            "at": {
+              "$ref": "#/$defs/dateTime"
+            },
+            "monotonicNs": {
+              "$ref": "#/$defs/monotonicNs"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sourceEvidenceSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "prefixSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "identity": {
+          "type": "object",
+          "required": ["device", "lifecycle", "worker"],
+          "properties": {
+            "device": {
+              "type": "object",
+              "required": [
+                "serial",
+                "vendorId",
+                "productId",
+                "initialEpoch",
+                "returnedEpoch",
+                "revalidationEpoch"
+              ],
+              "properties": {
+                "serial": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "vendorId": {
+                  "const": "0fd9"
+                },
+                "productId": {
+                  "const": "0080"
+                },
+                "initialEpoch": {
+                  "$ref": "#/$defs/deviceEpoch"
+                },
+                "returnedEpoch": {
+                  "$ref": "#/$defs/deviceEpoch"
+                },
+                "revalidationEpoch": {
+                  "$ref": "#/$defs/deviceEpoch"
+                }
+              },
+              "additionalProperties": false
+            },
+            "lifecycle": {
+              "$ref": "#/$defs/lifecycle"
+            },
+            "worker": {
+              "$ref": "#/$defs/worker"
+            }
+          },
+          "additionalProperties": false
+        },
+        "window": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/$defs/monotonicNs"
+          }
+        },
+        "tokenSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "pid1": {
+      "type": "object",
+      "required": ["hostPid", "startTicks", "pidNamespace", "mountNamespace", "cgroup"],
+      "properties": {
+        "hostPid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pidNamespace": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mountNamespace": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cgroup": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "liveDeviceIdentity": {
+      "type": "object",
+      "required": ["serial", "vendorId", "productId", "epoch"],
+      "properties": {
+        "serial": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendorId": {
+          "const": "0fd9"
+        },
+        "productId": {
+          "const": "0080"
+        },
+        "epoch": {
+          "$ref": "#/$defs/deviceEpoch"
+        }
+      },
+      "additionalProperties": false
+    },
+    "markers": {
+      "type": "object",
+      "required": ["opening", "ready", "relevantLinesSha256"],
+      "properties": {
+        "opening": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ready": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "relevantLinesSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "frame": {
+      "type": "object",
+      "required": [
+        "id",
+        "complete",
+        "startedAt",
+        "endedAt",
+        "startedMonotonicNs",
+        "endedMonotonicNs",
+        "observationCutoff",
+        "host",
+        "device",
+        "containerObservation",
+        "lifecycle",
+        "pid1",
+        "workers",
+        "descriptors",
+        "markers",
+        "absence",
+        "auditBinding",
+        "digestSha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "startedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "endedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "startedMonotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "endedMonotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "observationCutoff": {
+          "$ref": "#/$defs/observationCutoff"
+        },
+        "host": {
+          "type": "object",
+          "required": ["hostname", "bootId", "osRelease"],
+          "properties": {
+            "hostname": {
+              "type": "string",
+              "minLength": 1
+            },
+            "bootId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "osRelease": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "device": {
+          "type": "object",
+          "required": ["complete", "present", "identity"],
+          "properties": {
+            "complete": {
+              "type": "boolean"
+            },
+            "present": {
+              "type": "boolean"
+            },
+            "identity": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/liveDeviceIdentity"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "type": "object",
+                "properties": {
+                  "present": {
+                    "const": true
+                  }
+                },
+                "required": ["present"]
+              },
+              "then": {
+                "type": "object",
+                "properties": {
+                  "identity": {
+                    "$ref": "#/$defs/liveDeviceIdentity"
+                  }
+                }
+              },
+              "else": {
+                "type": "object",
+                "properties": {
+                  "identity": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "containerObservation": {
+          "$ref": "#/$defs/containerObservation"
+        },
+        "lifecycle": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/lifecycle"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pid1": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/pid1"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "workers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/worker"
+          }
+        },
+        "descriptors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "minProperties": 1
+          }
+        },
+        "markers": {
+          "$ref": "#/$defs/markers"
+        },
+        "absence": {
+          "type": "object",
+          "required": ["historicalContainerAbsent", "exact"],
+          "properties": {
+            "historicalContainerAbsent": {
+              "type": "boolean"
+            },
+            "exact": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "auditBinding": {
+          "type": "object",
+          "required": ["commandReceiptIndexes", "filesystemReceiptIndexes"],
+          "properties": {
+            "commandReceiptIndexes": {
+              "$ref": "#/$defs/receiptIndexes"
+            },
+            "filesystemReceiptIndexes": {
+              "$ref": "#/$defs/receiptIndexes"
+            }
+          },
+          "additionalProperties": false
+        },
+        "digestSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "observationCutoff": {
+      "type": "object",
+      "required": ["at", "monotonicNs"],
+      "properties": {
+        "at": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "monotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        }
+      },
+      "additionalProperties": false
+    },
+    "containerObservation": {
+      "type": "object",
+      "required": ["present", "state", "exact"],
+      "properties": {
+        "present": {
+          "type": "boolean"
+        },
+        "state": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "exact": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "present": {
+                "const": true
+              }
+            },
+            "required": ["present"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              }
+            }
+          },
+          "else": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "exactRunningContainerObservation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/containerObservation"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "present": {
+              "const": true
+            },
+            "state": {
+              "const": "running"
+            },
+            "exact": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "receiptIndexes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "prohibitedCounts": {
+      "type": "object",
+      "required": [
+        "externalNetwork",
+        "hidrawOpen",
+        "hidrawRead",
+        "hidrawWrite",
+        "hidrawIoctl",
+        "signal",
+        "lifecycleMutation",
+        "configurationMutation",
+        "mountMutation",
+        "cgroupMutation",
+        "sysfsWrite",
+        "productionMutation"
+      ],
+      "properties": {
+        "externalNetwork": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hidrawOpen": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hidrawRead": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hidrawWrite": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hidrawIoctl": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "signal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lifecycleMutation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "configurationMutation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mountMutation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cgroupMutation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sysfsWrite": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "productionMutation": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "capabilityAudit": {
+      "type": "object",
+      "required": [
+        "mode",
+        "commandReceipts",
+        "filesystemReceipts",
+        "allowedProcessCounts",
+        "commandCount",
+        "filesystemReceiptCount",
+        "complete",
+        "exact",
+        "frameCount",
+        "lsusbCount",
+        "unrecordedObservationCount",
+        "prohibitedCounts"
+      ],
+      "properties": {
+        "mode": {
+          "const": "live-readonly-capability-bounded"
+        },
+        "commandReceipts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind"],
+            "properties": {
+              "kind": {
+                "enum": ["git", "lsusb", "dockerVersion", "dockerPs", "dockerInspect", "dockerLogs"]
+              }
+            },
+            "minProperties": 1
+          }
+        },
+        "filesystemReceipts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "minProperties": 1
+          }
+        },
+        "allowedProcessCounts": {
+          "$ref": "#/$defs/allowedProcessCounts"
+        },
+        "commandCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "filesystemReceiptCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "exact": {
+          "type": "boolean"
+        },
+        "frameCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lsusbCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unrecordedObservationCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prohibitedCounts": {
+          "$ref": "#/$defs/prohibitedCounts"
+        }
+      },
+      "additionalProperties": false
+    },
+    "allowedProcessCounts": {
+      "type": "object",
+      "required": ["git", "lsusb", "dockerVersion", "dockerPs", "dockerInspect", "dockerLogs"],
+      "properties": {
+        "git": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lsusb": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerVersion": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerPs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerInspect": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerLogs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "exactCapabilityAudit": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/capabilityAudit"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "const": "live-readonly-capability-bounded"
+            },
+            "complete": {
+              "const": true
+            },
+            "exact": {
+              "const": true
+            },
+            "frameCount": {
+              "const": 2
+            },
+            "lsusbCount": {
+              "const": 1
+            },
+            "unrecordedObservationCount": {
+              "const": 0
+            },
+            "prohibitedCounts": {
+              "type": "object",
+              "properties": {
+                "externalNetwork": {
+                  "const": 0
+                },
+                "hidrawOpen": {
+                  "const": 0
+                },
+                "hidrawRead": {
+                  "const": 0
+                },
+                "hidrawWrite": {
+                  "const": 0
+                },
+                "hidrawIoctl": {
+                  "const": 0
+                },
+                "signal": {
+                  "const": 0
+                },
+                "lifecycleMutation": {
+                  "const": 0
+                },
+                "configurationMutation": {
+                  "const": 0
+                },
+                "mountMutation": {
+                  "const": 0
+                },
+                "cgroupMutation": {
+                  "const": 0
+                },
+                "sysfsWrite": {
+                  "const": 0
+                },
+                "productionMutation": {
+                  "const": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "nonZeroProhibitedAudit": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/capabilityAudit"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "prohibitedCounts": {
+              "type": "object",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "externalNetwork": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hidrawOpen": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hidrawRead": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hidrawWrite": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hidrawIoctl": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "signal": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "lifecycleMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "configurationMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "mountMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "cgroupMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "sysfsWrite": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "productionMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "predicates": {
+      "type": "object",
+      "required": [
+        "sourceAdmissionExact",
+        "auditExact",
+        "framesComplete",
+        "frameOrderExact",
+        "exposureBounded",
+        "hostStable",
+        "deviceExact",
+        "lifecycleExact",
+        "pid1Exact",
+        "workerUnique",
+        "workerExact",
+        "descriptorAbsent",
+        "markersStable"
+      ],
+      "properties": {
+        "sourceAdmissionExact": {
+          "type": "boolean"
+        },
+        "auditExact": {
+          "type": "boolean"
+        },
+        "framesComplete": {
+          "type": "boolean"
+        },
+        "frameOrderExact": {
+          "type": "boolean"
+        },
+        "exposureBounded": {
+          "type": "boolean"
+        },
+        "hostStable": {
+          "type": "boolean"
+        },
+        "deviceExact": {
+          "type": "boolean"
+        },
+        "lifecycleExact": {
+          "type": "boolean"
+        },
+        "pid1Exact": {
+          "type": "boolean"
+        },
+        "workerUnique": {
+          "type": "boolean"
+        },
+        "workerExact": {
+          "type": "boolean"
+        },
+        "descriptorAbsent": {
+          "type": "boolean"
+        },
+        "markersStable": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "allTruePredicates": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/predicates"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceAdmissionExact": {
+              "const": true
+            },
+            "auditExact": {
+              "const": true
+            },
+            "framesComplete": {
+              "const": true
+            },
+            "frameOrderExact": {
+              "const": true
+            },
+            "exposureBounded": {
+              "const": true
+            },
+            "hostStable": {
+              "const": true
+            },
+            "deviceExact": {
+              "const": true
+            },
+            "lifecycleExact": {
+              "const": true
+            },
+            "pid1Exact": {
+              "const": true
+            },
+            "workerUnique": {
+              "const": true
+            },
+            "workerExact": {
+              "const": true
+            },
+            "descriptorAbsent": {
+              "const": true
+            },
+            "markersStable": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "revalidationReceipt": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "kind",
+        "authority",
+        "action",
+        "authorizesAction",
+        "validAtCutoffOnly",
+        "revalidatedAtCutoff",
+        "requiresRevalidation",
+        "historicalCandidateTokenSha256",
+        "cutoff",
+        "exposure",
+        "identity",
+        "markers",
+        "sources",
+        "receiptSha256"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "overlaykit-h044-live-revalidation-receipt/v1"
+        },
+        "kind": {
+          "const": "cutoff-bound-live-readonly-revalidation"
+        },
+        "authority": {
+          "const": "none"
+        },
+        "action": {
+          "type": "null"
+        },
+        "authorizesAction": {
+          "const": false
+        },
+        "validAtCutoffOnly": {
+          "const": true
+        },
+        "revalidatedAtCutoff": {
+          "const": true
+        },
+        "requiresRevalidation": {
+          "const": true
+        },
+        "historicalCandidateTokenSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "cutoff": {
+          "$ref": "#/$defs/observationCutoff"
+        },
+        "exposure": {
+          "type": "object",
+          "required": [
+            "startedAt",
+            "endedAt",
+            "startedMonotonicNs",
+            "endedMonotonicNs",
+            "milliseconds"
+          ],
+          "properties": {
+            "startedAt": {
+              "$ref": "#/$defs/dateTime"
+            },
+            "endedAt": {
+              "$ref": "#/$defs/dateTime"
+            },
+            "startedMonotonicNs": {
+              "$ref": "#/$defs/monotonicNs"
+            },
+            "endedMonotonicNs": {
+              "$ref": "#/$defs/monotonicNs"
+            },
+            "milliseconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5000
+            }
+          },
+          "additionalProperties": false
+        },
+        "identity": {
+          "type": "object",
+          "required": ["host", "device", "containerObservation", "lifecycle", "pid1", "worker"],
+          "properties": {
+            "host": {
+              "type": "object"
+            },
+            "device": {
+              "$ref": "#/$defs/liveDeviceIdentity"
+            },
+            "containerObservation": {
+              "$ref": "#/$defs/exactRunningContainerObservation"
+            },
+            "lifecycle": {
+              "$ref": "#/$defs/lifecycle"
+            },
+            "pid1": {
+              "$ref": "#/$defs/pid1"
+            },
+            "worker": {
+              "$ref": "#/$defs/worker"
+            }
+          },
+          "additionalProperties": false
+        },
+        "markers": {
+          "$ref": "#/$defs/markers"
+        },
+        "sources": {
+          "type": "object",
+          "required": [
+            "h043EvidenceSha256",
+            "h043PrefixSha256",
+            "frameDigests",
+            "capabilityAuditSha256"
+          ],
+          "properties": {
+            "h043EvidenceSha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "h043PrefixSha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "frameDigests": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/sha256"
+              }
+            },
+            "capabilityAuditSha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          },
+          "additionalProperties": false
+        },
+        "receiptSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "liveClassification": {
+      "type": "object",
+      "required": ["disposition", "stage", "reasonCode", "predicates", "receipts"],
+      "properties": {
+        "disposition": {
+          "enum": ["candidate", "withheld", "inconclusive"]
+        },
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reasonCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "predicates": {
+          "$ref": "#/$defs/predicates"
+        },
+        "receipts": {
+          "type": "array",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/revalidationReceipt"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "hostileMatrixCase": {
+      "type": "object",
+      "required": [
+        "id",
+        "inputSha256",
+        "expectedDisposition",
+        "actualDisposition",
+        "expectedReceiptCount",
+        "actualReceiptCount",
+        "stage",
+        "reasonCode",
+        "passed"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "inputSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "expectedDisposition": {
+          "enum": ["candidate", "withheld", "inconclusive"]
+        },
+        "actualDisposition": {
+          "enum": ["candidate", "withheld", "inconclusive"]
+        },
+        "expectedReceiptCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "actualReceiptCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reasonCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "hostileMatrix": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "requiredCaseIds",
+        "caseCount",
+        "passedCount",
+        "allPassed",
+        "cases"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "overlaykit-h044-hostile-matrix/v1"
+        },
+        "requiredCaseIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "caseCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "passedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allPassed": {
+          "type": "boolean"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/hostileMatrixCase"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["proves", "excludes"],
+      "properties": {
+        "proves": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
