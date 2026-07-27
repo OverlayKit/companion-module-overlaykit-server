@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0023",
+  "title": "Accept bounded H-047 repository desired-state refutation",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root produced the H-047 evidence and post-review closure under the human principal @rodrigoteamx; the registered principal, not the agent, accepted the semantic review and authorized this successor transition.",
+      "evidence": "Repository AGENTS.md, compiled governance plan, canonical human-motion SHA-256 96ba495b155fa70a7ea18338863f38c8679135a89b417ff56397702b82601482, and local human-acceptance record SHA-256 b79b6a2573f081ef73545d501480a9a303af2b33dcb5ebbdd510db8794e8b98e.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0022 remains the byte-exact proposed pre-experiment contract and the complete H-047 harness remains frozen in its distinct valid signed source anchor; neither record is rewritten by acceptance.",
+      "evidence": "CHG-0022 SHA-256 240c33df684ec75c52c9dd542ba6c1c6f4451be06dcacc1a60bf7a8ae6d8b647; signed commit 8e2a30c0d6ccf9e70d6654498b490ee623a9f56c with parent a68ab8f2c8a64828c1c685161ef9319bd8a837c7, tree 227ced4336abc89fff98673294ccfd330abfae9a, valid OpenPGP signature, and exact 11-source set SHA-256 c8f3a6dd4643287460b6f9d623dd5c240d28208628cf017c8b29d679de32ce54.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immutable H-047 subject is protected-main commit a68ab8f2c8a64828c1c685161ef9319bd8a837c7 and its complete NUL-safe inventory contains 238 tracked paths.",
+      "evidence": "Subject tree 9ee6e2f74f7fd6272559d1b91fe4005726cc5b18 and SHA-256 c9abef88898ec71e5130e041920ca285bce46bbabb08b6a6d885e292295aad05 of the exact git ls-tree stream, independently reconstructed by the verifier.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Both canonical executions are byte-identical and independently verified at semantic evidence SHA-256 903774524e5c0d04f08bc1606e92f2741619f39bb22fc8f84f351fe18f351af8.",
+      "evidence": "Each canonical directory contains candidate-index SHA-256 7054c1990b55cc931d9b0e409772fbb35b5346b255a8c36c6a91fbd9c6a518d9, run SHA-256 a8d89d2ab4bac0fcbb2a154d036caacdb2ef4424e3acccc1d8d1f01160165a96, source-map SHA-256 84172fc400d801e4dfbd439cc37c03118cb177e87fc6c230c885eb5e6ec94ea1, and verification SHA-256 58cc15ba5de1cd75527789cba6693a66820f5c0c888c60450364977c41d17ac3; all four pairs are byte-equal.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The frozen mechanical inventory covers all 238 subject paths, 101 candidates, 106 edges, 2 atoms, 3 archive roots, and zero chain components or eligible chains, with no prohibited host or production capability observed.",
+      "evidence": "Canonical candidate index, source map, run and independent verification; mechanicalCoverageComplete true; verifierIndependent true; exact source and subject anchors; repository-only read-only capability audit; 47-scenario red-team closure with baseline seven human unknowns and every mechanical mutation adding a mechanical unknown rather than an eligible chain.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The frozen producer and verifier remain inconclusive at source-admission for incomplete-ambiguous-or-unknown-coverage because the complete mechanical result retained exactly seven pending human unknowns: one acceptance state and six semantic judgments.",
+      "evidence": "Immutable canonical run and candidate index, whose unknowns are human-review-not-accepted plus six pending-human-judgment entries; neither canonical directory, review-map.json, nor the signed source anchor is changed or rerun after review.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The registered human principal accepted the exact review map, all individual classifications and dismissals, and all six semantic dispositions: historical or exclusion prose is not current normative authority; laboratory sources are not production; implicit cardinality is insufficient; a generic owner does not establish lifecycle ownership; and operational code alone establishes neither a reconciler nor an absence-to-convergence rule.",
+      "evidence": "Review-map raw SHA-256 d38ad8bbe9149afdae4590886cc92935261eca4fed3fe1c865d1cf16e3cc7139; canonical JSON SHA-256 fbd9176a3d63694bd0bda91b3f2e60c4ac00e0770024470df871cb9cdebd4c73; canonical motion SHA-256 96ba495b155fa70a7ea18338863f38c8679135a89b417ff56397702b82601482; human-acceptance SHA-256 b79b6a2573f081ef73545d501480a9a303af2b33dcb5ebbdd510db8794e8b98e.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "After the human principal closes exactly the seven pending review unknowns without changing the complete mechanical inventory, zero complete eight-predicate chains refutes H-047 exclusively inside the exact immutable repository boundary.",
+      "evidence": "Human-accepted review map and dispositions, complete mechanical coverage, zero eligible chains, post-review assessment SHA-256 be753e0bac489ac8480730dbb8bc971d664dc0de3208e06c0f12f45e3a5618c5, and the accepted claim boundary that excludes external policy, intent, compliance, drift, cause, and actual external ownership.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "A deterministic restricted local post-review closure preserves both canonical evidence copies, every signed H-047 source, the source anchor, human acceptance, post-review assessment, and manifest; Git tracks only a non-authorizing receipt.",
+      "evidence": "Local 23-member POSIX ustar archive SHA-256 c7eca4b7f7030104aab4488e8e9c931f0d6d1e99dc1224b236746e8c8aa03890, 1136640 bytes, mode 0600, byte-identical double build; manifest SHA-256 986f46826173a2d10f620d6e776931e0e6466aeecea6814b46646c588e33fbfa; external closure SHA-256 37caabe82ca7a0c3a639484be86a62cc819cb3bb16c7e1b3db388a9ae4c269d5; receipt evidence/h047/903774524e5c0d04f08bc1606e92f2741619f39bb22fc8f84f351fe18f351af8/README.md with SHA-256 59fce308bddae67f66cad2dc46e70ec121e53bb2dc813172047a459ad0029cfc.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "H-047 activates no ADR candidate and selects no source of production desired state, lifecycle owner, reconciler, convergence policy, host mutation, or action authority.",
+      "evidence": "Canonical ADR assessment no-decision-candidate-activated, human acceptance, post-review assessment, accepted ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002 unchanged, authority none, and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human transition separately authorizes a signed acceptance commit, push, protected merge, and opening H-048 only as governed-discovery read-only after merge; it does not authorize an ADR, SPEC, production policy, raw publication, or host or production mutation.",
+      "evidence": "Canonical human-motion SHA-256 96ba495b155fa70a7ea18338863f38c8679135a89b417ff56397702b82601482 and its explicit authorizes and withholds sets.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-047 does not establish whether desired state exists outside the exact repository subject, whether any external policy requires the deployment, or whether the observed absence was intentional.",
+      "evidence": "Repository-only claim boundary and explicit human acceptance that refutation is exclusively within that boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-047 does not establish current host compliance, drift, cause, actual operational ownership, or any safe installation, configuration, restart, signal, reconciliation, remediation, or production policy.",
+      "evidence": "No live observation or production capability, zero eligible chains, authority none, action null, and explicit human exclusions.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-047 does not establish physical button command delivery, configuration continuity, rendered pixels, operator perception, OBS truth, or complete product recovery and does not satisfy or expand SPEC-0001 or SPEC-0002.",
+      "evidence": "Repository desired-state claim boundary and unchanged accepted product specifications.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The raw H-047 evidence and post-review replay remain restricted local artifacts and their publication remains unauthorized.",
+      "evidence": "Repository artifacts/ ignore boundary, local modes 0600, bounded disclosure scan, public non-authorizing receipt, and exact human authorization boundary.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0022 remains proposed and byte-identical, and every H-047 source remains recoverable from the unchanged valid signed source anchor.",
+      "verification": "Recompute CHG-0022 SHA-256 240c33df684ec75c52c9dd542ba6c1c6f4451be06dcacc1a60bf7a8ae6d8b647, all 11 source hashes, source-set SHA-256 c8f3a6dd4643287460b6f9d623dd5c240d28208628cf017c8b29d679de32ce54, parent, tree, and git verify-commit 8e2a30c0d6ccf9e70d6654498b490ee623a9f56c."
+    },
+    {
+      "id": "SC-002",
+      "statement": "Both canonical evidence directories remain byte-identical and reproduce the exact immutable inconclusive mechanical outcome, complete inventory, seven human unknowns, and zero eligible chains.",
+      "verification": "Recompute semantic evidence, run, verification, candidate-index and source-map hashes; compare all four files across both directories; inspect exact counts, outcome, authority none, action null, and independent-verifier fields."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The post-review refutation is derived only by applying the exact registered human acceptance to the seven pending human unknowns and never by mutating or reinterpreting the frozen mechanical run as mechanically refuted.",
+      "verification": "Recompute both review-map hashes, canonical motion and acceptance hashes, post-review assessment hash, compare frozen source and artifact bytes, and inspect the explicit temporal interpretation in the acceptance, assessment, closure, receipt, and this successor."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The local content-addressed closure preserves both canonical copies, all signed sources, and all post-review metadata with deterministic restricted bytes while Git contains only a reviewed non-authorizing receipt.",
+      "verification": "Archive SHA-256 c7eca4b7f7030104aab4488e8e9c931f0d6d1e99dc1224b236746e8c8aa03890; double-build comparison; 23-member order, hash, length, type, mode, duplicate, and path audit; closure SHA-256 37caabe82ca7a0c3a639484be86a62cc819cb3bb16c7e1b3db388a9ae4c269d5; Git-ignore and bounded disclosure checks."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Acceptance activates no ADR, product specification, profile, compiled plan, product code, or production policy and leaves every accepted record unchanged.",
+      "verification": "Governance diff, accepted-record hash comparison, plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, profile 1.6.0 comparison, and deterministic manifest compilation."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Focused H-047 source tests and anchor-dependent verification pass at signed source anchor 8e2a30c0d6ccf9e70d6654498b490ee623a9f56c, while governance, quality, and build gates pass in the post-review successor tree.",
+      "verification": "Pinned Node 22.20.0 focused test receipt at the anchor plus final npm run governance:verify, npm run governance:check, npm run check, npm run build, git diff --check, closure verification, and signed-commit verification."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The acceptance branch is committed with a valid signature, pushed through a protected pull request, validated against current main, and merged only by an allowed merge commit without publishing raw artifacts.",
+      "verification": "git verify-commit, remote branch and pull-request state, required validate and observe checks, mergeability and review-thread inspection, protected main merge commit, post-merge workflow attestation, and repository tree inspection."
+    },
+    {
+      "id": "SC-008",
+      "statement": "H-048 is opened only after H-047 merge as a separate governed-discovery read-only question with no ADR, SPEC, production policy, live observation, or host or production mutation.",
+      "verification": "Separate H-048 discovery artifact or report, repository and host diff, and explicit authority none and action null unless a later human transition states otherwise."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0023 records the exact registered human motion and hashes, the frozen mechanical result, the separate bounded post-review adjudication, typed claims, exclusions, and transition authorities.",
+      "evidence": "Canonical human-motion SHA-256 96ba495b155fa70a7ea18338863f38c8679135a89b417ff56397702b82601482, human-acceptance SHA-256 b79b6a2573f081ef73545d501480a9a303af2b33dcb5ebbdd510db8794e8b98e, and this implemented successor."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "CHG-0022, the signed source anchor, canonical evidence, review map, accepted ADRs, accepted specifications, profile, and compiled plan remain byte-identical at their applicable temporal boundaries.",
+      "evidence": "Exact source, evidence, accepted-record, plan, profile, and review-map hashes plus repository diff."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The deterministic local closure and tracked receipt preserve the accepted review without publishing raw evidence or converting the receipt into normative or action authority.",
+      "evidence": "Archive, manifest, closure, receipt and Git-ignore identities; all local closure files mode 0600; authority none; action null."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The ADR assessment remains no-decision-candidate-activated and no ADR, SPEC, product code, production policy, or host mutation is added.",
+      "evidence": "Governance and repository diff, post-review assessment, accepted-record hashes, and explicit human boundary."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "All temporal H-047, closure, governance, quality, build, and repository-integrity gates pass under Node 22.20.0 at their correct source and successor boundaries.",
+      "evidence": "Successful final local gate receipts produced before the signed CHG-0023 commit."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "The acceptance commit is validly signed and the branch is merged through protected GitHub checks without deleting the remote branch or publishing local raw artifacts.",
+      "evidence": "Signed commit verification, protected pull request checks, merge commit, post-merge workflow attestation, and remote branch retention."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "The merged H-047 result makes no claim about external policy, intent, compliance, drift, cause, actual external ownership, or remediation.",
+      "evidence": "Human-accepted claim boundary, receipt, post-review assessment, this successor's unknowns, authority none, and action null."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "Any H-048 work remains a distinct governed-discovery read-only Slice after merge and creates no ADR, SPEC, production policy, live observation, or production action.",
+      "evidence": "Separate post-merge H-048 discovery record or report and exact human authorization."
+    }
+  ]
+}
