@@ -47,6 +47,15 @@ describe('OverlayKit governance contract', () => {
     expect(contract.changes.find(({ change }) => change.id === 'CHG-0014')?.change.status).toBe(
       'implemented'
     );
+    expect(contract.changes.find(({ change }) => change.id === 'CHG-0015')).toEqual(
+      expect.objectContaining({
+        contentHash: 'b2cd667fad87b366163549cdb3b0ffaac95ffd591fc53d6158c229a516ae7e25',
+        change: expect.objectContaining({ status: 'proposed' }),
+      })
+    );
+    expect(contract.changes.find(({ change }) => change.id === 'CHG-0016')?.change.status).toBe(
+      'implemented'
+    );
 
     const plan = compileGovernance(contract);
     const manifest = buildManifest(contract, plan);
@@ -102,6 +111,22 @@ describe('OverlayKit governance contract', () => {
         )
       )
     ).toBe('15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36');
+    expect(
+      sha256(
+        readFileSync(
+          join(
+            root,
+            'evidence/h043/64bf41f30dc2d51a2475e6f2e9b79ddebc225c076a87b83c384b3848b1bbecb8/replay-fbe7e841a7319328b253e414f93abd3a17ab47506b783b652c6624aae3b68dec.tar.gz'
+          )
+        )
+      )
+    ).toBe('fbe7e841a7319328b253e414f93abd3a17ab47506b783b652c6624aae3b68dec');
+    expect(sha256(readFileSync(join(root, '.overlaykit/governance/plan.json')))).toBe(
+      '2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243'
+    );
+    expect(sha256(readFileSync(join(root, '.overlaykit/governance/profile.json')))).toBe(
+      'e61fde755b80c66742df144d5e7bcb4309629542e3bdba666a347f65d3341787'
+    );
     expect(plan.gates.find((gate) => gate.id === 'signed-identity')).toEqual(
       expect.objectContaining({
         tier: 'deferred',
