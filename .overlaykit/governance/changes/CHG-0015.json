@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0015",
+  "title": "Test fail-closed worker-candidate classification from the accepted H-042 pre-signal prefix",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Accepted ADR-0006 identifies SurfaceThread only as the minimum observed replaceable unit inside the exact H-042 boundary and explicitly requires a successor governed Slice before any production recovery proposal.",
+      "evidence": ".overlaykit/governance/decisions/ADR-0006.json under verified profile overlaykit-companion-module@1.6.0 and plan SHA-256 bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The accepted canonical H-042 bundle preserves a complete thirty-second negative automatic-reacquisition control, exact device epoch, container and PID 1 lifecycle, one unchanged SurfaceThread tuple, current-node descriptor absence, stable serial-specific markers, and the first later signal boundary.",
+      "evidence": "Canonical H-042 run h042-2026-07-26T16-19-05-858Z-efaf85fa; semantic evidence SHA-256 f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88; run.json SHA-256 be39e69140f733e7f56e371f144b6e7b0cd43c05b7be6bfea9850c440679a7b6; deterministic replay archive SHA-256 15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "SPEC-0001 and SPEC-0002 exclude USB access, Stream Deck discovery, physical key presses, and rendered device pixels, so H-043 is mechanism-governance evidence and cannot satisfy or expand either accepted product specification.",
+      "evidence": ".overlaykit/governance/specifications/SPEC-0001.json and SPEC-0002.json accepted out-of-scope boundaries in the verified compiled plan.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Before another physical epoch or any actuator is attempted, a pure classifier over the already accepted H-042 causal prefix is the smallest Slice that can expose whether stale identity, PID reuse, lifecycle drift, recovered descriptors, marker changes, incomplete timing, or post-signal leakage would be rejected rather than converted into an intervention candidate.",
+      "evidence": "D³ reorder from a live signal controller to an offline, capability-free decision model using the accepted H-042 pre-signal evidence boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-043: an exact, independently verified projection of the accepted H-042 evidence strictly before its first fault-injection signal can emit exactly one revalidation-required experimental recovery candidate only when the new MK.2 epoch, complete thirty-second negative control, unchanged top-level lifecycle, unique unchanged SurfaceThread identity, current-at-cutoff descriptor absence, stable markers, and admitted causal history all remain exact; every other input emits zero candidates, hostile mutations fail closed as withheld or inconclusive, arbitrary later-tail changes have no influence, classifier execution is mutation-free, and the admitted prefix contains no fault, lifecycle, configuration, rescan, or device-I/O intervention before the cutoff beyond the recorded human USB epoch and exact read-only observer activity.",
+      "evidence": "D³ minimal refutation Slice registered before H-043 implementation or execution.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The H-043 projection must establish an exact causal cut before the first fault-injection signal and must bind the accepted archive, run bytes, and projected prefix digest; ambiguity, missing evidence, contradictory chronology, or any dependency on post-signal observations blocks an eligible result.",
+      "evidence": "H-043 fail-closed input-admission and causal-boundary contract.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-043 does not determine whether a fresh live collector can obtain and atomically revalidate the same facts without a race; that requires a successor read-only physical Slice.",
+      "evidence": "H-043 intentionally reuses immutable accepted evidence and performs no host observation.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Any H-043 candidate is historical and may be stale immediately after its recorded cutoff; it is never current live authority and must require a separate live read-only revalidation before any later action proposal.",
+      "evidence": "H-043 classifies only immutable archived evidence and marks candidate authority as none.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-043 does not establish an authorized production trigger, safe signal delivery, repeated recovery, button or configuration continuity, security, acceptable downtime, long-outage behavior, multiple-device behavior, pre-login behavior, reboot recovery, rendered pixels, operator perception, or OBS truth.",
+      "evidence": "ADR-0006 production-recovery prerequisites and H-043 explicit minimal-Slice exclusions.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "Before classification, H-043 verifies the accepted H-042 archive, canonical run bytes, semantic evidence identity, CHG-0014 and ADR-0006 boundary, current governance manifest, and the exact H-043 source set.",
+      "verification": "Content hashes, deterministic archive-member extraction, canonical H-042 verification receipt, governance verification, repository identity, and exact source map."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The producer constructs an explicit causal prefix containing only baseline, absence, returned-epoch, negative-window, final pre-signal revalidation, and pre-boundary audit facts, binds it to one canonical digest, and proves its cutoff precedes the first fault-injection entry; signal receipt, post-signal observations, H-042 outcome, cleanup, and later audit entries are not projected.",
+      "verification": "Exact allowlisted projection, monotonic boundary comparison, first-signal identity, source-run digest, prefix digest, rejection of missing, extra, or reordered prefix evidence, and proof that arbitrary deletion or mutation of the later tail leaves the prefix digest, classification, and candidate bytes unchanged."
+    },
+    {
+      "id": "SC-003",
+      "statement": "Classification has exactly three dispositions: candidate only when every required predicate is true, withheld when complete evidence current at the recorded cutoff proves automatic recovery or an incomplete negative wait, and inconclusive when identity, source admission, completeness, chronology, freshness-at-cutoff, or cardinality is missing, malformed, contradictory, stale, or ambiguous.",
+      "verification": "Pure deterministic classifier, exhaustive predicate-to-outcome matrix, stable reason codes, and schema conditionals."
+    },
+    {
+      "id": "SC-004",
+      "statement": "A candidate result contains one capability-free receipt with requiresRevalidation true, authority none, and action null, bound to the exact SurfaceThread PID, start ticks, PPID, parent start ticks, UID, GID, groups, command line, cgroup, PID namespace, and mount namespace; unchanged container and PID 1 lifecycle; returned MK.2 USB, HID, and node epoch; completed negative window; prefix digest; source evidence hashes; and classification time from the recorded causal cutoff.",
+      "verification": "Schema validation and independent field-by-field recomputation; the receipt contains no signal command, executable action, mutable host path selection, retry policy, or production authorization."
+    },
+    {
+      "id": "SC-005",
+      "statement": "A hostile matrix rejects PID reuse, worker ambiguity, changed parent or namespaces, container or PID 1 drift, current-at-cutoff descriptor ownership, new opening or ready markers, incomplete or inconsistent thirty-second timing, stale or unchanged device epoch, dynamic-node mismatch, pre-boundary interventions, duplicate candidate construction, input tampering, and any post-signal dependency.",
+      "verification": "Focused mutation tests in which no hostile case emits an eligible candidate."
+    },
+    {
+      "id": "SC-006",
+      "statement": "An independent verifier reconstructs source admission, the causal prefix, every predicate, classification, candidate fields, and evidence digest without importing producer decision constants or trusting declared predicates.",
+      "verification": "Producer-schema-verifier boundary parity tests, independent literal reconstruction, artifact hashing, canonical digest recomputation, and negative verifier tests."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The canonical accepted H-042 prefix yields exactly one independently verified revalidation-required experimental candidate while the pure classifier performs zero process.kill, spawn, exec, network, socket, host, container, configuration, device, or filesystem-mutation operations and the evidence wrapper only reads input bytes and writes local output bytes.",
+      "verification": "Canonical H-043 run and verification artifacts, literal zero-count capability audit, static import review, and deterministic replay."
+    },
+    {
+      "id": "SC-008",
+      "statement": "H-043 is supported only if the canonical prefix emits one verified candidate, every hostile and non-eligible case emits zero candidates with the exact disposition, arbitrary tail changes are irrelevant, and all side-effect counts remain zero; a prohibited positive or side effect refutes H-043, while incomplete admission remains inconclusive.",
+      "verification": "Independent outcome recomputation across the canonical run, hostile matrix, tail-independence cases, and capability audit."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0015 records the architectural question, H-043, typed claims, exact evidence boundary, three-way semantics, hostile refutation path, observable evidence, exclusions, and D³ reorder before implementation.",
+      "evidence": "Before: build a live controller that can terminate SurfaceThread. After reorder: first prove a capability-free decision model over the accepted pre-signal prefix."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The Slice adds only CHG-0015, offline H-043 projection, classification, schema, verifier, tests, local evidence, and deterministic generated governance artifacts; accepted decisions, specifications, and source-bound H-042 files remain untouched.",
+      "evidence": "Repository diff, accepted-record hash comparison, and H-042 source and canonical verification."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "One canonical offline run produces independently verified supported, refuted, or inconclusive H-043 evidence without interpreting an eligible candidate as authority to act.",
+      "evidence": "Pending H-043 run.json and verification.json with exact outcome and claim boundary."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Governance, quality, build, canonical H-042 verification, focused H-043 tests, hostile matrix, schema validation, and independent H-043 verification pass under Node 22.",
+      "evidence": "Pending final local gate receipts."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No ADR, accepted or implemented contract status, product specification, physical epoch, live collector, actuator, signal, restart, installation, production policy, push, merge, publication, or release is created before separate human evidence review and authorization; live read-only revalidation belongs to H-044.",
+      "evidence": "Human Doctrine review remains pending; verified H-043 evidence may only surface an ADR or successor-Slice candidate."
+    }
+  ]
+}
