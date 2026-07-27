@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0016",
+  "title": "Accept bounded H-043 offline worker-eligibility evidence",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "CHG-0015 is the byte-exact pre-experiment contract that governed H-043 and remains proposed and unchanged after evidence review.",
+      "evidence": "CHG-0015 file SHA-256 b2cd667fad87b366163549cdb3b0ffaac95ffd591fc53d6158c229a516ae7e25 under compiled plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, historical manifest content hash b29bde1b9f24a5c0ddaaa6b18cb577de859d6d9577b6636148c4ebeb021b8917, and signed source anchor d471998eb3121005010b024919f4364efebbb376.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Canonical H-043 run h043-2026-07-26T22-13-38-193Z-b4158eab produced a supported and independently verified offline-worker-eligibility result with all 18 required sources exact, all 25 hostile cases passing, arbitrary post-cutoff tail changes independent, and all side-effect counts zero.",
+      "evidence": "Semantic evidence SHA-256 64bf41f30dc2d51a2475e6f2e9b79ddebc225c076a87b83c384b3848b1bbecb8; run.json SHA-256 4a5754eddcd5672072d1ce0dc68c7a42694eafdc3eab5cddc4bf3e9ce5a57328; verification.json SHA-256 f75726992c88d45b9d43bab3443005cdaed05464d303f05a8356e0ccecc81023; 69 focused tests passed.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The accepted H-043 result contains exactly one historical candidate bound to the H-042 pre-signal cutoff 78174124595205, 86266314 nanoseconds before the first fault-injection entry, and marks that candidate requiresRevalidation true, authority none, and action null.",
+      "evidence": "Canonical candidate token SHA-256 43f26fc54686331e1d6a4f06d827b92d1975cc1482b2cd2d1795f698a6deac06; prefix SHA-256 aee82f2da74cee96a7ac10ea21946d1e668913e1bb2e2210398b4a362eff3959; first fault entry SHA-256 a52472766a103a8b1b7348b1a5d1305c79022b063697ffefc5af3538f8a64658.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The registered human authority @rodrigoteamx accepted the exact final H-043 receipt on 2026-07-26 and authorized content-addressed preservation, repository merge, and opening H-044 read-only.",
+      "evidence": "Human Doctrine review response 'Acepto la moción H‑043 completa y autorizo preservación, merge y apertura de H‑044 read-only.' anchored by the signed governance acceptance commit containing this successor record.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The complete replay closure contains 21 files and is preserved as a deterministic 389084-byte Git-tracked archive after a bounded disclosure scan found no credentials, bearer values, passwords, cookies, private keys, or API keys in the new H-043 receipts and sources.",
+      "evidence": "evidence/h043/64bf41f30dc2d51a2475e6f2e9b79ddebc225c076a87b83c384b3848b1bbecb8/replay-fbe7e841a7319328b253e414f93abd3a17ab47506b783b652c6624aae3b68dec.tar.gz; archive SHA-256 fbe7e841a7319328b253e414f93abd3a17ab47506b783b652c6624aae3b68dec.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Because the historical classifier rejects identity, lifecycle, device, timing, audit, and source drift without producing authority, the next minimal Slice is a separate fresh physical read-only revalidation of the same volatile tuple before any action proposal.",
+      "evidence": "Human-accepted bounded inference from canonical H-043 evidence 64bf41f30dc2d51a2475e6f2e9b79ddebc225c076a87b83c384b3848b1bbecb8 and ADR-0006's successor-Slice requirement.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "No accepted evidence yet establishes that a fresh live collector can observe the historical candidate's device, container, PID 1, and SurfaceThread identities atomically enough to reject staleness or PID reuse without a race.",
+      "evidence": "H-043 is intentionally offline and assigns this question to successor H-044 read-only.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-043 does not establish an authorized production trigger, safe signal delivery, atomic check-action behavior, repeated recovery, security, acceptable downtime, long-outage behavior, multiple-device behavior, pre-login behavior, or reboot recovery.",
+      "evidence": "Canonical H-043 claimBoundary exclusions, ADR-0006, and the human acceptance boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-043 does not establish physical button command delivery, OverlayKit configuration continuity, rendered pixels, operator perception, OBS truth, or complete recovery and does not alter SPEC-0001 or SPEC-0002.",
+      "evidence": "Canonical H-043 claimBoundary exclusions and accepted SPEC-0001 and SPEC-0002.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0015 remains byte-identical and its 18-source H-043 closure is preserved independently from the governance acceptance transition.",
+      "verification": "Recompute CHG-0015 SHA-256 as b2cd667fad87b366163549cdb3b0ffaac95ffd591fc53d6158c229a516ae7e25 and verify every collector.sources entry against signed source anchor d471998eb3121005010b024919f4364efebbb376."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The accepted claim reproduces exactly the canonical H-043 outcome and exclusions without broadening one historical eligibility candidate into current authority or permission to act.",
+      "verification": "Independent verification of the semantic evidence, run, verification, prefix, candidate token, causal boundary, hostile matrix, tail independence, side-effect audit, and claim boundary."
+    },
+    {
+      "id": "SC-003",
+      "statement": "A content-addressed Git-tracked bundle preserves the exact H-043 sources, canonical run, verification, and transitive H-042 input after disclosure review, while the two withdrawn preliminary receipts remain excluded.",
+      "verification": "Archive SHA-256 and member inspection, 18 source-hash comparisons, disclosure review, and confirmation that only h043-2026-07-26T22-13-38-193Z-b4158eab is identified as canonical."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Acceptance activates no new ADR or product specification: profile 1.6.0 retains ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002 unchanged, and plan.json remains byte-identical.",
+      "verification": "Governance source diff, accepted-record hash comparison, and deterministic manifest compilation."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The activated governance tree, repository quality checks, and build pass after acceptance; the focused H-043 producer tests pass against the exact signed source anchor, and both H-042 and H-043 canonical evidence independently verify from the acceptance tree under Node 22.20.0.",
+      "verification": "Post-acceptance receipts from governance:verify, governance:check, check, build, and both canonical verifiers, plus 69 focused H-043 tests executed at signed source anchor d471998eb3121005010b024919f4364efebbb376. The H-043 producer fails closed after the manifest successor by design."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Acceptance permits signed source and governance commits, GitHub push, merge, and a separately governed H-044 read-only Slice, but does not permit a signal, actuator, restart, installation, production policy, npm publication, release, or product-specification expansion.",
+      "verification": "Human authorization boundary, signed commit verification, repository and remote state, and absence of host or production mutation."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0016 records the registered human acceptance, typed facts, bounded inference, nonblocking unknowns, exact evidence identities, exclusions, and separate transition authorities.",
+      "evidence": "Human Doctrine acceptance by @rodrigoteamx on 2026-07-26 and this implemented successor contract."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "CHG-0015 remains proposed and byte-identical; accepted ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002 remain untouched.",
+      "evidence": "Repository diff and exact accepted-record SHA-256 comparison."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The canonical H-043 evidence, exact source map, and transitive H-042 input are stored in a Git-tracked content-addressed archive and independently verify without admitting withdrawn receipts.",
+      "evidence": "Archive SHA-256 fbe7e841a7319328b253e414f93abd3a17ab47506b783b652c6624aae3b68dec; run SHA-256 4a5754eddcd5672072d1ce0dc68c7a42694eafdc3eab5cddc4bf3e9ce5a57328; verification SHA-256 f75726992c88d45b9d43bab3443005cdaed05464d303f05a8356e0ccecc81023."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No ADR, profile, plan, or product specification changes; only CHG-0016 and the deterministically regenerated manifest record the acceptance transition.",
+      "evidence": "Governance diff, plan and profile byte hashes, manifest, and repository governance assertions."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "Post-acceptance governance, quality, build, accepted-record, archive-member, source-hash, and canonical verification gates pass; focused H-043 producer tests pass at the signed historical source anchor under Node 22.20.0.",
+      "evidence": "Successful final local gates dated 2026-07-26, including 69/69 H-043 tests at d471998eb3121005010b024919f4364efebbb376 and independent verification from the acceptance tree."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No product code, accepted specification, host or production configuration, signal, restart, installation, npm publication, or release is created by this acceptance.",
+      "evidence": "Repository diff, unchanged specification hashes, H-043 zero side-effect audit, and the explicit human authorization boundary."
+    }
+  ]
+}

@@ -1,0 +1,1839 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h043-offline-worker-eligibility-run/v1",
+  "title": "OverlayKit H-043 offline worker eligibility evidence",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "runId",
+    "startedAt",
+    "completedAt",
+    "outcome",
+    "collector",
+    "input",
+    "prefix",
+    "causalBoundary",
+    "canonicalClassification",
+    "hostileMatrix",
+    "sideEffectAudit",
+    "claimBoundary",
+    "evidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h043-offline-worker-eligibility-run/v1"
+    },
+    "hypothesis": {
+      "const": "H-043"
+    },
+    "runId": {
+      "type": "string",
+      "pattern": "^h043-[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3])-[0-5][0-9]-[0-5][0-9](?:-[0-9]{1,9})?Z-[0-9a-f]{8}$"
+    },
+    "startedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "completedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "outcome": {
+      "$ref": "#/$defs/outcome"
+    },
+    "collector": {
+      "$ref": "#/$defs/collector"
+    },
+    "input": {
+      "$ref": "#/$defs/input"
+    },
+    "prefix": {
+      "$ref": "#/$defs/prefixManifest"
+    },
+    "causalBoundary": {
+      "$ref": "#/$defs/causalBoundary"
+    },
+    "canonicalClassification": {
+      "$ref": "#/$defs/classification"
+    },
+    "hostileMatrix": {
+      "$ref": "#/$defs/hostileMatrix"
+    },
+    "sideEffectAudit": {
+      "$ref": "#/$defs/sideEffectAudit"
+    },
+    "claimBoundary": {
+      "$ref": "#/$defs/claimBoundary"
+    },
+    "evidenceSha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": {
+              "status": {
+                "const": "supported"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "properties": {
+          "outcome": {
+            "properties": {
+              "stage": {
+                "const": "offline-worker-eligibility"
+              },
+              "reasonCode": {
+                "const": "canonical-candidate-and-hostile-matrix-exact"
+              }
+            }
+          },
+          "collector": {
+            "properties": {
+              "sourceStable": {
+                "const": true
+              }
+            }
+          },
+          "canonicalClassification": {
+            "properties": {
+              "disposition": {
+                "const": "candidate"
+              }
+            }
+          },
+          "hostileMatrix": {
+            "$ref": "#/$defs/exactPassingHostileMatrix"
+          },
+          "sideEffectAudit": {
+            "$ref": "#/$defs/exactZeroSideEffectAudit"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": {
+              "status": {
+                "const": "refuted"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "oneOf": [
+          {
+            "properties": {
+              "outcome": {
+                "properties": {
+                  "stage": {
+                    "const": "side-effect-boundary"
+                  },
+                  "reasonCode": {
+                    "const": "side-effect-observed"
+                  }
+                }
+              },
+              "sideEffectAudit": {
+                "$ref": "#/$defs/nonZeroSideEffectAudit"
+              }
+            }
+          },
+          {
+            "properties": {
+              "outcome": {
+                "properties": {
+                  "stage": {
+                    "const": "hostile-matrix"
+                  },
+                  "reasonCode": {
+                    "const": "hostile-case-or-tail-independence-failed"
+                  }
+                }
+              },
+              "hostileMatrix": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/hostileMatrix"
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "allPassed": {
+                            "const": false
+                          }
+                        }
+                      },
+                      {
+                        "properties": {
+                          "tailIndependent": {
+                            "const": false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "sideEffectAudit": {
+                "$ref": "#/$defs/exactZeroSideEffectAudit"
+              }
+            }
+          },
+          {
+            "properties": {
+              "outcome": {
+                "properties": {
+                  "stage": {
+                    "const": "canonical-classification"
+                  },
+                  "reasonCode": {
+                    "const": "canonical-prefix-not-eligible"
+                  }
+                }
+              },
+              "collector": {
+                "properties": {
+                  "sourceStable": {
+                    "const": true
+                  }
+                }
+              },
+              "canonicalClassification": {
+                "properties": {
+                  "disposition": {
+                    "const": "withheld"
+                  }
+                }
+              },
+              "hostileMatrix": {
+                "$ref": "#/$defs/exactPassingHostileMatrix"
+              },
+              "sideEffectAudit": {
+                "$ref": "#/$defs/exactZeroSideEffectAudit"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "properties": {
+              "status": {
+                "const": "inconclusive"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "oneOf": [
+          {
+            "properties": {
+              "outcome": {
+                "properties": {
+                  "stage": {
+                    "const": "source-admission"
+                  },
+                  "reasonCode": {
+                    "const": "source-set-unstable"
+                  }
+                }
+              },
+              "collector": {
+                "properties": {
+                  "sourceStable": {
+                    "const": false
+                  }
+                }
+              },
+              "hostileMatrix": {
+                "$ref": "#/$defs/exactPassingHostileMatrix"
+              },
+              "sideEffectAudit": {
+                "$ref": "#/$defs/exactZeroSideEffectAudit"
+              }
+            }
+          },
+          {
+            "properties": {
+              "outcome": {
+                "properties": {
+                  "stage": {
+                    "const": "prefix-boundary"
+                  },
+                  "reasonCode": {
+                    "const": "canonical-prefix-inconclusive"
+                  }
+                }
+              },
+              "collector": {
+                "properties": {
+                  "sourceStable": {
+                    "const": true
+                  }
+                }
+              },
+              "canonicalClassification": {
+                "properties": {
+                  "disposition": {
+                    "const": "inconclusive"
+                  }
+                }
+              },
+              "hostileMatrix": {
+                "$ref": "#/$defs/exactPassingHostileMatrix"
+              },
+              "sideEffectAudit": {
+                "$ref": "#/$defs/exactZeroSideEffectAudit"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dateTime": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](?:\\.[0-9]{1,9})?Z$"
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "monotonicNs": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)$"
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "stage", "reasonCode"],
+      "properties": {
+        "status": {
+          "enum": ["supported", "refuted", "inconclusive"]
+        },
+        "stage": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "reasonCode": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceReceipt": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "collector": {
+      "type": "object",
+      "required": ["node", "repository", "baseCommit", "sources", "sourceStable", "governance"],
+      "properties": {
+        "node": {
+          "const": "v22.20.0"
+        },
+        "repository": {
+          "const": "https://github.com/OverlayKit/companion-module-overlaykit-server.git"
+        },
+        "baseCommit": {
+          "const": "dce2cd8bb454a264f8f9738f9748dc1c70b5dcd0"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sourceReceipt"
+          }
+        },
+        "sourceStable": {
+          "type": "boolean"
+        },
+        "governance": {
+          "type": "object",
+          "required": ["changeId", "changeSha256", "planHash", "manifestContentHash"],
+          "properties": {
+            "changeId": {
+              "const": "CHG-0015"
+            },
+            "changeSha256": {
+              "const": "b2cd667fad87b366163549cdb3b0ffaac95ffd591fc53d6158c229a516ae7e25"
+            },
+            "planHash": {
+              "const": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4"
+            },
+            "manifestContentHash": {
+              "const": "b29bde1b9f24a5c0ddaaa6b18cb577de859d6d9577b6636148c4ebeb021b8917"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "archivePath",
+        "archiveSha256",
+        "h042RunId",
+        "h042EvidenceSha256",
+        "h042RunSha256",
+        "h042VerificationSha256"
+      ],
+      "properties": {
+        "archivePath": {
+          "const": "evidence/h042/f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88/replay-15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36.tar.gz"
+        },
+        "archiveSha256": {
+          "const": "15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36"
+        },
+        "h042RunId": {
+          "const": "h042-2026-07-26T16-19-05-858Z-efaf85fa"
+        },
+        "h042EvidenceSha256": {
+          "const": "f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88"
+        },
+        "h042RunSha256": {
+          "const": "be39e69140f733e7f56e371f144b6e7b0cd43c05b7be6bfea9850c440679a7b6"
+        },
+        "h042VerificationSha256": {
+          "const": "0fc4f3cd7f78fe1184331a40f97874521d97d6f5c677a4829588a6dc676e6919"
+        }
+      },
+      "additionalProperties": false
+    },
+    "countedDigest": {
+      "type": "object",
+      "required": ["count", "sha256"],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "prefixManifest": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "prefixSha256",
+        "cutoffMonotonicNs",
+        "runtimePoll",
+        "hostPoll",
+        "invocationAudit",
+        "logs"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "overlaykit-h043-h042-prefix/v1"
+        },
+        "prefixSha256": {
+          "const": "aee82f2da74cee96a7ac10ea21946d1e668913e1bb2e2210398b4a362eff3959"
+        },
+        "cutoffMonotonicNs": {
+          "const": "78174124595205"
+        },
+        "runtimePoll": {
+          "type": "object",
+          "required": ["lineCount", "sha256"],
+          "properties": {
+            "lineCount": {
+              "const": 55
+            },
+            "sha256": {
+              "const": "ec7f7041a505524d2ba058b3185373633135cab0765f46a2d4ddab9f260d725f"
+            }
+          },
+          "additionalProperties": false
+        },
+        "hostPoll": {
+          "type": "object",
+          "required": ["lineCount", "sha256"],
+          "properties": {
+            "lineCount": {
+              "const": 476
+            },
+            "sha256": {
+              "const": "53b91505477301d9a1a554f6a15dc41b138158df702339daa48139b810a3a4b4"
+            }
+          },
+          "additionalProperties": false
+        },
+        "invocationAudit": {
+          "type": "object",
+          "required": ["entryCount", "sha256"],
+          "properties": {
+            "entryCount": {
+              "const": 223
+            },
+            "sha256": {
+              "const": "bfc457e62f58cc581b3ad653cc9b45ee397ef6fc8a2be0d96f3cb003e0d7a8ef"
+            }
+          },
+          "additionalProperties": false
+        },
+        "logs": {
+          "type": "object",
+          "required": ["initialSha256", "absentSha256", "preSignalSha256"],
+          "properties": {
+            "initialSha256": {
+              "const": "27534063c7d53c75a8b20f8b0a50c4b0ca01bd09763baab7716fc062e50263e6"
+            },
+            "absentSha256": {
+              "const": "0b62162131e526aa07efc175a626623e885e9965362f833936d2e494391a4abb"
+            },
+            "preSignalSha256": {
+              "const": "f5375408668603381d24b9289b307636b86db462022fd5fedfd1726fbc9e5d8b"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "causalBoundary": {
+      "type": "object",
+      "required": [
+        "cutoffMonotonicNs",
+        "firstFaultInjection",
+        "gapNs",
+        "precedesFirstFaultInjection"
+      ],
+      "properties": {
+        "cutoffMonotonicNs": {
+          "const": "78174124595205"
+        },
+        "firstFaultInjection": {
+          "type": "object",
+          "required": ["sourceAuditIndex", "at", "monotonicNs", "kind", "phase", "entrySha256"],
+          "properties": {
+            "sourceAuditIndex": {
+              "const": 223
+            },
+            "at": {
+              "const": "2026-07-26T16:20:34.271Z"
+            },
+            "monotonicNs": {
+              "const": "78174210861519"
+            },
+            "kind": {
+              "const": "docker-exec-signal"
+            },
+            "phase": {
+              "const": "fault-injection"
+            },
+            "entrySha256": {
+              "const": "a52472766a103a8b1b7348b1a5d1305c79022b063697ffefc5af3538f8a64658"
+            }
+          },
+          "additionalProperties": false
+        },
+        "gapNs": {
+          "const": "86266314"
+        },
+        "precedesFirstFaultInjection": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "predicates": {
+      "type": "object",
+      "required": [
+        "sourceAdmissionExact",
+        "prefixBoundaryExact",
+        "usbEpochExact",
+        "returnedDeviceExact",
+        "negativeWindowComplete",
+        "topLevelLifecycleUnchanged",
+        "workerUniqueThroughout",
+        "workerTupleUnchanged",
+        "currentDescriptorAbsentThroughout",
+        "markersStable",
+        "finalReceiptsCoherent",
+        "historicalAuditExact"
+      ],
+      "properties": {
+        "sourceAdmissionExact": {
+          "type": "boolean"
+        },
+        "prefixBoundaryExact": {
+          "type": "boolean"
+        },
+        "usbEpochExact": {
+          "type": "boolean"
+        },
+        "returnedDeviceExact": {
+          "type": "boolean"
+        },
+        "negativeWindowComplete": {
+          "type": "boolean"
+        },
+        "topLevelLifecycleUnchanged": {
+          "type": "boolean"
+        },
+        "workerUniqueThroughout": {
+          "type": "boolean"
+        },
+        "workerTupleUnchanged": {
+          "type": "boolean"
+        },
+        "currentDescriptorAbsentThroughout": {
+          "type": "boolean"
+        },
+        "markersStable": {
+          "type": "boolean"
+        },
+        "finalReceiptsCoherent": {
+          "type": "boolean"
+        },
+        "historicalAuditExact": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "statIdentity": {
+      "type": "object",
+      "required": [
+        "stDev",
+        "inode",
+        "ctimeNs",
+        "mode",
+        "uid",
+        "gid",
+        "rdev",
+        "rdevHex",
+        "major",
+        "minor",
+        "isCharacterDevice"
+      ],
+      "properties": {
+        "stDev": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "inode": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "ctimeNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "mode": {
+          "type": "string",
+          "pattern": "^0[0-7]{3}$"
+        },
+        "uid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rdev": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "rdevHex": {
+          "type": "string",
+          "pattern": "^[0-9a-f]+:[0-9a-f]+$"
+        },
+        "major": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "isCharacterDevice": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "deviceEpoch": {
+      "type": "object",
+      "required": [
+        "serial",
+        "busNumber",
+        "deviceNumber",
+        "usbDevicePath",
+        "usbDev",
+        "hidDevicePath",
+        "devicePath",
+        "stat"
+      ],
+      "properties": {
+        "serial": {
+          "const": "A00SA5492OQMLF"
+        },
+        "busNumber": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "deviceNumber": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "usbDevicePath": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "usbDev": {
+          "type": "string",
+          "pattern": "^[0-9]+:[0-9]+$"
+        },
+        "hidDevicePath": {
+          "type": "string",
+          "pattern": "^/sys/devices/.+/[0-9]{4}:[0-9A-F]{4}:[0-9A-F]{4}\\.[0-9]{4}$"
+        },
+        "devicePath": {
+          "type": "string",
+          "pattern": "^/dev/hidraw[0-9]+$"
+        },
+        "stat": {
+          "$ref": "#/$defs/statIdentity"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": [
+        "containerId",
+        "imageId",
+        "startedAt",
+        "restartCount",
+        "hostPid",
+        "pid1StartTicks",
+        "pidNamespace",
+        "mountNamespace",
+        "cgroup",
+        "hostCgroup",
+        "cgroupNamespaceMode"
+      ],
+      "properties": {
+        "containerId": {
+          "$ref": "#/$defs/sha256"
+        },
+        "imageId": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "startedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "restartCount": {
+          "const": 0
+        },
+        "hostPid": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "pid1StartTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pidNamespace": {
+          "type": "string",
+          "pattern": "^pid:\\[[0-9]+\\]$"
+        },
+        "mountNamespace": {
+          "type": "string",
+          "pattern": "^mnt:\\[[0-9]+\\]$"
+        },
+        "cgroup": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "hostCgroup": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "cgroupNamespaceMode": {
+          "const": "private"
+        }
+      },
+      "additionalProperties": false
+    },
+    "worker": {
+      "type": "object",
+      "required": [
+        "pid",
+        "startTicks",
+        "ppid",
+        "parentStartTicks",
+        "uid",
+        "gid",
+        "groups",
+        "cmdline",
+        "cgroup",
+        "pidNamespace",
+        "mountNamespace"
+      ],
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "startTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ppid": {
+          "const": 1
+        },
+        "parentStartTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "uid": {
+          "const": 1000
+        },
+        "gid": {
+          "const": 1000
+        },
+        "groups": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": 1000
+            },
+            {
+              "const": 1002
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "cmdline": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "/app/node-runtimes/node22/bin/node"
+            },
+            {
+              "const": "--enable-source-maps"
+            },
+            {
+              "const": "/app/SurfaceThread.js"
+            }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "cgroup": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "pidNamespace": {
+          "type": "string",
+          "pattern": "^pid:\\[[0-9]+\\]$"
+        },
+        "mountNamespace": {
+          "type": "string",
+          "pattern": "^mnt:\\[[0-9]+\\]$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "candidateWindow": {
+      "type": "object",
+      "required": [
+        "startedMonotonicNs",
+        "deadlineMonotonicNs",
+        "completedMonotonicNs",
+        "boundaryPollMonotonicNs",
+        "revalidationMonotonicNs",
+        "cutoffMonotonicNs"
+      ],
+      "properties": {
+        "startedMonotonicNs": {
+          "const": "78143547973113"
+        },
+        "deadlineMonotonicNs": {
+          "const": "78173547973113"
+        },
+        "completedMonotonicNs": {
+          "const": "78174031954528"
+        },
+        "boundaryPollMonotonicNs": {
+          "const": "78174031765124"
+        },
+        "revalidationMonotonicNs": {
+          "const": "78174119635040"
+        },
+        "cutoffMonotonicNs": {
+          "const": "78174124595205"
+        }
+      },
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "kind",
+        "historical",
+        "requiresRevalidation",
+        "authority",
+        "action",
+        "observedCutoff",
+        "sourceEvidenceSha256",
+        "prefixSha256",
+        "identity",
+        "window",
+        "tokenSha256"
+      ],
+      "properties": {
+        "kind": {
+          "const": "revalidation-required"
+        },
+        "historical": {
+          "const": true
+        },
+        "requiresRevalidation": {
+          "const": true
+        },
+        "authority": {
+          "const": "none"
+        },
+        "action": {
+          "type": "null"
+        },
+        "observedCutoff": {
+          "type": "object",
+          "required": ["at", "monotonicNs"],
+          "properties": {
+            "at": {
+              "const": "2026-07-26T16:20:34.184Z"
+            },
+            "monotonicNs": {
+              "const": "78174124595205"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sourceEvidenceSha256": {
+          "const": "f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88"
+        },
+        "prefixSha256": {
+          "const": "aee82f2da74cee96a7ac10ea21946d1e668913e1bb2e2210398b4a362eff3959"
+        },
+        "identity": {
+          "type": "object",
+          "required": ["device", "lifecycle", "worker"],
+          "properties": {
+            "device": {
+              "type": "object",
+              "required": [
+                "serial",
+                "vendorId",
+                "productId",
+                "initialEpoch",
+                "returnedEpoch",
+                "revalidationEpoch"
+              ],
+              "properties": {
+                "serial": {
+                  "const": "A00SA5492OQMLF"
+                },
+                "vendorId": {
+                  "const": "0fd9"
+                },
+                "productId": {
+                  "const": "0080"
+                },
+                "initialEpoch": {
+                  "$ref": "#/$defs/deviceEpoch"
+                },
+                "returnedEpoch": {
+                  "$ref": "#/$defs/deviceEpoch"
+                },
+                "revalidationEpoch": {
+                  "$ref": "#/$defs/deviceEpoch"
+                }
+              },
+              "additionalProperties": false
+            },
+            "lifecycle": {
+              "$ref": "#/$defs/lifecycle"
+            },
+            "worker": {
+              "$ref": "#/$defs/worker"
+            }
+          },
+          "additionalProperties": false
+        },
+        "window": {
+          "$ref": "#/$defs/candidateWindow"
+        },
+        "tokenSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "classification": {
+      "type": "object",
+      "required": ["disposition", "stage", "reasonCode", "predicates", "candidates"],
+      "properties": {
+        "disposition": {
+          "enum": ["candidate", "withheld", "inconclusive"]
+        },
+        "stage": {
+          "enum": [
+            "historical-worker-candidate",
+            "not-eligible",
+            "source-admission",
+            "contradictory-evidence",
+            "identity",
+            "prefix-boundary",
+            "classification"
+          ]
+        },
+        "reasonCode": {
+          "enum": [
+            "revalidation-required-worker-candidate",
+            "device-absent-at-cutoff",
+            "negative-window-open",
+            "automatic-reacquisition-observed",
+            "malformed-prefix",
+            "partial-or-mixed-reacquisition",
+            "identity-ambiguity-or-drift",
+            "device-epoch-or-node-mismatch",
+            "incomplete-or-contradictory-boundary",
+            "untrusted-or-contradictory-prefix",
+            "predicate-gap"
+          ]
+        },
+        "predicates": {
+          "$ref": "#/$defs/predicates"
+        },
+        "candidates": {
+          "type": "array",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/candidate"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "const": "candidate"
+              }
+            },
+            "required": ["disposition"]
+          },
+          "then": {
+            "properties": {
+              "stage": {
+                "const": "historical-worker-candidate"
+              },
+              "reasonCode": {
+                "const": "revalidation-required-worker-candidate"
+              },
+              "predicates": {
+                "properties": {
+                  "sourceAdmissionExact": {
+                    "const": true
+                  },
+                  "prefixBoundaryExact": {
+                    "const": true
+                  },
+                  "usbEpochExact": {
+                    "const": true
+                  },
+                  "returnedDeviceExact": {
+                    "const": true
+                  },
+                  "negativeWindowComplete": {
+                    "const": true
+                  },
+                  "topLevelLifecycleUnchanged": {
+                    "const": true
+                  },
+                  "workerUniqueThroughout": {
+                    "const": true
+                  },
+                  "workerTupleUnchanged": {
+                    "const": true
+                  },
+                  "currentDescriptorAbsentThroughout": {
+                    "const": true
+                  },
+                  "markersStable": {
+                    "const": true
+                  },
+                  "finalReceiptsCoherent": {
+                    "const": true
+                  },
+                  "historicalAuditExact": {
+                    "const": true
+                  }
+                }
+              },
+              "candidates": {
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "const": "withheld"
+              }
+            },
+            "required": ["disposition"]
+          },
+          "then": {
+            "properties": {
+              "stage": {
+                "const": "not-eligible"
+              },
+              "reasonCode": {
+                "enum": [
+                  "device-absent-at-cutoff",
+                  "negative-window-open",
+                  "automatic-reacquisition-observed"
+                ]
+              },
+              "candidates": {
+                "maxItems": 0
+              }
+            },
+            "anyOf": [
+              {
+                "properties": {
+                  "predicates": {
+                    "properties": {
+                      "usbEpochExact": {
+                        "const": false
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "predicates": {
+                    "properties": {
+                      "returnedDeviceExact": {
+                        "const": false
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "predicates": {
+                    "properties": {
+                      "negativeWindowComplete": {
+                        "const": false
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "predicates": {
+                    "properties": {
+                      "currentDescriptorAbsentThroughout": {
+                        "const": false
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "predicates": {
+                    "properties": {
+                      "markersStable": {
+                        "const": false
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "const": "inconclusive"
+              }
+            },
+            "required": ["disposition"]
+          },
+          "then": {
+            "properties": {
+              "stage": {
+                "enum": [
+                  "source-admission",
+                  "contradictory-evidence",
+                  "identity",
+                  "prefix-boundary",
+                  "classification"
+                ]
+              },
+              "reasonCode": {
+                "enum": [
+                  "malformed-prefix",
+                  "partial-or-mixed-reacquisition",
+                  "identity-ambiguity-or-drift",
+                  "device-epoch-or-node-mismatch",
+                  "incomplete-or-contradictory-boundary",
+                  "untrusted-or-contradictory-prefix",
+                  "predicate-gap"
+                ]
+              },
+              "candidates": {
+                "maxItems": 0
+              }
+            },
+            "not": {
+              "properties": {
+                "predicates": {
+                  "properties": {
+                    "sourceAdmissionExact": {
+                      "const": true
+                    },
+                    "prefixBoundaryExact": {
+                      "const": true
+                    },
+                    "usbEpochExact": {
+                      "const": true
+                    },
+                    "returnedDeviceExact": {
+                      "const": true
+                    },
+                    "negativeWindowComplete": {
+                      "const": true
+                    },
+                    "topLevelLifecycleUnchanged": {
+                      "const": true
+                    },
+                    "workerUniqueThroughout": {
+                      "const": true
+                    },
+                    "workerTupleUnchanged": {
+                      "const": true
+                    },
+                    "currentDescriptorAbsentThroughout": {
+                      "const": true
+                    },
+                    "markersStable": {
+                      "const": true
+                    },
+                    "finalReceiptsCoherent": {
+                      "const": true
+                    },
+                    "historicalAuditExact": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "matrixCase": {
+      "type": "object",
+      "required": [
+        "id",
+        "inputSha256",
+        "expectedDisposition",
+        "actualDisposition",
+        "expectedCandidateCount",
+        "actualCandidateCount",
+        "stage",
+        "reasonCode",
+        "passed"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "canonical-golden",
+            "healthy-baseline",
+            "device-absent",
+            "negative-window-open",
+            "current-descriptor-reacquired",
+            "ordered-markers-changed",
+            "partial-marker-change",
+            "worker-missing",
+            "multiple-workers",
+            "container-lifecycle-drift",
+            "pid1-identity-drift",
+            "worker-pid-changed",
+            "worker-startticks-changed",
+            "worker-ppid-changed",
+            "worker-parent-startticks-changed",
+            "worker-pid-namespace-changed",
+            "worker-full-tuple-drift",
+            "exact-absence-missing",
+            "usb-epoch-identity-mismatch",
+            "returned-node-mismatch",
+            "negative-window-boundary-missing",
+            "late-positive",
+            "prefix-tail-contamination",
+            "duplicate-candidates",
+            "unapproved-command"
+          ]
+        },
+        "inputSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "expectedDisposition": {
+          "enum": ["candidate", "withheld", "inconclusive"]
+        },
+        "actualDisposition": {
+          "enum": ["candidate", "withheld", "inconclusive"]
+        },
+        "expectedCandidateCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "actualCandidateCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stage": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "reasonCode": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "hostileMatrix": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "requiredCaseIds",
+        "caseCount",
+        "passedCount",
+        "allPassed",
+        "tailIndependent",
+        "cases"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "overlaykit-h043-hostile-matrix/v1"
+        },
+        "requiredCaseIds": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "canonical-golden"
+            },
+            {
+              "const": "healthy-baseline"
+            },
+            {
+              "const": "device-absent"
+            },
+            {
+              "const": "negative-window-open"
+            },
+            {
+              "const": "current-descriptor-reacquired"
+            },
+            {
+              "const": "ordered-markers-changed"
+            },
+            {
+              "const": "partial-marker-change"
+            },
+            {
+              "const": "worker-missing"
+            },
+            {
+              "const": "multiple-workers"
+            },
+            {
+              "const": "container-lifecycle-drift"
+            },
+            {
+              "const": "pid1-identity-drift"
+            },
+            {
+              "const": "worker-pid-changed"
+            },
+            {
+              "const": "worker-startticks-changed"
+            },
+            {
+              "const": "worker-ppid-changed"
+            },
+            {
+              "const": "worker-parent-startticks-changed"
+            },
+            {
+              "const": "worker-pid-namespace-changed"
+            },
+            {
+              "const": "worker-full-tuple-drift"
+            },
+            {
+              "const": "exact-absence-missing"
+            },
+            {
+              "const": "usb-epoch-identity-mismatch"
+            },
+            {
+              "const": "returned-node-mismatch"
+            },
+            {
+              "const": "negative-window-boundary-missing"
+            },
+            {
+              "const": "late-positive"
+            },
+            {
+              "const": "prefix-tail-contamination"
+            },
+            {
+              "const": "duplicate-candidates"
+            },
+            {
+              "const": "unapproved-command"
+            }
+          ],
+          "minItems": 25,
+          "maxItems": 25
+        },
+        "caseCount": {
+          "const": 25
+        },
+        "passedCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 25
+        },
+        "allPassed": {
+          "type": "boolean"
+        },
+        "tailIndependent": {
+          "type": "boolean"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 25,
+          "maxItems": 25,
+          "items": {
+            "$ref": "#/$defs/matrixCase"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "allPassed": {
+                "const": true
+              }
+            },
+            "required": ["allPassed"]
+          },
+          "then": {
+            "properties": {
+              "passedCount": {
+                "const": 25
+              },
+              "cases": {
+                "items": {
+                  "properties": {
+                    "passed": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "passedCount": {
+                "maximum": 24
+              },
+              "cases": {
+                "contains": {
+                  "properties": {
+                    "passed": {
+                      "const": false
+                    }
+                  },
+                  "required": ["passed"]
+                },
+                "minContains": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "exactPassingHostileMatrix": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/hostileMatrix"
+        },
+        {
+          "properties": {
+            "caseCount": {
+              "const": 25
+            },
+            "passedCount": {
+              "const": 25
+            },
+            "allPassed": {
+              "const": true
+            },
+            "tailIndependent": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "sideEffectAudit": {
+      "type": "object",
+      "required": [
+        "mode",
+        "commands",
+        "commandCount",
+        "hostObservationCount",
+        "dockerCount",
+        "networkCount",
+        "processCount",
+        "sysfsCount",
+        "deviceOpenCount",
+        "deviceReadCount",
+        "deviceWriteCount",
+        "signalCount",
+        "mutationCount",
+        "passed"
+      ],
+      "properties": {
+        "mode": {
+          "const": "offline-archived-evidence-only"
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "commandCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hostObservationCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "networkCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "processCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sysfsCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "deviceOpenCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "deviceReadCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "deviceWriteCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "signalCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mutationCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "exactZeroSideEffectAudit": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sideEffectAudit"
+        },
+        {
+          "properties": {
+            "commands": {
+              "maxItems": 0
+            },
+            "commandCount": {
+              "const": 0
+            },
+            "hostObservationCount": {
+              "const": 0
+            },
+            "dockerCount": {
+              "const": 0
+            },
+            "networkCount": {
+              "const": 0
+            },
+            "processCount": {
+              "const": 0
+            },
+            "sysfsCount": {
+              "const": 0
+            },
+            "deviceOpenCount": {
+              "const": 0
+            },
+            "deviceReadCount": {
+              "const": 0
+            },
+            "deviceWriteCount": {
+              "const": 0
+            },
+            "signalCount": {
+              "const": 0
+            },
+            "mutationCount": {
+              "const": 0
+            },
+            "passed": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "nonZeroSideEffectAudit": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sideEffectAudit"
+        },
+        {
+          "properties": {
+            "passed": {
+              "const": false
+            }
+          },
+          "anyOf": [
+            {
+              "properties": {
+                "commands": {
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "commandCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "hostObservationCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "dockerCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "networkCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "processCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "sysfsCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "deviceOpenCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "deviceReadCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "deviceWriteCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "signalCount": {
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "mutationCount": {
+                  "minimum": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["proves", "excludes"],
+      "properties": {
+        "proves": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "offline deterministic eligibility classification of the byte-exact canonical H-042 pre-signal prefix"
+            },
+            {
+              "const": "exact conjunction of one already-recorded USB epoch, a complete thirty-second negative automatic-reacquisition control, and one current-at-cutoff SurfaceThread, container, PID 1, and device tuple"
+            },
+            {
+              "const": "at most one historical revalidation-required candidate binding the exact observed volatile identities designated for separate live revalidation"
+            },
+            {
+              "const": "fail-closed withholding for complete non-eligible prefixes and inconclusive classification for missing, malformed, contradictory, stale, or ambiguous inputs"
+            },
+            {
+              "const": "classifier execution with no signal, process, container, host, configuration, or device mutation and no dependency on signal or post-signal evidence"
+            }
+          ],
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "excludes": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "live eligibility after the recorded cutoff, successful physical revalidation, race freedom, PID-reuse safety, or atomic check-action behavior"
+            },
+            {
+              "const": "authorization or safety of SIGTERM or any other action; a candidate is not a command, supervisor, or production policy"
+            },
+            {
+              "const": "a live watcher, controller, supervisor, systemd or udev unit, restart or recreate policy, device bind, cgroup rule, or configuration change"
+            },
+            {
+              "const": "a new physical USB epoch, device I/O, new worker replacement or reacquisition, or repeated recovery"
+            },
+            {
+              "const": "button delivery, OverlayKit configuration continuity, rendered pixels, operator perception, OBS truth, or product acceptance"
+            },
+            {
+              "const": "security, acceptable downtime, multiple devices, pre-login, reboot, long-outage behavior, or support beyond the exact archived identities"
+            }
+          ],
+          "minItems": 6,
+          "maxItems": 6
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
