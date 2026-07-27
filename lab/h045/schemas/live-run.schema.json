@@ -1,0 +1,4602 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h045-live-run/v2",
+  "title": "OverlayKit H-045 dynamic read-only acquisition evidence",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "runId",
+    "startedAt",
+    "completedAt",
+    "outcome",
+    "collector",
+    "input",
+    "sourceAdmission",
+    "acceptedTarget",
+    "frames",
+    "capabilityAudit",
+    "liveClassification",
+    "hostileMatrix",
+    "claimBoundary",
+    "evidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h045-live-run/v2"
+    },
+    "hypothesis": {
+      "const": "H-045"
+    },
+    "runId": {
+      "type": "string",
+      "pattern": "^h045-[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3])-[0-5][0-9]-[0-5][0-9](?:-[0-9]{1,9})?Z-[0-9a-f]{8}$"
+    },
+    "startedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "completedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "outcome": {
+      "$ref": "#/$defs/outcome"
+    },
+    "collector": {
+      "$ref": "#/$defs/collector"
+    },
+    "input": {
+      "$ref": "#/$defs/input"
+    },
+    "sourceAdmission": {
+      "$ref": "#/$defs/sourceAdmission"
+    },
+    "acceptedTarget": {
+      "$ref": "#/$defs/acceptedTarget"
+    },
+    "frames": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/frame"
+      }
+    },
+    "capabilityAudit": {
+      "$ref": "#/$defs/capabilityAudit"
+    },
+    "liveClassification": {
+      "$ref": "#/$defs/liveClassification"
+    },
+    "hostileMatrix": {
+      "$ref": "#/$defs/hostileMatrix"
+    },
+    "claimBoundary": {
+      "$ref": "#/$defs/claimBoundary"
+    },
+    "evidenceSha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "candidate"
+              }
+            },
+            "required": ["disposition"]
+          }
+        },
+        "required": ["liveClassification"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "frames": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/$defs/candidateFrame"
+            }
+          },
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "predicates": {
+                "$ref": "#/$defs/allTruePredicates"
+              },
+              "receipts": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "$ref": "#/$defs/dynamicTupleReceipt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "withheld"
+              }
+            },
+            "required": ["disposition"]
+          }
+        },
+        "required": ["liveClassification"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "frames": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/frame"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "deploymentInventory": {
+                      "type": "object",
+                      "properties": {
+                        "rows": {
+                          "type": "array",
+                          "maxItems": 1
+                        },
+                        "matches": {
+                          "type": "array",
+                          "maxItems": 1
+                        }
+                      },
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "rows": {
+                              "type": "array",
+                              "maxItems": 0
+                            },
+                            "matches": {
+                              "type": "array",
+                              "maxItems": 0
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "rows": {
+                              "type": "array",
+                              "minItems": 1,
+                              "maxItems": 1
+                            },
+                            "matches": {
+                              "type": "array",
+                              "minItems": 1,
+                              "maxItems": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "predicates": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/predicates"
+                  },
+                  {
+                    "not": {
+                      "$ref": "#/$defs/allTruePredicates"
+                    }
+                  }
+                ]
+              },
+              "receipts": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "inconclusive"
+              }
+            },
+            "required": ["disposition"]
+          }
+        },
+        "required": ["liveClassification"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "receipts": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "supported"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "stage": {
+                "const": "dynamic-readonly-acquisition"
+              },
+              "reasonCode": {
+                "const": "complete-live-classification-and-hostile-matrix-exact"
+              }
+            }
+          },
+          "collector": {
+            "type": "object",
+            "properties": {
+              "protectedMain": {
+                "type": "object",
+                "properties": {
+                  "isAncestor": {
+                    "const": true
+                  }
+                }
+              },
+              "sourceContract": {
+                "type": "object",
+                "properties": {
+                  "isAncestor": {
+                    "const": true
+                  }
+                }
+              },
+              "sourceStable": {
+                "const": true
+              },
+              "governance": {
+                "type": "object",
+                "properties": {
+                  "verified": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          },
+          "sourceAdmission": {
+            "$ref": "#/$defs/allExactSourceAdmission"
+          },
+          "frames": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/$defs/completeFrame"
+            }
+          },
+          "capabilityAudit": {
+            "$ref": "#/$defs/exactCapabilityAudit"
+          },
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "enum": ["candidate", "withheld"]
+              }
+            }
+          },
+          "hostileMatrix": {
+            "type": "object",
+            "properties": {
+              "allPassed": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "refuted"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "inconclusive"
+              },
+              "receipts": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "object",
+                "properties": {
+                  "stage": {
+                    "const": "capability-boundary"
+                  },
+                  "reasonCode": {
+                    "const": "prohibited-capability-observed"
+                  }
+                }
+              },
+              "capabilityAudit": {
+                "$ref": "#/$defs/nonZeroProhibitedAudit"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "object",
+                "properties": {
+                  "stage": {
+                    "const": "hostile-matrix"
+                  },
+                  "reasonCode": {
+                    "const": "hostile-case-failed"
+                  }
+                }
+              },
+              "hostileMatrix": {
+                "type": "object",
+                "properties": {
+                  "allPassed": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "object",
+                "properties": {
+                  "stage": {
+                    "const": "independent-verification"
+                  },
+                  "reasonCode": {
+                    "const": "producer-verifier-disagreement"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "inconclusive"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "liveClassification": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "inconclusive"
+              },
+              "receipts": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "sourceAdmission": {
+                "type": "object",
+                "properties": {
+                  "allExact": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "capabilityAudit": {
+                "type": "object",
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "complete": {
+                        "const": false
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "exact": {
+                        "const": false
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "liveClassification": {
+                "type": "object",
+                "properties": {
+                  "disposition": {
+                    "const": "inconclusive"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gitCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "dateTime": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](?:\\.[0-9]{1,9})?Z$"
+    },
+    "monotonicNs": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)$"
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "stage", "reasonCode"],
+      "properties": {
+        "status": {
+          "enum": ["supported", "refuted", "inconclusive"]
+        },
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reasonCode": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "requiredSourcePaths": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "const": ".overlaykit/governance/changes/CHG-0018.json"
+        },
+        {
+          "const": ".overlaykit/governance/changes/CHG-0019.json"
+        },
+        {
+          "const": ".overlaykit/governance/changes/CHG-0020.json"
+        },
+        {
+          "const": ".overlaykit/governance/decisions/ADR-0006.json"
+        },
+        {
+          "const": ".overlaykit/governance/manifest.json"
+        },
+        {
+          "const": ".overlaykit/governance/plan.json"
+        },
+        {
+          "const": "evidence/h044/c0bfbc3cbb7c7a4f42ed9ba642648b815bff32adaf622fd82663022e167e3610/README.md"
+        },
+        {
+          "const": "lab/h041/host-inventory.mjs"
+        },
+        {
+          "const": "lab/h044/observer-lib.mjs"
+        },
+        {
+          "const": "lab/h045/admission-lib.mjs"
+        },
+        {
+          "const": "lab/h045/admission-lib.test.mjs"
+        },
+        {
+          "const": "lab/h045/classifier-lib.mjs"
+        },
+        {
+          "const": "lab/h045/classifier-lib.test.mjs"
+        },
+        {
+          "const": "lab/h045/observer-lib.mjs"
+        },
+        {
+          "const": "lab/h045/observer-lib.test.mjs"
+        },
+        {
+          "const": "lab/h045/run.mjs"
+        },
+        {
+          "const": "lab/h045/run.test.mjs"
+        },
+        {
+          "const": "lab/h045/schema.test.mjs"
+        },
+        {
+          "const": "lab/h045/schemas/live-run.schema.json"
+        },
+        {
+          "const": "lab/h045/verify.mjs"
+        },
+        {
+          "const": "lab/h045/verify.test.mjs"
+        },
+        {
+          "const": "lab/h046/environment-seam.test.mjs"
+        },
+        {
+          "const": "package-lock.json"
+        },
+        {
+          "const": "package.json"
+        }
+      ],
+      "minItems": 24,
+      "maxItems": 24
+    },
+    "sourceMap": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/sourceEntryChg0018"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryChg0019"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryChg0020"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryAdr0006"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryGovernanceManifest"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryGovernancePlan"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH044Receipt"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH041Inventory"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH044Observer"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045Admission"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045AdmissionTest"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045Classifier"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045ClassifierTest"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045Observer"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045ObserverTest"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045Run"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045RunTest"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045SchemaTest"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045Schema"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045Verify"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH045VerifyTest"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryH046EnvironmentSeamTest"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryPackageLock"
+        },
+        {
+          "$ref": "#/$defs/sourceEntryPackage"
+        }
+      ],
+      "minItems": 24,
+      "maxItems": 24
+    },
+    "sourceEntry": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceEntryChg0018": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": ".overlaykit/governance/changes/CHG-0018.json"
+        }
+      }
+    },
+    "sourceEntryChg0019": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": ".overlaykit/governance/changes/CHG-0019.json"
+        }
+      }
+    },
+    "sourceEntryChg0020": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": ".overlaykit/governance/changes/CHG-0020.json"
+        }
+      }
+    },
+    "sourceEntryAdr0006": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": ".overlaykit/governance/decisions/ADR-0006.json"
+        }
+      }
+    },
+    "sourceEntryGovernanceManifest": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": ".overlaykit/governance/manifest.json"
+        }
+      }
+    },
+    "sourceEntryGovernancePlan": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": ".overlaykit/governance/plan.json"
+        }
+      }
+    },
+    "sourceEntryH044Receipt": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "evidence/h044/c0bfbc3cbb7c7a4f42ed9ba642648b815bff32adaf622fd82663022e167e3610/README.md"
+        }
+      }
+    },
+    "sourceEntryH041Inventory": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h041/host-inventory.mjs"
+        }
+      }
+    },
+    "sourceEntryH044Observer": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h044/observer-lib.mjs"
+        }
+      }
+    },
+    "sourceEntryH045Admission": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/admission-lib.mjs"
+        }
+      }
+    },
+    "sourceEntryH045AdmissionTest": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/admission-lib.test.mjs"
+        }
+      }
+    },
+    "sourceEntryH045Classifier": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/classifier-lib.mjs"
+        }
+      }
+    },
+    "sourceEntryH045ClassifierTest": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/classifier-lib.test.mjs"
+        }
+      }
+    },
+    "sourceEntryH045Observer": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/observer-lib.mjs"
+        }
+      }
+    },
+    "sourceEntryH045ObserverTest": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/observer-lib.test.mjs"
+        }
+      }
+    },
+    "sourceEntryH045Run": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/run.mjs"
+        }
+      }
+    },
+    "sourceEntryH045RunTest": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/run.test.mjs"
+        }
+      }
+    },
+    "sourceEntryH045SchemaTest": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/schema.test.mjs"
+        }
+      }
+    },
+    "sourceEntryH045Schema": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/schemas/live-run.schema.json"
+        }
+      }
+    },
+    "sourceEntryH045Verify": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/verify.mjs"
+        }
+      }
+    },
+    "sourceEntryH045VerifyTest": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h045/verify.test.mjs"
+        }
+      }
+    },
+    "sourceEntryH046EnvironmentSeamTest": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "lab/h046/environment-seam.test.mjs"
+        }
+      }
+    },
+    "sourceEntryPackageLock": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "package-lock.json"
+        }
+      }
+    },
+    "sourceEntryPackage": {
+      "$ref": "#/$defs/sourceEntry",
+      "type": "object",
+      "properties": {
+        "path": {
+          "const": "package.json"
+        }
+      }
+    },
+    "reviewAuthorization": {
+      "type": "object",
+      "required": ["grant", "sourceSetSha256", "semantics"],
+      "properties": {
+        "grant": {
+          "type": "string",
+          "pattern": "^CHG-0020:h045-one-readonly-replacement-attempt:sha256:[0-9a-f]{64}$"
+        },
+        "sourceSetSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "semantics": {
+          "const": "one-live-read-only-replacement-attempt"
+        }
+      },
+      "additionalProperties": false
+    },
+    "attemptLedger": {
+      "type": "object",
+      "required": [
+        "predecessorReservationRelativePath",
+        "predecessorFailureRelativePath",
+        "predecessorReservationSha256",
+        "predecessorFailureSha256",
+        "reservationRelativePath",
+        "completionRelativePath",
+        "reservationSha256",
+        "semantics"
+      ],
+      "properties": {
+        "predecessorReservationRelativePath": {
+          "const": "artifacts/h045/live-attempt/reservation.json"
+        },
+        "predecessorFailureRelativePath": {
+          "const": "artifacts/h045/live-attempt/failure.json"
+        },
+        "predecessorReservationSha256": {
+          "const": "27ee9aa2c70adb56682564c6ddc80c43cc40e6a5c5e1edacc23327648aad2f24"
+        },
+        "predecessorFailureSha256": {
+          "const": "710b3b28760239f5971c961f8b0011a18c439c10a4974f548c435ff2a4507fc0"
+        },
+        "reservationRelativePath": {
+          "const": "artifacts/h045/h045-chg-0020-attempt-1/reservation.json"
+        },
+        "completionRelativePath": {
+          "const": "artifacts/h045/h045-chg-0020-attempt-1/completion.json"
+        },
+        "reservationSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "semantics": {
+          "const": "fixed-local-linked-one-shot-replacement-ledger"
+        }
+      },
+      "additionalProperties": false
+    },
+    "collector": {
+      "type": "object",
+      "required": [
+        "reviewAuthorization",
+        "attemptLedger",
+        "runtime",
+        "repository",
+        "observedHead",
+        "protectedMain",
+        "sourceContract",
+        "sourcesBefore",
+        "sourcesAfter",
+        "sourceStable",
+        "governance"
+      ],
+      "properties": {
+        "reviewAuthorization": {
+          "$ref": "#/$defs/reviewAuthorization"
+        },
+        "attemptLedger": {
+          "$ref": "#/$defs/attemptLedger"
+        },
+        "runtime": {
+          "type": "object",
+          "required": ["node", "platform", "arch", "binarySha256", "binaryByteLength"],
+          "properties": {
+            "node": {
+              "const": "v22.20.0"
+            },
+            "platform": {
+              "const": "linux"
+            },
+            "arch": {
+              "const": "x64"
+            },
+            "binarySha256": {
+              "const": "b1cbec894e45a5814b6ab756e1e14f8a76516273197e67e0412b57c1e10d0d9f"
+            },
+            "binaryByteLength": {
+              "const": 123183528
+            }
+          },
+          "additionalProperties": false
+        },
+        "repository": {
+          "const": "https://github.com/OverlayKit/companion-module-overlaykit-server.git"
+        },
+        "observedHead": {
+          "$ref": "#/$defs/gitCommit"
+        },
+        "protectedMain": {
+          "type": "object",
+          "required": ["commit", "isAncestor"],
+          "properties": {
+            "commit": {
+              "const": "e7c9406dc75d6d8c9cb771d9d62d4fd1359b975d"
+            },
+            "isAncestor": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sourceContract": {
+          "type": "object",
+          "required": ["commit", "isAncestor"],
+          "properties": {
+            "commit": {
+              "const": "2dc13d02f3d054fe54cb253869134c872e965601"
+            },
+            "isAncestor": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sourcesBefore": {
+          "$ref": "#/$defs/sourceMap"
+        },
+        "sourcesAfter": {
+          "$ref": "#/$defs/sourceMap"
+        },
+        "sourceStable": {
+          "type": "boolean"
+        },
+        "governance": {
+          "type": "object",
+          "required": [
+            "verified",
+            "planHash",
+            "planSha256",
+            "manifestContentHash",
+            "manifestSha256",
+            "changes",
+            "decisions",
+            "requiredSourcePaths"
+          ],
+          "properties": {
+            "verified": {
+              "type": "boolean"
+            },
+            "planHash": {
+              "const": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4"
+            },
+            "planSha256": {
+              "const": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243"
+            },
+            "manifestContentHash": {
+              "const": "e708f14dcb922d1d5bb7b64a8842d6920a15b2e3d54ad6ad694491c600820110"
+            },
+            "manifestSha256": {
+              "const": "bdf427ab00a32910814563778042b1efc17b0341c69dcd9fde586f8943eff1da"
+            },
+            "changes": {
+              "type": "object",
+              "required": ["CHG-0018", "CHG-0019", "CHG-0020"],
+              "properties": {
+                "CHG-0018": {
+                  "const": "7d8e1f0256d0b6dd94586152cd32bce5f2b3375cb57992cb5f9313966d22028a"
+                },
+                "CHG-0019": {
+                  "const": "6c83d4b15e82ee3727cc941ffc2b8a9023052ea8a306f2e441953fe044a277fa"
+                },
+                "CHG-0020": {
+                  "const": "e8c00014e79af95a9a567cbcfca2f054b25c4b807f549df58b7591aca8ae0c6b"
+                }
+              },
+              "additionalProperties": false
+            },
+            "decisions": {
+              "type": "object",
+              "required": ["ADR-0006"],
+              "properties": {
+                "ADR-0006": {
+                  "const": "619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360"
+                }
+              },
+              "additionalProperties": false
+            },
+            "requiredSourcePaths": {
+              "$ref": "#/$defs/requiredSourcePaths"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "imageIdentity": {
+      "type": "object",
+      "required": ["imageReference", "imageId"],
+      "properties": {
+        "imageReference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "imageId": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "acceptedImage": {
+      "type": "object",
+      "required": ["imageReference", "imageId"],
+      "properties": {
+        "imageReference": {
+          "const": "ghcr.io/bitfocus/companion/companion:v4.3.3"
+        },
+        "imageId": {
+          "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+        }
+      },
+      "additionalProperties": false
+    },
+    "stableSelector": {
+      "type": "object",
+      "required": ["mode", "dockerEndpoint", "imageReference", "imageId"],
+      "properties": {
+        "mode": {
+          "const": "accepted-image-ancestor"
+        },
+        "dockerEndpoint": {
+          "const": "unix:///var/run/docker.sock"
+        },
+        "imageReference": {
+          "const": "ghcr.io/bitfocus/companion/companion:v4.3.3"
+        },
+        "imageId": {
+          "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+        }
+      },
+      "additionalProperties": false
+    },
+    "serialBinding": {
+      "type": "object",
+      "required": ["decisionId", "decisionSha256", "contextField", "serialSha256"],
+      "properties": {
+        "decisionId": {
+          "const": "ADR-0006"
+        },
+        "decisionSha256": {
+          "const": "619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360"
+        },
+        "contextField": {
+          "const": "physical Stream Deck MK.2 serial"
+        },
+        "serialSha256": {
+          "const": "08e7fdb9e9bd371297e96f27f75b77bc3920181d1d448ed2d6f6a1d123548f5f"
+        }
+      },
+      "additionalProperties": false
+    },
+    "input": {
+      "type": "object",
+      "required": ["imageReference", "imageId", "vendorId", "productId", "serialBinding"],
+      "properties": {
+        "imageReference": {
+          "const": "ghcr.io/bitfocus/companion/companion:v4.3.3"
+        },
+        "imageId": {
+          "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+        },
+        "vendorId": {
+          "const": "0fd9"
+        },
+        "productId": {
+          "const": "0080"
+        },
+        "serialBinding": {
+          "$ref": "#/$defs/serialBinding"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceAdmission": {
+      "type": "object",
+      "required": [
+        "h044PublicReceiptExact",
+        "h044SemanticEvidenceExact",
+        "acceptedDecisionExact",
+        "acceptedTargetContextExact",
+        "historicalBoundaryExact",
+        "chg0018Exact",
+        "chg0019Exact",
+        "chg0020Exact",
+        "adr0006Exact",
+        "repositoryRemoteExact",
+        "observedHeadWellFormed",
+        "protectedMainExact",
+        "sourceContractExact",
+        "protectedMainAncestryExact",
+        "sourceContractAncestryExact",
+        "runtimeBinaryExact",
+        "targetInputExact",
+        "governanceExact",
+        "sourceSetExact",
+        "sourceStable",
+        "allExact"
+      ],
+      "properties": {
+        "h044PublicReceiptExact": {
+          "type": "boolean"
+        },
+        "h044SemanticEvidenceExact": {
+          "type": "boolean"
+        },
+        "acceptedDecisionExact": {
+          "type": "boolean"
+        },
+        "acceptedTargetContextExact": {
+          "type": "boolean"
+        },
+        "historicalBoundaryExact": {
+          "type": "boolean"
+        },
+        "chg0018Exact": {
+          "type": "boolean"
+        },
+        "chg0019Exact": {
+          "type": "boolean"
+        },
+        "chg0020Exact": {
+          "type": "boolean"
+        },
+        "adr0006Exact": {
+          "type": "boolean"
+        },
+        "repositoryRemoteExact": {
+          "type": "boolean"
+        },
+        "observedHeadWellFormed": {
+          "type": "boolean"
+        },
+        "protectedMainExact": {
+          "type": "boolean"
+        },
+        "sourceContractExact": {
+          "type": "boolean"
+        },
+        "protectedMainAncestryExact": {
+          "type": "boolean"
+        },
+        "sourceContractAncestryExact": {
+          "type": "boolean"
+        },
+        "runtimeBinaryExact": {
+          "type": "boolean"
+        },
+        "targetInputExact": {
+          "type": "boolean"
+        },
+        "governanceExact": {
+          "type": "boolean"
+        },
+        "sourceSetExact": {
+          "type": "boolean"
+        },
+        "sourceStable": {
+          "type": "boolean"
+        },
+        "allExact": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "allExactSourceAdmission": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sourceAdmission"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "h044PublicReceiptExact": {
+              "const": true
+            },
+            "h044SemanticEvidenceExact": {
+              "const": true
+            },
+            "acceptedDecisionExact": {
+              "const": true
+            },
+            "acceptedTargetContextExact": {
+              "const": true
+            },
+            "historicalBoundaryExact": {
+              "const": true
+            },
+            "chg0018Exact": {
+              "const": true
+            },
+            "chg0019Exact": {
+              "const": true
+            },
+            "chg0020Exact": {
+              "const": true
+            },
+            "adr0006Exact": {
+              "const": true
+            },
+            "repositoryRemoteExact": {
+              "const": true
+            },
+            "observedHeadWellFormed": {
+              "const": true
+            },
+            "protectedMainExact": {
+              "const": true
+            },
+            "sourceContractExact": {
+              "const": true
+            },
+            "protectedMainAncestryExact": {
+              "const": true
+            },
+            "sourceContractAncestryExact": {
+              "const": true
+            },
+            "runtimeBinaryExact": {
+              "const": true
+            },
+            "targetInputExact": {
+              "const": true
+            },
+            "governanceExact": {
+              "const": true
+            },
+            "sourceSetExact": {
+              "const": true
+            },
+            "sourceStable": {
+              "const": true
+            },
+            "allExact": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "acceptedTarget": {
+      "type": "object",
+      "required": ["imageReference", "imageId", "vendorId", "productId", "serial", "serialBinding"],
+      "properties": {
+        "imageReference": {
+          "const": "ghcr.io/bitfocus/companion/companion:v4.3.3"
+        },
+        "imageId": {
+          "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+        },
+        "vendorId": {
+          "const": "0fd9"
+        },
+        "productId": {
+          "const": "0080"
+        },
+        "serial": {
+          "const": "A00SA5492OQMLF"
+        },
+        "serialBinding": {
+          "$ref": "#/$defs/serialBinding"
+        }
+      },
+      "additionalProperties": false
+    },
+    "stat": {
+      "type": "object",
+      "required": [
+        "stDev",
+        "inode",
+        "ctimeNs",
+        "mode",
+        "uid",
+        "gid",
+        "rdev",
+        "rdevHex",
+        "major",
+        "minor",
+        "isCharacterDevice"
+      ],
+      "properties": {
+        "stDev": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)$"
+        },
+        "inode": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "ctimeNs": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)$"
+        },
+        "mode": {
+          "type": "string",
+          "pattern": "^[0-7]{4}$"
+        },
+        "uid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rdev": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)$"
+        },
+        "rdevHex": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9a-f][0-9a-f]*):(?:0|[1-9a-f][0-9a-f]*)$"
+        },
+        "major": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "isCharacterDevice": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "deviceEpoch": {
+      "type": "object",
+      "required": [
+        "serial",
+        "busNumber",
+        "deviceNumber",
+        "usbDevicePath",
+        "usbDev",
+        "hidDevicePath",
+        "devicePath",
+        "stat"
+      ],
+      "properties": {
+        "serial": {
+          "const": "A00SA5492OQMLF"
+        },
+        "busNumber": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deviceNumber": {
+          "type": "string",
+          "minLength": 1
+        },
+        "usbDevicePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "usbDev": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hidDevicePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "devicePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stat": {
+          "$ref": "#/$defs/stat"
+        }
+      },
+      "additionalProperties": false
+    },
+    "liveDeviceIdentity": {
+      "type": "object",
+      "required": ["serial", "vendorId", "productId", "epoch"],
+      "properties": {
+        "serial": {
+          "const": "A00SA5492OQMLF"
+        },
+        "vendorId": {
+          "const": "0fd9"
+        },
+        "productId": {
+          "const": "0080"
+        },
+        "epoch": {
+          "$ref": "#/$defs/deviceEpoch"
+        }
+      },
+      "additionalProperties": false
+    },
+    "device": {
+      "type": "object",
+      "required": ["complete", "present", "identity"],
+      "properties": {
+        "complete": {
+          "type": "boolean"
+        },
+        "present": {
+          "type": "boolean"
+        },
+        "identity": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/liveDeviceIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "present": {
+                "const": true
+              }
+            },
+            "required": ["present"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "identity": {
+                "$ref": "#/$defs/liveDeviceIdentity"
+              }
+            }
+          },
+          "else": {
+            "type": "object",
+            "properties": {
+              "identity": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "host": {
+      "type": "object",
+      "required": ["hostname", "bootId", "osRelease"],
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bootId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "osRelease": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": [
+        "containerId",
+        "imageId",
+        "startedAt",
+        "restartCount",
+        "hostPid",
+        "pid1StartTicks",
+        "pidNamespace",
+        "mountNamespace",
+        "cgroup",
+        "hostCgroup",
+        "cgroupNamespaceMode"
+      ],
+      "properties": {
+        "containerId": {
+          "$ref": "#/$defs/sha256"
+        },
+        "imageId": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "startedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "restartCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hostPid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pid1StartTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pidNamespace": {
+          "type": "string",
+          "pattern": "^pid:\\[[1-9][0-9]*\\]$"
+        },
+        "mountNamespace": {
+          "type": "string",
+          "pattern": "^mnt:\\[[1-9][0-9]*\\]$"
+        },
+        "cgroup": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hostCgroup": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cgroupNamespaceMode": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "pid1": {
+      "type": "object",
+      "required": ["hostPid", "startTicks", "pidNamespace", "mountNamespace", "cgroup"],
+      "properties": {
+        "hostPid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pidNamespace": {
+          "type": "string",
+          "pattern": "^pid:\\[[1-9][0-9]*\\]$"
+        },
+        "mountNamespace": {
+          "type": "string",
+          "pattern": "^mnt:\\[[1-9][0-9]*\\]$"
+        },
+        "cgroup": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "worker": {
+      "type": "object",
+      "required": [
+        "pid",
+        "startTicks",
+        "ppid",
+        "parentStartTicks",
+        "uid",
+        "gid",
+        "groups",
+        "cmdline",
+        "cgroup",
+        "pidNamespace",
+        "mountNamespace"
+      ],
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ppid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parentStartTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "uid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "cmdline": {
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "const": "/app/SurfaceThread.js"
+          },
+          "minContains": 1,
+          "maxContains": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "cgroup": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pidNamespace": {
+          "type": "string",
+          "pattern": "^pid:\\[[1-9][0-9]*\\]$"
+        },
+        "mountNamespace": {
+          "type": "string",
+          "pattern": "^mnt:\\[[1-9][0-9]*\\]$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "markers": {
+      "type": "object",
+      "required": ["opening", "ready", "relevantLinesSha256"],
+      "properties": {
+        "opening": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ready": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "relevantLinesSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "container": {
+      "type": "object",
+      "required": ["id", "imageReference", "imageId", "state"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/sha256"
+        },
+        "imageReference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "imageId": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "state": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "descriptor": {
+      "type": "object",
+      "required": ["descriptor", "target", "lstat", "stat"],
+      "properties": {
+        "descriptor": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)$"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lstat": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/filesystemStat"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "isSymbolicLink": {
+                  "const": true
+                }
+              }
+            }
+          ]
+        },
+        "stat": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/filesystemStat"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "major": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "isCharacterDevice": {
+                  "const": true
+                }
+              }
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "deployment": {
+      "type": "object",
+      "required": [
+        "complete",
+        "exact",
+        "container",
+        "lifecycle",
+        "pid1",
+        "workers",
+        "descriptors",
+        "markers"
+      ],
+      "properties": {
+        "complete": {
+          "type": "boolean"
+        },
+        "exact": {
+          "type": "boolean"
+        },
+        "container": {
+          "$ref": "#/$defs/container"
+        },
+        "lifecycle": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/lifecycle"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pid1": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/pid1"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "workers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/worker"
+          }
+        },
+        "descriptors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/descriptor"
+          }
+        },
+        "markers": {
+          "$ref": "#/$defs/markers"
+        }
+      },
+      "additionalProperties": false
+    },
+    "deploymentInventory": {
+      "type": "object",
+      "required": ["complete", "exact", "selector", "rows", "matches"],
+      "properties": {
+        "complete": {
+          "type": "boolean"
+        },
+        "exact": {
+          "type": "boolean"
+        },
+        "selector": {
+          "$ref": "#/$defs/acceptedImage"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["containerId", "state"],
+            "properties": {
+              "containerId": {
+                "$ref": "#/$defs/sha256"
+              },
+              "state": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/deployment"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "observationCutoff": {
+      "type": "object",
+      "required": ["at", "monotonicNs"],
+      "properties": {
+        "at": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "monotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        }
+      },
+      "additionalProperties": false
+    },
+    "receiptIndexes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "frame": {
+      "type": "object",
+      "required": [
+        "id",
+        "complete",
+        "startedAt",
+        "endedAt",
+        "startedMonotonicNs",
+        "endedMonotonicNs",
+        "observationCutoff",
+        "host",
+        "device",
+        "deploymentInventory",
+        "auditBinding",
+        "digestSha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "startedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "endedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "startedMonotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "endedMonotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "observationCutoff": {
+          "$ref": "#/$defs/observationCutoff"
+        },
+        "host": {
+          "$ref": "#/$defs/host"
+        },
+        "device": {
+          "$ref": "#/$defs/device"
+        },
+        "deploymentInventory": {
+          "$ref": "#/$defs/deploymentInventory"
+        },
+        "auditBinding": {
+          "type": "object",
+          "required": ["commandReceiptIndexes", "filesystemReceiptIndexes"],
+          "properties": {
+            "commandReceiptIndexes": {
+              "$ref": "#/$defs/receiptIndexes"
+            },
+            "filesystemReceiptIndexes": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/receiptIndexes"
+                },
+                {
+                  "type": "array",
+                  "maxItems": 16384
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "digestSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "completeFrame": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/frame"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "complete": {
+              "const": true
+            },
+            "device": {
+              "type": "object",
+              "properties": {
+                "complete": {
+                  "const": true
+                }
+              }
+            },
+            "deploymentInventory": {
+              "type": "object",
+              "properties": {
+                "complete": {
+                  "const": true
+                },
+                "exact": {
+                  "const": true
+                },
+                "selector": {
+                  "$ref": "#/$defs/acceptedImage"
+                },
+                "rows": {
+                  "type": "array"
+                },
+                "matches": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/deployment"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "complete": {
+                            "const": true
+                          },
+                          "exact": {
+                            "const": true
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "candidateDeployment": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/deployment"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "complete": {
+              "const": true
+            },
+            "exact": {
+              "const": true
+            },
+            "container": {
+              "type": "object",
+              "properties": {
+                "imageReference": {
+                  "const": "ghcr.io/bitfocus/companion/companion:v4.3.3"
+                },
+                "imageId": {
+                  "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+                },
+                "state": {
+                  "const": "running"
+                }
+              }
+            },
+            "lifecycle": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/lifecycle"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "imageId": {
+                      "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+                    }
+                  }
+                }
+              ]
+            },
+            "pid1": {
+              "$ref": "#/$defs/pid1"
+            },
+            "workers": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1,
+              "items": {
+                "$ref": "#/$defs/worker"
+              }
+            },
+            "descriptors": {
+              "type": "array",
+              "maxItems": 0
+            }
+          }
+        }
+      ]
+    },
+    "candidateFrame": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/completeFrame"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "device": {
+              "type": "object",
+              "properties": {
+                "present": {
+                  "const": true
+                },
+                "identity": {
+                  "$ref": "#/$defs/liveDeviceIdentity"
+                }
+              }
+            },
+            "deploymentInventory": {
+              "type": "object",
+              "properties": {
+                "rows": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "matches": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "items": {
+                    "$ref": "#/$defs/candidateDeployment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "prohibitedCounts": {
+      "type": "object",
+      "required": [
+        "externalNetwork",
+        "unrestrictedContainerInventory",
+        "dockerExec",
+        "hidrawOpen",
+        "hidrawRead",
+        "hidrawWrite",
+        "hidrawIoctl",
+        "signal",
+        "lifecycleMutation",
+        "configurationMutation",
+        "mountMutation",
+        "cgroupMutation",
+        "sysfsWrite",
+        "productionMutation"
+      ],
+      "properties": {
+        "externalNetwork": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unrestrictedContainerInventory": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerExec": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hidrawOpen": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hidrawRead": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hidrawWrite": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hidrawIoctl": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "signal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lifecycleMutation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "configurationMutation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mountMutation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cgroupMutation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sysfsWrite": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "productionMutation": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "allowedProcessCounts": {
+      "type": "object",
+      "required": ["git", "lsusb", "dockerVersion", "dockerPs", "dockerInspect", "dockerLogs"],
+      "properties": {
+        "git": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lsusb": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerVersion": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerPs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerInspect": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dockerLogs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "environmentPolicy": {
+      "type": "object",
+      "required": ["mode", "inheritedKeys", "fixed"],
+      "properties": {
+        "mode": {
+          "const": "closed-fixed"
+        },
+        "inheritedKeys": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "fixed": {
+          "type": "object",
+          "required": [
+            "DOCKER_CONFIG",
+            "GIT_CONFIG_COUNT",
+            "GIT_CONFIG_GLOBAL",
+            "GIT_CONFIG_NOSYSTEM",
+            "LANG",
+            "LC_ALL"
+          ],
+          "properties": {
+            "DOCKER_CONFIG": {
+              "const": "/nonexistent/overlaykit-h045-docker-config"
+            },
+            "GIT_CONFIG_COUNT": {
+              "const": "0"
+            },
+            "GIT_CONFIG_GLOBAL": {
+              "const": "/dev/null"
+            },
+            "GIT_CONFIG_NOSYSTEM": {
+              "const": "1"
+            },
+            "LANG": {
+              "const": "C"
+            },
+            "LC_ALL": {
+              "const": "C"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputReceipt": {
+      "type": "object",
+      "required": ["encoding", "text", "base64", "byteLength", "lineCount", "sha256"],
+      "properties": {
+        "encoding": {
+          "enum": ["utf8", "base64"]
+        },
+        "text": {
+          "type": ["string", "null"]
+        },
+        "base64": {
+          "type": "string",
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4194304
+        },
+        "lineCount": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "encoding": {
+                "const": "utf8"
+              }
+            },
+            "required": ["encoding"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "lineCount": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "else": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "null"
+              },
+              "lineCount": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "commandReceipt": {
+      "type": "object",
+      "required": [
+        "index",
+        "kind",
+        "ordinal",
+        "executable",
+        "args",
+        "startedAt",
+        "endedAt",
+        "startedMonotonicNs",
+        "endedMonotonicNs",
+        "durationNs",
+        "limits",
+        "environmentPolicy",
+        "exitCode",
+        "signal",
+        "stdout",
+        "stderr",
+        "cardinality",
+        "errorCode"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kind": {
+          "enum": ["git", "lsusb", "dockerVersion", "dockerPs", "dockerInspect", "dockerLogs"]
+        },
+        "observerKind": {
+          "enum": ["gitRevParse", "gitMergeBaseAncestor", "gitRemoteGetUrl"]
+        },
+        "ordinal": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "executable": {
+          "enum": ["git", "lsusb", "docker"]
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "startedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "endedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "startedMonotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "endedMonotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "durationNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "limits": {
+          "type": "object",
+          "required": ["maxBufferBytes", "timeoutMs", "overflow"],
+          "properties": {
+            "maxBufferBytes": {
+              "const": 4194304
+            },
+            "timeoutMs": {
+              "const": null
+            },
+            "overflow": {
+              "const": "drain-without-signal"
+            }
+          },
+          "additionalProperties": false
+        },
+        "environmentPolicy": {
+          "$ref": "#/$defs/environmentPolicy"
+        },
+        "exitCode": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 255
+        },
+        "signal": {
+          "type": ["string", "null"]
+        },
+        "stdout": {
+          "$ref": "#/$defs/outputReceipt"
+        },
+        "stderr": {
+          "$ref": "#/$defs/outputReceipt"
+        },
+        "cardinality": {
+          "type": "object",
+          "required": ["global", "kind"],
+          "properties": {
+            "global": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "kind": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "errorCode": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "git"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "type": "object",
+            "required": ["observerKind"],
+            "properties": {
+              "observerKind": {
+                "enum": ["gitRevParse", "gitMergeBaseAncestor", "gitRemoteGetUrl"]
+              },
+              "executable": {
+                "const": "git"
+              }
+            }
+          },
+          "else": {
+            "type": "object",
+            "properties": {
+              "observerKind": false
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "observerKind": {
+                "const": "gitRevParse"
+              }
+            },
+            "required": ["observerKind"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "args": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": "rev-parse"
+                  },
+                  {
+                    "const": "HEAD"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "observerKind": {
+                "const": "gitRemoteGetUrl"
+              }
+            },
+            "required": ["observerKind"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "args": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": "remote"
+                  },
+                  {
+                    "const": "get-url"
+                  },
+                  {
+                    "const": "origin"
+                  }
+                ],
+                "minItems": 3,
+                "maxItems": 3
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "observerKind": {
+                "const": "gitMergeBaseAncestor"
+              }
+            },
+            "required": ["observerKind"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "args": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": "merge-base"
+                  },
+                  {
+                    "const": "--is-ancestor"
+                  },
+                  {
+                    "enum": [
+                      "e7c9406dc75d6d8c9cb771d9d62d4fd1359b975d",
+                      "2dc13d02f3d054fe54cb253869134c872e965601"
+                    ]
+                  },
+                  {
+                    "const": "HEAD"
+                  }
+                ],
+                "minItems": 4,
+                "maxItems": 4
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "lsusb"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "executable": {
+                "const": "lsusb"
+              },
+              "args": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "dockerVersion"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "executable": {
+                "const": "docker"
+              },
+              "args": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": "--host"
+                  },
+                  {
+                    "const": "unix:///var/run/docker.sock"
+                  },
+                  {
+                    "const": "version"
+                  },
+                  {
+                    "const": "--format"
+                  },
+                  {
+                    "const": "{\"Client\":{\"Version\":{{json .Client.Version}},\"ApiVersion\":{{json .Client.APIVersion}}},\"Server\":{\"Version\":{{json .Server.Version}},\"ApiVersion\":{{json .Server.APIVersion}}}}"
+                  }
+                ],
+                "minItems": 5,
+                "maxItems": 5
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "dockerPs"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "executable": {
+                "const": "docker"
+              },
+              "args": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": "--host"
+                  },
+                  {
+                    "const": "unix:///var/run/docker.sock"
+                  },
+                  {
+                    "const": "ps"
+                  },
+                  {
+                    "const": "--all"
+                  },
+                  {
+                    "const": "--no-trunc"
+                  },
+                  {
+                    "const": "--filter"
+                  },
+                  {
+                    "const": "ancestor=sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+                  },
+                  {
+                    "const": "--format"
+                  },
+                  {
+                    "const": "{\"ID\":{{json .ID}},\"State\":{{json .State}}}"
+                  }
+                ],
+                "minItems": 9,
+                "maxItems": 9
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "dockerInspect"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "executable": {
+                "const": "docker"
+              },
+              "args": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": "--host"
+                  },
+                  {
+                    "const": "unix:///var/run/docker.sock"
+                  },
+                  {
+                    "const": "inspect"
+                  },
+                  {
+                    "const": "--format"
+                  },
+                  {
+                    "const": "{\"Id\":{{json .Id}},\"Image\":{{json .Image}},\"State\":{\"Status\":{{json .State.Status}},\"Running\":{{json .State.Running}},\"Pid\":{{json .State.Pid}},\"StartedAt\":{{json .State.StartedAt}}},\"RestartCount\":{{json .RestartCount}},\"CgroupnsMode\":{{json .HostConfig.CgroupnsMode}}}"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                ],
+                "minItems": 6,
+                "maxItems": 6
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "dockerLogs"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "executable": {
+                "const": "docker"
+              },
+              "args": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": "--host"
+                  },
+                  {
+                    "const": "unix:///var/run/docker.sock"
+                  },
+                  {
+                    "const": "logs"
+                  },
+                  {
+                    "const": "--timestamps"
+                  },
+                  {
+                    "const": "--since"
+                  },
+                  {
+                    "$ref": "#/$defs/dateTime"
+                  },
+                  {
+                    "const": "--until"
+                  },
+                  {
+                    "$ref": "#/$defs/dateTime"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                ],
+                "minItems": 9,
+                "maxItems": 9
+              }
+            }
+          }
+        }
+      ]
+    },
+    "filesystemResultEmpty": {
+      "type": "object",
+      "required": ["cardinality", "sha256"],
+      "properties": {
+        "cardinality": {
+          "const": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "filesystemResultRead": {
+      "type": "object",
+      "required": ["cardinality", "byteLength", "bytes", "encoding", "text", "sha256"],
+      "properties": {
+        "cardinality": {
+          "const": 1
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048576
+        },
+        "bytes": {
+          "type": "object",
+          "required": ["encoding", "base64", "byteLength", "sha256"],
+          "properties": {
+            "encoding": {
+              "const": "base64"
+            },
+            "base64": {
+              "type": "string",
+              "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+            },
+            "byteLength": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1048576
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          },
+          "additionalProperties": false
+        },
+        "encoding": {
+          "enum": ["utf8", "base64"]
+        },
+        "text": {
+          "type": ["string", "null"]
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "filesystemResultDirectory": {
+      "type": "object",
+      "required": ["entries", "cardinality", "sha256"],
+      "properties": {
+        "entries": {
+          "type": "array",
+          "maxItems": 4096,
+          "items": {
+            "type": "string"
+          }
+        },
+        "cardinality": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "filesystemResultPath": {
+      "type": "object",
+      "required": ["value", "cardinality", "sha256"],
+      "properties": {
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "cardinality": {
+          "const": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "filesystemStat": {
+      "type": "object",
+      "required": [
+        "stDev",
+        "inode",
+        "ctimeNs",
+        "mode",
+        "uid",
+        "gid",
+        "rdev",
+        "rdevHex",
+        "major",
+        "minor",
+        "isCharacterDevice",
+        "isSymbolicLink"
+      ],
+      "properties": {
+        "stDev": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "inode": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "ctimeNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "mode": {
+          "type": "string",
+          "pattern": "^[0-7]{4}$"
+        },
+        "uid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rdev": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "rdevHex": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9a-f][0-9a-f]*):(?:0|[1-9a-f][0-9a-f]*)$"
+        },
+        "major": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "isCharacterDevice": {
+          "type": "boolean"
+        },
+        "isSymbolicLink": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "filesystemResultStat": {
+      "type": "object",
+      "required": ["cardinality", "metadata", "sha256"],
+      "properties": {
+        "cardinality": {
+          "const": 1
+        },
+        "metadata": {
+          "$ref": "#/$defs/filesystemStat"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "filesystemReceipt": {
+      "type": "object",
+      "required": [
+        "index",
+        "operation",
+        "path",
+        "startedAt",
+        "endedAt",
+        "startedMonotonicNs",
+        "endedMonotonicNs",
+        "durationNs",
+        "disposition",
+        "result",
+        "errorCode",
+        "cardinality"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "operation": {
+          "enum": [
+            "readFileSync",
+            "readdirSync",
+            "realpathSync",
+            "statSync",
+            "lstatSync",
+            "readlinkSync"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^/",
+          "not": {
+            "pattern": "(?:^|/)\\.\\.?(?:/|$)"
+          }
+        },
+        "startedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "endedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "startedMonotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "endedMonotonicNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "durationNs": {
+          "$ref": "#/$defs/monotonicNs"
+        },
+        "disposition": {
+          "enum": ["observed", "missing", "error"]
+        },
+        "result": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/filesystemResultEmpty"
+            },
+            {
+              "$ref": "#/$defs/filesystemResultRead"
+            },
+            {
+              "$ref": "#/$defs/filesystemResultDirectory"
+            },
+            {
+              "$ref": "#/$defs/filesystemResultPath"
+            },
+            {
+              "$ref": "#/$defs/filesystemResultStat"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": ["string", "null"]
+        },
+        "cardinality": {
+          "type": "object",
+          "required": ["global", "operation"],
+          "properties": {
+            "global": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "operation": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "const": "readFileSync"
+              }
+            },
+            "required": ["operation"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^(?:/etc/os-release|/proc/sys/kernel/(?:random/boot_id|hostname)|/sys/class/hidraw/hidraw(?:0|[1-9][0-9]*)/(?:device/uevent|dev)|/sys/devices/(?:[^/]+/)*usb(?:0|[1-9][0-9]*)/(?:[^/]+/)+(?:idVendor|idProduct|serial|manufacturer|product|busnum|devnum|devpath|dev)|/proc/[1-9][0-9]*/cgroup|/proc/[1-9][0-9]*/root/proc/[1-9][0-9]*/(?:stat|status|cmdline|cgroup))$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "const": "readdirSync"
+              },
+              "path": {
+                "const": "/sys/class/hidraw"
+              }
+            },
+            "required": ["operation", "path"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "object",
+                "properties": {
+                  "entries": {
+                    "type": "array",
+                    "maxItems": 64
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "const": "readdirSync"
+              },
+              "path": {
+                "type": "string",
+                "pattern": "^/proc/[1-9][0-9]*/root/proc(?:/[1-9][0-9]*/fd)?$"
+              }
+            },
+            "required": ["operation", "path"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "object",
+                "properties": {
+                  "entries": {
+                    "type": "array",
+                    "maxItems": 1024
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "const": "readdirSync"
+              }
+            },
+            "required": ["operation"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^(?:/sys/class/hidraw|/proc/[1-9][0-9]*/root/proc(?:/[1-9][0-9]*/fd)?)$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "const": "realpathSync"
+              }
+            },
+            "required": ["operation"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^/sys/class/hidraw/hidraw(?:0|[1-9][0-9]*)/device$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "enum": ["statSync", "lstatSync"]
+              }
+            },
+            "required": ["operation"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^(?:/(?:dev|host-dev)/hidraw(?:0|[1-9][0-9]*)|/proc/[1-9][0-9]*/root/proc/[1-9][0-9]*/fd/(?:0|[1-9][0-9]*))$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "const": "readlinkSync"
+              }
+            },
+            "required": ["operation"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^(?:/(?:dev|host-dev)/hidraw(?:0|[1-9][0-9]*)|/proc/[1-9][0-9]*/root/proc/[1-9][0-9]*/(?:ns/(?:pid|mnt)|fd/(?:0|[1-9][0-9]*)))$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "observed"
+              }
+            },
+            "required": ["disposition"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "errorCode": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "$ref": "#/$defs/filesystemResultEmpty"
+              },
+              "errorCode": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "observed"
+              },
+              "operation": {
+                "const": "readFileSync"
+              }
+            },
+            "required": ["disposition", "operation"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "$ref": "#/$defs/filesystemResultRead"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "observed"
+              },
+              "operation": {
+                "const": "readdirSync"
+              }
+            },
+            "required": ["disposition", "operation"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "$ref": "#/$defs/filesystemResultDirectory"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "observed"
+              },
+              "operation": {
+                "enum": ["realpathSync", "readlinkSync"]
+              }
+            },
+            "required": ["disposition", "operation"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "$ref": "#/$defs/filesystemResultPath"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "disposition": {
+                "const": "observed"
+              },
+              "operation": {
+                "enum": ["statSync", "lstatSync"]
+              }
+            },
+            "required": ["disposition", "operation"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "$ref": "#/$defs/filesystemResultStat"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "capabilityAudit": {
+      "type": "object",
+      "required": [
+        "mode",
+        "environmentPolicy",
+        "commandReceipts",
+        "filesystemReceipts",
+        "allowedProcessCounts",
+        "commandCount",
+        "filesystemReceiptCount",
+        "complete",
+        "exact",
+        "frameCount",
+        "lsusbCount",
+        "unrecordedObservationCount",
+        "prohibitedCounts"
+      ],
+      "properties": {
+        "mode": {
+          "const": "live-readonly-dynamic-acquisition-capability-bounded"
+        },
+        "environmentPolicy": {
+          "$ref": "#/$defs/environmentPolicy"
+        },
+        "commandReceipts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/commandReceipt"
+          }
+        },
+        "filesystemReceipts": {
+          "type": "array",
+          "maxItems": 32768,
+          "items": {
+            "$ref": "#/$defs/filesystemReceipt"
+          }
+        },
+        "allowedProcessCounts": {
+          "$ref": "#/$defs/allowedProcessCounts"
+        },
+        "commandCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "filesystemReceiptCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 32768
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "exact": {
+          "type": "boolean"
+        },
+        "frameCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lsusbCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unrecordedObservationCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prohibitedCounts": {
+          "$ref": "#/$defs/prohibitedCounts"
+        }
+      },
+      "additionalProperties": false
+    },
+    "exactCapabilityAudit": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/capabilityAudit"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "commandReceipts": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/commandReceipt"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "signal": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "complete": {
+              "const": true
+            },
+            "exact": {
+              "const": true
+            },
+            "frameCount": {
+              "const": 2
+            },
+            "lsusbCount": {
+              "const": 1
+            },
+            "unrecordedObservationCount": {
+              "const": 0
+            },
+            "prohibitedCounts": {
+              "type": "object",
+              "properties": {
+                "externalNetwork": {
+                  "const": 0
+                },
+                "unrestrictedContainerInventory": {
+                  "const": 0
+                },
+                "dockerExec": {
+                  "const": 0
+                },
+                "hidrawOpen": {
+                  "const": 0
+                },
+                "hidrawRead": {
+                  "const": 0
+                },
+                "hidrawWrite": {
+                  "const": 0
+                },
+                "hidrawIoctl": {
+                  "const": 0
+                },
+                "signal": {
+                  "const": 0
+                },
+                "lifecycleMutation": {
+                  "const": 0
+                },
+                "configurationMutation": {
+                  "const": 0
+                },
+                "mountMutation": {
+                  "const": 0
+                },
+                "cgroupMutation": {
+                  "const": 0
+                },
+                "sysfsWrite": {
+                  "const": 0
+                },
+                "productionMutation": {
+                  "const": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "nonZeroProhibitedAudit": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/capabilityAudit"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "prohibitedCounts": {
+              "type": "object",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "externalNetwork": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "unrestrictedContainerInventory": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "dockerExec": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hidrawOpen": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hidrawRead": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hidrawWrite": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "hidrawIoctl": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "signal": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "lifecycleMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "configurationMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "mountMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "cgroupMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "sysfsWrite": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "productionMutation": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "predicates": {
+      "type": "object",
+      "required": [
+        "sourceAdmissionExact",
+        "auditExact",
+        "framesComplete",
+        "frameOrderExact",
+        "exposureBounded",
+        "hostStable",
+        "deviceStable",
+        "deviceExact",
+        "acceptedImageSelectorExact",
+        "deploymentUnique",
+        "deploymentStable",
+        "deploymentRunning",
+        "pid1Stable",
+        "workerUnique",
+        "workerStable",
+        "descriptorStable",
+        "descriptorAbsent",
+        "markersStable"
+      ],
+      "properties": {
+        "sourceAdmissionExact": {
+          "type": "boolean"
+        },
+        "auditExact": {
+          "type": "boolean"
+        },
+        "framesComplete": {
+          "type": "boolean"
+        },
+        "frameOrderExact": {
+          "type": "boolean"
+        },
+        "exposureBounded": {
+          "type": "boolean"
+        },
+        "hostStable": {
+          "type": "boolean"
+        },
+        "deviceStable": {
+          "type": "boolean"
+        },
+        "deviceExact": {
+          "type": "boolean"
+        },
+        "acceptedImageSelectorExact": {
+          "type": "boolean"
+        },
+        "deploymentUnique": {
+          "type": "boolean"
+        },
+        "deploymentStable": {
+          "type": "boolean"
+        },
+        "deploymentRunning": {
+          "type": "boolean"
+        },
+        "pid1Stable": {
+          "type": "boolean"
+        },
+        "workerUnique": {
+          "type": "boolean"
+        },
+        "workerStable": {
+          "type": "boolean"
+        },
+        "descriptorStable": {
+          "type": "boolean"
+        },
+        "descriptorAbsent": {
+          "type": "boolean"
+        },
+        "markersStable": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "allTruePredicates": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/predicates"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceAdmissionExact": {
+              "const": true
+            },
+            "auditExact": {
+              "const": true
+            },
+            "framesComplete": {
+              "const": true
+            },
+            "frameOrderExact": {
+              "const": true
+            },
+            "exposureBounded": {
+              "const": true
+            },
+            "hostStable": {
+              "const": true
+            },
+            "deviceStable": {
+              "const": true
+            },
+            "deviceExact": {
+              "const": true
+            },
+            "acceptedImageSelectorExact": {
+              "const": true
+            },
+            "deploymentUnique": {
+              "const": true
+            },
+            "deploymentStable": {
+              "const": true
+            },
+            "deploymentRunning": {
+              "const": true
+            },
+            "pid1Stable": {
+              "const": true
+            },
+            "workerUnique": {
+              "const": true
+            },
+            "workerStable": {
+              "const": true
+            },
+            "descriptorStable": {
+              "const": true
+            },
+            "descriptorAbsent": {
+              "const": true
+            },
+            "markersStable": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "dynamicTupleReceipt": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "kind",
+        "authority",
+        "action",
+        "authorizesAction",
+        "validAtCutoffOnly",
+        "revalidatedAtCutoff",
+        "requiresRevalidation",
+        "cutoff",
+        "exposure",
+        "identity",
+        "markers",
+        "sources",
+        "receiptSha256"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "overlaykit-h045-dynamic-tuple-receipt/v1"
+        },
+        "kind": {
+          "const": "cutoff-bound-dynamic-readonly-tuple"
+        },
+        "authority": {
+          "const": "none"
+        },
+        "action": {
+          "type": "null"
+        },
+        "authorizesAction": {
+          "const": false
+        },
+        "validAtCutoffOnly": {
+          "const": true
+        },
+        "revalidatedAtCutoff": {
+          "const": true
+        },
+        "requiresRevalidation": {
+          "const": true
+        },
+        "cutoff": {
+          "$ref": "#/$defs/observationCutoff"
+        },
+        "exposure": {
+          "type": "object",
+          "required": [
+            "startedAt",
+            "endedAt",
+            "startedMonotonicNs",
+            "endedMonotonicNs",
+            "milliseconds"
+          ],
+          "properties": {
+            "startedAt": {
+              "$ref": "#/$defs/dateTime"
+            },
+            "endedAt": {
+              "$ref": "#/$defs/dateTime"
+            },
+            "startedMonotonicNs": {
+              "$ref": "#/$defs/monotonicNs"
+            },
+            "endedMonotonicNs": {
+              "$ref": "#/$defs/monotonicNs"
+            },
+            "milliseconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5000
+            }
+          },
+          "additionalProperties": false
+        },
+        "identity": {
+          "type": "object",
+          "required": ["host", "device", "deployment"],
+          "properties": {
+            "host": {
+              "$ref": "#/$defs/host"
+            },
+            "device": {
+              "$ref": "#/$defs/liveDeviceIdentity"
+            },
+            "deployment": {
+              "type": "object",
+              "required": ["container", "lifecycle", "pid1", "worker", "descriptors"],
+              "properties": {
+                "container": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/container"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "imageReference": {
+                          "const": "ghcr.io/bitfocus/companion/companion:v4.3.3"
+                        },
+                        "imageId": {
+                          "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+                        },
+                        "state": {
+                          "const": "running"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "lifecycle": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/lifecycle"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "imageId": {
+                          "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "pid1": {
+                  "$ref": "#/$defs/pid1"
+                },
+                "worker": {
+                  "$ref": "#/$defs/worker"
+                },
+                "descriptors": {
+                  "type": "array",
+                  "maxItems": 0
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "markers": {
+          "$ref": "#/$defs/markers"
+        },
+        "sources": {
+          "type": "object",
+          "required": ["acceptedImage", "frameDigests", "capabilityAuditSha256"],
+          "properties": {
+            "acceptedImage": {
+              "$ref": "#/$defs/acceptedImage"
+            },
+            "frameDigests": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/sha256"
+              }
+            },
+            "capabilityAuditSha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          },
+          "additionalProperties": false
+        },
+        "receiptSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "liveClassification": {
+      "type": "object",
+      "required": ["disposition", "stage", "reasonCode", "predicates", "receipts"],
+      "properties": {
+        "disposition": {
+          "enum": ["candidate", "withheld", "inconclusive"]
+        },
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reasonCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "predicates": {
+          "$ref": "#/$defs/predicates"
+        },
+        "receipts": {
+          "type": "array",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/dynamicTupleReceipt"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "hostileMatrixCase": {
+      "type": "object",
+      "required": [
+        "id",
+        "inputSha256",
+        "expectedDisposition",
+        "actualDisposition",
+        "expectedReceiptCount",
+        "actualReceiptCount",
+        "stage",
+        "reasonCode",
+        "passed"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "inputSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "expectedDisposition": {
+          "enum": ["candidate", "withheld", "inconclusive"]
+        },
+        "actualDisposition": {
+          "enum": ["candidate", "withheld", "inconclusive"]
+        },
+        "expectedReceiptCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "actualReceiptCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reasonCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "hostileMatrix": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "requiredCaseIds",
+        "caseCount",
+        "passedCount",
+        "allPassed",
+        "cases"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "overlaykit-h045-hostile-matrix/v1"
+        },
+        "requiredCaseIds": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "multiple-image-matches"
+            },
+            {
+              "const": "selector-broadening"
+            },
+            {
+              "const": "descendant-image-mismatch"
+            },
+            {
+              "const": "hidden-container-row"
+            },
+            {
+              "const": "deployment-presence-drift"
+            },
+            {
+              "const": "container-drift"
+            },
+            {
+              "const": "pid1-drift"
+            },
+            {
+              "const": "worker-ambiguity"
+            },
+            {
+              "const": "pid-reuse"
+            },
+            {
+              "const": "parent-drift"
+            },
+            {
+              "const": "namespace-drift"
+            },
+            {
+              "const": "device-absence"
+            },
+            {
+              "const": "device-epoch-drift"
+            },
+            {
+              "const": "descriptor-recovery"
+            },
+            {
+              "const": "marker-change"
+            },
+            {
+              "const": "frame-reorder"
+            },
+            {
+              "const": "exposure-over-limit"
+            },
+            {
+              "const": "missing-command-audit"
+            },
+            {
+              "const": "duplicate-receipts"
+            },
+            {
+              "const": "input-tampering"
+            },
+            {
+              "const": "source-drift"
+            },
+            {
+              "const": "environment-policy-drift"
+            },
+            {
+              "const": "prohibited-capability"
+            }
+          ],
+          "minItems": 23,
+          "maxItems": 23
+        },
+        "caseCount": {
+          "const": 23
+        },
+        "passedCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23
+        },
+        "allPassed": {
+          "type": "boolean"
+        },
+        "cases": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "multiple-image-matches"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "selector-broadening"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "descendant-image-mismatch"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "hidden-container-row"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "deployment-presence-drift"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "container-drift"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "pid1-drift"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "worker-ambiguity"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "pid-reuse"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "parent-drift"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "namespace-drift"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "device-absence"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "device-epoch-drift"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "descriptor-recovery"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "marker-change"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "frame-reorder"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "exposure-over-limit"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "missing-command-audit"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "duplicate-receipts"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "input-tampering"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "source-drift"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "environment-policy-drift"
+                }
+              }
+            },
+            {
+              "$ref": "#/$defs/hostileMatrixCase",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "prohibited-capability"
+                }
+              }
+            }
+          ],
+          "minItems": 23,
+          "maxItems": 23
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "allPassed": {
+                "const": true
+              }
+            },
+            "required": ["allPassed"]
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "passedCount": {
+                "const": 23
+              },
+              "cases": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "passed": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "claimBoundary": {
+      "type": "object",
+      "required": ["proves", "excludes"],
+      "properties": {
+        "proves": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "one capability-bounded dynamic read-only observation derived only from the exact accepted Companion image and MK.2 identity without a historical volatile target identifier"
+            },
+            {
+              "const": "two adjacent complete frames no more than 5000 milliseconds apart with exact image-filter cardinality, current device epoch, Docker lifecycle, PID 1, SurfaceThread, descriptor, marker, and audit receipts"
+            },
+            {
+              "const": "one cutoff-bound authority-void dynamic tuple receipt only for one stable running non-healthy deployment, or zero receipts with withheld for complete current non-eligibility"
+            },
+            {
+              "const": "fail-closed inconclusive classification for multiplicity, selector ambiguity, contradiction, inaccessible evidence, PID reuse, inter-frame drift, source drift, or incomplete audit"
+            },
+            {
+              "const": "exact audited cardinality of allowed local Git, lsusb, Docker Unix-socket, and filesystem metadata observations with zero prohibited capabilities"
+            }
+          ],
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "excludes": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "validity after the second-frame cutoff, continuity from H-043, atomicity, race freedom, PID-reuse-safe action, or a closed check-action interval"
+            },
+            {
+              "const": "authorization or safety of SIGTERM, pidfd, any signal, command, restart, rescan, retry, executable action, watcher, controller, or supervisor"
+            },
+            {
+              "const": "physical disconnect or reconnect, hidraw open or I/O, Docker lifecycle mutation, namespace entry, configuration change, installation, production policy, publication, or release"
+            },
+            {
+              "const": "configuration continuity, button delivery, rendered pixels, operator perception, OBS truth, product acceptance, security, or acceptable downtime"
+            },
+            {
+              "const": "multiple-device behavior, image upgrade discovery, pre-login behavior, reboot recovery, long-outage recovery, or production recovery policy"
+            },
+            {
+              "const": "an expansion or satisfaction of accepted SPEC-0001 or SPEC-0002"
+            },
+            {
+              "const": "a successor ADR or architectural authority beyond ADR-0006"
+            }
+          ],
+          "minItems": 7,
+          "maxItems": 7
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

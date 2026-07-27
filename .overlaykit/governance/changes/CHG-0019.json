@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0019",
+  "title": "Test dynamic read-only acquisition of one current Companion worker tuple",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "CHG-0018 implements human acceptance of canonical H-044 while CHG-0017 remains the byte-exact proposed pre-experiment contract.",
+      "evidence": "Protected-main commit e7c9406dc75d6d8c9cb771d9d62d4fd1359b975d; CHG-0018 SHA-256 7d8e1f0256d0b6dd94586152cd32bce5f2b3375cb57992cb5f9313966d22028a; CHG-0017 SHA-256 858fcc7fde8bf6abd73e58f56224c3eae238ecf46ae70e92aca92f886937e576; post-merge Constitution run 30234625612 passed validate and observe.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Canonical H-044 supports the capability-bounded live read-only classifier but withholds a live candidate because the exact historical container is absent in both complete frames.",
+      "evidence": "H-044 run h044-2026-07-27T02-46-55-692Z-799230e4; semantic evidence SHA-256 c0bfbc3cbb7c7a4f42ed9ba642648b815bff32adaf622fd82663022e167e3610; live disposition withheld; stage not-eligible; reason historical-container-absent; receipt count zero.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "H-044 queried Docker only through an exact id filter for the historical 64-hex container and therefore does not establish that no current official Companion deployment exists.",
+      "evidence": "Both canonical H-044 docker ps receipts use --filter id=78c013a0b101e9f4d93195e5f3b3e6184aa69019ba2b5f0ea472085f156d986c and return an empty exact result.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Accepted H-042 binds the tested deployment boundary to official Companion 4.3.3 image reference ghcr.io/bitfocus/companion/companion:v4.3.3 and image ID sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e, while ADR-0006 accepts SurfaceThread only as a bounded observed replacement unit.",
+      "evidence": "Accepted CHG-0014, canonical H-042 evidence f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88, and ADR-0006 SHA-256 619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "SPEC-0001 and SPEC-0002 exclude USB access, Stream Deck discovery, physical key presses, and rendered device pixels, so H-045 is supplemental mechanism-governance evidence and cannot satisfy or expand either accepted product specification.",
+      "evidence": "Accepted SPEC-0001 SHA-256 917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179 and SPEC-0002 SHA-256 d15b1cbf7e97bd92aadf40342421161a0955e210b8566f7ae870dc78c05e89f6.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Before constructing a pidfd guard, watcher, controller, or actuator, the smallest Slice that can refute the next premise is dynamic read-only acquisition of one coherent current deployment, PID 1, SurfaceThread, device, and descriptor tuple without accepting any historical container, PID, worker PID, process start tick, namespace, or cgroup identity as input.",
+      "evidence": "D³ reorder from wrapping the H-043 historical tuple with a controller to proving current-target selection from stable accepted deployment and hardware properties only.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-045: on the currently authorized post-login Linux host, a capability-bounded collector can independently admit accepted H-044, enumerate only deployments derived from the exact accepted Companion image without a historical volatile identifier, capture two adjacent read-only frames, and emit exactly one cutoff-bound non-authorizing dynamic tuple receipt only when one current running deployment, PID 1, unique SurfaceThread, MK.2 epoch, descriptor state, and marker state are complete and stable; complete current evidence with no target or an already healthy target emits zero receipts and withheld, while multiplicity, ambiguity, contradiction, inaccessible evidence, PID reuse, or inter-frame drift emits zero receipts and inconclusive.",
+      "evidence": "D³ minimal refutation Slice registered before H-045 implementation or live Docker, USB, sysfs, or proc observation.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The current host may contain zero, one, or multiple deployments derived from the accepted image, and none has yet been enumerated without the historical H-043 container identity.",
+      "evidence": "H-044 intentionally restricted both Docker ps reads to the historical container ID; H-045 has not invoked a dynamic inventory.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "The accepted image identity may no longer describe the current deployment; complete exact evidence of zero matches must be withheld rather than broaden the image selector or infer an upgrade.",
+      "evidence": "H-045 preserves the exact accepted H-042 boundary and does not authorize image discovery by container name, labels, configuration, environment, or unrestricted inventory.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Even one supported H-045 tuple receipt would prove only a read-only observation at its second-frame cutoff and would be stale immediately; it cannot establish continuity from H-043, atomicity, race freedom, PID-reuse-safe action, or authority at any later instant.",
+      "evidence": "A read-only acquisition cannot close the check-action interval and therefore must retain authority none, action null, authorizesAction false, validAtCutoffOnly true, and requiresRevalidation true.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-045 does not establish a safe signal, pidfd action, watcher, controller, supervisor, restart, repeated recovery, configuration continuity, physical button delivery, rendered pixels, operator perception, OBS truth, security, acceptable downtime, multiple-device behavior, pre-login behavior, reboot recovery, or production policy.",
+      "evidence": "H-045 explicit minimal-Slice exclusions, accepted H-044 boundary, ADR-0006, and accepted SPEC-0001 and SPEC-0002.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "Before any live observation, H-045 verifies accepted CHG-0018, the public H-044 receipt and semantic evidence identity, ADR-0006, protected-main ancestry, current governance manifest, exact Node runtime, and the complete H-045 source set.",
+      "verification": "Content hashes, Git ancestry, governance verification, source-map comparison, and Node 22.20.0 binary identity."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The collector accepts no historical container, PID 1, worker PID, process start tick, namespace, cgroup, or descriptor identity as input and uses an exact Docker Unix-socket ancestor filter for only the accepted official image identity with a minimal output projection.",
+      "verification": "Input schema forbids volatile target fields; exact command allowlist requires unix:///var/run/docker.sock, the accepted image selector, bounded output, and rejects container names, labels, environment, configuration, unrestricted ps, external contexts, and remote endpoints."
+    },
+    {
+      "id": "SC-003",
+      "statement": "One exact audited lsusb plus read-only sysfs and device-node metadata identify the current MK.2 epoch without opening or issuing I/O or ioctl against hidraw; Docker version, filtered ps, minimal inspect, bounded logs, and host proc reads identify zero or one complete current deployment and process tuple per frame.",
+      "verification": "Raw command and filesystem receipts, exact cardinalities, complete identity fields, and literal zero hidraw-open, hidraw-read, hidraw-write, hidraw-ioctl, signal, lifecycle, configuration, mount, cgroup, sysfs-write, external-network, and production-mutation counts."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Two immediately adjacent complete frames bind wall and monotonic start, logical cutoff, and collection end times; current device epoch, selected image and container lifecycle, PID 1, unique SurfaceThread identity, matching-device descriptor metadata, and serial-specific marker state are explicit, with exposure bounded to at most 5000 milliseconds.",
+      "verification": "Schema-valid ordered frames, independently recomputed frame digests and completeness, exact tuple comparison, descriptor and marker reconstruction, monotonic exposure, and no unrecorded observation between frame boundaries."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Classification emits one dynamic tuple receipt only when both complete frames contain exactly one stable current running deployment and matching unique tuple that is not already healthy; complete evidence of zero matching deployment, a non-running deployment, absent device, absent worker, or current descriptor ownership emits withheld, while multiplicity, ambiguity, contradiction, incomplete access, PID reuse, or any drift emits inconclusive.",
+      "verification": "Pure deterministic three-way classifier with exact predicate set, stable stage and reason codes, receipt cardinality, and schema conditionals."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Any dynamic tuple receipt is valid only at its second-frame cutoff and contains authority none, action null, authorizesAction false, validAtCutoffOnly true, revalidatedAtCutoff true, requiresRevalidation true for every subsequent use, the full observed tuple and exposure interval, and no command, signal target, executable action, retry, continuity claim, or future validity.",
+      "verification": "Schema consts, field-by-field independent reconstruction, receipt digest, and hostile authority- and continuity-expansion tests."
+    },
+    {
+      "id": "SC-007",
+      "statement": "A hostile matrix rejects or withholds multiple image matches, selector broadening, hidden container rows, container or PID 1 drift, worker ambiguity, PID reuse, parent or namespace drift, device absence or epoch drift, descriptor recovery, marker changes, frame reordering, excessive exposure, missing audit, duplicate receipts, input tampering, and any prohibited capability without an unsafe positive.",
+      "verification": "Focused mutation tests covering every predicate, disposition, reason code, receipt count, selector boundary, source admission, and side-effect boundary."
+    },
+    {
+      "id": "SC-008",
+      "statement": "An independent verifier reconstructs source admission, image-filtered inventory, both frames, command and filesystem audit, every predicate, classification, receipt fields, exposure, hostile matrix, claim boundary, and semantic evidence digest without importing producer decisions or trusting declared summaries.",
+      "verification": "Producer-schema-verifier parity tests, independent command and selector literals, independent classifier, canonical digest recomputation, and negative verifier tests."
+    },
+    {
+      "id": "SC-009",
+      "statement": "A complete canonical run supports H-045 when its independently verified classification is either one exact authority-void dynamic tuple candidate or zero candidates with withheld; any selector expansion, prohibited capability, unsafe positive, duplicate receipt, or producer-verifier disagreement refutes H-045, while incomplete admission, frames, or audit make the hypothesis inconclusive.",
+      "verification": "Canonical H-045 run and verification independently recompute separate supported, refuted, or inconclusive hypothesis outcome and candidate, withheld, or inconclusive live classification."
+    },
+    {
+      "id": "SC-010",
+      "statement": "H-045 records and minimizes every host-bound field, keeps raw evidence local until separate disclosure review, and does not publish current host, boot, USB-inventory, process, container, namespace, cgroup, or hardware identifiers merely because the read-only experiment succeeds.",
+      "verification": "Field allowlist, raw-artifact Git exclusion, disclosure scan, content-addressed local preservation plan, and explicit publication boundary."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0019 records the architectural question, H-045, typed claims, exact dynamic acquisition boundary, three-way semantics, stable input boundary, hostile refutation path, observable evidence, exclusions, and D³ reorder before implementation or host observation.",
+      "evidence": "Before: build a controller or pidfd guard around the H-043 historical tuple. After reorder: first prove dynamic current-target acquisition without historical volatile identifiers or action capability."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The Slice adds only CHG-0019, a bounded H-045 collector, pure classifier, schema, independent verifier, tests, local evidence, and deterministic generated governance artifacts; accepted records, product specifications, product code, CHG-0017, CHG-0018, and source-bound H-044 files remain untouched.",
+      "evidence": "Repository diff, accepted-record hash comparison, and H-044 receipt and source-hash verification."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "At most one separately authorized live read-only run produces independently verified supported, refuted, or inconclusive H-045 evidence and never interprets a dynamic tuple receipt as authority after its cutoff.",
+      "evidence": "Pending H-045 run.json and verification.json with exact outcome, classification, exposure, selector audit, command audit, and claim boundary."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Governance, quality, build, canonical H-042 and H-043 verification, historical H-044 replay verification, focused H-045 tests, hostile matrix, schema validation, and independent H-045 verification pass under Node 22.20.0 at their correct temporal source boundaries.",
+      "evidence": "Pending final local gate receipts."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No physical disconnect or reconnect, hidraw open or I/O, docker exec, unrestricted container inventory, namespace entry, signal, stop, restart, recreate, rescan, installation, configuration change, watcher, controller, supervisor, production policy, raw-evidence publication, product specification, npm publication, or release is created by H-045.",
+      "evidence": "Capability audit and repository, host, Docker, process, device, configuration, and disclosure boundaries."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No ADR, accepted or implemented successor status, live H-045 observation, push, merge, production action, raw-evidence publication, or authority promotion is created before separate human review of this exact precontract and any completed offline harness; only the signed proposed precontract may be committed while the live run remains unauthorized.",
+      "evidence": "The human instruction authorizes proceeding to the next governed question; exact H-045 live observation and every later transition remain separate."
+    }
+  ]
+}

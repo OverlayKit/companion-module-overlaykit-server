@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0020",
+  "title": "Repair the H-045 closed-environment seam and govern one replacement read-only attempt",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "CHG-0019 is the byte-exact proposed pre-experiment contract for H-045 and is anchored by a signed commit whose parent is protected main.",
+      "evidence": "CHG-0019 SHA-256 6c83d4b15e82ee3727cc941ffc2b8a9023052ea8a306f2e441953fe044a277fa; signed commit 2dc13d02f3d054fe54cb253869134c872e965601; parent e7c9406dc75d6d8c9cb771d9d62d4fd1359b975d; governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The separately reviewed CHG-0019 source-bound one-run grant was reserved exactly once and terminated fail closed before producing a canonical H-045 run, completion, or verification.",
+      "evidence": "Grant CHG-0019:one-readonly-run:sha256:7230be4ed41b469a9e8486ff757c349eff48035e393c4825542c0ad2c201fab2; reservation SHA-256 27ee9aa2c70adb56682564c6ddc80c43cc40e6a5c5e1edacc23327648aad2f24; failure SHA-256 710b3b28760239f5971c961f8b0011a18c439c10a4974f548c435ff2a4507fc0; exact live-attempt membership reservation.json and failure.json.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The consumed attempt failed at runtime-admission with observationStarted true because the canonical entry point passed the Node process.env host object into a plain-record-only command-auditor seam.",
+      "evidence": "failure.json stage runtime-admission and observationStarted true; TypeError environment must be an object at observer-lib.mjs sanitizedEnvironment, called by createCommandAuditor and executeH045.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Under the pinned Node 22.20.0 runtime, process.env is an object whose prototype is neither Object.prototype nor null, while a fresh empty plain record is accepted by the command auditor without invoking its runner.",
+      "evidence": "Offline reproduction under /tmp/node-v22.20.0-linux-x64/bin/node: direct process.env returns TypeError; an empty or spread-created plain record constructs the auditor; runnerCalls remains zero.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The H-045 command environment policy inherits no host key and constructs an exact fixed child environment for Git, Docker, and locale isolation.",
+      "evidence": "OBSERVER_COMMAND_ENVIRONMENT_POLICY mode closed-fixed, inheritedKeys [], and fixed DOCKER_CONFIG, GIT_CONFIG_COUNT, GIT_CONFIG_GLOBAL, GIT_CONFIG_NOSYSTEM, LANG, and LC_ALL values in lab/h045/observer-lib.mjs.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "ADR-0001, ADR-0003, ADR-0005, ADR-0006, SPEC-0001, and SPEC-0002 remain accepted and H-045 remains supplemental mechanism-governance evidence that cannot expand either product specification.",
+      "evidence": "Current compiled governance plan and exact accepted-record SHA-256 values; CHG-0019 claim boundary; ADR-0006 physical-mechanism boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The failed attempt is evidence about a harness environment seam, not a supported, refuted, or inconclusive H-045 live classification; therefore H-045 remains the identity of the unanswered live acquisition hypothesis.",
+      "evidence": "The exception occurs before Git admission, lsusb admission, Docker admission, frame observation, classification, run persistence, completion, and independent verification, and no run.json exists.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Because the child command policy inherits zero host keys, the smallest repair is for the canonical entry point to provide a fresh empty plain record rather than enumerate, spread, retain, or copy process.env.",
+      "evidence": "Closed-fixed environment policy, direct offline seam reproduction, D³ minimum-change ordering, and the absence of any observer requirement for host environment values.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-046: the canonical H-045 entry point can cross the environment seam using a fresh empty plain record, preserve the exact closed-fixed child environment, invoke no runner during construction, and leave every H-045 selector, classifier, capability, and claim boundary unchanged.",
+      "evidence": "Offline-only refutation target derived from the exact TypeError and the existing successful empty-record auditor tests; no live observation is required to test H-046.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The final repaired H-045 source-set digest is unknown until CHG-0020, deterministic governance artifacts, the minimal implementation, schemas, verifier, and all focused tests are frozen and reviewed byte for byte.",
+      "evidence": "Any change to a required source changes the source-set digest; no repaired source closure has yet been accepted.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "No human has yet reviewed the repaired source closure or authorized the CHG-0020 replacement H-045 live attempt.",
+      "evidence": "The prior human motion bound only the consumed CHG-0019 grant and source digest; replacement authority is intentionally separate.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "The current host may yield a candidate, withheld, or inconclusive H-045 classification; the failed environment admission provides no evidence about the current deployment, device epoch, worker, descriptor, or marker tuple.",
+      "evidence": "No canonical H-045 frames, capability audit, classification, run, or verification were produced.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "CHG-0020 does not establish a safe signal, pidfd action, retry loop, watcher, controller, restart, physical button delivery, configuration continuity, rendered pixels, security property, or production recovery policy.",
+      "evidence": "H-045 claim exclusions, ADR-0006, and accepted SPEC-0001 and SPEC-0002.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0019, its signed source-contract commit, and the consumed reservation and failure receipts remain byte-exact, while the predecessor ledger contains no completion, run, or verification and is never deleted, renamed, overwritten, or reused.",
+      "verification": "Recompute the CHG-0019, reservation, and failure SHA-256 values; verify signed ancestry, exact ledger membership, canonical realpaths, modes, ownership, link counts, and absence of completion and positive evidence."
+    },
+    {
+      "id": "SC-002",
+      "statement": "H-046 is implemented only as an offline environment-seam repair: the canonical entry point supplies a fresh empty plain record, the command auditor emits the exact closed-fixed environment policy, and no host environment key is inherited or copied.",
+      "verification": "Pinned-Node regression against the real process.env prototype, exact canonical-path test, environment-policy deep comparison, source inspection prohibiting process.env spread at the command seam, and secret-shaped host-key canaries absent from every child environment receipt."
+    },
+    {
+      "id": "SC-003",
+      "statement": "Constructing the repaired canonical command auditor invokes no runner, performs no Docker, lsusb, Git, proc, sysfs, or hidraw observation, and changes no host state.",
+      "verification": "Instrumented runner and filesystem seams remain at zero calls during H-046 construction and failure cases; prohibited capability counters remain zero."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The environment repair does not broaden the H-045 input, image selector, Docker Unix-socket transport, command or filesystem allowlists, two-frame semantics, classifier dispositions, receipt authority, hostile matrix, claim boundary, or exposure limit.",
+      "verification": "Byte or semantic comparison against the reviewed CHG-0019 harness constants plus producer-schema-verifier parity and hostile environment-expansion tests."
+    },
+    {
+      "id": "SC-005",
+      "statement": "A new source closure includes CHG-0020 and every repaired producer, schema, verifier, test, package, governance, and predecessor-binding source required to reproduce H-046 and the replacement H-045 attempt.",
+      "verification": "Exact sorted source map, per-file SHA-256 recomputation, deterministic manifest compilation, signed source anchor, Node 22.20.0 binary identity, and one final sourceSetSha256 calculated only after all bytes are frozen."
+    },
+    {
+      "id": "SC-006",
+      "statement": "The only replacement authorization grammar is CHG-0020:h045-one-readonly-replacement-attempt:sha256:<source-set-sha256>, and it is valid only for the exact separately reviewed repaired source set.",
+      "verification": "Exact parser and negative tests reject CHG-0019, the old digest, altered change or semantics, malformed hashes, extra fields, offline envelopes, and source drift."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The replacement uses the distinct fixed ledger artifacts/h045/h045-chg-0020-attempt-1 and binds CHG-0020, H-045, the attempt identity, predecessor receipt hashes, new grant, and new source-set digest without accepting an arbitrary artifact root.",
+      "verification": "Canonical-root and fd-relative ledger tests, exact reservation schema, predecessor admission, O_NOFOLLOW and inode checks, exclusive creation race tests, and rejection of old, alternate, symlinked, or reused ledger paths."
+    },
+    {
+      "id": "SC-008",
+      "statement": "After separate human review and exact authorization, at most one replacement H-045 read-only attempt produces either a failure receipt or one independently verified supported, refuted, or inconclusive canonical result; every terminal state permanently consumes the new grant.",
+      "verification": "One-shot concurrency tests, exact reservation-to-failure or reservation-to-completion binding, canonical run and verification reconstruction, and a second-use rejection test."
+    },
+    {
+      "id": "SC-009",
+      "statement": "The replacement preserves H-045 authority none, action null, cutoff-only validity, complete capability audit, local raw-evidence boundary, and zero signal, lifecycle, configuration, hidraw-I/O, namespace-entry, external-network, or production mutation.",
+      "verification": "Schema consts, independent verifier, command and filesystem receipts, prohibited counters, raw-evidence Git exclusion, and disclosure scan."
+    },
+    {
+      "id": "SC-010",
+      "statement": "Governance, quality, build, historical H-042/H-043 verification, frozen H-044 replay, H-045/H-046 focused tests, schemas, and independent verifier pass under their correct temporal source boundaries before handoff.",
+      "verification": "npm run governance:check, npm run check, npm run build, pinned Node 22.20.0 focused suites, and exact historical replay receipts."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0020 records the consumed CHG-0019 attempt, exact failure identities, typed claims, H-046 offline refutation target, replacement H-045 boundary, new one-shot identity, exclusions, and D³ reorder before implementation or another live attempt.",
+      "evidence": "This proposed contract, predecessor receipt hashes, signed CHG-0019 source anchor, and the reordered question from repeating live execution to first repairing and refuting the environment seam offline."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "CHG-0019 remains proposed and byte-identical; accepted ADR-0001 through ADR-0006, SPEC-0001, SPEC-0002, profile 1.6.0, and plan.json remain unchanged while the manifest is regenerated deterministically for CHG-0020.",
+      "evidence": "Repository diff, accepted-record hashes, CHG-0019 SHA-256, profile and plan hash comparison, and governance compiler output."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The minimal environment repair and H-046 regression suite pass offline without live, Docker, lsusb, proc, sysfs, hidraw, signal, lifecycle, configuration, or production observation or mutation.",
+      "evidence": "Pending H-046 focused tests, zero-call seam receipts, exact child-environment comparison, hostile environment cases, and capability audit."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The repaired complete source closure is frozen, source-hashed, independently red-teamed, and presented for separate human review before any replacement live attempt.",
+      "evidence": "Pending exact source map, sourceSetSha256, signed source anchor, full offline test and gate receipts, red-team disposition, and human review motion."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "Only an exact human grant with CHG-0020 replacement semantics may create the distinct h045-chg-0020-attempt-1 ledger; the consumed CHG-0019 ledger and grant remain permanently non-reusable.",
+      "evidence": "Pending human grant, exact parser receipts, predecessor-ledger verification, exclusive reservation, and hostile old-grant and second-use tests."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "Exactly one replacement live attempt, if authorized, terminates in a preserved failure or an independently verified canonical H-045 supported, refuted, or inconclusive result without reinterpreting the predecessor failure.",
+      "evidence": "Pending new reservation, failure or completion, run.json when completed, verification.json when completed, ledger-membership receipt, and independent outcome reconstruction."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "Final governance, quality, build, temporal predecessor, focused H-045/H-046, schema, hostile, source, ledger, and verification gates pass under Node 22.20.0.",
+      "evidence": "Pending final local gate receipts at the frozen repaired source closure."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "No new ADR, accepted or implemented status, product code, product specification, signal, restart, controller, installation, publication, push, merge, or production policy is created before its separately required human transition; a failed replacement authorizes no third attempt.",
+      "evidence": "Repository and remote diff, unchanged accepted-record hashes, capability and disclosure audits, exact human authority boundary, and absence of any third-attempt ledger or grant."
+    }
+  ]
+}
