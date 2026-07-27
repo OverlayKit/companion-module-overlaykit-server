@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0018",
+  "title": "Accept bounded H-044 live read-only revalidation evidence",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "CHG-0017 is the byte-exact pre-experiment contract that governed H-044 and remains proposed and unchanged after evidence review.",
+      "evidence": "CHG-0017 file SHA-256 858fcc7fde8bf6abd73e58f56224c3eae238ecf46ae70e92aca92f886937e576 under compiled plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, historical manifest content hash b36032589f0d652ceffd6aafee502e551b4f86779149be4b9ac1c38636a17013, pre-experiment contract commit 9e2156e7ddc38ebe223824a07f682421b7ee0589, and signed source anchor 99c5d5c4bf1e5a8be464b9701f86276fd31a6f67.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Canonical H-044 run h044-2026-07-27T02-46-55-692Z-799230e4 produced a supported and independently verified live-readonly-revalidation outcome whose live classification is withheld at not-eligible with reason historical-container-absent and zero candidate receipts.",
+      "evidence": "Semantic evidence SHA-256 c0bfbc3cbb7c7a4f42ed9ba642648b815bff32adaf622fd82663022e167e3610; run.json SHA-256 5cdc565e0c3db181435e86eaf3932b02aec7c67da2dddbe653052af588af3a5d; verification.json SHA-256 cfa31401dd5981df4129956797ce6ab879ec01436efc8ad664f9e65ce0086d59.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The independent H-044 verifier reconstructed two complete frames over 46.766966 milliseconds, found the exact MK.2 identity stable in both frames, proved the historical container absent at both cutoffs, and agreed exactly with the producer.",
+      "evidence": "Canonical verification fields framesReconstructed true, frameCompletenessExact true, recomputedFrameCompleteness [true,true], framesExact true, frameOrderExact true, classificationExact true, receiptExact true, producerAgreement true, and verified true.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The canonical capability audit records exactly one lsusb, one Docker version read, two Docker ps reads, three Git reads, 390 read-only filesystem receipts, Docker transport fixed to unix:///var/run/docker.sock, and zero external-network, hidraw-open, hidraw-I/O, signal, lifecycle, configuration, mount, cgroup, sysfs-write, or production-mutation capabilities.",
+      "evidence": "Canonical run capabilityAudit is complete and exact with commandCount 7, lsusbCount 1, unrecordedObservationCount 0, prohibited counts all zero, and no Docker inspect or logs because both filtered container observations were exact absences.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The registered human authority @rodrigoteamx accepted the complete H-044 motion on 2026-07-26 and authorized local content-addressed preservation, signed commits, repository merge, and proceeding to the next governed question while withholding publication of the raw receipt and every production action.",
+      "evidence": "Human Doctrine sequence consisting of the complete proposed H-044 motion followed by the response 'dale commiy y merge y a lo que sigue', anchored by the signed governance acceptance commit containing this successor record.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The replay closure contains 26 files and is preserved as a deterministic 594063-byte local archive with mode 0600 after a bounded scan found no private-key, cloud-key, GitHub-token, Slack-token, credential-URL, authorization-field, password, or API-key signature in the new live receipts.",
+      "evidence": "Ignored local path artifacts/h044-preserved/c0bfbc3cbb7c7a4f42ed9ba642648b815bff32adaf622fd82663022e167e3610/replay-7783de86dc9fe18edbca1faa7767af7ddf1dbb3a126bb968ebec9aa9d6c4f9bf.tar.gz; archive SHA-256 7783de86dc9fe18edbca1faa7767af7ddf1dbb3a126bb968ebec9aa9d6c4f9bf. Only a non-sensitive hash receipt is Git-tracked.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The H-043 historical candidate is not a current action target: because the exact historical container is absent in two complete adjacent frames, the next investigation must acquire any current Companion and SurfaceThread tuple dynamically without treating persisted container or process identifiers as runtime authority.",
+      "evidence": "Human-accepted bounded inference from canonical H-044 evidence c0bfbc3cbb7c7a4f42ed9ba642648b815bff32adaf622fd82663022e167e3610, the withheld historical-container-absent classification, and ADR-0006's successor-Slice requirement.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-044 does not establish that any current official Companion container exists, because its Docker queries intentionally selected only the exact historical container identity.",
+      "evidence": "Canonical H-044 Docker ps arguments filter id=78c013a0b101e9f4d93195e5f3b3e6184aa69019ba2b5f0ea472085f156d986c and both results are empty.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "No accepted evidence yet establishes dynamic current-target acquisition without volatile historical identifiers, an atomic or PID-reuse-safe check-action boundary, a safe signal target, watcher behavior, retries, repeated recovery, security, acceptable downtime, pre-login behavior, reboot recovery, or production policy.",
+      "evidence": "Canonical H-044 claimBoundary exclusions, zero candidate receipts, and the human acceptance boundary; these questions require one or more successor governed Slices.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-044 does not establish physical button command delivery, OverlayKit configuration continuity, rendered pixels, operator perception, OBS truth, or complete recovery and does not alter SPEC-0001 or SPEC-0002.",
+      "evidence": "Canonical H-044 claimBoundary exclusions and accepted SPEC-0001 and SPEC-0002.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The raw H-044 replay contains current host, boot, USB-inventory, and hardware identifiers required for exact reconstruction; it remains locally preserved and publication is not authorized.",
+      "evidence": "Human acceptance boundary, artifacts/ Git ignore rule, local archive mode 0600, public restricted-evidence receipt, and repository status excluding the raw bundle.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0017 remains byte-identical and its 21-source H-044 closure is preserved independently from the governance acceptance transition.",
+      "verification": "Recompute CHG-0017 SHA-256 as 858fcc7fde8bf6abd73e58f56224c3eae238ecf46ae70e92aca92f886937e576 and verify every collector.sources entry against signed source anchor 99c5d5c4bf1e5a8be464b9701f86276fd31a6f67."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The accepted claim reproduces exactly the supported H-044 hypothesis outcome and withheld historical-container-absent live classification without inventing a candidate, authority, action, or broader recovery claim.",
+      "verification": "Independent verification of semantic evidence, run and verification bytes, both frame digests and completeness, exposure, source admission, command and filesystem audit, classification, zero receipt cardinality, hostile matrix, producer agreement, and claim boundary."
+    },
+    {
+      "id": "SC-003",
+      "statement": "A deterministic content-addressed bundle preserves the exact H-044 sources, pre-acceptance governance, canonical run, verification, and transitive H-043 input locally with restricted permissions, while Git tracks only its non-sensitive receipt.",
+      "verification": "Archive SHA-256, deterministic double-build comparison, 26-member inspection, mode 0600, Git ignore confirmation, disclosure scan, and confirmation that no raw H-044 run, verification, or archive path is staged."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Acceptance activates no new ADR or product specification: profile 1.6.0 retains ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002 unchanged, and plan.json remains byte-identical.",
+      "verification": "Governance source diff, accepted-record hash comparison, deterministic manifest compilation, and exact plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The activated governance tree, repository quality checks, build, canonical H-042 and H-043 verifiers, and 92 focused H-044 tests pass under Node 22.20.0; canonical H-044 verification passes at its frozen pre-acceptance governance tree.",
+      "verification": "Post-acceptance receipts from governance:verify, governance:check, check, build, canonical H-042 and H-043 verification, H-044 tests at source anchor 99c5d5c4bf1e5a8be464b9701f86276fd31a6f67, and H-044 replay verification with the historical manifest. The current-tree H-044 producer and canonical verifier fail closed after the manifest successor by design."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Acceptance permits signed source and governance commits, GitHub push, merge, and a separately governed next Slice, but does not permit raw-evidence publication, a signal, actuator, restart, installation, production policy, npm publication, release, or product-specification expansion.",
+      "verification": "Human authorization boundary, signed commit verification, repository and remote state, raw-artifact exclusion, and absence of host or production mutation."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0018 records the registered human acceptance, typed facts, bounded inference, nonblocking unknowns, exact evidence identities, exclusions, disclosure boundary, and separate transition authorities.",
+      "evidence": "Human Doctrine acceptance by @rodrigoteamx on 2026-07-26 and this implemented successor contract."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "CHG-0017 remains proposed and byte-identical; accepted ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002 remain untouched.",
+      "evidence": "Repository diff and CHG-0017 SHA-256 858fcc7fde8bf6abd73e58f56224c3eae238ecf46ae70e92aca92f886937e576."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The canonical H-044 sources and exact replay closure are locally content-addressed and independently verifiable, while the repository contains only the frozen harness and a non-sensitive public receipt.",
+      "evidence": "Source anchor 99c5d5c4bf1e5a8be464b9701f86276fd31a6f67; semantic evidence SHA-256 c0bfbc3cbb7c7a4f42ed9ba642648b815bff32adaf622fd82663022e167e3610; local archive SHA-256 7783de86dc9fe18edbca1faa7767af7ddf1dbb3a126bb968ebec9aa9d6c4f9bf."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Profile 1.6.0, plan.json, ADR-0001 through ADR-0006, and SPEC-0001 through SPEC-0002 remain unchanged; only CHG-0018 and the manifest record the acceptance transition.",
+      "evidence": "Governance diff, deterministic compiler output, exact plan hash, and accepted-record hashes."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "Post-acceptance governance, quality, build, archive, source-hash, disclosure, focused H-044, and canonical H-042, H-043, and H-044 verification gates pass under Node 22.20.0 at their correct temporal source boundaries.",
+      "evidence": "Successful final local gate receipts dated 2026-07-26."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No product code, accepted specification, new ADR, raw evidence publication, host or production configuration, signal, restart, installation, npm publication, or release is created by this acceptance.",
+      "evidence": "Repository diff, ignored restricted archive, unchanged accepted-record hashes, capability audit, and the explicit human authorization boundary."
+    }
+  ]
+}
