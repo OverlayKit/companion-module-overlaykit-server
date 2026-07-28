@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0033",
+  "title": "Frame H-052 human relationship-carrier adequacy decision",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the governed-discovery framing agent for CHG-0033 under the human principal @rodrigoteamx; the agent cannot select a relationship carrier, approve its own hypothesis, or create normative, architectural, product, or operational authority.",
+      "evidence": "Repository AGENTS.md, accepted ADR-0001, and compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immutable H-052 subject is protected-main merge commit 16d0d29b32eb80603c17cc1cb1e3ed1265787008 with tree 0bff82e4d790b8fc133810230f28590c6b518bc7, whose parents are prior main 2810e63defe37025f575ebea37be7e1c5e97c18e and signed review commit 0c2ff24ae3c2b8b50549c977cbb051add9bea436.",
+      "evidence": "GitHub pull request 12, valid GitHub merge signature, local Git object inspection, protected-main ancestry, and successful post-merge Constitution workflow 30378867711.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "At the immutable subject, the compiled plan has raw SHA-256 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243 and internal planHash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4; the pre-CHG-0033 manifest has raw SHA-256 82b28670146249375930bf26c5c1952ba49b0e32263b6eef175135c59ae808ec and contentHash 9b1c2ef29b290edd603042a667a7c5eb09ceba40773ac03a6effa3bc58268a9f.",
+      "evidence": "Exact Git blobs at main@16d0d29b32eb80603c17cc1cb1e3ed1265787008 and independent SHA-256 calculation.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The exact H-052 semantic source boundary contains twelve Git blobs at the immutable subject: CHG-0032; manifest, plan, profile, profile schema, and specification schema; SPEC-0001 and SPEC-0002; the H-050 canonical motion and human acceptance; and the H-051 human acceptance and readiness map.",
+      "evidence": "Restricted git ls-tree stream SHA-256 9a458da4749c055eb4fcf86f4463f8523031f53314129efb67dc2033d3e37a56 and canonical twelve-descriptor source-set SHA-256 2c886b0854dbf121c4498f43b82b686bd6d47d750eea304d7df78909e8f1c469, independently reproduced using raw Git blob bytes.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The accepted H-050 human intent says that a later new specification extends SPEC-0001 for physical-recovery scope and references SPEC-0002 for the virtual-command segment without editing or deleting either accepted record, while every drafting, acceptance, ADR, and implementation transition remains separate.",
+      "evidence": "Canonical H-050 motion raw SHA-256 20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28 at /predicateDecisions/8/value and its human-accepted closure recorded by CHG-0030.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human-accepted H-051 result is inconclusive only inside the current carrier-representability boundary: nine predicates are satisfied, mapsSpecificationRelationship is ambiguous, and schemaCompilerAdmitsAdditiveLifecycle is unresolved.",
+      "evidence": "CHG-0031 raw SHA-256 6cdc124c9707cd4a743cfdd68a1706534418ad5163da720aefe8e0c2ded7adf5; readiness-map raw SHA-256 dfb1156e6c16721c01d008cb5d760b05f10dc2328cfb871a3a80a29a4447c7ce; human-acceptance raw SHA-256 69f2918fdc0f816ef2b70438d7b2731d94242eb3db191dff7d4b8e5c6b95ff23; and post-review assessment raw SHA-256 7512c59bb1d5ef1f858a25d2e1d9c65c4be2656e488bf1265a63fe30881df2e2.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "ProductSpecification/v1 has a typed supersedes property but no typed extends or references property, while the active profile can name SPEC-0001 and SPEC-0002 independently; no accepted rule decides whether content-addressed prose is an adequate relationship carrier.",
+      "evidence": "Specification schema raw SHA-256 056bc1460849ece13839cd635f0ce1e2e93cd7d00bf9c0e6622e0a2440f720fc, profile raw SHA-256 e61fde755b80c66742df144d5e7bcb4309629542e3bdba666a347f65d3341787, H-051 mapsSpecificationRelationship citations and rationale, and the accepted plan.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0032 is byte-identical at raw SHA-256 cc9613136398182e12a80963efd4aadce4c4bdacc182919cdda1179ca7aead91 and authorizes post-merge continuation only as a separate CHG-0033 governed-discovery frame with authority none and action null.",
+      "evidence": "CHG-0032 SC-008 and DOD-007 at the immutable H-052 subject.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The next load-bearing question is human carrier adequacy rather than specification drafting or a schema/compiler experiment, because choosing prose sufficiency permits a later current-carrier projection experiment while requiring a typed relation demands a prior governance-carrier Slice.",
+      "evidence": "H-050 relationship intent, the two unresolved H-051 predicates, ProductSpecification/v1's exact surface, CHG-0032 continuation boundary, and ADR-0001 evidence-before-decision ordering.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-052: within main@16d0d29b32eb80603c17cc1cb1e3ed1265787008, content-addressed prose in a future additive ProductSpecification/v1, together with independent active-specification membership, is an adequate explicit and auditable carrier for the accepted statement that the future specification extends SPEC-0001 and references SPEC-0002, without using supersedes or adding typed extends or references fields.",
+      "evidence": "This is the falsifiable H-052 carrier-adequacy claim; neither the agent nor existing repository evidence has selected or accepted it.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-052 is supported only by an exact content-addressed human motion that selects prose-content-addressed-sufficient, explicitly preserves byte-identical SPEC-0001 and SPEC-0002 as independently active accepted records, rejects use of supersedes for this relationship, and retains authority none and action null; it is refuted only by an exact human motion that selects typed-machine-readable-required and explicitly rejects prose alone; it is inconclusive for an absent, deferred, conditional, ambiguous, incomplete, or third-carrier motion; and it is invalid on source drift, an agent-selected default, claimed schema/compiler admission, or any fixture, SPEC, ADR, governance-carrier mutation, product change, live action, or unauthorized Git transition.",
+      "evidence": "Fail-closed D3 outcome policy derived from the exact H-051 ambiguity, accepted-record immutability, CHG-0032's continuation limit, and the distinction between human carrier policy and technical representability evidence.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the human principal accepts content-addressed prose as sufficient, requires a typed machine-readable relation, identifies a third carrier, or defers the decision remains unknown and blocks every fixture, specification, carrier implementation, and downstream experiment.",
+      "evidence": "No post-H-051 human carrier-adequacy motion exists in the immutable subject or current governed-discovery frame.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the current schema, validator, compiler, profile lifecycle, and deterministic plan admit a future additive specification remains unresolved and explicitly outside H-052 framing.",
+      "evidence": "The human-accepted H-051 classification schemaCompilerAdmitsAdditiveLifecycle is unresolved because no SPEC-shaped fixture was authorized or executed.",
+      "blocking": true
+    },
+    {
+      "kind": "fact",
+      "statement": "No ADR candidate is activated by opening H-052 because no durable reusable composition rule has been selected, experimentally challenged, evidenced without ambiguity, and accepted by the human principal.",
+      "evidence": "ADR-0001 candidacy sequence, H-051's accepted inconclusive outcome, CHG-0032's no-ADR boundary, the untested H-052 assumption, authority none, and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Authority exists only to register CHG-0033 and its deterministic manifest entry as a local post-merge governed-discovery frame; authority for a lab/h052 docket or harness, subject lock, fixture, schema/compiler/profile/plan change, SPEC, ADR, product or live action, commit, push, merge, publication, release, or successor hypothesis remains absent.",
+      "evidence": "CHG-0032 SC-008 and DOD-007, the exact contextual continuation, and the minimum non-circular registration required by the compiled governance contract.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0033 binds H-052 to the exact protected-main commit, tree, predecessor hashes, accepted H-050 relationship intent, and human-accepted H-051 inconclusive result.",
+      "verification": "Recompute the nominated Git identities, restricted tree SHA-256 9a458da4749c055eb4fcf86f4463f8523031f53314129efb67dc2033d3e37a56, and source-set SHA-256 2c886b0854dbf121c4498f43b82b686bd6d47d750eea304d7df78909e8f1c469; inspect PR 12, merge signature, workflow 30378867711, H-050 motion, H-051 acceptance and assessment, CHG-0031, and CHG-0032."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The H-052 assumption and four-way outcome policy distinguish prose sufficiency, typed-relation requirement, unresolved human policy, and invalid overclaim without selecting a carrier.",
+      "verification": "Inspect the exact assumption, supported, refuted, inconclusive, and invalid conditions and require that no repository artifact supplies a default human decision."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The pre-review H-052 result remains inconclusive because the required human carrier-adequacy motion is absent.",
+      "verification": "Confirm the blocking human-policy unknown, proposed lifecycle, authority none, action null, and absence of any H-052 human-decision artifact."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The D3 reorder changes the first move from a SPEC-shaped fixture or specification draft to an exact human carrier decision; either decision can only nominate a separately authorized next Slice.",
+      "verification": "Inspect the load-bearing inference, H-051 unresolved predicates, outcome policy, and the explicit no-downstream-authority boundary."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Opening H-052 changes only CHG-0033 and the deterministic governance manifest entry.",
+      "verification": "Require a two-path Git diff and zero changes under lab/h052, artifacts, accepted ADRs, accepted specifications, governance schemas, profile, plan, tools, product source, tests, package metadata, or repository configuration."
+    },
+    {
+      "id": "SC-006",
+      "statement": "No ADR candidate, specification, relationship carrier, fixture, schema/compiler claim, product behavior, live observation, host mutation, Git transition, or publication is created.",
+      "verification": "Inspect typed claims, exact diff, candidate assessment, exclusions, authority none, and action null."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The registered frame conforms to the change schema, remains deterministically manifest-bound, and passes governance, formatting, quality, build, and repository-integrity gates.",
+      "verification": "Run scoped Prettier, npm run governance:verify, npm run governance:check, npm run check, npm run build, git diff --check, and accepted-record/product diff inspection."
+    },
+    {
+      "id": "SC-008",
+      "statement": "The handoff presents the exact H-052 carrier-adequacy question for human decision and makes no recommendation or inferred selection.",
+      "verification": "Compare the handoff against the H-052 assumption and outcome policy while requiring no successor action before a new exact human response."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "The H-052 hypothesis, exact outcome rules, claim boundary, pre-review inconclusive state, and D3 reorder are captured in proposed CHG-0033.",
+      "evidence": "This proposed change contract."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The frame is content-addressed to the exact post-merge main subject and accepted predecessor evidence without admitting raw local closures or mutable successor files into its subject.",
+      "evidence": "Main commit and tree, twelve-blob restricted tree and canonical descriptor-set hashes, PR and workflow evidence, and exclusion boundaries."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "H-052 remains inconclusive until the human principal selects prose sufficiency, selects a typed-relation requirement, supplies a third carrier, or explicitly defers.",
+      "evidence": "Blocking human-policy unknown, four-way outcome policy, authority none, and action null."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No lab/h052 artifact, harness, subject lock, docket, fixture, SPEC, ADR, schema/compiler/profile/plan change, product change, live action, raw artifact, Git transition, or publication is created.",
+      "evidence": "Exact two-path diff and CHG-0032 continuation limit."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No ADR candidate is activated; a future durable carrier rule can become a candidate only after a separately governed falsification Slice, non-ambiguous evidence, and exact human acceptance.",
+      "evidence": "ADR-0001 candidacy sequence, candidate assessment claim, and H-052 exclusions."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "CHG-0033 is the only new source record and the deterministic manifest is the only modified existing record.",
+      "evidence": "Path-scoped Git status and diff."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "Governance, formatting, quality, build, and repository-integrity gates pass for the local proposed frame.",
+      "evidence": "Final scoped local validation outputs."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "The next transition is withheld pending an exact human carrier-adequacy decision and separate authority.",
+      "evidence": "Human-decision handoff, no selected carrier, authority none, and action null."
+    }
+  ]
+}
