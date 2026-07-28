@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "overlaykit-product-specification/v1",
+  "id": "SPEC-9998",
+  "title": "Synthetic additive relationship-carrier fixture",
+  "status": "accepted",
+  "date": "2026-07-28",
+  "supersedes": null,
+  "scope": "Non-normative H-053 laboratory data used only to test whether the current governance host admits a third independently active accepted specification.",
+  "summary": "Relationship carrier: this synthetic fixture extends SPEC-0001 for physical Stream Deck MK.2 recovery scope and references SPEC-0002 for the virtual Companion command segment. SPEC-0001 and SPEC-0002 remain independently active and byte-identical. This prose creates no product requirement, implementation authority, or real specification identity.",
+  "actors": [
+    {
+      "id": "fixture-maintainer",
+      "label": "Synthetic fixture maintainer",
+      "description": "Executes an offline representability experiment without creating product law."
+    }
+  ],
+  "terms": [
+    {
+      "id": "synthetic-addition",
+      "name": "Synthetic additive fixture",
+      "definition": "Non-normative test data whose accepted status is confined to the H-053 in-memory counterfactual."
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-LAB-998",
+      "category": "integration",
+      "statement": "The synthetic counterfactual retains SPEC-0001 and SPEC-0002 while adding this fixture as an independent active record.",
+      "verification": "Compile the source-locked in-memory contract and inspect exact active IDs, statuses, supersession edges, and predecessor hashes."
+    }
+  ],
+  "userStories": [
+    {
+      "id": "US-998",
+      "actor": "fixture-maintainer",
+      "need": "test additive specification admission without persisting a real specification",
+      "outcome": "the current host behavior is observed within a closed offline boundary",
+      "surface": "integration",
+      "preconditions": [
+        "The exact H-053 source boundary is closed.",
+        "SPEC-0001 and SPEC-0002 bytes are available from the immutable Git subject.",
+        "No live, network, product, or governance-source mutation is permitted."
+      ],
+      "acceptanceCriteria": [
+        {
+          "id": "AC-998",
+          "given": "two independently active accepted predecessor specifications and this synthetic accepted fixture",
+          "when": "the source-locked governance host compiles the in-memory counterfactual",
+          "then": "exactly three specifications are effective accepted with no supersession edge",
+          "verification": "Inspect the deterministic compiled plan and addition-only synthetic manifest."
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "WF-998",
+      "title": "Exercise synthetic additive admission",
+      "actors": ["fixture-maintainer"],
+      "steps": [
+        "Load the immutable predecessor specifications and current host inputs into memory.",
+        "Validate this synthetic fixture against ProductSpecification/v1.",
+        "Add the fixture atomically as accepted with supersedes null.",
+        "Activate all three specification IDs in the in-memory profile.",
+        "Compile twice under corpus and profile permutations.",
+        "Compare the plans, manifests, predecessor bytes, stale-evidence state, and negative controls."
+      ],
+      "invariants": ["REQ-LAB-998"]
+    }
+  ],
+  "outOfScope": [
+    "A real SPEC-0003 or any reserved production specification identity",
+    "Normative physical recovery behavior or implementation",
+    "Profile, schema, compiler, validator, plan, product, or live-host mutation",
+    "ADR creation or activation",
+    "Network, USB, hidraw, Docker, signals, services, commit, push, merge, or publication"
+  ]
+}

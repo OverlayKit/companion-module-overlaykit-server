@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0034",
+  "title": "Exercise H-053 additive specification lifecycle admission offline",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the local H-053 evidence-producing agent under the human principal @rodrigoteamx; the agent cannot approve its own hypothesis, create or accept a specification or ADR, modify product law, or grant any later transition.",
+      "evidence": "Repository AGENTS.md, accepted ADR-0001, and compiled plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The exact H-053 source boundary combines twenty-one immutable Git blobs at commit 16d0d29b32eb80603c17cc1cb1e3ed1265787008 and tree 0bff82e4d790b8fc133810230f28590c6b518bc7 with eight unsigned local predecessor sources; its nominated combined SHA-256 is d257830144a01545cd4bdd11c3209481adc54dc6d47603eb8273f6884f17a54f.",
+      "evidence": "Restricted Git tree stream SHA-256 20e85f20358fe0b186281d3ff006074ccfcdd3de72c2e2fbe1255283326667ac, Git source-set SHA-256 6031fbc61fc8ccf1be86b712f8d718412a449fe3f393d8fca59fb820473169dd, local source-set SHA-256 45f826086a17aaacdfc0b7dbd8ef2046cfe4044f34ef34c3d1536c783b632f8a, and compact UTF-8 canonical JSON with recursive Object.keys(...).sort() key ordering; the host localeCompare canonicalizer is intentionally not the nominated boundary algorithm.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The local predecessor layer binds CHG-0033 at raw SHA-256 7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4, the pre-H-053 manifest at raw SHA-256 888e02e5605c6387c83644bacb049761451605d2c27b501b14f0b8d826af2666, and all six files of the H-052 closure whose closure receipt raw SHA-256 is a59c69bc2607b0c4f8d6aab336761b48e0b6f19d251be151e6846c3daf71814f.",
+      "evidence": "Exact local bytes, modes, byte lengths, and SHA-256 descriptors admitted by the nominated H-053 source boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "H-052 is human-accepted as supported only for content-addressed prose as the relationship carrier: a future additive specification may state that it extends SPEC-0001 and references SPEC-0002 while both remain independently active and byte-identical, supersedes remains null, and no typed extends or references field is required.",
+      "evidence": "H-052 closure a59c69bc2607b0c4f8d6aab336761b48e0b6f19d251be151e6846c3daf71814f, human-acceptance 046532df31c092fed31ca6dab06526214df5ceba351f5234cf5ab7482d46809c, and post-review assessment 584fccbee547e963d137f72224cd6fdaca400ced3eeb804ada240b6ad8cfc0bf.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "ProductSpecification/v1 admits supersedes null and rejects undeclared typed relationship fields, the profile schema admits an unbounded unique specificationIds array, the validator requires each active specification to be accepted and unsuperseded, the compiler walks every active lineage, the manifest binds every specification, and observation becomes stale when profileHash, planHash, or manifestHash differs.",
+      "evidence": "The exact specification and profile schemas, validator, compiler, manifest, projector, repository loader, canonicalizer, types, and tests included in the H-053 Git source layer.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The smallest Slice that can resolve the remaining H-052 schemaCompilerAdmitsAdditiveLifecycle unknown is an offline synthetic counterfactual that adds one already accepted specification and activates it alongside the two existing accepted specifications without persisting any specification or profile mutation.",
+      "evidence": "H-052 remaining unknowns, current manifest immutability behavior, accepted ADR-0001 evidence-before-decision ordering, and the exact human H-053 grant.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-053: within the exact nominated source boundary, the current governance host admits an atomic, synthetic, already accepted ProductSpecification/v1 addition with supersedes null and content-addressed prose that names its extends SPEC-0001 and references SPEC-0002 relationship, while retaining SPEC-0001 and SPEC-0002 byte-identical and independently active and compiling exactly three effective accepted specifications.",
+      "evidence": "This is the falsifiable H-053 claim; static source inspection predicts but does not prove the outcome.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The exact H-053 predicates are exactSourceBoundaryClosed, candidateConformsProductSpecificationV1, candidateUsesProseCarrierAndSupersedesNull, candidateInternalReferencesAreClosed, transitionIsAtomicAcceptedAddition, profileRetainsExactlyThreeSpecifications, allThreeAreAcceptedAndUnsuperceded, predecessorBytesRemainIdentical, compiledPlanContainsThreeEffectiveAcceptedSpecifications, profileAndCorpusPermutationIsDeterministic, manifestDeltaIsAdditionOnlyAndContentBound, priorEvidenceBecomesStale, and noSpecificationOrImplementationAuthorityIsInferred.",
+      "evidence": "The predicate roster is the finite executable decomposition of the human-authorized H-053 experiment.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-053 is supported only when the exact source boundary closes, every positive predicate passes, every required negative control executes with the expected observed host behavior, no real governance or product source changes, and authority remains none with action null; it is refuted only when the exact closed host rejects the authorized atomic accepted addition or cannot produce three effective accepted specifications; it is inconclusive on any omitted, drifted, opaque, ambiguous, contradictory, or unclassifiable source or result; and it is invalid on unauthorized persistence, live or network activity, source mutation, authority overclaim, or self-approval.",
+      "evidence": "Fail-closed D3 outcome policy derived from ADR-0001, the human grant, and the distinction between exact host admission and normative product authority.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The four required negative controls are proposedToAcceptedRejectedByImmutability, activeSetRemovalAdmittedByHost, supersessionBreaksIndependentActiveSet, and typedRelationshipFieldsRejectedBySchema; the active-set removal control records current host behavior as an enforcement gap if removal is admitted rather than treating that admission as proof of monotonic retention.",
+      "evidence": "The human grant explicitly requires proposed-to-accepted, active-set removal, supersession, and typed-field controls; static inspection predicts the first, third, and fourth are rejected and that active-set removal is currently admitted.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the current source-locked governance host passes all thirteen predicates and exhibits the four predicted negative-control behaviors remains unknown until the authorized offline harness executes and a separate verifier reconstructs its raw evidence.",
+      "evidence": "No H-053 fixture, run, or independently verified evidence exists before this proposed contract and Slice.",
+      "blocking": true
+    },
+    {
+      "kind": "inference",
+      "statement": "Opening H-053 activates no ADR candidate; a passing admission experiment accompanied by an admitted active-set-removal control may nominate, but cannot activate, a later candidate concerning monotonic active-specification membership.",
+      "evidence": "ADR-0001 candidacy sequence, H-053's non-normative exact-host boundary, the predicted active-set-removal behavior, and the explicit prohibition on creating an ADR.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human H-053 grant authorizes only CHG-0034 in proposed status, its deterministic manifest entry, a non-normative synthetic fixture and offline harness/verifier under lab/h053, and ignored local raw evidence; it explicitly prohibits a real SPEC, ADR, profile, schema, compiler, plan or product modification, network or live observation, commit, push, merge, and publication.",
+      "evidence": "The exact model-visible H-053 authorization bound to combined source-boundary SHA-256 d257830144a01545cd4bdd11c3209481adc54dc6d47603eb8273f6884f17a54f; raw transport-byte identity is not claimed.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Authority for human acceptance or rejection of H-053, post-review closure, any successor CHG or hypothesis, a real specification, an ADR, profile or host changes, product implementation, live observation, network access, commit, push, merge, or publication remains absent.",
+      "evidence": "The H-053 grant is exhaustive, retains authority none and action null, and expressly denies every listed transition.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0034 records H-053 as an untested proposed assumption and binds it to the exact nominated combined source boundary without admitting CHG-0034, lab/h053, or generated evidence into its own subject.",
+      "verification": "Reconstruct the twenty-one Git and eight local descriptors and require combined SHA-256 d257830144a01545cd4bdd11c3209481adc54dc6d47603eb8273f6884f17a54f."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The positive witness is only a non-normative synthetic SPEC-9998 fixture added atomically as accepted with supersedes null and content-addressed prose naming SPEC-0001 and SPEC-0002.",
+      "verification": "Validate fixture schema and internal references, raw content hash, synthetic ID, relationship prose, accepted status, null supersedes, and absence from real governance specification paths."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The counterfactual retains the exact raw bytes and active membership of SPEC-0001 and SPEC-0002 and compiles exactly SPEC-0001, SPEC-0002, and SPEC-9998 as effective accepted with no supersession edge.",
+      "verification": "Compare predecessor SHA-256 values, exact active ID set, compiled plan projection, and supersededBy values."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The synthetic manifest transition is addition-only and content-bound, compilation is invariant to corpus and profile permutation, and evidence produced for the predecessor plan or manifest becomes stale.",
+      "verification": "Compare canonical manifests, plan hashes across permutations, and projector state for a predecessor run observed against the synthetic successor."
+    },
+    {
+      "id": "SC-005",
+      "statement": "All four controls execute and distinguish host-enforced immutability, admitted active-set removal, supersession semantics, and schema rejection of typed relationship fields.",
+      "verification": "Require the exact four control receipts and fail closed on a missing or differently classified control."
+    },
+    {
+      "id": "SC-006",
+      "statement": "The real profile, schemas, compiler, validator, projector, plan, accepted specifications, product source, CHG-0033, and H-052 closure remain byte-identical; the real manifest changes only by the CHG-0034 entry and derived contentHash.",
+      "verification": "Pre/post source hashes, path-scoped Git diff, deterministic governance compilation, and manifest semantic delta."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The producer emits deterministic ignored raw evidence and an independent verifier reconstructs source closure, all predicates, controls, outcome, authority none, and action null without live or network capabilities.",
+      "verification": "Run the H-053 producer twice, compare canonical semantic output, verify the preserved run, and inspect the process capability allowlist."
+    },
+    {
+      "id": "SC-008",
+      "statement": "The result remains restricted to exact current-host admission and does not infer normative content, profile retention enforcement, product behavior, implementation feasibility, live behavior, security, or production policy.",
+      "verification": "Inspect claim boundary, negative-control interpretation, ADR assessment, authority, action, and explicit non-demonstrations."
+    },
+    {
+      "id": "SC-009",
+      "statement": "No ADR is created or activated; any reusable active-set-retention concern is reported only as a candidate for later human review.",
+      "verification": "Path-scoped diff, result ADR assessment, and absence of a new decision record."
+    },
+    {
+      "id": "SC-010",
+      "statement": "Focused H-053, governance, formatting, quality, build, whitespace, source-preservation, and offline-boundary gates pass.",
+      "verification": "Focused tests and verifier, npm run governance:check, offline npm run check, npm run build, git diff --check, and final hash and scope audit."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "The H-053 claim, thirteen predicates, four controls, fail-closed outcome policy, claim boundary, and D3 reorder are captured in proposed CHG-0034.",
+      "evidence": "This proposed change contract."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The two-layer source boundary is exact, non-circular, and reconstructable from immutable Git objects plus byte-exact unsigned local predecessor files.",
+      "evidence": "H-053 subject lock and independent source inspection."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The fixture is visibly synthetic and non-normative, remains only under lab/h053, and reserves no real specification identity or product content.",
+      "evidence": "Fixture path, SPEC-9998 identifier, fixture prose, and absence of changes below .overlaykit/governance/specifications."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The authorized positive counterfactual and all four negative controls execute offline and produce deterministic, independently verifiable evidence.",
+      "evidence": "Focused tests, two producer outputs, raw run receipt, and verifier receipt."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "CHG-0033, the H-052 closure, accepted decisions and specifications, profile, schemas, compiler, validator, projector, plan, and product remain byte-identical.",
+      "evidence": "Pre/post content hashes and path-scoped repository diff."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "The only real governance mutation is CHG-0034 proposed plus its deterministic addition-only manifest entry.",
+      "evidence": "Governance compile output and semantic manifest delta."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "The resulting H-053 classification and any ADR candidacy assessment remain pending human review with authority none and action null.",
+      "evidence": "Raw evidence outcome, explicit human-review gate, and no successor artifact."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "No real SPEC, ADR, profile, schema, compiler, plan, product, live, network, Git-history, or publication transition occurs.",
+      "evidence": "Capability audit, source hashes, repository status, and explicit authorization boundary."
+    },
+    {
+      "id": "DOD-009",
+      "statement": "All required focused and repository handoff gates pass without network access.",
+      "evidence": "Final local gate outputs and offline environment receipt."
+    }
+  ]
+}

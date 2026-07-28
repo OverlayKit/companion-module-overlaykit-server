@@ -1,0 +1,272 @@
+{
+  "schemaVersion": "overlaykit-h053-subject-lock/v1",
+  "hypothesis": "H-053",
+  "normative": false,
+  "nominatedCombinedSourceSetSha256": "d257830144a01545cd4bdd11c3209481adc54dc6d47603eb8273f6884f17a54f",
+  "canonicalization": {
+    "encoding": "UTF-8",
+    "serialization": "compact JSON",
+    "objectKeyOrder": "recursive Object.keys(value).sort() using the ECMAScript default UTF-16 code-unit order",
+    "arrayOrder": "preserved",
+    "whitespace": "none outside JSON string values",
+    "contrastNotUsed": "The governance host canonicalizer uses localeCompare and yields b0c89615a63f58a2a30b8f62e4e683848786aa6bb4b30f8dfe5d084546461cea for this descriptor; it is not the nominated boundary algorithm."
+  },
+  "sourceBoundary": {
+    "schemaVersion": "overlaykit-h053-proposed-source-boundary/v1",
+    "gitSubject": {
+      "commit": "16d0d29b32eb80603c17cc1cb1e3ed1265787008",
+      "tree": "0bff82e4d790b8fc133810230f28590c6b518bc7",
+      "sourceCount": 21,
+      "restrictedLsTreeSha256": "20e85f20358fe0b186281d3ff006074ccfcdd3de72c2e2fbe1255283326667ac",
+      "sourceSetSha256": "6031fbc61fc8ccf1be86b712f8d718412a449fe3f393d8fca59fb820473169dd",
+      "sources": [
+        {
+          "path": ".overlaykit/governance/changes/CHG-0032.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "e51756be1977a4d0271998b3c42cc208687ace26",
+          "byteLength": 15522,
+          "sha256": "cc9613136398182e12a80963efd4aadce4c4bdacc182919cdda1179ca7aead91"
+        },
+        {
+          "path": ".overlaykit/governance/manifest.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "be799f631111d2869faee3ed450af05f12c4d416",
+          "byteLength": 4524,
+          "sha256": "82b28670146249375930bf26c5c1952ba49b0e32263b6eef175135c59ae808ec"
+        },
+        {
+          "path": ".overlaykit/governance/plan.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "750f5694f9e3abd5025b3a380fe7df8972529761",
+          "byteLength": 22610,
+          "sha256": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243"
+        },
+        {
+          "path": ".overlaykit/governance/profile.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "a8160c8da0609979304ae1118c57dec62e63cb1d",
+          "byteLength": 2547,
+          "sha256": "e61fde755b80c66742df144d5e7bcb4309629542e3bdba666a347f65d3341787"
+        },
+        {
+          "path": ".overlaykit/governance/schemas/profile.schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "ef2d654ab57aace24649059b95c07505a28526f9",
+          "byteLength": 6879,
+          "sha256": "82360a0c3d3f9e60cf8a5c00bc0d9b0d5eee6de149bba5485db140e3683f5dd2"
+        },
+        {
+          "path": ".overlaykit/governance/schemas/specification.schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "0b859e302a34caea0e63dfd0430a0451da604b0c",
+          "byteLength": 5189,
+          "sha256": "056bc1460849ece13839cd635f0ce1e2e93cd7d00bf9c0e6622e0a2440f720fc"
+        },
+        {
+          "path": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "45a1452e51681107005db9119c9724d29b29e23e",
+          "byteLength": 10127,
+          "sha256": "917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179"
+        },
+        {
+          "path": ".overlaykit/governance/specifications/SPEC-0002.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "4ee3541194fd13b5e68f141504a87b915823795d",
+          "byteLength": 10804,
+          "sha256": "d15b1cbf7e97bd92aadf40342421161a0955e210b8566f7ae870dc78c05e89f6"
+        },
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "c69f6bb9fccaa9b9c0e60ddee6a981c0692a0acd",
+          "byteLength": 4139,
+          "sha256": "20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28"
+        },
+        {
+          "path": "lab/h050/human-acceptance.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "7dad6d901846eb2f4b28c1424cbd070ae85310d0",
+          "byteLength": 3598,
+          "sha256": "d392ec651f80cdd715ef7482a829b823631fc94ceb8abf926e957c7f7f690602"
+        },
+        {
+          "path": "lab/h051/human-acceptance.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "1e8eed26dd3a03fdcdf9253b3fca0be172489ca3",
+          "byteLength": 6774,
+          "sha256": "69f2918fdc0f816ef2b70438d7b2731d94242eb3db191dff7d4b8e5c6b95ff23"
+        },
+        {
+          "path": "lab/h051/readiness-map.json",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "49c22282b6c7c1340109b008e378323ae8b7b0cd",
+          "byteLength": 14270,
+          "sha256": "dfb1156e6c16721c01d008cb5d760b05f10dc2328cfb871a3a80a29a4447c7ce"
+        },
+        {
+          "path": "tools/governance/src/canonical.ts",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "644d79767684b780f96e56f56263e3bb281df325",
+          "byteLength": 1346,
+          "sha256": "104bbd70451af320a2a92e134fc2767208fe08ed1275c2d739b13c0f23ef432b"
+        },
+        {
+          "path": "tools/governance/src/compiler.ts",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "dae622d5aa26dd8359fe2175e3b7c45a1aeb57e8",
+          "byteLength": 7028,
+          "sha256": "d5b22afddb6e1611a2d29c5dffd082afcc21dae0c4d9d14078219c2b35368acb"
+        },
+        {
+          "path": "tools/governance/src/manifest.ts",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "daedefbaf776d8fae8ee78b96d5e0d7a9db53544",
+          "byteLength": 2702,
+          "sha256": "95ca667e1596df740237267851a15403061cfa9126c3153634d10b1d9e0b9a9f"
+        },
+        {
+          "path": "tools/governance/src/projector.ts",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "26961bcb8189c7b3d87f050a205abe57428c2c85",
+          "byteLength": 6650,
+          "sha256": "efaa5623f60211ba7c1ba5b47f1bf66049fbada7ea5de10ba1e5fd336492a7be"
+        },
+        {
+          "path": "tools/governance/src/repository.ts",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "96f9ce729adb4d0ce928fdab61ea59ce1b472657",
+          "byteLength": 13617,
+          "sha256": "5c5e65af5c2d6d0e59911327b1c49801048dd899d5c5dafca8dbbcf45cfe599b"
+        },
+        {
+          "path": "tools/governance/src/types.ts",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "8dee3fe789f715f598c67c20080f00bd6cb343be",
+          "byteLength": 12487,
+          "sha256": "b8b7508ac6b35d16409ab447d71b511263e61953ce56e9a14667becb8db07e14"
+        },
+        {
+          "path": "tools/governance/src/validator.ts",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "c9aa5c15eb7e3e95cc437d642bbe12797a728118",
+          "byteLength": 13226,
+          "sha256": "177330ac2915cab64953812ad01e8af162e50e7de0fd236b53669e323763a475"
+        },
+        {
+          "path": "tools/governance/tests/governance.test.ts",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "e80a745db4b098f5b96bbf36c02f4a5153e96d4d",
+          "byteLength": 20130,
+          "sha256": "a01c6a4d82dd1c039bd2328d4b2d1c771d48d26bedfe61e845d04547e4411357"
+        },
+        {
+          "path": "tools/governance/tests/repository.test.ts",
+          "mode": "100644",
+          "type": "blob",
+          "oid": "d35643cac26629be0f3d816041daf3cdbf14b487",
+          "byteLength": 9577,
+          "sha256": "57c0bc3f0b11cfe8073e6fb3d4748ba6fe24e500f692eb4dc76f2aefd1c0f1db"
+        }
+      ]
+    },
+    "localPredecessor": {
+      "sourceCount": 8,
+      "sourceSetSha256": "45f826086a17aaacdfc0b7dbd8ef2046cfe4044f34ef34c3d1536c783b632f8a",
+      "sources": [
+        {
+          "path": ".overlaykit/governance/changes/CHG-0033.json",
+          "mode": "0644",
+          "byteLength": 15121,
+          "sha256": "7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4"
+        },
+        {
+          "path": ".overlaykit/governance/manifest.json",
+          "mode": "0644",
+          "byteLength": 4608,
+          "sha256": "888e02e5605c6387c83644bacb049761451605d2c27b501b14f0b8d826af2666"
+        },
+        {
+          "path": "artifacts/h052/post-review-closures/7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4/closure.json",
+          "mode": "0600",
+          "byteLength": 4417,
+          "sha256": "a59c69bc2607b0c4f8d6aab336761b48e0b6f19d251be151e6846c3daf71814f"
+        },
+        {
+          "path": "artifacts/h052/post-review-closures/7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4/human-acceptance.json",
+          "mode": "0600",
+          "byteLength": 6260,
+          "sha256": "046532df31c092fed31ca6dab06526214df5ceba351f5234cf5ab7482d46809c"
+        },
+        {
+          "path": "artifacts/h052/post-review-closures/7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4/manifest.json",
+          "mode": "0600",
+          "byteLength": 7443,
+          "sha256": "eebafdeaf127af12dddaf2024e479a9390ba17ed28daa85e0e9af9a153dd19c9"
+        },
+        {
+          "path": "artifacts/h052/post-review-closures/7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4/post-review-assessment.json",
+          "mode": "0600",
+          "byteLength": 7236,
+          "sha256": "584fccbee547e963d137f72224cd6fdaca400ced3eeb804ada240b6ad8cfc0bf"
+        },
+        {
+          "path": "artifacts/h052/post-review-closures/7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4/replay-460a524ea707ede8aef7529e7fb7f37395d96cabd1cad9f04d9ac2f42c0df33f.tar",
+          "mode": "0600",
+          "byteLength": 171008,
+          "sha256": "460a524ea707ede8aef7529e7fb7f37395d96cabd1cad9f04d9ac2f42c0df33f"
+        },
+        {
+          "path": "artifacts/h052/post-review-closures/7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4/source-anchor.json",
+          "mode": "0600",
+          "byteLength": 7717,
+          "sha256": "871b8854113b1608e4eba0616838f8143a0d23fe7b5720174106695228812c35"
+        }
+      ]
+    }
+  },
+  "mutableSourceRecovery": {
+    "path": ".overlaykit/governance/manifest.json",
+    "reason": "The nominated bytes precede the authorized CHG-0034 manifest addition and must not be reinterpreted from the successor worktree.",
+    "archivePath": "artifacts/h052/post-review-closures/7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4/replay-460a524ea707ede8aef7529e7fb7f37395d96cabd1cad9f04d9ac2f42c0df33f.tar",
+    "archiveMember": "sources/h052-frame/001",
+    "recoveredRawSha256": "888e02e5605c6387c83644bacb049761451605d2c27b501b14f0b8d826af2666"
+  },
+  "boundary": {
+    "question": "Whether the source-locked current governance host admits the exact synthetic atomic accepted additive witness and exhibits the four nominated negative-control behaviors.",
+    "apparatusExcludedFromSubject": [
+      ".overlaykit/governance/changes/CHG-0034.json",
+      "lab/h053/",
+      "artifacts/h053/"
+    ],
+    "doesNotDemonstrate": [
+      "normative product content",
+      "a real specification or specification identity",
+      "monotonic active-set enforcement",
+      "implementation feasibility or product behavior",
+      "live, security, compliance, drift, or production policy"
+    ]
+  },
+  "authority": "none",
+  "action": null
+}
