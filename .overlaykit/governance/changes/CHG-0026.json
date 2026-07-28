@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0026",
+  "title": "Test whether accepted law requires bounded automatic MK.2 recovery",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the evidence-producing agent for CHG-0026 under the human principal @rodrigoteamx; the agent cannot approve its own semantic classifications, create action authority, or expand accepted product law.",
+      "evidence": "Repository AGENTS.md, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, ADR-0001, and the principal's exact H-049 boundary restatement on 2026-07-27.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immutable H-049 normative subject is protected-main merge commit 226d299a9b0d8acd592675f514a67d6229d0134a with tree f0cd2b22b3c9da7b2c2d2cf5b93baa97dd1a5bcd, before CHG-0026 or its harness exists in the subject tree.",
+      "evidence": "Local read-only git rev-parse and git ls-tree; the exact subject is the main identity stated in the accepted H-049 motion.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The nominated semantic boundary contains exactly nine blobs: compiled plan.json, ADR-0001 through ADR-0006, and SPEC-0001 through SPEC-0002; their restricted NUL-safe ls-tree stream SHA-256 is e9e46d2e5affa66e72df0fbd1ed516c13327ebbb02d668ee92da2a4cd47b93c8.",
+      "evidence": "Independent reconstruction with git ls-tree -rz --full-tree at 226d299a9b0d8acd592675f514a67d6229d0134a and per-blob Git OID, byte length, mode, and raw SHA-256 checks recorded by lab/h049/subject-lock.json.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The compiled plan raw SHA-256 is 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243 and its internal planHash is bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4; it declares exactly six effective accepted unsuperseded ADRs and two effective accepted unsuperseded specifications whose content hashes equal the raw source hashes.",
+      "evidence": "Exact plan source plus independent comparison against all eight accepted source blobs in the immutable subject.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "SPEC-0001 requires bounded jittered reconnect only for retryable network and server failures and explicitly excludes USB access, physical Stream Deck discovery, physical key presses, and rendered button pixels.",
+      "evidence": "SPEC-0001 requirements/9, userStories/0/acceptanceCriteria/3, outOfScope/3, and outOfScope/4 at raw SHA-256 917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "ADR-0006 accepts only a bounded historical SurfaceThread replacement observation, selects no production controller or trigger, does not establish physical button delivery or acceptable downtime, forbids expanding SPEC-0001 or SPEC-0002 from that mechanism evidence, and says both specifications remain unchanged.",
+      "evidence": "ADR-0006 decision, consequences/1 through consequences/4, and policies/0 through policies/3 at raw SHA-256 619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The three-second rule in ADR-0005 and SPEC-0002 begins at a virtual action invocation and ends when authoritative server state is visible in Companion; those records explicitly exclude USB and physical Stream Deck behavior.",
+      "evidence": "ADR-0005 decision and policies/3 and policies/7 plus SPEC-0002 requirements/4 and outOfScope/0 at their exact accepted raw hashes.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The H-049 experiment is authorized only as a local offline read-only audit and carries authority none with action null; USB, hidraw, live observation, Docker, signals, configuration, controller implementation, ADR creation, specification creation, and production policy are outside scope.",
+      "evidence": "The principal's exact H-049 motion and its immediate governed-discovery context on 2026-07-27.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "An exact Git-blob closure, complete string-clause universe, human-reviewable candidate map, seven-predicate classifier, and independent verifier are the smallest Slice that can refute the obligation before controller design or host observation.",
+      "evidence": "D³ reorder from controller implementation to normative audit, ADR-0001 evidence-before-decision ordering, and H-047 fail-closed source-closure precedent.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "Canonical execution occurs without an external process replacing already-loaded JavaScript between Node loader admission and the harness on-disk preflight; preflight and postflight source maps prove on-disk stability during the governed run but are not runtime loader attestation.",
+      "evidence": "The local source closure checks every nominated harness file before and after semantic reconstruction, while Node does not expose the exact ESM source bytes admitted by its loader to this self-inspecting process.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-049: within the exact accepted-law boundary there exists at least one current, explicit, unambiguous, fully linked normative chain that binds the SPEC-0001 Linux role to an automatic post-login recovery duty after disconnect and return or re-enumeration of the same physical Stream Deck MK.2, restores the causal path from a physical key press through Companion to an OverlayKit command, and completes within an explicit observable maximum measured from that trigger.",
+      "evidence": "This is the refutable claim. Historical evidence, exclusions, future-slice preconditions, network reconnect, virtual-button timing, descriptor ownership, Opening or Ready markers, and unlinked cross-record proximity do not satisfy it.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The final H-049 source-closure digest, clause-universe digest, candidate-map digest, independent verification, and canonical pre-review outcome remain unknown until the frozen local harness is executed twice against the exact subject.",
+      "evidence": "Any change to the proposed contract, manifest, subject lock, review map, producer, schema, verifier, or tests changes the experiment source closure.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the principal accepts every proposed semantic classification, default dismissal, and cross-record link judgment remains unknown until a separate exact human review; a mechanically complete but unaccepted map cannot support a refuted outcome.",
+      "evidence": "ADR-0001 delegated-agent boundary and the review-map status agent-proposed-pending-human-acceptance.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "The experiment cannot establish external policy, desired future product behavior, current host state, recovery safety, or whether a successor specification should add physical recovery.",
+      "evidence": "The nine-source immutable boundary excludes external intent, live state, product implementation, and future human decisions.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Any authority to create an ADR or successor specification, implement a controller, observe or mutate the host, commit, push, merge, publish evidence, or establish production policy remains unknown until a separate governed human transition.",
+      "evidence": "CHG-0026 is proposed, offline, read-only, local, and explicitly non-authorizing.",
+      "blocking": true
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The producer and verifier bind exactly subject commit 226d299a9b0d8acd592675f514a67d6229d0134a, tree f0cd2b22b3c9da7b2c2d2cf5b93baa97dd1a5bcd, all nine nominated paths, their modes, Git OIDs, byte lengths, raw SHA-256 values, restricted ls-tree SHA-256, raw plan SHA-256, and internal planHash.",
+      "verification": "Independent git ls-tree and git cat-file reconstruction without reading normative subject bytes from the worktree."
+    },
+    {
+      "id": "SC-002",
+      "statement": "Every string leaf in all nine JSON blobs appears exactly once in a deterministic clause universe with source path, JSON pointer, structural role, and value SHA-256; no regex or candidate filter defines source coverage.",
+      "verification": "Independent recursive JSON traversal, cardinality and uniqueness checks, source-map binding, and omission, duplication, retargeting, and reordering fixtures."
+    },
+    {
+      "id": "SC-003",
+      "statement": "A chain is eligible only when one explicitly linked obligation identity satisfies all seven predicates: effective accepted normative authority, SPEC-0001 Linux-role binding, physical MK.2 scope, exact post-login disconnect-and-return or re-enumeration trigger, automatic recovery obligation, restored physical-key-to-OverlayKit-command delivery, and an explicit observable maximum; explicit link closure and absence of exclusion or contradiction are mandatory.",
+      "verification": "Positive synthetic chain plus hostile tests for historical context, may-investigate language, network reconnect, virtual timing, descriptor-only reacquisition, cross-record Cartesian mixing, exclusions, conflicts, and partial chains."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Outcome precedence fails closed: invalid subject, schema, source, or canonical artifacts are invalid evidence; any pending review, ambiguity, omission, conflict, or unclassified clause makes H-049 inconclusive; only accepted complete coverage permits supported with at least one complete chain or refuted with zero complete chains.",
+      "verification": "Producer, schema, and independent-verifier parity plus invalid, unknown-plus-positive, pending-zero, accepted-positive, and accepted-zero outcome fixtures."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The tracked review map binds every nominated candidate and default dismissal to the exact clause-universe digest, remains agent-proposed with humanAcceptanceRef null, and exposes every pending semantic judgment required before refutation; this pre-review harness rejects any in-place acceptance transition.",
+      "verification": "Raw and canonical review-map hashes, exact citation reconstruction, complete-default binding, hostile auto-acceptance and review-hash tests, and a separately governed content-addressed successor requirement for any human acceptance."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Every valid output preserves authority none and action null and states that the result applies only to the nominated nine-source boundary and cannot establish external policy, product intent, host state, controller safety, or implementation authority.",
+      "verification": "Schema constants, exact claim-boundary comparison, independent reconstruction, and negative overclaim tests."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The experiment uses only exact read-only local Git commands, reads its tracked local harness inputs, and writes restricted ignored artifacts under artifacts/h049; it uses no network, Docker, USB, hidraw, procfs, sysfs, devfs, systemd, signal, lifecycle, installation, configuration, or production capability.",
+      "verification": "Command allowlist, zero-inheritance fixed Git environment, exact git check-ignore probe, output-root validation, mode and symlink checks, hostile writer-path fixtures, implementation inspection, and repository diff."
+    },
+    {
+      "id": "SC-008",
+      "statement": "Two canonical producer runs against the exact subject yield byte-identical source map, clause universe, candidate index, and run bytes, and each passes a separately implemented mechanical verifier that imports no producer or classifier; the harness source map is explicitly an on-disk preflight/postflight stability record rather than loader attestation or independent semantic approval.",
+      "verification": "Double execution into distinct ignored directories, byte comparison, independent mechanical verification outputs, on-disk source stability checks, static import audit, and explicit claim-boundary inspection."
+    },
+    {
+      "id": "SC-009",
+      "statement": "No accepted or implemented record, profile, compiled plan, product code, or production configuration changes; only CHG-0026, its manifest entry, and the local H-049 harness are introduced.",
+      "verification": "Repository diff, accepted-record hash comparison, plan/profile byte comparison, deterministic manifest compilation, and product-source diff."
+    },
+    {
+      "id": "SC-010",
+      "statement": "Governance, focused H-049 tests, repository quality checks, and build gates pass under an allowed Node 22 runtime before evidence handoff.",
+      "verification": "npm run governance:verify, npm run governance:check, focused Node tests, npm_config_offline=true npm run check, npm run build, formatting, and git diff --check."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0026 records the exact pre-experiment H-049 claim, subject, nine-source boundary, typed epistemic state, seven predicates, outcomes, claim boundary, prohibited capabilities, and D³ reorder before execution.",
+      "evidence": "This proposed contract and its deterministic manifest entry."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The immutable normative subject remains 226d299a9b0d8acd592675f514a67d6229d0134a while CHG-0026 and its harness remain outside the subject, so the experiment cannot cite itself as normative evidence.",
+      "evidence": "Subject commit, tree, exact source lock, and repository diff."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "A minimal producer, schema, complete clause universe, proposed review map, focused hostile tests, and independent verifier reconstruct all nine sources and preserve the exact pending seven-predicate map without claiming independent semantic validation.",
+      "evidence": "Pending local H-049 source closure, test receipts, exact-map verification, and static proof that verify.mjs imports neither inventory-lib.mjs nor run.mjs."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Two canonical offline executions and independent verifications agree byte-for-byte and report the exact fail-closed pre-review H-049 outcome with authority none and action null.",
+      "evidence": "Pending local content-addressed source-map.json, clause-universe.json, candidate-index.json, run.json, and verification.json."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "The review map remains pending human acceptance; zero proposed complete chains cannot become a canonical refutation until the principal separately accepts the exact content-addressed map, every classification and default dismissal, and closes every pending judgment through a governed successor.",
+      "evidence": "Pending review-map hashes, fail-closed run outcome, candidate index, hostile in-place acceptance test, and separate human review handoff."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No accepted ADR, accepted specification, implemented change, profile, compiled plan, product source, or production configuration is edited or deleted.",
+      "evidence": "Accepted-record hashes, plan/profile hashes, repository diff, and governance verification."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "The experiment performs no live or host observation and no network, Docker, USB, hidraw, procfs, sysfs, devfs, systemd, signal, lifecycle, installation, configuration, controller, publication, or production mutation.",
+      "evidence": "Capability audit, command allowlist, ignored artifact boundary, implementation inspection, and repository diff."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "The ADR assessment activates no candidate because H-049 selects no product obligation, trigger, controller, deadline, deployment identity, host mutation, or action authority; a refutation could only open a later human decision about a successor specification.",
+      "evidence": "Pending exact outcome assessment against ADR-0001, ADR-0005, ADR-0006, SPEC-0001, and SPEC-0002."
+    },
+    {
+      "id": "DOD-009",
+      "statement": "All required governance, focused, quality, build, formatting, and repository-integrity gates pass at the local source boundary before evidence handoff.",
+      "evidence": "Pending final local gate receipts."
+    },
+    {
+      "id": "DOD-010",
+      "statement": "CHG-0026 remains proposed and all raw evidence remains local until separate human review; no acceptance, ADR, specification, commit, push, merge, publication, controller implementation, or production policy follows automatically.",
+      "evidence": "Repository and remote state, proposed status, local ignored evidence boundary, and separate human-transition requirement."
+    }
+  ]
+}

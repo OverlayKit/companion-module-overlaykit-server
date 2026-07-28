@@ -1,0 +1,508 @@
+{
+  "schemaVersion": "overlaykit-h049-semantic-review/v1",
+  "hypothesis": "H-049",
+  "status": "agent-proposed-pending-human-acceptance",
+  "humanAcceptanceRef": null,
+  "subject": {
+    "commit": "226d299a9b0d8acd592675f514a67d6229d0134a",
+    "tree": "f0cd2b22b3c9da7b2c2d2cf5b93baa97dd1a5bcd"
+  },
+  "clauseUniverse": {
+    "clauseCount": 901,
+    "sha256": "637671ba036157351305e3bf023645bcebb9f8ab0ec19d37e4988799754e7c79"
+  },
+  "defaultDisposition": {
+    "classification": "no-additional-eligible-chain",
+    "rationale": "Every unlisted string clause remains in the exact content-addressed universe. Unlisted clauses may repeat or partially contribute individual H-049 predicates, exclusions, history, evidence, or metadata, but the proposed audit finds that none supplies an additional complete explicitly linked seven-predicate obligation. Human acceptance of this exact default remains required; lexical similarity alone cannot promote an unlisted clause into an eligible chain.",
+    "allUnlistedClauses": true,
+    "humanAcceptanceRequired": true
+  },
+  "pendingHumanJudgments": [
+    "acceptance or rejection of all five candidate classifications, every exact citation, and the default disposition over all 901 clauses",
+    "whether SPEC-0001 Linux role binding denotes the linux-operator, module runtime, or production-host environment without implying host lifecycle ownership",
+    "whether SPEC-0001 summary language about one physical or virtual button creates physical MK.2 recovery behavior despite its explicit USB, discovery, and key-press exclusions; the proposed map says no",
+    "whether SPEC-0001's ordinary button-to-authorized-command surface constitutes restored physical command delivery after recovery; the proposed map says no",
+    "whether SPEC-0001 retryable network and server reconnect can satisfy physical USB recovery; the proposed map says no",
+    "whether ADR-0006 historical mechanism evidence, may-investigate language, or successor-Slice preconditions create a current automatic recovery duty; the proposed map says no",
+    "whether the three-second virtual-invocation-to-visible-server-state rule can act as a physical disconnect-to-command-delivery recovery deadline; the proposed map says no",
+    "whether ADR-0003 generic Linux, API 2.0, build, host, CI, USB, and physical-hardware exclusions create or link a positive MK.2 recovery obligation; the proposed map says no",
+    "whether accepted clauses from SPEC-0001, ADR-0006, ADR-0005, and SPEC-0002 may be joined without an explicit normative edge and despite physical-scope exclusions; the proposed map says no"
+  ],
+  "candidates": [
+    {
+      "id": "spec0001-network-reconnect",
+      "obligationKey": "spec0001-retryable-network-server-reconnect",
+      "classification": "normative-positive",
+      "citations": [
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/summary",
+          "valueSha256": "81d0775aaf498320b85b56143f8f91ecddd1c8abb729242f4203626f7306068d",
+          "role": "Linux operator and physical-or-virtual desired interaction summary"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/scope",
+          "valueSha256": "8d51668f91ef3cd4af2699657ef72fe65b58ad3fef28f2cad933643a7383ee05",
+          "role": "Linux module scope without host lifecycle ownership"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/actors/0/id",
+          "valueSha256": "b1d815013e078263c00a2afaaf5e1b0ecbea159daf8d10337145dffc2d4f6346",
+          "role": "explicit linux-operator identity"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/actor",
+          "valueSha256": "b1d815013e078263c00a2afaaf5e1b0ecbea159daf8d10337145dffc2d4f6346",
+          "role": "user-story binding to the linux-operator"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/preconditions/2",
+          "valueSha256": "05a02b796ba5e0e20fc3145e2134a9f9112e6327fdfa18a98dbb2be89c265406",
+          "role": "Linux production-host reachability precondition"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/acceptanceCriteria/1/then",
+          "valueSha256": "3c533151251ffdc8f27fec1195c97059155ddb49184a2f5ef0b8c93241ac60dc",
+          "role": "authorized module-command outcome without physical key causality"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/workflows/0/steps/7",
+          "valueSha256": "186f8e16d5f92801070ad76b94157c21b2e19b7431ce6dbaeb9f992063bc6f47",
+          "role": "command send step without a physical recovery trigger"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/requirements/9/statement",
+          "valueSha256": "be12266edf9fddac3530e85d48e8723309f9ac528b4e8d22e3588958bbeed132",
+          "role": "retryable network and server reconnect obligation"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/acceptanceCriteria/3/given",
+          "valueSha256": "506332bc4fb7ebf4d14d3b95d453c1af2bd8b54dd3a792dc6ce1247137c76f11",
+          "role": "retryable disconnect acceptance trigger"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/acceptanceCriteria/3/then",
+          "valueSha256": "238942debec510aa19ca6d7649383b39ebcbc7a5df9665eb292f6c2849a8ac5e",
+          "role": "retryable reconnect acceptance outcome"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/outOfScope/3",
+          "valueSha256": "d03d51d8f4e0eedf294429776ffc22f2e8dc753f6715886f7007c2490d3d85dd",
+          "role": "explicit USB and physical discovery exclusion"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/outOfScope/4",
+          "valueSha256": "95ffffab310575981c3636673f968af9c12b253b43808a9c57cd4a97af4563da",
+          "role": "explicit physical key-press exclusion"
+        }
+      ],
+      "predicates": {
+        "effectiveAcceptedNormativeAuthority": true,
+        "spec0001LinuxRoleBinding": true,
+        "physicalStreamDeckMk2Scope": false,
+        "postLoginDisconnectOrReenumerationTrigger": false,
+        "automaticRecoveryObligation": true,
+        "physicalCommandDeliveryRestored": false,
+        "observableRecoveryDeadline": false
+      },
+      "explicitLinkClosure": true,
+      "exclusionOrContradiction": true,
+      "rationale": "This is a current reconnect obligation, but its explicit domain is retryable network and server failure. It names neither MK.2 nor post-login USB re-enumeration, supplies no physical command-delivery receipt, gives no finite end-to-end maximum, and explicitly excludes the physical surfaces required by H-049."
+    },
+    {
+      "id": "adr0006-bounded-surface-thread-mechanism",
+      "obligationKey": "adr0006-h042-bounded-mechanism-and-future-preconditions",
+      "classification": "future-precondition",
+      "citations": [
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/context",
+          "valueSha256": "f9eff612bdb2b5694f3e88b2c6ed65723f518780581aea1b5873e2c7767ff0f2",
+          "role": "historical MK.2 re-enumeration trigger, measurements, and human evidence acceptance"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/decision",
+          "valueSha256": "9dbf608c2e7a43019f8d17eaf38806d799522732da57ae4c52a073f94cc902a5",
+          "role": "bounded observed mechanism and explicit non-policy boundary"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/consequences/1",
+          "valueSha256": "b6a08060336951eb73d669114bb5807028e3deca6215786dbce998e5de1b7b2e",
+          "role": "no production controller or trigger selected"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/consequences/2",
+          "valueSha256": "bd20a5207ca6fd593253c2ac9612ba50c39b443d9524c22057a035f97e02f226",
+          "role": "acceptable downtime and recovery safety remain future proposal obligations"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/consequences/3",
+          "valueSha256": "6e959e9c1fc586a08d8367fe2895d569ac15744c99010d28eef11c8237d2d008",
+          "role": "physical button-command delivery requires separate evidence"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/consequences/4",
+          "valueSha256": "b5dcbd13bbc5e55049ae2f8bd56d3c015e14583dff29df8f0638e8ebd1222f76",
+          "role": "mechanism evidence cannot satisfy or expand specifications"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/policies/0/statement",
+          "valueSha256": "fdbe761c4bdb49a69912b8e4fd01f3942abdd44ea5f7898430584e794f40028d",
+          "role": "exact historical mechanism boundary"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/policies/1/statement",
+          "valueSha256": "fdd8afedae499e3e3e8fb1724d303565fa3c85e3a9309aceb53442431214e8cf",
+          "role": "experimental signal is not production policy"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/policies/2/statement",
+          "valueSha256": "df58549b82f317bf11efa9e10cd7f1a7856d62b44f4d55f89f45d02c15500cc5",
+          "role": "hardware mechanism does not establish physical delivery or expand specifications"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/policies/3/statement",
+          "valueSha256": "bc93eecb0f3a03cb744a3dd3a96dda4fe66af841e5591698244a03de9fa96efd",
+          "role": "future recovery proposal requires a successor Slice"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/plan.json",
+          "pointer": "/rules/23/statement",
+          "valueSha256": "fdd8afedae499e3e3e8fb1724d303565fa3c85e3a9309aceb53442431214e8cf",
+          "role": "compiled non-policy rule"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/plan.json",
+          "pointer": "/rules/32/statement",
+          "valueSha256": "df58549b82f317bf11efa9e10cd7f1a7856d62b44f4d55f89f45d02c15500cc5",
+          "role": "compiled non-expansion rule"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/plan.json",
+          "pointer": "/rules/34/statement",
+          "valueSha256": "bc93eecb0f3a03cb744a3dd3a96dda4fe66af841e5591698244a03de9fa96efd",
+          "role": "compiled future-Slice precondition"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/plan.json",
+          "pointer": "/rules/36/statement",
+          "valueSha256": "fdbe761c4bdb49a69912b8e4fd01f3942abdd44ea5f7898430584e794f40028d",
+          "role": "compiled exact mechanism boundary"
+        }
+      ],
+      "predicates": {
+        "effectiveAcceptedNormativeAuthority": true,
+        "spec0001LinuxRoleBinding": false,
+        "physicalStreamDeckMk2Scope": true,
+        "postLoginDisconnectOrReenumerationTrigger": true,
+        "automaticRecoveryObligation": false,
+        "physicalCommandDeliveryRestored": false,
+        "observableRecoveryDeadline": false
+      },
+      "explicitLinkClosure": true,
+      "exclusionOrContradiction": true,
+      "rationale": "ADR-0006 normatively preserves a bounded historical mechanism and future investigation preconditions. It expressly denies a production trigger or complete recovery policy, leaves physical button-command delivery and acceptable downtime unproven, and prevents using H-042 to expand SPEC-0001 or SPEC-0002."
+    },
+    {
+      "id": "spec0002-virtual-action-deadline",
+      "obligationKey": "spec0002-virtual-invocation-to-visible-authoritative-state",
+      "classification": "normative-positive",
+      "citations": [
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0005.json",
+          "pointer": "/decision",
+          "valueSha256": "7f73d5e823b1799d809a4f7faf84a38a25f4b495fb23f5ba4a2a0f2c3ebec39f",
+          "role": "complete three-second virtual-action timing domain and physical-scope exclusion"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0005.json",
+          "pointer": "/policies/3/statement",
+          "valueSha256": "d0e416f333aaf03dab1c1571bc71e8bfc1c18add949dfc390b7968edd1b85da4",
+          "role": "three-second virtual action projection rule"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0005.json",
+          "pointer": "/policies/7/statement",
+          "valueSha256": "d65ec19069e8736476d3cc6f909937b55176ad2038088b0554abbf03e9d3de85",
+          "role": "emulator evidence physical-scope exclusion"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0005.json",
+          "pointer": "/consequences/6",
+          "valueSha256": "3e7b5fe6a4f6fcb0da3a495960f70459a37ee95758888948f261183e77d88e3f",
+          "role": "physical expansion requires a new governed question and Slice"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0002.json",
+          "pointer": "/requirements/4/statement",
+          "valueSha256": "40ae20dfbf6d94476eaffb603dffb1f83ebcabd17f702febf121a47a7e97ba02",
+          "role": "virtual invocation to authoritative UI-state deadline"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0002.json",
+          "pointer": "/userStories/0/acceptanceCriteria/3/when",
+          "valueSha256": "d91560daa13edb4bed8dc3919e823fca8f776ba557e0964f4ceeb1fb75f5b353",
+          "role": "three-second virtual projection timing condition"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0002.json",
+          "pointer": "/userStories/0/acceptanceCriteria/3/then",
+          "valueSha256": "c9560e989254283053bb4b1a073ba1aab7dec723426694ad08cd3581404c6ee9",
+          "role": "virtual projection measurement outcome, not restored physical delivery"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0002.json",
+          "pointer": "/outOfScope/0",
+          "valueSha256": "303bb16a70b39ef8ee68ac7cc0751ff0b1235f49caab661ec89e955606f919a9",
+          "role": "USB, physical discovery, and key-press exclusion"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/plan.json",
+          "pointer": "/rules/31/statement",
+          "valueSha256": "d0e416f333aaf03dab1c1571bc71e8bfc1c18add949dfc390b7968edd1b85da4",
+          "role": "compiled three-second virtual action rule"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/plan.json",
+          "pointer": "/rules/19/statement",
+          "valueSha256": "d65ec19069e8736476d3cc6f909937b55176ad2038088b0554abbf03e9d3de85",
+          "role": "compiled emulator physical-scope exclusion"
+        }
+      ],
+      "predicates": {
+        "effectiveAcceptedNormativeAuthority": true,
+        "spec0001LinuxRoleBinding": false,
+        "physicalStreamDeckMk2Scope": false,
+        "postLoginDisconnectOrReenumerationTrigger": false,
+        "automaticRecoveryObligation": false,
+        "physicalCommandDeliveryRestored": false,
+        "observableRecoveryDeadline": false
+      },
+      "explicitLinkClosure": true,
+      "exclusionOrContradiction": true,
+      "rationale": "The three-second maximum is normative only for virtual action invocation to visible authoritative server state in Companion. Its start, end, actor, surface, and failure mode differ from H-049, and the same law excludes USB and physical Stream Deck behavior."
+    },
+    {
+      "id": "spec0001-button-command-surface",
+      "obligationKey": "spec0001-operator-button-to-authorized-command",
+      "classification": "normative-positive",
+      "citations": [
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/summary",
+          "valueSha256": "81d0775aaf498320b85b56143f8f91ecddd1c8abb729242f4203626f7306068d",
+          "role": "Linux operator and generic physical-or-virtual button signal"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/actors/0/id",
+          "valueSha256": "b1d815013e078263c00a2afaaf5e1b0ecbea159daf8d10337145dffc2d4f6346",
+          "role": "exact linux-operator interaction actor"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/need",
+          "valueSha256": "f5dbec83e8526ed8b8e45f54e5035226810df1dd3be2e193376bfe6ccb9d2136",
+          "role": "generic Companion-button visibility need"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/requirements/1/statement",
+          "valueSha256": "5a4449af092af37e936cd636d5a8cf0837bbf69d456c9a554602862f0dd8c3e3",
+          "role": "stable admitted visibility-action surface"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/requirements/7/statement",
+          "valueSha256": "3e8ababaa0757e8190849d291bd1d23956cc2cd17732b950b23455df70731487",
+          "role": "authorized command construction and evidence boundary"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/acceptanceCriteria/1/given",
+          "valueSha256": "cebf724cbe6d62ed85e30f6a7ab80efb4bc2fe72f560851f6139abe783f9ec7c",
+          "role": "available-action precondition"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/acceptanceCriteria/1/when",
+          "valueSha256": "10fa80afa5c0f5758735f296b034166e671701be60ba10f35e28c3880281e742",
+          "role": "operator visibility-action invocation"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/acceptanceCriteria/1/then",
+          "valueSha256": "3c533151251ffdc8f27fec1195c97059155ddb49184a2f5ef0b8c93241ac60dc",
+          "role": "one authorized module command, not recovered physical delivery"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/workflows/0/steps/7",
+          "valueSha256": "186f8e16d5f92801070ad76b94157c21b2e19b7431ce6dbaeb9f992063bc6f47",
+          "role": "ordinary module command-send step"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/outOfScope/3",
+          "valueSha256": "d03d51d8f4e0eedf294429776ffc22f2e8dc753f6715886f7007c2490d3d85dd",
+          "role": "explicit USB and physical discovery exclusion"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/outOfScope/4",
+          "valueSha256": "95ffffab310575981c3636673f968af9c12b253b43808a9c57cd4a97af4563da",
+          "role": "explicit physical key-press exclusion"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0003.json",
+          "pointer": "/decision",
+          "valueSha256": "55d6321cfbaa150d0a53568ce9c299b43340d9e1a1bceb77cf6fb1bc63330f1d",
+          "role": "accepted Linux adapter boundary and explicit USB and physical-hardware non-claim"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0003.json",
+          "pointer": "/policies/7/statement",
+          "valueSha256": "3e031cfa09cc394c164d69e3f721381d1e948fd9a64a6ceff6e682af81203277",
+          "role": "build, host, and CI evidence cannot establish physical hardware behavior"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/plan.json",
+          "pointer": "/rules/10/statement",
+          "valueSha256": "3e031cfa09cc394c164d69e3f721381d1e948fd9a64a6ceff6e682af81203277",
+          "role": "compiled physical-hardware claim exclusion"
+        }
+      ],
+      "predicates": {
+        "effectiveAcceptedNormativeAuthority": true,
+        "spec0001LinuxRoleBinding": true,
+        "physicalStreamDeckMk2Scope": false,
+        "postLoginDisconnectOrReenumerationTrigger": false,
+        "automaticRecoveryObligation": false,
+        "physicalCommandDeliveryRestored": false,
+        "observableRecoveryDeadline": false
+      },
+      "explicitLinkClosure": true,
+      "exclusionOrContradiction": true,
+      "rationale": "SPEC-0001 explicitly links its Linux operator and an ordinary generic button/action surface to one authorized module command. It does not identify the same physical MK.2, a post-login USB trigger, automatic physical recovery, restored physical-key causality after recovery, or a recovery deadline; SPEC-0001 and ADR-0003 expressly exclude the required physical claims."
+    },
+    {
+      "id": "strongest-cross-domain-composite",
+      "obligationKey": "invalid-spec0001-adr0006-spec0002-cartesian-stitch",
+      "classification": "cross-domain-composite",
+      "citations": [
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/summary",
+          "valueSha256": "81d0775aaf498320b85b56143f8f91ecddd1c8abb729242f4203626f7306068d",
+          "role": "Linux and physical-or-virtual interaction signal"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/userStories/0/acceptanceCriteria/1/then",
+          "valueSha256": "3c533151251ffdc8f27fec1195c97059155ddb49184a2f5ef0b8c93241ac60dc",
+          "role": "authorized module-command signal without physical key causality"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/workflows/0/steps/7",
+          "valueSha256": "186f8e16d5f92801070ad76b94157c21b2e19b7431ce6dbaeb9f992063bc6f47",
+          "role": "command-send signal without physical recovery semantics"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/requirements/9/statement",
+          "valueSha256": "be12266edf9fddac3530e85d48e8723309f9ac528b4e8d22e3588958bbeed132",
+          "role": "automatic network reconnect signal"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/outOfScope/3",
+          "valueSha256": "d03d51d8f4e0eedf294429776ffc22f2e8dc753f6715886f7007c2490d3d85dd",
+          "role": "SPEC-0001 physical USB exclusion"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0003.json",
+          "pointer": "/decision",
+          "valueSha256": "55d6321cfbaa150d0a53568ce9c299b43340d9e1a1bceb77cf6fb1bc63330f1d",
+          "role": "cross-domain physical-hardware exclusion"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0005.json",
+          "pointer": "/decision",
+          "valueSha256": "7f73d5e823b1799d809a4f7faf84a38a25f4b495fb23f5ba4a2a0f2c3ebec39f",
+          "role": "wrong timer causal anchors and physical-scope exclusion"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/context",
+          "valueSha256": "f9eff612bdb2b5694f3e88b2c6ed65723f518780581aea1b5873e2c7767ff0f2",
+          "role": "historical physical trigger and observed timings only"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/consequences/2",
+          "valueSha256": "bd20a5207ca6fd593253c2ac9612ba50c39b443d9524c22057a035f97e02f226",
+          "role": "acceptable downtime remains a future proposal precondition"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/decision",
+          "valueSha256": "9dbf608c2e7a43019f8d17eaf38806d799522732da57ae4c52a073f94cc902a5",
+          "role": "physical MK.2 trigger and explicit non-policy boundary"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/policies/2/statement",
+          "valueSha256": "df58549b82f317bf11efa9e10cd7f1a7856d62b44f4d55f89f45d02c15500cc5",
+          "role": "cross-specification expansion prohibition"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0002.json",
+          "pointer": "/requirements/4/statement",
+          "valueSha256": "40ae20dfbf6d94476eaffb603dffb1f83ebcabd17f702febf121a47a7e97ba02",
+          "role": "unrelated virtual-action timer signal"
+        },
+        {
+          "sourcePath": ".overlaykit/governance/specifications/SPEC-0002.json",
+          "pointer": "/outOfScope/0",
+          "valueSha256": "303bb16a70b39ef8ee68ac7cc0751ff0b1235f49caab661ec89e955606f919a9",
+          "role": "SPEC-0002 physical USB exclusion"
+        }
+      ],
+      "predicates": {
+        "effectiveAcceptedNormativeAuthority": true,
+        "spec0001LinuxRoleBinding": true,
+        "physicalStreamDeckMk2Scope": true,
+        "postLoginDisconnectOrReenumerationTrigger": true,
+        "automaticRecoveryObligation": true,
+        "physicalCommandDeliveryRestored": false,
+        "observableRecoveryDeadline": false
+      },
+      "explicitLinkClosure": false,
+      "exclusionOrContradiction": true,
+      "rationale": "This is the strongest possible lexical composition, but it joins four different obligation domains without a normative edge. Physical command delivery is expressly unproven, the three-second timer has the wrong causal anchors, and accepted exclusions plus ADR-0006's non-expansion rule contradict the stitch."
+    }
+  ],
+  "authority": "none",
+  "action": null
+}

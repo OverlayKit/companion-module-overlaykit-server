@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0027",
+  "title": "Record bounded H-049 accepted-law refutation in a local successor",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root produced the H-049 post-review closure under the human principal @rodrigoteamx; the principal accepted the exact semantic review, and the later contextual reply authorizes only local successor materialization and local verification gates.",
+      "evidence": "Canonical human-motion SHA-256 e04c6641f59b16d6926a5695adc691efbfd392d3361f8160d4b7036d9c881e10; exact UTF-8 reply adelante without LF SHA-256 d0355cec890057025372102f42d49459abbe102c85a151023a58e267b0549d40; human-acceptance record SHA-256 368d86ec0cd36de5ae2a774d812f8daa12407b498fd56b95e47509777d621de6; repository AGENTS.md and ADR-0001 delegated-agent boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0026 remains proposed and byte-identical, and its exact thirteen-source pre-review harness closure is preserved inside a distinct local content-addressed unsigned anchor captured before CHG-0027 existed.",
+      "evidence": "CHG-0026 raw SHA-256 d336eadf0b99292e57745d6b58b61f9eab7b4074b7e3452758652c478eff6ebc; pre-review manifest raw SHA-256 f11ff1b0a2414acdf15a8814157e5a6de8b202e3b6d5653ca3e06a73753e218b; source-set SHA-256 2870263697a59dff253a578ec62cff5a72c5a4610eb21d8ff137e4b8c6e881b1; local source-anchor record SHA-256 7fc72bcf2b3f9b446820055e9c580a79f9ec836d6e226550c410f0dd548b1069; explicit admission local-content-addressed-unsigned, signature absent-not-authorized, signed commit null, and durabilityClaimed false.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Both canonical-v2 H-049 evidence copies remain byte-identical and independently verified at semantic evidence SHA-256 a49c84d01f17a85691de9d7989fcddfd94aef81283d992e93ce4acd7f7a912c3.",
+      "evidence": "Each copy has candidate-index SHA-256 7c4e41bf052fc0f87fc3d1cd5370c3be6390fafac67ffbdd422881b3b88f1ad7, clause-universe SHA-256 637671ba036157351305e3bf023645bcebb9f8ab0ec19d37e4988799754e7c79, harness-source-map SHA-256 e7a059f8a0855a822e7294ed6fb549b3e3eee9b67d60f1ec1f6cc0c6752bd708, run SHA-256 31420930f9370faf1b4e8e9d5f15b40cb2e70c5d1ec771da2872adafda05b6ec, source-map SHA-256 ef5ee45d5137f71364be01bf849c5771b292d20195e22e9cfd3d0a4fcf45f7c9, and verification SHA-256 f14c5144542464917b240c2880fb3a1d12514dbb79243d83b7b9531385001ab2; all six file pairs are byte-equal.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immutable mechanical evidence still reports inconclusive at semantic-review, while the source review map remains agent-proposed with humanAcceptanceRef null; neither record is rewritten as refuted after human review.",
+      "evidence": "Review-map raw SHA-256 6b07f91932451ceacc9a28d28116404328f0fb4143160ff58a73c8dbf50d9782, canonical JSON SHA-256 6e4c69836c57de051cd92826b5ac9103b7a9eeef2f1b0fb072f5df8f9c8db928, canonical run and verification outcome inconclusive/semantic-review/human-review-pending-or-semantic-coverage-incomplete, nine pending judgments, and post-review closure fields reviewMap.mutatedAfterReview false and mechanicalEvidence.mutatedAfterReview false.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal accepted the exact H-049 map, all five classifications, all sixty-three citations, all nine semantic judgments as resolved according to that map, and the complete no-additional-eligible-chain default over the 901-clause universe.",
+      "evidence": "Canonical human motion and exact review hashes; human-acceptance record SHA-256 368d86ec0cd36de5ae2a774d812f8daa12407b498fd56b95e47509777d621de6; post-review assessment SHA-256 4e21036bb1a45446a47f4b33850b29044806b146dff9cff3ee8603a36bce9b41; acceptedCandidateCount 5, acceptedCitationCount 63, closedJudgmentCount 9, remainingJudgmentCount 0, and acceptedDefaultDisposition no-additional-eligible-chain.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Applying only the exact accepted human review to the complete immutable mechanical inventory leaves zero eligible seven-predicate chains and therefore refutes H-049 exclusively inside the exact nominated accepted-law boundary.",
+      "evidence": "Mechanical coverage complete over nine sources and 901 clauses; exact accepted five-candidate and sixty-three-citation review; zero remaining judgments; zero eligible chains; post-review assessment SHA-256 4e21036bb1a45446a47f4b33850b29044806b146dff9cff3ee8603a36bce9b41; post-review status refuted at closed-accepted-law-boundary for complete-zero-chain-coverage.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "A deterministic restricted local closure preserves both canonical evidence copies, the exact thirteen pre-review sources, replay sources, local unsigned anchor, human acceptance, post-review assessment, and payload manifest without a self-hash cycle.",
+      "evidence": "Thirty-one-member POSIX ustar SHA-256 de7cdd19172370522811436389cf43622b539515336bfd32ddf79f70fdcf8107, 911872 bytes, mode 0600, link count one, byte-identical double build; manifest SHA-256 e3644bd4011d6c8fc600dfd0d0e1153f67aec5ac4fbe27fc4bb93627de511d09; external closure SHA-256 a977da735151247caa87dde36fbf694d52c943b00a33771f65dd2fca76d277a1; raw directory mode 0700; receipt evidence/h049/a49c84d01f17a85691de9d7989fcddfd94aef81283d992e93ce4acd7f7a912c3/README.md SHA-256 8cfdb84f55cd8caf1c015b965ee1530700e2fda5e4c066ff113b08fbe97a422b.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The closure verifier fails closed on source drift, premature CHG-0027 presence, unsafe output paths, symlinks, hardlinks, widened modes, path traversal, non-canonical paths, semantic overclaims, unmanifested members, archive mutations, and any metadata, manifest, archive, or closure envelope mismatch.",
+      "evidence": "Post-review source SHA-256 59bd1bf1912f6079c8cbef8954acbb00d233cdff52e7e9608bce4074ba8a2454 and test SHA-256 bf30dcca100eb6bb8880c0cec6b7a502d63bd322cf6c05f4d5c01f3be9085698; exact six-file external roster; manifest-to-archive cardinality and bijection; byte-exact deterministic ustar reconstruction; full temporary reconstruction of all five content envelopes; eleven of eleven post-review tests and fifty-four of fifty-four focused H-049 tests passing under Node 22.21.1 at the frozen pre-successor source boundary; exact closure verification passing after CHG-0027 exists.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "H-049 activates no ADR candidate and changes no accepted ADR, accepted specification, profile, compiled plan, product code, product configuration, recovery obligation, trigger, controller, deadline, deployment identity, or production policy.",
+      "evidence": "Post-review ADR assessment no-decision-candidate-activated with futureSuccessorSpecificationAuthorized false, authority none, and action null; accepted ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002 remain unchanged; compiled plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4; scoped repository diff.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The local content-addressed closure is sufficient for the currently authorized administrative materialization, while authenticity across machines, independent timestamping, and durable recovery require a later separately authorized signed Git transition.",
+      "evidence": "All closure bytes are locally hash-bound, reconstructed, mode-restricted, ignored, and non-authorizing; source admission explicitly states local-content-addressed-unsigned, signature absent-not-authorized, signed commit null, and durabilityClaimed false.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-049 does not establish whether an external policy or future product intention requires bounded automatic physical MK.2 recovery.",
+      "evidence": "The exact boundary contains only plan.json, ADR-0001 through ADR-0006, and SPEC-0001 through SPEC-0002 at subject 226d299a9b0d8acd592675f514a67d6229d0134a.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "H-049 does not establish live host state, USB or hidraw behavior, recovery safety, implementation, compliance, drift, cause, physical command delivery, or any remedy.",
+      "evidence": "The experiment and post-review closure use no live, host, USB, hidraw, Docker, signal, configuration, controller, installation, or production capability; explicit accepted claim boundary and authority none/action null.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the principal wants a successor product specification for physical MK.2 recovery remains a separate undecided question.",
+      "evidence": "The refutation selects no product obligation or architecture; the acceptance explicitly activates no ADR and does not authorize a specification; post-review assessment futureDecisionAuthorized false.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Signed Git provenance, commit, push, merge, remote durability, publication, and any operational action remain unauthorized and unproven.",
+      "evidence": "Exact human acceptance withholding, contextual successor-transition boundary, local unsigned source anchor, ignored raw artifacts, uncommitted receipt, authority none, and action null.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0026, its exact pre-review manifest, review map, thirteen-source harness closure, and both canonical-v2 evidence copies remain recoverable byte-for-byte at their correct temporal boundary.",
+      "verification": "Recompute CHG-0026 SHA-256 d336eadf0b99292e57745d6b58b61f9eab7b4074b7e3452758652c478eff6ebc, pre-review manifest SHA-256 f11ff1b0a2414acdf15a8814157e5a6de8b202e3b6d5653ca3e06a73753e218b, source-set SHA-256 2870263697a59dff253a578ec62cff5a72c5a4610eb21d8ff137e4b8c6e881b1, both review-map hashes, and all twelve canonical artifact hashes from the local closure."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The source anchor remains explicitly local and unsigned and never claims a signed commit, independent timestamp, remote durability, or publication.",
+      "verification": "Reconstruct source-anchor record SHA-256 7fc72bcf2b3f9b446820055e9c580a79f9ec836d6e226550c410f0dd548b1069 and inspect admission, signatureStatus, signedCommit, durabilityClaimed, provenanceLimit, authority, and action."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The post-review refutation derives only from the distinct exact human acceptance and never mutates or reinterprets the immutable inconclusive mechanical run or pending review map.",
+      "verification": "Recompute canonical motion, transition reply, human-acceptance, review-map, and post-review-assessment hashes; inspect nine closed and zero remaining judgments, five candidates, sixty-three citations, default disposition, temporal outcomes, mutated false fields, authority none, and action null."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The deterministic restricted closure has an exact external roster, exact manifest-to-archive bijection, exact normalized ustar reconstruction, and exact reconstructed content envelopes with no self-hash cycle or disclosure expansion.",
+      "verification": "Run node lab/h049/post-review.mjs verify; require archive SHA-256 de7cdd19172370522811436389cf43622b539515336bfd32ddf79f70fdcf8107, manifest SHA-256 e3644bd4011d6c8fc600dfd0d0e1153f67aec5ac4fbe27fc4bb93627de511d09, closure SHA-256 a977da735151247caa87dde36fbf694d52c943b00a33771f65dd2fca76d277a1, thirty-one members, directory mode 0700, file mode 0600, link count one, and zero nominated disclosure signatures."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The accepted post-review result is refuted only inside the exact nominated accepted-law boundary, with zero complete seven-predicate chains, authority none, and action null.",
+      "verification": "Inspect the human acceptance, post-review assessment, closure, receipt, and this successor against subject commit 226d299a9b0d8acd592675f514a67d6229d0134a and source-set SHA-256 3136aa776e1d15dcc2f3fc3597a6e7011f2b9601492936c5e1da65920a67e218."
+    },
+    {
+      "id": "SC-006",
+      "statement": "No ADR candidate, successor specification, product source, product configuration, profile, compiled plan rule, host mutation, or production policy is introduced.",
+      "verification": "Scoped repository diff, accepted-record hash comparison, plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, post-review ADR assessment, authority none, and action null."
+    },
+    {
+      "id": "SC-007",
+      "statement": "All temporal H-049 source tests, hostile post-review tests, closure verification, governance, quality, build, formatting, and repository-integrity gates pass under Node 22.21.1 at their correct source boundaries.",
+      "verification": "Fifty-four of fifty-four focused H-049 tests, including eleven post-review tests, reconstructed from the frozen pre-successor archive where CHG-0027 is absent; exact closure verification in the successor tree where rebuilding is intentionally rejected; npm run governance:verify; npm run governance:check; npm_config_offline=true npm run check; npm run build; scoped Prettier; git diff --check."
+    },
+    {
+      "id": "SC-008",
+      "statement": "CHG-0027, its receipt, and all raw closure bytes remain local and uncommitted, with no push, merge, publication, or remote mutation.",
+      "verification": "Git status, branch and remote inspection, artifacts ignore proof, receipt wording, absence of a successor commit, and exact contextual authority boundary."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0027 records the exact human acceptance, contextual local transition, immutable pre-review evidence, separate post-review refutation, typed claims, exclusions, provenance limits, and authority boundary.",
+      "evidence": "Canonical human motion, reply, acceptance, assessment, closure, receipt, and this implemented local successor."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "CHG-0026, review-map.json, both canonical-v2 copies, all accepted ADRs and specifications, profile, plan, product source, and product configuration remain unchanged at their applicable temporal boundaries.",
+      "evidence": "Exact local source anchor, canonical evidence identities, accepted-record hashes, plan hash, and scoped repository diff."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The human-accepted H-049 adjudication is refuted only inside the exact nominated accepted-law boundary and makes no claim about external policy, future intent, live state, safety, implementation, compliance, drift, cause, or remedy.",
+      "evidence": "Human-acceptance claim boundary, post-review assessment, closure, receipt, successor unknowns, authority none, and action null."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The local unsigned source anchor and deterministic closure preserve exact bytes without claiming a signed Git identity, durable remote recovery, publication, or independent timestamp.",
+      "evidence": "Source-anchor, manifest, archive, closure, receipt, local modes, ignored raw boundary, admission local-content-addressed-unsigned, and signature absent-not-authorized."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "The post-review verifier reconstructs and compares every content envelope and fails closed against the governed hostile matrix.",
+      "evidence": "Source and test hashes, exact external roster, archive-manifest bijection, byte-exact ustar rebuild, full temporary reconstruction, eleven post-review tests, red-team replay, and closure verification receipt."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "The ADR assessment remains no-decision-candidate-activated and no future specification or product architecture is authorized.",
+      "evidence": "Post-review assessment, closure, receipt, governance diff, futureDecisionAuthorized false, authority none, and action null."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "All required temporal source, post-review, closure, governance, quality, build, formatting, and repository-integrity gates pass.",
+      "evidence": "Final local gate outputs under Node 22.21.1 at their correct pre-review and successor boundaries."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "No commit, push, merge, publication, ADR, SPEC, production policy, live observation, or host or product mutation follows from this local closure.",
+      "evidence": "Exact human withholding, contextual transition, Git and remote state, ignored raw artifacts, uncommitted receipt, authority none, and action null."
+    }
+  ]
+}
