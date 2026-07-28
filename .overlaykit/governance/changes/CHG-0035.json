@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0035",
+  "title": "Inventory H-054 executable-boundary candidates offline",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the local H-054 evidence-producing agent under the human principal @rodrigoteamx; delegated agents may inspect or implement bounded apparatus but cannot approve H-054, select a runtime, create an ADR or specification, execute H-053 or H-055, or grant any later transition.",
+      "evidence": "Repository AGENTS.md, accepted ADR-0001, and compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immutable tracked H-054 anchor is protected-main merge commit 161554b968b6dc38fb1cc055c829b414ba5b85ae with tree d8087b92796a8be07ee5779a5847e0e3859930a0, and its local predecessor anchor is the byte-exact H-053 post-review closure whose raw SHA-256 is e84b9faeb4858549eec513c3a08f19da566987665f4c79a448102dbc957b4911.",
+      "evidence": "Local Git object inspection of main and origin/main plus artifacts/h053/post-review-closures/5a55fc6ec2dff653858d4c8a70a22d3085400b423b8c93e265f14774078bf14f/closure.json.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The H-053 closure truthfully records successor.authorized false, chg0035Created false, and h054Opened false at its earlier temporal boundary; the later exact human grant opens CHG-0035 and H-054 prospectively without editing, deleting, or retroactively reinterpreting that closure.",
+      "evidence": "H-053 closure raw SHA-256 e84b9faeb4858549eec513c3a08f19da566987665f4c79a448102dbc957b4911 at /successor and /temporalBoundary, followed by the model-visible H-054 authorization anchored to main 161554b968b6dc38fb1cc055c829b414ba5b85ae, tree d8087b92796a8be07ee5779a5847e0e3859930a0, and that exact closure; inaccessible transport-byte identity is not claimed.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Human review accepted H-053 as inconclusive only inside its nominated d257 source boundary because tools/governance/src/errors.ts executed outside that boundary; its twelve of thirteen passing predicates and four of four passing controls remain observations and inferences rather than support or refutation.",
+      "evidence": "Canonical H-053 run raw SHA-256 5a55fc6ec2dff653858d4c8a70a22d3085400b423b8c93e265f14774078bf14f, semantic SHA-256 0e979b5191acbf68a865d6f9c651d8683e93fbcc26cfd44bbf06ad363a3b29d4, post-review assessment raw SHA-256 1d36e522a2cbbf3bebe420df413eea349c7ec661e2fc10f0ab99fa16174fd307, and closure e84b9faeb4858549eec513c3a08f19da566987665f4c79a448102dbc957b4911.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "At the H-054 tracked anchor, CHG-0033, CHG-0034, manifest.json, and plan.json have raw SHA-256 values 7179de3ae940a9b959d441f42d04ece4158746f23362743dbe625dd9bbd92cc4, 162074e3c306b77abe7dc1787d329d999d9955defbc94346a0def68392036458, 69781c1d92fa9fc689270f42a837789dd14daaee4b16d2c813be99fbb579754d, and 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243 respectively; the manifest contentHash is 22cd29f52d7e43d25049873e808c0112803c4e17d6033d82127c3b032267a42a and the planHash is bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4.",
+      "evidence": "Independent SHA-256 calculation, deterministic governance verification, and exact Git blobs at main 161554b968b6dc38fb1cc055c829b414ba5b85ae.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The H-053 post-review source anchor identifies tools/governance/src/errors.ts at raw SHA-256 23f0c8e843f655a61dae807709c75670a42ef4b851beb0d8cacd584d0e0578b4 as an executed but unadmitted first-party source, records environmentClosed false, and content-addresses only the Ajv and tsx package manifests rather than their complete package trees, transitives, native loader binary, Node executable, dynamic libraries, process selectors, or syscall behavior.",
+      "evidence": "H-053 source-anchor raw SHA-256 90102d826050381a29e74a15d61627134aba936f460bb095ce3293d0faf78a30, execution bindings SHA-256 bb699e42bcdd5c29cd2cde50bf2c19ce312253ca8b689e32871bfde3446d6bf2, and post-review remainingUnknowns.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The historical H-053 run reports Node v24.16.0 while package.json declares the supported engine as ^22.20 and the available /usr/bin/node reports v22.22.2; current read-only seed receipts give Node 24 executable SHA-256 b2959781cc5a74c357ffa02367efa8a0330cbb1c9cb347732fdfaaaca381cbcd and Node 22 executable SHA-256 1a1ebcd93dc90cf3e3dc37493e8efc04a1f60bddada1402453094214af03e33d, but H-054 selects neither candidate.",
+      "evidence": "Canonical H-053 environment receipt; package.json raw SHA-256 b2abc860816de570d3dc9c71e2aaa7c29bd1cbfde76a9e8f080012456872de35; read-only version, readlink, stat, and SHA-256 observations of /home/rod/.local/share/nodejs/node-v24.16.0-linux-x64/bin/node, /usr/bin/node, and /usr/bin/node-22.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The smallest successor Slice is a layer-qualified inventory that treats historical Node 24 replay and repository-supported Node 22 execution as separate unselected candidates; immediately rerunning H-053 or H-055 would conflate source-boundary repair with runtime drift and could not establish which input caused any changed result.",
+      "evidence": "H-053's accepted exclusive source-boundary classification, environmentClosed false, the exact runtime-version divergence, ADR-0005 runtime-identity rule, and the human prohibition on executing H-053 or H-055 in H-054.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-054: within the exact tracked and local predecessor anchors, an exclusively offline and read-only inventory can enumerate and content-address every semantically relevant userspace input needed to nominate a later hermetic successor, while preserving Node 22 and Node 24 as separate candidate layers and assigning an explicit classification to every opaque or irrecoverable input.",
+      "evidence": "This is the falsifiable H-054 inventory claim authorized by the human principal; no inventory result or runtime selection is presumed.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The finite H-054 inventory layers are anchors and predecessor records; H-053 apparatus, guarded surface, static first-party imports, and errors.ts; package manifests, a manifest-declared and lock-bound installed dependency graph, complete reachable package trees and transitives, declared export values with per-import and conditional export resolution explicitly classified as not enumerated, symlink chains, tsx, esbuild, its platform-native binary, and Ajv; separate Node 22 and Node 24 executables, build identities, loaders, and dynamic libraries; Git executable, libraries, configuration, refs, object-store indirections, and invoked arguments; and process cwd, argv, execArgv, environment allowlist, locale, timezone, umask, temporary paths, and cache selectors.",
+      "evidence": "Human-authorized layer roster, H-053 apparatus and source anchor, package-lock raw SHA-256 9f948eeea2c4c42507ba2d67d59c070bd2cd70d0e9340529d84a7fed874a83ff, source-lock Git invocation, tsx/esbuild/Ajv dependency resolution, and read-only runtime inspection.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-054 is supported only when both candidate layers are exact, deterministic, independently reconstructed, contain zero semantically relevant opaque, irrecoverable, or unclassified inputs, pass every required control, and an exact later human review resolves runtime selection without H-054 enacting that selection; it is refuted only by exact evidence of a reachable dependency omitted by the producer, non-deterministic inventory under identical inputs, an undetected cross-layer collision, candidate-layer contamination, or a hostile omission that bypasses verification; it is inconclusive while runtime selection remains unresolved or any relevant input remains opaque, irrecoverable, unclassified, dynamically indeterminate, permission-blocked, or methodologically incomplete; and it is invalid on H-053 or H-055 execution, unauthorized mutation, network or live observation, source drift, authority overclaim, or self-approval.",
+      "evidence": "Fail-closed D3 outcome policy derived from the exact human grant, ADR-0001 evidence-before-decision ordering, ADR-0005 runtime identity, H-053's accepted limitation, and the explicit strict H-054 outcome boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The required control families are omission of errors.ts, a reachable package or export target, the esbuild native binary, a Node executable or shared library, and Git; staleness of the Git anchor, H-053 closure, package lock, candidate runtime, or evidence binding; symlink retargeting, escape, cycle, or dangling resolution; and divergent bytes under one logical identity or colliding logical paths across predecessor, apparatus, Node 22, and Node 24 layers.",
+      "evidence": "The human grant explicitly requires omission, staleness, symlink, and layer-collision controls; the concrete hostile cases follow from the H-053 source and environment gaps and the separate-candidate invariant.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether both candidate inventories close with zero semantically relevant opaque, irrecoverable, or unclassified inputs and whether an independent verifier detects every hostile control remains unknown until the authorized H-054 producer and verifier execute offline.",
+      "evidence": "No H-054 fixture, apparatus, run, or independently verified raw evidence exists before this proposed contract and Slice.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether a later human review nominates exact Node 24 historical replay, supported Node 22 successor execution, neither candidate, or a newly bounded alternative remains unknown; while this selection is unresolved, H-054 must classify the result as inconclusive and H-055 remains blocked.",
+      "evidence": "The H-054 grant requires separate candidate layers, prohibits silent runtime selection, and keeps H-055 separate; no later runtime-selection motion exists.",
+      "blocking": true
+    },
+    {
+      "kind": "inference",
+      "statement": "Opening H-054 activates and nominates no ADR candidate because it inventories a one-experiment execution boundary without yet establishing a human-selected runtime, a closed repeatable rule, or accepted evidence of reusable architectural consequence.",
+      "evidence": "ADR-0001 candidacy sequence, unresolved H-054 inventory and runtime-selection unknowns, explicit no-ADR authorization, authority none, and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human H-054 grant authorizes only CHG-0035 proposed, its deterministic manifest entry, a synthetic non-normative fixture and offline producer and independent verifier under lab/h054, and ignored local raw evidence; it prohibits H-053 and H-055 execution, silent runtime selection, network or live observation, USB or hidraw access, Docker, host or product mutation, SPEC, ADR, commit, push, merge, and publication.",
+      "evidence": "The exact model-visible H-054 authorization anchored to main 161554b968b6dc38fb1cc055c829b414ba5b85ae, tree d8087b92796a8be07ee5779a5847e0e3859930a0, and H-053 closure e84b9faeb4858549eec513c3a08f19da566987665f4c79a448102dbc957b4911; raw transport-byte identity is not claimed.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Authority for human acceptance or rejection of H-054, a post-review closure, H-055 or any successor CHG, runtime enactment, a real specification, an ADR or candidate record, governance or product changes, live observation, network access, commit, push, merge, or publication remains absent.",
+      "evidence": "The H-054 grant is exhaustive, retains authority none and action null, and expressly separates H-055 and every later transition.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0035 records H-054 as an untested proposed assumption and binds its subject non-circularly to main 161554b968b6dc38fb1cc055c829b414ba5b85ae, tree d8087b92796a8be07ee5779a5847e0e3859930a0, and H-053 closure e84b9faeb4858549eec513c3a08f19da566987665f4c79a448102dbc957b4911 without admitting CHG-0035, lab/h054, or generated evidence into that predecessor subject.",
+      "verification": "Recompute the Git commit and tree, closure raw SHA-256, predecessor contract and generated-artifact hashes, and inspect the subject lock for explicit temporal layers and absence of circular descriptors."
+    },
+    {
+      "id": "SC-002",
+      "statement": "Every inventory entry is qualified by its enclosing layer and stable logical path; readable regular files record type, byte length, mode and SHA-256, symlinks record exact link text and separately inventoried resolved paths where applicable, and layer metadata records provenance, selection rationale and closure limits. Every opaque, irrecoverable, unsupported-special, unresolved or otherwise non-content-addressable input is explicitly classified; no relevant input is silently dropped.",
+      "verification": "Validate layer and logical-path uniqueness, independently reconstruct complete layer membership, compare content hashes and symlink/path-resolution receipts, and require explicit fail-closed classifications for every non-content-addressable or unclosed input."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The first-party inventory closes the exact H-053 apparatus, guarded surface, static execution graph, and executed errors.ts edge while preserving the distinction between nominated H-053 subject sources, later apparatus, guarded-only files, and previously executed-unadmitted sources.",
+      "verification": "Reconstruct H-053 apparatus descriptor-set SHA-256 1c686c08b995890b39ab750e0fc593766d5916fed2dfc5e6f657ea51f6b40126, guarded and source-execution receipts, errors.ts SHA-256 23f0c8e843f655a61dae807709c75670a42ef4b851beb0d8cacd584d0e0578b4, and all layer assignments."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The dependency inventory derives the installed package graph from the human-nominated Ajv and tsx seeds through required and present optional dependency edges, binds each node to package-lock and its manifest, and content-addresses complete installed trees for tsx, esbuild, its platform-native binary, Ajv and every reached transitive dependency. Declared export and bin values are content-addressed, while per-import and conditional export resolution is explicitly classified as not enumerated and therefore methodologically incomplete.",
+      "verification": "Independently derive the installed dependency graph from manifest-declared required and present optional edges starting at the two seeds, bind each reached node to package-lock resolution and integrity, reconstruct every complete package tree and symlink, verify the native binary receipt, reject manifest-only or omitted-transitive representations, and require the package-entry-point-resolution-method blocking classification."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Node 22 and Node 24 remain separate unselected candidate manifests with independent executable, build, loader, and dynamic-library receipts; no default, merged descriptor, host PATH ordering, or producer runtime is represented as human runtime selection, and unresolved selection yields inconclusive.",
+      "verification": "Compare candidate IDs, executable hashes, versions, build metadata, resolved symlinks and library graphs; require disjoint candidate namespaces and inspect outcome runtimeSelection and classification."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Git and process-selection inputs are explicit, including the Git executable and libraries, applicable repository configuration, refs and object-store indirections, invoked arguments, cwd, argv, execArgv, environment allowlist, locale, timezone, umask, temporary paths, and cache selectors; opaque, irrelevant, and irrecoverable inputs are never conflated.",
+      "verification": "Inspect tool and process receipts, configuration scope, ref and object resolution, environment allowlist and redaction policy, cache state or disablement, and the classification and rationale for every non-content-addressed input."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The producer emits deterministic ignored raw evidence on repeated identical inputs and the verifier independently reconstructs anchors, descriptors, semantic hashes, classifications, candidate separation, controls, outcome, authority none, and action null without importing producer implementation.",
+      "verification": "Run the producer twice in the authorized offline read-only boundary, compare canonical semantic output, inspect the verifier import graph, and verify preserved evidence using a separate read-only process."
+    },
+    {
+      "id": "SC-008",
+      "statement": "All omission, staleness, symlink, and layer-collision control families execute and fail closed, including representative omission of errors.ts, a transitive package entry, esbuild native, Node or a library, and Git; no hostile fixture may be accepted as a complete inventory.",
+      "verification": "Require exact control rosters and receipts, expected rejection reasons, independent reconstruction, and failure on any missing, bypassed, ambiguously classified, or differently observed control."
+    },
+    {
+      "id": "SC-009",
+      "statement": "The authorized run is classified inconclusive whenever runtime selection remains null or any required input remains opaque, irrecoverable, unclassified or methodologically incomplete, and invalid evidence is rejected on integrity or boundary failure; the counterfactual support and refutation thresholds remain recorded but cannot be enacted by this no-selection run. The result remains limited to offline executable-boundary inventory, activates no ADR candidate, executes no successor, and retains authority none and action null.",
+      "verification": "Independently reconstruct the exact blocking classifications, require null runtimeSelection and inconclusive outcome for this run, exercise invalidity guards, and inspect the claim boundary, explicit non-demonstrations, ADR assessment, authority and action."
+    },
+    {
+      "id": "SC-010",
+      "statement": "The only tracked mutations are CHG-0035, its deterministic addition-only manifest entry, and authorized lab/h054 apparatus; raw evidence remains ignored, and CHG-0033, CHG-0034, the H-053 closure, accepted decisions and specifications, profile, schemas, compiler, plan, product, host, and Git history remain unchanged while focused and repository gates pass offline.",
+      "verification": "Path-scoped diff and status audit, predecessor hash comparison, manifest semantic delta, byte-identical plan check, git check-ignore for artifacts/h054, focused H-054 tests and verifier, governance check, quality, build, formatting, whitespace, and no-network capability receipts."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "The H-054 claim, finite inventory layers, strict four-way outcome policy, control families, claim boundary, runtime-selection unknown, and D3 reorder are captured in proposed CHG-0035.",
+      "evidence": "This proposed change contract."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The tracked and local predecessor anchors are exact, non-circular, and reconstructable, and the H-053 closure remains byte-identical with its earlier successor.authorized false temporal fact preserved.",
+      "evidence": "H-054 subject lock, Git and closure receipts, predecessor hashes, and pre/post closure SHA-256 comparison."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The H-054 fixture is visibly synthetic and non-normative, remains only under lab/h054, models hostile inventory inputs without executing H-053 or H-055, and grants no runtime, governance, product, or operational authority.",
+      "evidence": "Fixture path and schema, fixture prose and identities, capability audit, and absence of real governance, product, and live inputs."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The offline read-only producer inventories the authorized layers deterministically into ignored local raw evidence, and an implementation-independent verifier reconstructs and verifies the preserved run.",
+      "evidence": "Two producer receipts, raw run identity, semantic identity, independent verifier receipt, import-graph audit, and offline read-only capability receipt."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "Every required omission, staleness, symlink, and layer-collision control executes with the expected fail-closed result and cannot be bypassed by missing or ambiguous metadata.",
+      "evidence": "Control fixtures, exact control roster, producer receipts, verifier receipts, and focused tests."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "Every semantically relevant input is explicitly classified, both runtime candidate layers remain distinct and unselected, and any opaque, irrecoverable, unclassified, or unresolved-runtime state produces an inconclusive rather than supported classification.",
+      "evidence": "Descriptor inventory, classification counts, candidate manifests, runtimeSelection field, outcome derivation, and independent verification."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "Only CHG-0035, the deterministic manifest addition, and lab/h054 apparatus are tracked; artifacts/h054 remains ignored and local, while plan.json, CHG-0033, CHG-0034, the H-053 closure, accepted law, product, host configuration, and Git history remain byte-identical.",
+      "evidence": "Exact path roster, manifest delta, git check-ignore, repository status, and pre/post SHA-256 ledger."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "The H-054 classification and any later runtime nomination remain pending separate human review; no H-055, successor CHG, ADR or candidate record, specification, implementation, live action, commit, push, merge, or publication occurs, and authority remains none with action null.",
+      "evidence": "Raw evidence outcome, explicit human-review gate, ADR assessment, capability audit, repository status, authority, and action."
+    },
+    {
+      "id": "DOD-009",
+      "statement": "All focused H-054, deterministic reconstruction, governance, formatting, quality, build, whitespace, source-preservation, scope, and offline-boundary gates pass.",
+      "evidence": "Final local gate outputs, hash ledger, path-scoped audit, and no-network capability receipt."
+    }
+  ]
+}
