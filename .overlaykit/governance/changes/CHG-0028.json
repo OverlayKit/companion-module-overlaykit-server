@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0028",
+  "title": "Authorize signed publication of the bounded H-049 closure",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the publication-producing agent for CHG-0028 under the human principal @rodrigoteamx; the agent cannot expand the accepted H-049 conclusion or create product or operational authority.",
+      "evidence": "Repository AGENTS.md, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, ADR-0001, and the exact contextual publication transition recorded by this successor.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0027 remains byte-identical and its statements that signed Git provenance, commit, push, merge, remote durability, and publication were unauthorized and unproven remain true at the exact local post-review boundary in which CHG-0027 was materialized.",
+      "evidence": "CHG-0027 raw SHA-256 db9063cd01d280a1f3481b6374eafa62dd406e1f5ff1e04ea3cc3d7efa15620d; its local-only claim, assumption, unknown, SC-008, and DOD-008; and the pre-CHG-0028 Git state at protected-main subject 226d299a9b0d8acd592675f514a67d6229d0134a.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immediate handoff explicitly requested separate authorization for commit, push, and merge, and the human principal replied with the exact UTF-8 text ok adelante without a trailing line feed.",
+      "evidence": "Immediate handoff sentence SHA-256 e5ba2fd8c45ded25dd6dc30442649af736058fe59a14b3c61357cf4ac7cd424e and exact response-text SHA-256 1bf75a1a269f52a7ed7094dbca4bfa7053365e672265dc363871a982075ec671.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Because the response directly answers the request naming the three withheld Git transitions, it authorizes a signed commit on the existing H-049 branch, push of that branch, a protected pull request, and an allowed merge commit, but no broader publication or action.",
+      "evidence": "Exact handoff and response hashes, CHG-0027's explicit need for a later separately authorized signed Git transition, and the contextual-transition precedent in CHG-0025.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The authorized tracked publication boundary contains only the governance manifest, CHG-0026 through CHG-0028, the non-authorizing H-049 receipt, and the twelve lab/h049 source, schema, review, lock, producer, verifier, and test files.",
+      "evidence": "Exact staged-path roster and scoped repository diff; the pre-successor roster contained sixteen paths, and this successor adds only .overlaykit/governance/changes/CHG-0028.json before deterministic manifest compilation.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The raw H-049 canonical evidence, local source anchor, human-acceptance envelope, post-review assessment, archive, payload manifest, and external closure remain under artifacts/, ignored and excluded from Git publication.",
+      "evidence": ".gitignore artifacts/ boundary, zero raw paths in git ls-files --others --exclude-standard and the exact staged roster, local closure SHA-256 a977da735151247caa87dde36fbf694d52c943b00a33771f65dd2fca76d277a1, archive SHA-256 de7cdd19172370522811436389cf43622b539515336bfd32ddf79f70fdcf8107, and manifest SHA-256 e3644bd4011d6c8fc600dfd0d0e1153f67aec5ac4fbe27fc4bb93627de511d09.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The publication transition does not retroactively convert the local unsigned source anchor into signed evidence; the new Git signature can establish provenance only for the exact tracked tree committed after this authorization.",
+      "evidence": "CHG-0027 source-anchor admission local-content-addressed-unsigned, signature absent-not-authorized, signedCommit null, durabilityClaimed false, and the distinct temporal boundary established by CHG-0028.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "H-049 remains refuted only inside the nominated accepted-law repository boundary, while its immutable mechanical evidence remains inconclusive; authority remains none, action remains null, and no ADR candidate is activated.",
+      "evidence": "Review-map raw SHA-256 6b07f91932451ceacc9a28d28116404328f0fb4143160ff58a73c8dbf50d9782, semantic evidence SHA-256 a49c84d01f17a85691de9d7989fcddfd94aef81283d992e93ce4acd7f7a912c3, human-acceptance SHA-256 368d86ec0cd36de5ae2a774d812f8daa12407b498fd56b95e47509777d621de6, post-review assessment SHA-256 4e21036bb1a45446a47f4b33850b29044806b146dff9cff3ee8603a36bce9b41, CHG-0027, and the local closure verifier.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0028 creates no ADR, specification, product behavior, product configuration, profile rule, physical recovery obligation, live observation, host mutation, production policy, or raw-evidence publication.",
+      "evidence": "Scoped repository diff, unchanged ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002, unchanged compiled plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, and exact contextual authority boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Remote durability, protected-branch admission, GitHub workflow results, attestation, and merge provenance do not exist until the authorized Git and GitHub transitions complete successfully.",
+      "evidence": "Pre-publication local branch state and the future observable requirements in SC-006 and DOD-006.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the human principal wants H-050 or any successor product specification remains undecided; this publication transition does not open another hypothesis or authorize further discovery.",
+      "evidence": "The exact response ok adelante answers only the immediately preceding request for commit, push, and merge and contains no continuation or product authority.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0026, CHG-0027, the H-049 receipt, review map, subject lock, harness, schema, producer, verifier, and tests remain byte-identical to the accepted local closure.",
+      "verification": "Recompute CHG-0026 SHA-256 d336eadf0b99292e57745d6b58b61f9eab7b4074b7e3452758652c478eff6ebc, CHG-0027 SHA-256 db9063cd01d280a1f3481b6374eafa62dd406e1f5ff1e04ea3cc3d7efa15620d, receipt SHA-256 8cfdb84f55cd8caf1c015b965ee1530700e2fda5e4c066ff113b08fbe97a422b, source-set SHA-256 2870263697a59dff253a578ec62cff5a72c5a4610eb21d8ff137e4b8c6e881b1, and every source hash captured by the closure."
+    },
+    {
+      "id": "SC-002",
+      "statement": "CHG-0028 records the exact contextual publication transition without editing CHG-0027 or interpreting the new authority as retroactive.",
+      "verification": "Recompute the handoff SHA-256 e5ba2fd8c45ded25dd6dc30442649af736058fe59a14b3c61357cf4ac7cd424e and response SHA-256 1bf75a1a269f52a7ed7094dbca4bfa7053365e672265dc363871a982075ec671; compare CHG-0027 bytes and inspect the temporal claims."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The staged and committed tree contains exactly the seventeen authorized H-049 tracked paths and contains no artifacts/ member or other unrelated worktree change.",
+      "verification": "Compare git diff --cached --name-only against the exact governance, evidence/h049, and lab/h049 roster; require zero artifacts/ paths, zero ignored raw members, and zero disclosure or secret-pattern findings."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The H-049 result, claim boundary, mechanical outcome, post-review outcome, authority, action, accepted ADRs, accepted specifications, profile, compiled plan, product source, and product configuration remain unchanged.",
+      "verification": "Closure verification, exact accepted-record and product diffs against 226d299a9b0d8acd592675f514a67d6229d0134a, plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, and deterministic manifest compilation."
+    },
+    {
+      "id": "SC-005",
+      "statement": "All temporal H-049, closure, governance, quality, build, formatting, and repository-integrity gates pass at their correct source boundaries before commit.",
+      "verification": "Fifty-four of fifty-four focused H-049 tests reconstructed from the frozen pre-successor archive, exact successor-tree closure verification, npm run governance:verify, npm run governance:check, npm_config_offline=true npm run check, npm run build, scoped Prettier, git diff --check, and accepted-record diff."
+    },
+    {
+      "id": "SC-006",
+      "statement": "The exact authorized tracked tree is committed with a valid identity signature, pushed without rewriting history, reviewed through a protected pull request, and merged only by an allowed merge commit after validate and observe complete successfully.",
+      "verification": "git verify-commit, GitHub signature state, remote branch ancestry, pull-request head and base identities, review-thread state, validate and observe checks, mergeability, protected-main merge method, and post-merge ancestry."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The merged main tree has a successful post-merge governance workflow and exact attestation while raw H-049 artifacts remain absent from Git and the remote feature branch remains retained.",
+      "verification": "Post-merge workflow run and artifact identities, GitHub attestation verification for the exact GovernanceRun subject, origin/main tree inspection, git ls-files artifacts/h049, remote branch inspection, and local ignored-raw verification."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0028 records the exact later contextual grant for signed commit, branch push, protected pull request, and allowed merge without rewriting CHG-0027.",
+      "evidence": "Exact handoff and response hashes, immutable CHG-0027 hash, contextual-transition precedent, and this implemented successor."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "Only the exact seventeen tracked H-049 paths are published, and all raw closure bytes remain local, ignored, mode-restricted, and absent from Git.",
+      "evidence": "Staged and committed path rosters, artifacts ignore proof, remote tree inspection, closure roster and modes, and bounded disclosure scan."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The immutable mechanical result remains inconclusive and the separate human-accepted post-review result remains refuted only within the exact accepted-law boundary, with authority none and action null.",
+      "evidence": "Canonical evidence, review map, human acceptance, post-review assessment, local closure, receipt, and CHG-0027."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No ADR candidate, specification, product change, host action, physical-recovery policy, raw publication, or next hypothesis is created by the transition.",
+      "evidence": "Governance and repository diffs, exact response boundary, accepted-record hashes, unchanged plan, authority none, and action null."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "All required temporal H-049, closure, governance, quality, build, formatting, integrity, and disclosure gates pass before publication.",
+      "evidence": "Final local gate outputs at the archived source boundary and current successor tree."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "The authorized tree is committed with a valid signature and merged through the protected GitHub workflow only after required checks and observation complete successfully.",
+      "evidence": "Signed commit identity, pull-request state, resolved review threads, validate and observe checks, allowed merge commit, post-merge workflow, and attestation."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "After merge, main contains the exact bounded tracked H-049 closure, the raw artifacts remain local-only, and no further cycle starts without a new governed frame and authority.",
+      "evidence": "origin/main ancestry and tree, remote branch retention, ignored raw directory inspection, and absence of any H-050 record."
+    }
+  ]
+}

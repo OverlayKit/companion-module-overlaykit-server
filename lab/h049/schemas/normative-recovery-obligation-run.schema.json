@@ -1,0 +1,338 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h049-normative-recovery-obligation-run/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "subject",
+    "harness",
+    "artifacts",
+    "summary",
+    "outcome",
+    "projectedOutcomeIfExactMapAccepted",
+    "adrAssessment",
+    "capabilityAudit",
+    "authority",
+    "action",
+    "claimBoundary",
+    "semanticEvidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h049-normative-recovery-obligation-run/v1"
+    },
+    "hypothesis": {
+      "const": "H-049"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commit",
+        "tree",
+        "sourceCount",
+        "sourceSetSha256",
+        "restrictedLsTreeSha256",
+        "planRawSha256",
+        "planHash"
+      ],
+      "properties": {
+        "commit": {
+          "const": "226d299a9b0d8acd592675f514a67d6229d0134a"
+        },
+        "tree": {
+          "const": "f0cd2b22b3c9da7b2c2d2cf5b93baa97dd1a5bcd"
+        },
+        "sourceCount": {
+          "const": 9
+        },
+        "sourceSetSha256": {
+          "const": "3136aa776e1d15dcc2f3fc3597a6e7011f2b9601492936c5e1da65920a67e218"
+        },
+        "restrictedLsTreeSha256": {
+          "const": "e9e46d2e5affa66e72df0fbd1ed516c13327ebbb02d668ee92da2a4cd47b93c8"
+        },
+        "planRawSha256": {
+          "const": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243"
+        },
+        "planHash": {
+          "const": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4"
+        }
+      }
+    },
+    "harness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceCount",
+        "sourceSetSha256",
+        "reviewMapRawSha256",
+        "reviewMapCanonicalSha256"
+      ],
+      "properties": {
+        "sourceCount": {
+          "const": 13
+        },
+        "sourceSetSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "reviewMapRawSha256": {
+          "const": "6b07f91932451ceacc9a28d28116404328f0fb4143160ff58a73c8dbf50d9782"
+        },
+        "reviewMapCanonicalSha256": {
+          "const": "6e4c69836c57de051cd92826b5ac9103b7a9eeef2f1b0fb072f5df8f9c8db928"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["harnessSourceMap", "sourceMap", "clauseUniverse", "candidateIndex"],
+      "properties": {
+        "harnessSourceMap": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "harness-source-map.json"
+                }
+              }
+            }
+          ]
+        },
+        "sourceMap": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "source-map.json"
+                }
+              }
+            }
+          ]
+        },
+        "clauseUniverse": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "clause-universe.json"
+                }
+              }
+            }
+          ]
+        },
+        "candidateIndex": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "candidate-index.json"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "summary": {
+      "const": {
+        "clauses": 901,
+        "candidates": 5,
+        "pendingHumanJudgments": 9,
+        "eligibleChains": 0,
+        "mechanicalCoverageComplete": true,
+        "semanticCoverageComplete": false
+      }
+    },
+    "outcome": {
+      "const": {
+        "status": "inconclusive",
+        "stage": "semantic-review",
+        "reasonCode": "human-review-pending-or-semantic-coverage-incomplete"
+      }
+    },
+    "projectedOutcomeIfExactMapAccepted": {
+      "const": {
+        "status": "refuted",
+        "stage": "closed-accepted-law-boundary",
+        "reasonCode": "complete-zero-chain-coverage",
+        "condition": "only-after-exact-map-content-addressed-human-acceptance-and-zero-pending-judgments"
+      }
+    },
+    "adrAssessment": {
+      "const": {
+        "status": "no-decision-candidate-activated",
+        "rationaleCode": "normative-audit-selects-no-product-or-production-architecture",
+        "futureDecisionQuestion": "whether the human principal wants a successor product specification for physical MK.2 recovery before any controller architecture is investigated",
+        "authority": "none",
+        "action": null
+      }
+    },
+    "capabilityAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "gitExecutable",
+        "commandPolicy",
+        "commandCounts",
+        "fixedGitEnvironment",
+        "sourceBinding",
+        "trackedReads",
+        "ignoredWriteRoot",
+        "outputFiles",
+        "prohibitedCapabilities"
+      ],
+      "properties": {
+        "mode": {
+          "const": "offline-read-only-normative-subject"
+        },
+        "gitExecutable": {
+          "const": "/usr/bin/git"
+        },
+        "commandPolicy": {
+          "const": [
+            "git check-ignore -v --no-index -- artifacts/h049/__h049-ignore-probe__",
+            "git rev-parse <fixed-subject>^{commit|tree}",
+            "git ls-tree -rz --full-tree <fixed-subject> -- <nine-fixed-paths>",
+            "git cat-file blob <one-of-nine-fixed-oids>"
+          ]
+        },
+        "commandCounts": {
+          "const": {
+            "cat-file-blob": 9,
+            "check-ignore": 1,
+            "restricted-ls-tree": 1,
+            "rev-parse": 2
+          }
+        },
+        "fixedGitEnvironment": {
+          "const": {
+            "GIT_ALTERNATE_OBJECT_DIRECTORIES": "",
+            "GIT_ATTR_NOSYSTEM": "1",
+            "GIT_CONFIG_COUNT": "0",
+            "GIT_CONFIG_GLOBAL": "/dev/null",
+            "GIT_CONFIG_NOSYSTEM": "1",
+            "GIT_CONFIG_SYSTEM": "/dev/null",
+            "GIT_NO_LAZY_FETCH": "1",
+            "GIT_NO_REPLACE_OBJECTS": "1",
+            "GIT_OPTIONAL_LOCKS": "0",
+            "GIT_TERMINAL_PROMPT": "0",
+            "LANG": "C",
+            "LC_ALL": "C",
+            "PATH": "/usr/bin:/bin"
+          }
+        },
+        "sourceBinding": {
+          "const": "on-disk-preflight-and-postflight-no-loader-attestation"
+        },
+        "trackedReads": {
+          "const": [
+            ".gitignore",
+            ".overlaykit/governance/changes/CHG-0026.json",
+            ".overlaykit/governance/manifest.json",
+            "lab/h049/inventory-lib.mjs",
+            "lab/h049/inventory-lib.test.mjs",
+            "lab/h049/review-map.json",
+            "lab/h049/run.mjs",
+            "lab/h049/run.test.mjs",
+            "lab/h049/schema.test.mjs",
+            "lab/h049/schemas/normative-recovery-obligation-run.schema.json",
+            "lab/h049/subject-lock.json",
+            "lab/h049/verify.mjs",
+            "lab/h049/verify.test.mjs"
+          ]
+        },
+        "ignoredWriteRoot": {
+          "const": "artifacts/h049"
+        },
+        "outputFiles": {
+          "const": [
+            "harness-source-map.json",
+            "source-map.json",
+            "clause-universe.json",
+            "candidate-index.json",
+            "run.json"
+          ]
+        },
+        "prohibitedCapabilities": {
+          "const": [
+            "network",
+            "docker",
+            "usb",
+            "hidraw",
+            "procfs",
+            "sysfs",
+            "devfs",
+            "systemd",
+            "signals",
+            "lifecycle",
+            "installation",
+            "configuration",
+            "controller-implementation",
+            "production-mutation"
+          ]
+        }
+      }
+    },
+    "authority": {
+      "const": "none"
+    },
+    "action": {
+      "type": "null"
+    },
+    "claimBoundary": {
+      "const": {
+        "subject": "only plan.json, ADR-0001 through ADR-0006, and SPEC-0001 through SPEC-0002 at main@226d299a9b0d8acd592675f514a67d6229d0134a",
+        "conclusion": "the pre-review result classifies only whether that exact accepted-law boundary contains an explicit seven-predicate automatic physical MK.2 recovery obligation",
+        "excluded": "external policy, future product intent, live host state, USB or hidraw behavior, controller safety, implementation authority, ADR or specification authority, production policy, and action authority remain unknown"
+      }
+    },
+    "semanticEvidenceSha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "byteLength", "sha256"],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}

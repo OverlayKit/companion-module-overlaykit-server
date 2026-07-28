@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "overlaykit-h049-subject-lock/v1",
+  "hypothesis": "H-049",
+  "subject": {
+    "commit": "226d299a9b0d8acd592675f514a67d6229d0134a",
+    "tree": "f0cd2b22b3c9da7b2c2d2cf5b93baa97dd1a5bcd",
+    "restrictedLsTreeSha256": "e9e46d2e5affa66e72df0fbd1ed516c13327ebbb02d668ee92da2a4cd47b93c8",
+    "planRawSha256": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243",
+    "planHash": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4"
+  },
+  "sources": [
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0001.json",
+      "mode": "100644",
+      "oid": "658d9a65b692eda327c7c0467e43e341e6805496",
+      "byteLength": 6660,
+      "sha256": "e597cbaa8c69d53e197eb82f3baf71a7626f96db0d28a2b54e91c035bef917d6"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0002.json",
+      "mode": "100644",
+      "oid": "279b8ec2585d1a45a13e61ff64a7f86359c7274d",
+      "byteLength": 4974,
+      "sha256": "6e99edcf98a6ec3a91c1d74be8fbe2f87b5108de6cc2f240671451b635875a00"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0003.json",
+      "mode": "100644",
+      "oid": "96c92e1b597e351df2979bd47c3d651ac9033880",
+      "byteLength": 6030,
+      "sha256": "8d10bfca940203cfa8fcfe96640d3c4c22ff25a14692a4a6ac459a3dc3743ce2"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0004.json",
+      "mode": "100644",
+      "oid": "b79e367a4c42fabef33c44c636e8d9d202345455",
+      "byteLength": 4421,
+      "sha256": "9eb30ec5ed70d282bb4e96674ea44e9796f95cb3fbd41b45f1f77da51f40812d"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0005.json",
+      "mode": "100644",
+      "oid": "f9500d868b051ff1c3e19eb3e5b8583e09bb5eac",
+      "byteLength": 7550,
+      "sha256": "f59ff9a71f87864fcb2478ce17a92b2f0dc4aa133ca6d01c56fb90ab682cb2d6"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0006.json",
+      "mode": "100644",
+      "oid": "46d087824a500f9dc6bf5fadbd2171fbe1f4aeb9",
+      "byteLength": 6334,
+      "sha256": "619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360"
+    },
+    {
+      "path": ".overlaykit/governance/plan.json",
+      "mode": "100644",
+      "oid": "750f5694f9e3abd5025b3a380fe7df8972529761",
+      "byteLength": 22610,
+      "sha256": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243"
+    },
+    {
+      "path": ".overlaykit/governance/specifications/SPEC-0001.json",
+      "mode": "100644",
+      "oid": "45a1452e51681107005db9119c9724d29b29e23e",
+      "byteLength": 10127,
+      "sha256": "917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179"
+    },
+    {
+      "path": ".overlaykit/governance/specifications/SPEC-0002.json",
+      "mode": "100644",
+      "oid": "4ee3541194fd13b5e68f141504a87b915823795d",
+      "byteLength": 10804,
+      "sha256": "d15b1cbf7e97bd92aadf40342421161a0955e210b8566f7ae870dc78c05e89f6"
+    }
+  ],
+  "predicates": [
+    {
+      "id": "effectiveAcceptedNormativeAuthority",
+      "definition": "The duty is stated by a current effective accepted unsuperseded normative source, not historical context, evidence, metadata, an exclusion, or a future proposal."
+    },
+    {
+      "id": "spec0001LinuxRoleBinding",
+      "definition": "The duty bearer is explicitly linked to SPEC-0001's Linux operator, module, or production-host environment without inferring deployment lifecycle ownership."
+    },
+    {
+      "id": "physicalStreamDeckMk2Scope",
+      "definition": "The duty explicitly targets the same physical Stream Deck MK.2 rather than virtual buttons, emulator UI, generic Companion, or generic hardware."
+    },
+    {
+      "id": "postLoginDisconnectOrReenumerationTrigger",
+      "definition": "The duty begins after login when the physical MK.2 disconnects and returns or enters a new enumerated USB epoch."
+    },
+    {
+      "id": "automaticRecoveryObligation",
+      "definition": "The current law requires automatic recovery without an operator intervention; observed behavior, may-investigate language, and future Slice preconditions are insufficient."
+    },
+    {
+      "id": "physicalCommandDeliveryRestored",
+      "definition": "Recovery ends only when a physical MK.2 key press causally traverses Companion and produces the authorized OverlayKit command; descriptor ownership, Opening, Ready, UI projection, or pixels alone are insufficient."
+    },
+    {
+      "id": "observableRecoveryDeadline",
+      "definition": "The law supplies an explicit finite maximum whose start is the physical trigger and whose observable end is restored physical command delivery."
+    }
+  ],
+  "chainInvariant": "All seven predicates belong to one explicitly linked obligation identity with the same role, device, trigger, recovery duty, outcome, and timing domain; exclusions, contradictions, and cross-record Cartesian mixing make the chain ineligible.",
+  "outcomePolicy": {
+    "invalidEvidence": "Any subject, schema, source, canonicalization, or artifact failure produces no hypothesis outcome.",
+    "inconclusive": "Any pending human review, ambiguity, omission, conflict, opaque source, unclassified clause, or unresolved link after valid source admission.",
+    "supported": "Complete accepted coverage, zero unknowns, and at least one eligible seven-predicate chain.",
+    "refuted": "Complete accepted coverage, zero unknowns, and zero eligible seven-predicate chains."
+  },
+  "authority": "none",
+  "action": null
+}
