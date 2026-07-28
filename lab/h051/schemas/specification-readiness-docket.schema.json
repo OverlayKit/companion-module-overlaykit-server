@@ -1,0 +1,377 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h051-specification-readiness-docket/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "title",
+    "status",
+    "normative",
+    "principal",
+    "agent",
+    "subject",
+    "authorizationContext",
+    "discoveryFrame",
+    "question",
+    "predicates",
+    "outcomePolicy",
+    "preReviewResult",
+    "epistemicClaims",
+    "claimBoundary",
+    "adrAssessment",
+    "capabilityAudit",
+    "authority",
+    "action"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h051-specification-readiness-docket/v1"
+    },
+    "hypothesis": {
+      "const": "H-051"
+    },
+    "title": {
+      "const": "Physical-recovery specification carrier readiness"
+    },
+    "status": {
+      "const": "agent-proposed-pending-human-acceptance"
+    },
+    "normative": {
+      "const": false
+    },
+    "principal": {
+      "const": "@rodrigoteamx"
+    },
+    "agent": {
+      "const": "Codex /root"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "precontractPath",
+        "precontractRawSha256",
+        "sourceLockPath",
+        "sourceLockRawSha256",
+        "readinessMapPath",
+        "readinessMapRawSha256",
+        "normativeCommit",
+        "normativeTree",
+        "h050ClosureRawSha256"
+      ],
+      "properties": {
+        "precontractPath": {
+          "const": ".overlaykit/governance/changes/CHG-0031.json"
+        },
+        "precontractRawSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "sourceLockPath": {
+          "const": "lab/h051/subject-lock.json"
+        },
+        "sourceLockRawSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "readinessMapPath": {
+          "const": "lab/h051/readiness-map.json"
+        },
+        "readinessMapRawSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "normativeCommit": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "normativeTree": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "h050ClosureRawSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "authorizationContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelVisibleReply",
+        "predecessorChangeRawSha256",
+        "predecessorClosureRawSha256",
+        "successorHypothesis",
+        "successorChange",
+        "interpretation",
+        "doesNotAuthorize"
+      ],
+      "properties": {
+        "modelVisibleReply": {
+          "const": {
+            "value": "adelante con lo que sigue",
+            "utf8ByteLength": 25,
+            "sha256": "3bbaa748bc466188cccba4634cf353c8480ff4de3dbe06d23c6991b60eef9fc2",
+            "transportBytesClaimed": false
+          }
+        },
+        "predecessorChangeRawSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "predecessorClosureRawSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "successorHypothesis": {
+          "const": "H-051"
+        },
+        "successorChange": {
+          "const": "CHG-0031"
+        },
+        "interpretation": {
+          "const": "one local offline governed-discovery pre-review cycle only"
+        },
+        "doesNotAuthorize": {
+          "const": [
+            "SPEC",
+            "ADR",
+            "product-or-mechanism-implementation",
+            "live-observation",
+            "host-mutation",
+            "commit",
+            "push",
+            "merge",
+            "publication"
+          ]
+        }
+      }
+    },
+    "discoveryFrame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "before",
+        "architecturalQuestion",
+        "overclaimToAvoid",
+        "minimalRefutingSlice",
+        "observableEvidence",
+        "outOfScopeAndDeferred",
+        "reorderResult"
+      ],
+      "properties": {
+        "before": {
+          "type": "string",
+          "minLength": 1
+        },
+        "architecturalQuestion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "overclaimToAvoid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minimalRefutingSlice": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observableEvidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outOfScopeAndDeferred": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reorderResult": {
+          "const": "the first move changes from specification drafting to carrier-readiness refutation"
+        }
+      }
+    },
+    "question": {
+      "const": "Does the closed H-050 intent admit a non-inventive, conflict-free, additive product-specification projection under the current carrier?"
+    },
+    "predicates": {
+      "const": [
+        "mapsAutomaticRecoveryObligation",
+        "mapsLinuxRoleAndPhysicalMk2Scope",
+        "mapsTriggerAndIdentityContinuity",
+        "mapsRestoredPhysicalCommandDelivery",
+        "mapsRecoveryDeadlineAndClock",
+        "mapsDegradedFailureAndManualFallback",
+        "mapsSafetySecurityAndAuthorityBoundary",
+        "mapsAcceptanceEvidenceAndScenarioCoverage",
+        "mapsSpecificationRelationship",
+        "projectionIsNonInventiveAndConflictFree",
+        "schemaCompilerAdmitsAdditiveLifecycle"
+      ]
+    },
+    "outcomePolicy": {
+      "const": {
+        "supported": "exact-human-accepted-map-with-eleven-satisfied-predicates-and-no-ambiguity-conflict-omission-or-authority-lift",
+        "refuted": "exact-human-accepted-exhaustive-finite-carrier-review-proves-no-admissible-non-inventive-projection",
+        "inconclusive": "human-acceptance-absent-or-any-predicate-ambiguous-unresolved-conflicting-omitted-or-non-exhaustive",
+        "invalid": "source-schema-map-drift-self-evidence-spec-shaped-fixture-or-authority-action-overclaim"
+      }
+    },
+    "preReviewResult": {
+      "const": {
+        "status": "inconclusive",
+        "stage": "pre-review-specification-readiness",
+        "reasonCode": "relationship-carrier-ambiguous-and-schema-compiler-pending",
+        "satisfiedPredicateCount": 9,
+        "ambiguousPredicateCount": 1,
+        "unresolvedPredicateCount": 1,
+        "humanAcceptance": null
+      }
+    },
+    "epistemicClaims": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/factClaim"
+        },
+        {
+          "$ref": "#/$defs/factClaim"
+        },
+        {
+          "$ref": "#/$defs/inferenceClaim"
+        },
+        {
+          "$ref": "#/$defs/assumptionClaim"
+        },
+        {
+          "$ref": "#/$defs/unknownClaim"
+        }
+      ],
+      "items": false
+    },
+    "claimBoundary": {
+      "const": {
+        "conclusion": "H-051 can report only source-closed abstract projection readiness and the exact unresolved carrier predicates",
+        "nonAuthority": "neither the docket nor map is a specification, product law, an ADR candidate, implementation authority, or approval of its own classifications",
+        "exhaustiveness": "the finite abstract-slot universe is closed, but arbitrary prose semantics cannot be exhaustively refuted without human judgment",
+        "excluded": "SPEC or ADR creation, accepted-record mutation, profile or compiler change, product or mechanism behavior, live state, host mutation, Git history, and publication"
+      }
+    },
+    "adrAssessment": {
+      "const": {
+        "candidateActivated": false,
+        "reason": "The Slice exposes an unresolved representation choice and selects no durable architecture or mechanism."
+      }
+    },
+    "capabilityAudit": {
+      "const": {
+        "mode": "offline-local-governed-discovery",
+        "network": false,
+        "liveHost": false,
+        "usb": false,
+        "hidraw": false,
+        "docker": false,
+        "signals": false,
+        "sourceMutation": false,
+        "worktreeEvidenceWrites": ["lab/h051/"],
+        "authorizedLocalGovernanceWritesOutsideThisHarnessSubtask": [
+          ".overlaykit/governance/changes/CHG-0031.json",
+          ".overlaykit/governance/manifest.json"
+        ],
+        "existingGovernanceRecordMutation": false,
+        "acceptedRecordMutation": false,
+        "productMutation": false,
+        "gitHistoryMutation": false
+      }
+    },
+    "authority": {
+      "const": "none"
+    },
+    "action": {
+      "type": "null"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gitOid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "statement", "evidence"],
+      "properties": {
+        "kind": {
+          "enum": ["fact", "inference", "assumption", "unknown"]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "factClaim": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/claim"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "fact"
+            }
+          }
+        }
+      ]
+    },
+    "inferenceClaim": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/claim"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "inference"
+            }
+          }
+        }
+      ]
+    },
+    "assumptionClaim": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/claim"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "assumption"
+            }
+          }
+        }
+      ]
+    },
+    "unknownClaim": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/claim"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "unknown"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

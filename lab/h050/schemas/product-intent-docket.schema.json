@@ -1,0 +1,396 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h050-product-intent-docket/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "title",
+    "status",
+    "normative",
+    "subject",
+    "question",
+    "predicates",
+    "outcomePolicy",
+    "humanDecision",
+    "claimBoundary",
+    "authority",
+    "action"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h050-product-intent-docket/v1"
+    },
+    "hypothesis": {
+      "const": "H-050"
+    },
+    "title": {
+      "const": "Physical MK.2 automatic-recovery product-intent docket"
+    },
+    "status": {
+      "const": "pending-human-decision"
+    },
+    "normative": {
+      "const": false
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit", "tree", "sourceCount", "sourceSetSha256"],
+      "properties": {
+        "commit": {
+          "const": "2810e63defe37025f575ebea37be7e1c5e97c18e"
+        },
+        "tree": {
+          "const": "421ae43dbac2b52fe4dc7f594fda795a870b4c10"
+        },
+        "sourceCount": {
+          "const": 13
+        },
+        "sourceSetSha256": {
+          "const": "a9b0c3a354fbdea6867f4343d69a051763395a882ae2dea8c76ff8ff6c20732b"
+        }
+      }
+    },
+    "question": {
+      "const": "Does the human principal require automatic physical Stream Deck MK.2 command-delivery recovery, and if so what exact nine-part product boundary must a later specification express?"
+    },
+    "predicates": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/automaticRecoveryObligation"
+        },
+        {
+          "$ref": "#/$defs/linuxRoleAndPhysicalMk2Scope"
+        },
+        {
+          "$ref": "#/$defs/triggerAndIdentityContinuity"
+        },
+        {
+          "$ref": "#/$defs/restoredPhysicalCommandDelivery"
+        },
+        {
+          "$ref": "#/$defs/recoveryDeadlineAndClock"
+        },
+        {
+          "$ref": "#/$defs/degradedFailureAndManualFallback"
+        },
+        {
+          "$ref": "#/$defs/safetySecurityAndAuthorityBoundary"
+        },
+        {
+          "$ref": "#/$defs/acceptanceEvidenceAndScenarioCoverage"
+        },
+        {
+          "$ref": "#/$defs/specificationRelationship"
+        }
+      ],
+      "items": false
+    },
+    "outcomePolicy": {
+      "const": {
+        "supported": "exact-content-addressed-human-motion-with-require-automatic-and-nine-of-nine-explicit-predicate-decisions",
+        "refuted": "exact-content-addressed-human-motion-with-explicit-no-obligation-decision",
+        "inconclusive": "human-motion-absent-incomplete-or-ambiguous",
+        "invalid": "source-or-docket-drift-authority-action-or-implementation-overclaim"
+      }
+    },
+    "humanDecision": {
+      "type": "null"
+    },
+    "claimBoundary": {
+      "const": {
+        "conclusion": "this docket can classify only whether an exact human product-intent motion selects automatic recovery and all nine product decisions, explicitly rejects the obligation, or leaves the question unresolved",
+        "nonAuthority": "the docket is a non-normative question artifact and cannot itself create product law, a specification, an ADR, implementation authority, or production policy",
+        "excluded": "mechanism selection, controller design, live safety, host state, USB or hidraw behavior, implementation, publication, and every operational action"
+      }
+    },
+    "authority": {
+      "const": "none"
+    },
+    "action": {
+      "type": "null"
+    }
+  },
+  "$defs": {
+    "pendingPredicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "question", "decision"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "question": {
+          "type": "string"
+        },
+        "decision": {
+          "type": "null"
+        }
+      }
+    },
+    "automaticRecoveryObligation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/pendingPredicate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "automaticRecoveryObligation"
+            },
+            "question": {
+              "const": "Is recovery after the nominated physical interruption mandatory and automatic rather than optional, investigatory, best-effort, or manual?"
+            }
+          }
+        }
+      ]
+    },
+    "linuxRoleAndPhysicalMk2Scope": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/pendingPredicate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "linuxRoleAndPhysicalMk2Scope"
+            },
+            "question": {
+              "const": "Which SPEC-0001 Linux production role and which physical Stream Deck MK.2 surface are governed by the obligation?"
+            }
+          }
+        }
+      ]
+    },
+    "triggerAndIdentityContinuity": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/pendingPredicate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "triggerAndIdentityContinuity"
+            },
+            "question": {
+              "const": "Which post-login disconnect, return, or re-enumeration event starts the obligation, and how is the same governed physical device identified?"
+            }
+          }
+        }
+      ]
+    },
+    "restoredPhysicalCommandDelivery": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/pendingPredicate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "restoredPhysicalCommandDelivery"
+            },
+            "question": {
+              "const": "Which observable physical-key-to-Companion-to-authorized-OverlayKit-command outcome proves recovery rather than descriptor or marker reacquisition alone?"
+            }
+          }
+        }
+      ]
+    },
+    "recoveryDeadlineAndClock": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/pendingPredicate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "recoveryDeadlineAndClock"
+            },
+            "question": {
+              "const": "What maximum recovery duration applies, and what exact observable event starts and stops its monotonic clock?"
+            }
+          }
+        }
+      ]
+    },
+    "degradedFailureAndManualFallback": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/pendingPredicate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "degradedFailureAndManualFallback"
+            },
+            "question": {
+              "const": "What visible degraded state, retry limit, terminal failure, and manual fallback are required when automatic recovery does not converge?"
+            }
+          }
+        }
+      ]
+    },
+    "safetySecurityAndAuthorityBoundary": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/pendingPredicate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "safetySecurityAndAuthorityBoundary"
+            },
+            "question": {
+              "const": "What identity, race, repeated-intervention, credential, configuration, and server-authority constraints must recovery preserve?"
+            }
+          }
+        }
+      ]
+    },
+    "acceptanceEvidenceAndScenarioCoverage": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/pendingPredicate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "acceptanceEvidenceAndScenarioCoverage"
+            },
+            "question": {
+              "const": "Which causal observations and scenarios, including repeated recovery, long outage, and multiple-device cases, are required for product acceptance?"
+            }
+          }
+        }
+      ]
+    },
+    "specificationRelationship": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/pendingPredicate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "specificationRelationship"
+            },
+            "question": {
+              "const": "Must a later product specification supersede, extend, or remain separate from SPEC-0001 and SPEC-0002 without rewriting either accepted record?"
+            }
+          }
+        }
+      ]
+    },
+    "predicateDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "decision", "value"],
+      "properties": {
+        "id": {
+          "enum": [
+            "automaticRecoveryObligation",
+            "linuxRoleAndPhysicalMk2Scope",
+            "triggerAndIdentityContinuity",
+            "restoredPhysicalCommandDelivery",
+            "recoveryDeadlineAndClock",
+            "degradedFailureAndManualFallback",
+            "safetySecurityAndAuthorityBoundary",
+            "acceptanceEvidenceAndScenarioCoverage",
+            "specificationRelationship"
+          ]
+        },
+        "decision": {
+          "const": "selected"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 8,
+          "pattern": "^(?!\\s)(?:.|\\n)*(?<!\\s)$"
+        }
+      }
+    },
+    "humanMotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "hypothesis",
+        "principal",
+        "subjectCommit",
+        "docketRawSha256",
+        "productIntent",
+        "predicateDecisions",
+        "decisionsExplicitUnambiguousConflictFree",
+        "mechanismSelected",
+        "specificationAuthorized",
+        "adrAuthorized",
+        "implementationAuthorized",
+        "authority",
+        "action"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "overlaykit-h050-human-product-intent-motion/v1"
+        },
+        "hypothesis": {
+          "const": "H-050"
+        },
+        "principal": {
+          "const": "@rodrigoteamx"
+        },
+        "subjectCommit": {
+          "const": "2810e63defe37025f575ebea37be7e1c5e97c18e"
+        },
+        "docketRawSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "productIntent": {
+          "enum": ["require-automatic", "no-obligation", "undecided"]
+        },
+        "predicateDecisions": {
+          "type": "array",
+          "maxItems": 9,
+          "items": {
+            "$ref": "#/$defs/predicateDecision"
+          }
+        },
+        "decisionsExplicitUnambiguousConflictFree": {
+          "const": true
+        },
+        "mechanismSelected": {
+          "const": false
+        },
+        "specificationAuthorized": {
+          "const": false
+        },
+        "adrAuthorized": {
+          "const": false
+        },
+        "implementationAuthorized": {
+          "const": false
+        },
+        "authority": {
+          "const": "none"
+        },
+        "action": {
+          "type": "null"
+        }
+      }
+    }
+  }
+}

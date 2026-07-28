@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0029",
+  "title": "Frame H-050 human product-intent decision for physical MK.2 recovery",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the evidence-producing agent for CHG-0029 under the human principal @rodrigoteamx; the agent cannot choose product intent, approve its own authority, or create normative or operational authority.",
+      "evidence": "Repository AGENTS.md, ADR-0001, and compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immutable H-050 context subject is protected-main merge commit 2810e63defe37025f575ebea37be7e1c5e97c18e with tree 421ae43dbac2b52fe4dc7f594fda795a870b4c10, before CHG-0029 or its docket exists in the subject tree.",
+      "evidence": "Local read-only git rev-parse and git ls-tree at branch creation.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The closed context boundary contains exactly thirteen blobs: manifest.json, plan.json, ADR-0001 through ADR-0006, SPEC-0001 through SPEC-0002, and the implemented H-047, H-048, and H-049 successors CHG-0023, CHG-0025, and CHG-0027.",
+      "evidence": "Restricted git ls-tree -rz --full-tree stream SHA-256 57c794871d39e2fd9f1cb78d69126477a5c9b6121afc39699e258e8e061718b7 and canonical thirteen-entry source-array SHA-256 a9b0c3a354fbdea6867f4343d69a051763395a882ae2dea8c76ff8ff6c20732b.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The compiled plan raw SHA-256 is 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243 with internal planHash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4; the compiled manifest raw SHA-256 is 1a32305c13fedf67a1a0e76cd8d9040dc91e39da16df5719fa889187f89c98d9 with contentHash 8bcf82852821ceee10c951a89ce34bb692346b0fc2ea23613bddc2f05a17f152.",
+      "evidence": "Exact blobs at the immutable H-050 context subject and independent SHA-256 calculation.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "SPEC-0001 governs the Linux adapter but explicitly excludes USB access, physical Stream Deck discovery, physical key presses, and rendered button pixels; SPEC-0002 excludes physical USB and key behavior and starts its three-second boundary at virtual action invocation.",
+      "evidence": "Accepted SPEC-0001 raw SHA-256 917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179 and SPEC-0002 raw SHA-256 d15b1cbf7e97bd92aadf40342421161a0955e210b8566f7ae870dc78c05e89f6.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "ADR-0006 accepts a bounded SurfaceThread replacement observation but selects no production controller, trigger, recovery deadline, acceptable downtime, or physical-command-delivery obligation, and requires a later governed Slice before any production proposal.",
+      "evidence": "Accepted ADR-0006 raw SHA-256 619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human-accepted H-049 result is refuted only inside its nominated accepted-law boundary because it contains zero complete seven-predicate normative chains; it does not establish absence of external intent or decide a future product obligation.",
+      "evidence": "Implemented CHG-0027 raw SHA-256 db9063cd01d280a1f3481b6374eafa62dd406e1f5ff1e04ea3cc3d7efa15620d and its preserved human-accepted H-049 closure.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "A second repository search for physical-recovery authority would repeat the already closed H-049 question; the smallest next Slice is therefore a human product-intent docket that exposes every decision required before a successor specification can be drafted without agent invention.",
+      "evidence": "H-049's accepted zero-chain result, ADR-0001 evidence-before-decision ordering, and the D³ reorder check from implementation to normative audit to explicit stakeholder decision.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-050: the human principal selects a complete, conflict-free product-intent contract that either requires the SPEC-0001 Linux role to restore physical MK.2 command delivery automatically after a post-login disconnect or re-enumeration, with all acceptance boundaries required to authorize drafting a successor specification without selecting a mechanism, or explicitly selects no such product obligation.",
+      "evidence": "This is the refutable product-intent hypothesis. Supported requires an exact human motion selecting require-automatic and resolving all nine decision groups; refuted requires an exact human motion selecting no-obligation; every other admissible state remains inconclusive.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The exact contextual reply adelante con lo que sigue authorizes only local materialization and verification of the next governed-discovery docket, not any product choice, accepted specification, ADR, implementation, live observation, commit, push, or merge.",
+      "evidence": "Immediate prior handoff SHA-256 077e0e48d3c598af917fbca983d071c2b14482d6fc5cf7a8d304a5b3ce845a3 and exact UTF-8 reply without a trailing line feed SHA-256 3bbaa748bc466188cccba4634cf353c8480ff4de3dbe06d23c6991b60eef9fc2.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether automatic physical recovery is a product obligation or remains outside the product is unknown until the principal explicitly resolves automaticRecoveryObligation.",
+      "evidence": "Accepted SPEC-0001 exclusion, accepted H-049 result, and no later exact human product-intent motion.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "The Linux-role and physical-MK.2 scope, trigger and identity-continuity semantics, and the observable meaning of restored physical command delivery remain undecided.",
+      "evidence": "Unresolved docket decisions linuxRoleAndPhysicalMk2Scope, triggerAndIdentityContinuity, and restoredPhysicalCommandDelivery.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "The recovery deadline and clock, degraded-state and manual-fallback behavior, and safety, security, and authority boundary remain undecided.",
+      "evidence": "Unresolved docket decisions recoveryDeadlineAndClock, degradedFailureAndManualFallback, and safetySecurityAndAuthorityBoundary.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "The required acceptance evidence and scenario coverage and the exact relationship to accepted specifications remain undecided.",
+      "evidence": "Unresolved docket decisions acceptanceEvidenceAndScenarioCoverage and specificationRelationship.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Any authority to draft, propose, accept, or supersede a specification; create an ADR; choose or implement a mechanism; observe or mutate the host; or commit, push, merge, or publish remains absent until separately granted.",
+      "evidence": "CHG-0029 is proposed, non-normative, local, offline, and fixed to authority none and action null.",
+      "blocking": true
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The H-050 subject lock binds exactly the immutable main commit and tree, thirteen nominated source blobs, their paths, modes, Git OIDs, byte lengths, raw SHA-256 values, restricted tree digest, source-array digest, plan identity, and manifest identity.",
+      "verification": "Run the independent H-050 verifier against local Git and require exact equality with lab/h050/subject-lock.json."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The docket exposes exactly nine required product-intent decision groups without defaults, inferred selections, mechanism choices, normative force, or operational authority.",
+      "verification": "Validate lab/h050/product-intent-docket.json against its schema and hostile fixtures for omitted, additional, defaulted, preselected, conflicting, normative, and action-authorizing content."
+    },
+    {
+      "id": "SC-003",
+      "statement": "H-050 is supported only by an exact human motion selecting require-automatic and resolving all nine decisions, refuted only by an exact human motion selecting no-obligation, and otherwise remains inconclusive.",
+      "verification": "Verifier outcome matrix for complete automatic obligation, explicit no-obligation, missing choice, ambiguous choice, conflicting choice, malformed authority, and absent human motion."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Every H-050 outcome remains non-normative with authority none and action null and cannot itself authorize a successor specification, ADR, mechanism, product change, live observation, or Git transition.",
+      "verification": "Schema constants, exact verifier reconstruction, negative overclaim tests, and repository diff."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The local Slice reads only the exact local Git subject and tracked H-050 files and performs no network, Docker, USB, hidraw, procfs, sysfs, devfs, systemd, signal, lifecycle, installation, configuration, controller, or product capability.",
+      "verification": "Implementation inspection, command audit, focused tests, and scoped repository and host-state checks."
+    },
+    {
+      "id": "SC-006",
+      "statement": "No accepted or implemented governance record, profile, product source, product configuration, or accepted product behavior is edited or deleted; only CHG-0029, its compiled manifest entry, and the local H-050 docket harness are introduced.",
+      "verification": "Accepted-record hash comparison, scoped Git diff, deterministic manifest compilation, and product-source diff."
+    },
+    {
+      "id": "SC-007",
+      "statement": "Governance, focused H-050 tests, repository quality, build, formatting, and repository-integrity gates pass under an allowed Node 22 runtime.",
+      "verification": "npm run governance:verify; npm run governance:check; focused Node tests; npm_config_offline=true npm run check; npm run build; scoped Prettier; and git diff --check."
+    },
+    {
+      "id": "SC-008",
+      "statement": "CHG-0029 and the docket remain local and uncommitted pending exact human product-intent review.",
+      "verification": "Git status, branch and remote inspection, absence of a successor commit, and exact authority boundary."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0029 records the H-050 hypothesis, immutable context, D³ reorder, nine decision groups, outcome rules, typed epistemic state, exclusions, and authority boundary before human adjudication.",
+      "evidence": "This proposed change contract and its deterministic manifest entry."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The tracked subject lock, docket, schema, verifier, and hostile tests fail closed on source drift, decision omission, ambiguity, conflict, defaults, self-approval, normative overclaim, action authority, and mechanism selection.",
+      "evidence": "Pending focused H-050 test and verification receipts."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The pre-review H-050 result is inconclusive because all nine product-intent decisions require the human principal and no exact adjudicating motion exists.",
+      "evidence": "Pending verified docket result with nine unresolved decisions, authority none, and action null."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No ADR candidate is activated because H-050 selects neither mechanism nor durable architecture; even a later supported product-intent result could only open a separate request to draft a successor specification.",
+      "evidence": "ADR assessment against ADR-0001 and ADR-0006, docket exclusions, authority none, and action null."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "All accepted ADRs and specifications, implemented change records, profile, product source, and product configuration remain unchanged.",
+      "evidence": "Accepted-record hashes, repository diff, and deterministic governance verification."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "All required focused, governance, quality, build, formatting, and repository-integrity gates pass locally.",
+      "evidence": "Pending final local gate outputs under Node 22."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "No live or host observation and no network, Docker, USB, hidraw, signal, restart, installation, configuration, product mutation, commit, push, merge, publication, ADR, or SPEC follows from this docket.",
+      "evidence": "Implementation inspection, repository and remote state, proposed status, exact contextual authority, authority none, and action null."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "The next transition, if any, is an exact human product-intent motion over the content-addressed docket; specification drafting and all later mechanism work require separate authority.",
+      "evidence": "Verified docket identity and the H-050 outcome and authority rules."
+    }
+  ]
+}

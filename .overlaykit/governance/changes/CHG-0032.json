@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0032",
+  "title": "Authorize signed publication of the bounded H-050 and H-051 reviews",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the publication-producing agent for CHG-0032 under the human principal @rodrigoteamx; the agent cannot expand either accepted review, choose a carrier rule, or create product or operational authority.",
+      "evidence": "Repository AGENTS.md, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, ADR-0001, and the exact contextual publication transition recorded by this successor.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Immediately before CHG-0032, the publication branch remains at protected-main commit 2810e63defe37025f575ebea37be7e1c5e97c18e with tree 421ae43dbac2b52fe4dc7f594fda795a870b4c10 and contains exactly twenty-six pending tracked paths whose canonical descriptor-set SHA-256 is e07f2a984586a41b37b030f97e33a437b8da63fe4feb67a15b6b5a2c330cc11d.",
+      "evidence": "Read-only git status, git rev-parse, exact path/hash/byte-length descriptors, and the pre-CHG-0032 manifest raw SHA-256 902275239fcbfcaef3c9f6d0a12f754af866b63822fdf6a7294b94b677c02f0b.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0029, CHG-0030, and CHG-0031 remain byte-identical at raw SHA-256 36c74c9c45104f28cd0a019a4e5433c7e836f61daaac26d8de6be3987be92f05, fdf68ebab17501486fd2418e5a2c91099c50cbe2c36a6e69e69b94a506b713f7, and 6cdc124c9707cd4a743cfdd68a1706534418ad5163da720aefe8e0c2ded7adf5 respectively.",
+      "evidence": "Independent SHA-256 calculation before this successor, the H-050 and H-051 source anchors, and accepted-record immutability.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The H-050 human review is supported only as non-normative product intent with require-automatic and all nine decisions accepted, while its deterministic local closure remains unsigned and ignored.",
+      "evidence": "Canonical motion SHA-256 20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28; CHG-0030; closure SHA-256 2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e; fifteen-member archive SHA-256 52e20e817f6e6a6b3fb2d512ce9571296e9bd2098123ab24eab0488f602c1725; authority none and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The H-051 human review remains inconclusive for relationship-carrier-ambiguous-and-schema-compiler-pending with nine satisfied, one ambiguous, and one unresolved predicate, and its deterministic local closure remains unsigned and ignored.",
+      "evidence": "Readiness-map raw SHA-256 dfb1156e6c16721c01d008cb5d760b05f10dc2328cfb871a3a80a29a4447c7ce and canonical JSON SHA-256 0a2ec483a1d4f3d6c3603b20a51c1abbcc2ef098e78306feee205c8409dd72a6; closure SHA-256 abcd1212e3d4663bfffdde15965000dfd11c78c61207d89628b110d64c802bd0; forty-three-member archive SHA-256 7cfaf829c25b9b0b0f52546033066b8ce90485d96da7e84574333b10a042d20a; authority none and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0030 and the H-051 local closure records remain truthful when they state that commit, push, merge, publication, a successor, and H-052 were unauthorized at their exact earlier local-only temporal boundaries.",
+      "evidence": "Byte-identical CHG-0030, CHG-0031, H-050 and H-051 human-acceptance records, post-review assessments, source anchors, manifests, archives, and closure envelopes captured before this later contextual response.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "After the complete H-051 closure handoff, the registered human principal supplied the model-visible text 'dale connit y merge y a lo que sigue', represented as thirty-six UTF-8 bytes with SHA-256 de39c2e5820abb8eae2420d682914d4e1dccd9154ca402bb31dd12a0e87c37b6; this record makes no claim about inaccessible transport bytes.",
+      "evidence": "The immediately preceding handoff names the exact H-051 closure, outcomes, gates, and withheld transitions; the subsequent model-visible response is bound to that predecessor context and to CHG-0032 rather than treated as a reusable text-hash capability.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "In this exact context, connit is a non-semantic typo for commit, and the response authorizes a signed commit, instrumental push of the existing feature branch, protected pull request, required validation, allowed merge commit, and continuation to a separately governed next discovery after merge.",
+      "evidence": "Immediate H-051 handoff and response ordering; CHG-0018 precedent for 'dale commiy y merge y a lo que sigue'; CHG-0025 precedent for 'ok pues commit merge y a lo que sigue'; repository ruleset requiring a pull request, signatures, strict validate, and merge method merge.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The authorized tracked publication boundary contains exactly twenty-eight paths: the governance manifest, CHG-0029 through CHG-0032, ten lab/h050 files, twelve lab/h051 files, and one non-authorizing H-051 receipt.",
+      "evidence": "Exact staged path roster after deterministic manifest compilation; accepted ADRs, specifications, profile, plan, product code, tests outside the two labs, and repository configuration remain excluded.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The tracked H-051 receipt preserves only content identities, outcome boundaries, and the later Git transition while exposing no raw replay member and conferring no authority of its own.",
+      "evidence": "evidence/h051/dfb1156e6c16721c01d008cb5d760b05f10dc2328cfb871a3a80a29a4447c7ce/README.md has 3,563 bytes and raw SHA-256 619bc81b554b417ee597280cd2edfb9834aff6e29e1172674226f51b17fc2d30.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The H-050 and H-051 replay archives, source anchors, external closure files, and copied post-review metadata remain under artifacts/, ignored and excluded from Git publication.",
+      "evidence": ".gitignore artifacts/ boundary, git check-ignore, exact staged roster, H-050 closure modes 0700/0600, H-051 closure modes 0700/0600, and zero artifacts paths in the index.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The publication transition changes no accepted ADR, accepted specification, profile rule, compiled plan, product source, product configuration, recovery mechanism, or live state, and activates no ADR candidate.",
+      "evidence": "Scoped repository diff, unchanged ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002, unchanged profile and plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, H-050 and H-051 ADR assessments, authority none, and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "A later Git signature can establish provenance only for the exact tracked publication tree; it cannot retroactively make either local closure signed, publish either raw archive, or turn human product intent or representability evidence into normative product law.",
+      "evidence": "Both closure envelopes declare local-unsigned-not-published or equivalent local-only durability, their source anchors have no signed commit, and this successor preserves those bytes and temporal claims.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Remote durability, protected-branch admission, workflow results, attestation, and merge provenance remain unproven until the authorized Git and GitHub transitions complete successfully.",
+      "evidence": "Pre-publication branch state and the future observable requirements in SC-006 and DOD-006.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Continuation authority applies only after the protected merge and only to opening H-052 as CHG-0033 governed-discovery framing for the unresolved carrier choice; it selects no carrier branch and authorizes no fixture, schema/compiler change, SPEC, ADR, product implementation, or live experiment.",
+      "evidence": "The phrase 'a lo que sigue', CHG-0018 and CHG-0025 continuation precedents, H-051's two remaining unknowns, and ADR-0001 evidence-before-decision ordering.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0029, CHG-0030, CHG-0031, all H-050 and H-051 lab sources, and both ignored local closures remain byte-identical to their applicable pre-publication boundaries.",
+      "verification": "Recompute every source hash, the twenty-six-path predecessor descriptor-set SHA-256 e07f2a984586a41b37b030f97e33a437b8da63fe4feb67a15b6b5a2c330cc11d, H-050 closure 2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e, and H-051 closure abcd1212e3d4663bfffdde15965000dfd11c78c61207d89628b110d64c802bd0."
+    },
+    {
+      "id": "SC-002",
+      "statement": "CHG-0032 records the exact contextual transition without editing or retroactively reinterpreting either earlier local-only record.",
+      "verification": "Recompute the model-visible response SHA-256 de39c2e5820abb8eae2420d682914d4e1dccd9154ca402bb31dd12a0e87c37b6; inspect its predecessor and target binding, transport disclaimer, temporal claims, and byte-identical predecessor hashes."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The staged and committed tree contains exactly the twenty-eight authorized tracked paths and contains no artifacts member, product change, accepted-record change, or unrelated worktree path.",
+      "verification": "Compare git diff --cached --name-only against the exact governance, evidence/h051, lab/h050, and lab/h051 roster; require zero artifacts paths and zero disclosure or secret-pattern findings."
+    },
+    {
+      "id": "SC-004",
+      "statement": "H-050 remains supported only as non-normative product intent; H-051 remains inconclusive with nine satisfied, one ambiguous, and one unresolved predicate; both retain authority none and action null.",
+      "verification": "Run the focused verifiers and closure checks at their correct temporal boundaries and compare exact motion, map, assessment, archive, manifest, source-anchor, and closure identities."
+    },
+    {
+      "id": "SC-005",
+      "statement": "All temporal H-050 and H-051 tests, closure verification, governance, quality, build, formatting, integrity, and disclosure gates pass before publication.",
+      "verification": "Run archived or pre-successor focused tests where successor absence is part of the claim, exact successor-tree closure verification where admitted, npm run governance:verify, npm run governance:check, npm run check, npm run build, scoped Prettier, git diff --check, accepted-record diff, and bounded disclosure scan."
+    },
+    {
+      "id": "SC-006",
+      "statement": "The exact authorized tracked tree is committed with a valid identity signature, pushed without rewriting history, reviewed through a protected pull request, and merged only by an allowed merge commit after required checks succeed.",
+      "verification": "git verify-commit, GitHub signature state, remote branch ancestry, pull-request head and base identities, unresolved-thread inspection, required validate check, mergeability, protected-main merge method, and post-merge ancestry."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The merged main tree receives successful post-merge governance evidence while both raw closure directories remain absent from Git and the remote feature branch remains retained.",
+      "verification": "Post-merge workflow state and attestation, origin/main tree inspection, git ls-files artifacts/h050 artifacts/h051, remote branch inspection, and local ignored-closure verification."
+    },
+    {
+      "id": "SC-008",
+      "statement": "Any H-052 work begins only after merge as CHG-0033 governed-discovery and does not infer a carrier choice or create an ADR, SPEC, schema/compiler change, fixture, product implementation, or live action.",
+      "verification": "Separate post-merge D3 frame bound to the exact merged commit and tree, with authority none and action null until a later human decision."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0032 records the later contextual grant for signed commit, instrumental branch push, protected pull request, allowed merge, and separate post-merge continuation without rewriting CHG-0029, CHG-0030, or CHG-0031.",
+      "evidence": "Exact predecessor closure identities, response representation and hash, immutable predecessor contract hashes, contextual-transition precedents, and this implemented successor."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "Only the exact twenty-eight tracked review paths are published, and all raw closure bytes remain local, ignored, mode-restricted, and absent from Git.",
+      "evidence": "Staged and committed path rosters, artifacts ignore proof, closure rosters and modes, remote tree inspection, and bounded disclosure scan."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "H-050 remains non-normative human intent and H-051 remains bounded inconclusive representability evidence; neither gains normative, architectural, product, or operational authority.",
+      "evidence": "Motion, map, human acceptances, post-review assessments, closures, immutable contracts, unchanged accepted law, authority none, and action null."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "No ADR candidate, specification, carrier rule, recovery mechanism, product change, host action, raw publication, release, or package publication is created by this transition.",
+      "evidence": "Governance and repository diffs, exact response boundary, accepted-record hashes, unchanged plan, capability audits, authority none, and action null."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "All required temporal focused tests, closure checks, governance, quality, build, formatting, integrity, and disclosure gates pass before Git publication.",
+      "evidence": "Final local gate outputs at the frozen source boundaries and current successor tree."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "The authorized tree is committed with a valid signature and merged through the protected GitHub workflow only after required checks complete successfully.",
+      "evidence": "Signed commit identity, pull-request state, resolved review threads, required validate check, allowed merge commit, post-merge workflow, and attestation."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "After merge, main contains the exact bounded tracked reviews, both raw artifacts remain local-only, and H-052 begins only as a separate CHG-0033 governed-discovery frame.",
+      "evidence": "origin/main ancestry and tree, remote branch retention, ignored raw-directory inspection, and separate post-merge D3 discovery record."
+    }
+  ]
+}

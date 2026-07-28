@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h051-subject-lock/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "normativeGit",
+    "localPredecessorEvidence",
+    "combinedSourceSetSha256",
+    "gitSources",
+    "localSources",
+    "sourceRoles",
+    "excludedSources",
+    "boundary",
+    "authority",
+    "action"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h051-subject-lock/v1"
+    },
+    "hypothesis": {
+      "const": "H-051"
+    },
+    "normativeGit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "admission",
+        "commit",
+        "tree",
+        "sourceCount",
+        "restrictedLsTreeSha256",
+        "sourceSetSha256",
+        "planRawSha256",
+        "planHash"
+      ],
+      "properties": {
+        "admission": {
+          "const": "exact-local-git-objects"
+        },
+        "commit": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "tree": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "sourceCount": {
+          "const": 18
+        },
+        "restrictedLsTreeSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "sourceSetSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "planRawSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "planHash": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "localPredecessorEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "admission",
+        "signatureStatus",
+        "signedCommit",
+        "durabilityClaimed",
+        "sourceCount",
+        "sourceSetSha256",
+        "closureRawSha256"
+      ],
+      "properties": {
+        "admission": {
+          "const": "local-content-addressed-unsigned"
+        },
+        "signatureStatus": {
+          "const": "absent-not-authorized"
+        },
+        "signedCommit": {
+          "type": "null"
+        },
+        "durabilityClaimed": {
+          "const": false
+        },
+        "sourceCount": {
+          "const": 8
+        },
+        "sourceSetSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "closureRawSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "combinedSourceSetSha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "gitSources": {
+      "type": "array",
+      "minItems": 18,
+      "maxItems": 18,
+      "items": {
+        "$ref": "#/$defs/gitSource"
+      }
+    },
+    "localSources": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/localSource"
+      }
+    },
+    "sourceRoles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptedLaw",
+        "acceptedPredecessorFinding",
+        "representationCarrier",
+        "h050PreReview",
+        "h050AcceptedIntent",
+        "h050EvidenceClosure"
+      ],
+      "properties": {
+        "acceptedLaw": {
+          "$ref": "#/$defs/uniquePaths"
+        },
+        "acceptedPredecessorFinding": {
+          "$ref": "#/$defs/uniquePaths"
+        },
+        "representationCarrier": {
+          "$ref": "#/$defs/uniquePaths"
+        },
+        "h050PreReview": {
+          "$ref": "#/$defs/uniquePaths"
+        },
+        "h050AcceptedIntent": {
+          "$ref": "#/$defs/uniquePaths"
+        },
+        "h050EvidenceClosure": {
+          "$ref": "#/$defs/uniquePaths"
+        }
+      }
+    },
+    "excludedSources": {
+      "const": {
+        "mutableWorktreeManifest": ".overlaykit/governance/manifest.json",
+        "immutableMainManifestIncluded": true,
+        "successorChange": ".overlaykit/governance/changes/CHG-0031.json",
+        "selfPrefix": "lab/h051/"
+      }
+    },
+    "boundary": {
+      "const": {
+        "question": "whether the exact accepted H-050 intent can be mapped losslessly to abstract product-specification slots under the current accepted law and representation carrier",
+        "nonAuthority": "the source lock admits evidence only; it does not create, draft, accept, activate, or authorize a specification or ADR",
+        "excluded": "SPEC-shaped fixtures, arbitrary-prose exhaustiveness claims, product or mechanism implementation, profile or schema mutation, live observation, host mutation, publication, commit, push, and merge"
+      }
+    },
+    "authority": {
+      "const": "none"
+    },
+    "action": {
+      "type": "null"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gitOid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "safePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "gitSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "mode", "type", "oid", "byteLength", "sha256"],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "mode": {
+          "const": "100644"
+        },
+        "type": {
+          "const": "blob"
+        },
+        "oid": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "localSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "mode", "byteLength", "sha256"],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "mode": {
+          "enum": ["0600", "0644"]
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "uniquePaths": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/safePath"
+      }
+    }
+  }
+}

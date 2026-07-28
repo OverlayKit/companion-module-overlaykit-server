@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "overlaykit-h051-specification-readiness-docket/v1",
+  "hypothesis": "H-051",
+  "title": "Physical-recovery specification carrier readiness",
+  "status": "agent-proposed-pending-human-acceptance",
+  "normative": false,
+  "principal": "@rodrigoteamx",
+  "agent": "Codex /root",
+  "subject": {
+    "precontractPath": ".overlaykit/governance/changes/CHG-0031.json",
+    "precontractRawSha256": "6cdc124c9707cd4a743cfdd68a1706534418ad5163da720aefe8e0c2ded7adf5",
+    "sourceLockPath": "lab/h051/subject-lock.json",
+    "sourceLockRawSha256": "e95b3c806c512fd116e169be3bd02c8673e8fc39c72f28b245e8ab28fabe0a0a",
+    "readinessMapPath": "lab/h051/readiness-map.json",
+    "readinessMapRawSha256": "dfb1156e6c16721c01d008cb5d760b05f10dc2328cfb871a3a80a29a4447c7ce",
+    "normativeCommit": "2810e63defe37025f575ebea37be7e1c5e97c18e",
+    "normativeTree": "421ae43dbac2b52fe4dc7f594fda795a870b4c10",
+    "h050ClosureRawSha256": "2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e"
+  },
+  "authorizationContext": {
+    "modelVisibleReply": {
+      "value": "adelante con lo que sigue",
+      "utf8ByteLength": 25,
+      "sha256": "3bbaa748bc466188cccba4634cf353c8480ff4de3dbe06d23c6991b60eef9fc2",
+      "transportBytesClaimed": false
+    },
+    "predecessorChangeRawSha256": "fdf68ebab17501486fd2418e5a2c91099c50cbe2c36a6e69e69b94a506b713f7",
+    "predecessorClosureRawSha256": "2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e",
+    "successorHypothesis": "H-051",
+    "successorChange": "CHG-0031",
+    "interpretation": "one local offline governed-discovery pre-review cycle only",
+    "doesNotAuthorize": [
+      "SPEC",
+      "ADR",
+      "product-or-mechanism-implementation",
+      "live-observation",
+      "host-mutation",
+      "commit",
+      "push",
+      "merge",
+      "publication"
+    ]
+  },
+  "discoveryFrame": {
+    "before": "draft the successor product specification from the accepted H-050 intent",
+    "architecturalQuestion": "Can the exact accepted H-050 intent be projected losslessly into the current product-specification carrier without silently turning extends and references into supersedes or inventing policy?",
+    "overclaimToAvoid": "that a source-cited abstract map is a specification, proves arbitrary prose representability, authorizes drafting, or establishes a safe recovery mechanism",
+    "minimalRefutingSlice": "close the exact law, representation, and H-050 sources; map each accepted decision only to a finite abstract-slot universe; and expose every unresolved carrier predicate",
+    "observableEvidence": "exact source hashes and JSON pointers, eleven structurally reconstructed predicate receipts whose semantic classifications remain pending human acceptance, zero omitted mappings, one ambiguous relationship predicate, and one unresolved schema-compiler predicate",
+    "outOfScopeAndDeferred": "SPEC-shaped fixtures, field prose, identifiers, actors, terms, requirements, stories, workflows, profile or schema mutation, mechanism selection, live evidence, and every operational transition",
+    "reorderResult": "the first move changes from specification drafting to carrier-readiness refutation"
+  },
+  "question": "Does the closed H-050 intent admit a non-inventive, conflict-free, additive product-specification projection under the current carrier?",
+  "predicates": [
+    "mapsAutomaticRecoveryObligation",
+    "mapsLinuxRoleAndPhysicalMk2Scope",
+    "mapsTriggerAndIdentityContinuity",
+    "mapsRestoredPhysicalCommandDelivery",
+    "mapsRecoveryDeadlineAndClock",
+    "mapsDegradedFailureAndManualFallback",
+    "mapsSafetySecurityAndAuthorityBoundary",
+    "mapsAcceptanceEvidenceAndScenarioCoverage",
+    "mapsSpecificationRelationship",
+    "projectionIsNonInventiveAndConflictFree",
+    "schemaCompilerAdmitsAdditiveLifecycle"
+  ],
+  "outcomePolicy": {
+    "supported": "exact-human-accepted-map-with-eleven-satisfied-predicates-and-no-ambiguity-conflict-omission-or-authority-lift",
+    "refuted": "exact-human-accepted-exhaustive-finite-carrier-review-proves-no-admissible-non-inventive-projection",
+    "inconclusive": "human-acceptance-absent-or-any-predicate-ambiguous-unresolved-conflicting-omitted-or-non-exhaustive",
+    "invalid": "source-schema-map-drift-self-evidence-spec-shaped-fixture-or-authority-action-overclaim"
+  },
+  "preReviewResult": {
+    "status": "inconclusive",
+    "stage": "pre-review-specification-readiness",
+    "reasonCode": "relationship-carrier-ambiguous-and-schema-compiler-pending",
+    "satisfiedPredicateCount": 9,
+    "ambiguousPredicateCount": 1,
+    "unresolvedPredicateCount": 1,
+    "humanAcceptance": null
+  },
+  "epistemicClaims": [
+    {
+      "kind": "fact",
+      "statement": "The exact H-050 accepted intent contains nine explicit decisions, selects no mechanism, and grants no specification, ADR, implementation, or action authority.",
+      "evidence": "Candidate motion SHA-256 20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28 and human acceptance SHA-256 d392ec651f80cdd715ef7482a829b823631fc94ceb8abf926e957c7f7f690602."
+    },
+    {
+      "kind": "fact",
+      "statement": "The current product-specification JSON schema exposes supersedes but no typed extends or references property, while the profile carrier exposes a set of active specification identifiers.",
+      "evidence": "Exact main@2810e63 specification schema, profile schema, and profile blobs admitted by the H-051 source lock."
+    },
+    {
+      "kind": "inference",
+      "statement": "Eight H-050 decisions map to the finite abstract-slot universe without an observed source conflict; the relationship decision remains ambiguous between prose and a machine-readable carrier.",
+      "evidence": "Agent-proposed readiness map SHA-256 dfb1156e6c16721c01d008cb5d760b05f10dc2328cfb871a3a80a29a4447c7ce."
+    },
+    {
+      "kind": "assumption",
+      "statement": "The contextual reply authorizes only this local evidence-writing governed-discovery cycle because its text digest recurs and must be interpreted together with the exact H-050 predecessor closure.",
+      "evidence": "Model-visible reply digest, CHG-0030 digest, H-050 closure digest, and the immediately preceding handoff."
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether prose is an adequate carrier for extends and references, whether a machine-readable relation is required, and whether the schema/compiler admits the desired additive lifecycle remain unresolved.",
+      "evidence": "mapsSpecificationRelationship is ambiguous; schemaCompilerAdmitsAdditiveLifecycle is unresolved; no SPEC-shaped fixture or human adjudication is authorized."
+    }
+  ],
+  "claimBoundary": {
+    "conclusion": "H-051 can report only source-closed abstract projection readiness and the exact unresolved carrier predicates",
+    "nonAuthority": "neither the docket nor map is a specification, product law, an ADR candidate, implementation authority, or approval of its own classifications",
+    "exhaustiveness": "the finite abstract-slot universe is closed, but arbitrary prose semantics cannot be exhaustively refuted without human judgment",
+    "excluded": "SPEC or ADR creation, accepted-record mutation, profile or compiler change, product or mechanism behavior, live state, host mutation, Git history, and publication"
+  },
+  "adrAssessment": {
+    "candidateActivated": false,
+    "reason": "The Slice exposes an unresolved representation choice and selects no durable architecture or mechanism."
+  },
+  "capabilityAudit": {
+    "mode": "offline-local-governed-discovery",
+    "network": false,
+    "liveHost": false,
+    "usb": false,
+    "hidraw": false,
+    "docker": false,
+    "signals": false,
+    "sourceMutation": false,
+    "worktreeEvidenceWrites": ["lab/h051/"],
+    "authorizedLocalGovernanceWritesOutsideThisHarnessSubtask": [
+      ".overlaykit/governance/changes/CHG-0031.json",
+      ".overlaykit/governance/manifest.json"
+    ],
+    "existingGovernanceRecordMutation": false,
+    "acceptedRecordMutation": false,
+    "productMutation": false,
+    "gitHistoryMutation": false
+  },
+  "authority": "none",
+  "action": null
+}

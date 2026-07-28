@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "overlaykit-h050-human-acceptance/v1",
+  "hypothesis": "H-050",
+  "principal": "@rodrigoteamx",
+  "normative": false,
+  "temporalSequence": {
+    "candidateProposal": "exact-content-and-digest-presented-before-human-acceptance",
+    "humanAcceptance": "subsequent-to-candidate-proposal",
+    "localMaterialization": "candidate-file-and-acceptance-record-materialized-after-human-acceptance",
+    "postReviewAssessment": "materialized-after-this-acceptance-record"
+  },
+  "candidateMotion": {
+    "path": "lab/h050/canonical-candidate-motion.json",
+    "rawSha256": "20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28",
+    "byteLength": 4139,
+    "encoding": "canonical-json-minified-with-one-trailing-lf"
+  },
+  "docket": {
+    "path": "lab/h050/product-intent-docket.json",
+    "rawSha256": "7a145c440af25f5bbbb71c111381f886dccba387e6a0880853e666ceabea6684"
+  },
+  "representations": {
+    "displayedMarkdown": {
+      "status": "model-visible-transcription-not-transport-bytes",
+      "value": "> Acepto como intención humana canónica de H‑050 la moción candidata SHA‑256 20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28, vinculada al docket SHA‑256 7a145c440af25f5bbbb71c111381f886dccba387e6a0880853e666ceabea6684, incluyendo\n  > sus nueve decisiones y límites. Autorizo únicamente su cierre post-review local. No autorizo SPEC, ADR, implementación, observación live, commit, push ni merge.",
+      "utf8ByteLength": 425,
+      "sha256": "613d3dae98b5e028a784c27706a29e6be5bcf437496964566e869e847b1c37f8"
+    },
+    "semanticFolded": {
+      "status": "unquoted-folded-semantic-text-not-transport-bytes",
+      "value": "Acepto como intención humana canónica de H‑050 la moción candidata SHA‑256 20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28, vinculada al docket SHA‑256 7a145c440af25f5bbbb71c111381f886dccba387e6a0880853e666ceabea6684, incluyendo sus nueve decisiones y límites. Autorizo únicamente su cierre post-review local. No autorizo SPEC, ADR, implementación, observación live, commit, push ni merge.",
+      "utf8ByteLength": 419,
+      "sha256": "da18adfb60bb11bb8237b0772ae3d16e2e52a3784c0ca06199eda6acf5eafa84"
+    },
+    "transportBytes": {
+      "claimed": false,
+      "byteLength": null,
+      "sha256": null
+    }
+  },
+  "acceptance": {
+    "decision": "accept-canonical-candidate-including-nine-decisions-and-limits",
+    "acceptedCandidateMotionSha256": "20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28",
+    "acceptedDocketRawSha256": "7a145c440af25f5bbbb71c111381f886dccba387e6a0880853e666ceabea6684",
+    "authorizes": ["local-post-review-closure"],
+    "authorizationExhaustive": true,
+    "outsideAuthorizedSet": "unauthorized",
+    "doesNotAuthorize": [
+      "SPEC",
+      "ADR",
+      "implementation",
+      "live-observation",
+      "commit",
+      "push",
+      "merge"
+    ]
+  },
+  "claimBoundary": {
+    "conclusion": "the human principal accepts the previously proposed exact candidate as canonical H-050 product intent, including all nine decisions and their existing non-authorizing limits; the candidate file and this record are later local materializations",
+    "nonAuthority": "this acceptance supports only the non-normative H-050 product-intent question and does not itself create a SPEC, ADR, implementation, live-observation, Git, or production authority",
+    "transport": "the record preserves two labeled review representations but makes no claim about inaccessible raw transport bytes"
+  },
+  "authority": "none",
+  "action": null
+}
