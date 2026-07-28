@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "overlaykit-h048-subject-lock/v1",
+  "hypothesis": "H-048",
+  "acceptedAt": "2026-07-27",
+  "acceptedBy": "@rodrigoteamx",
+  "repoSet": {
+    "sha256": "c7d16003f59e7aab2d22dbdbed0812ea2096060215c9a67592caf11e00a97ee5",
+    "preimageStatus": "unavailable",
+    "canonicalization": null,
+    "preimage": null
+  },
+  "repositories": [
+    {
+      "key": "OverlayKit/companion-module-overlaykit-server",
+      "localLocator": ".",
+      "commit": "2d46d1c60e7aced224b47a8857d93015c5fb5c91",
+      "tree": "1ea80375569a43bf7d1ef53b719cf878658ad3c7",
+      "entryCount": 250,
+      "lsTreeSha256": "418f8d2ea8b50416c04f87a3dcc73caaf8b9360cf3bdaa6ffae6b80b0f90944d",
+      "refSet": {
+        "sha256": "ef9b9c863e0061925eb58fb85882a2d56484d18b7cd811873f9c814a834f39f1",
+        "preimageStatus": "unavailable",
+        "canonicalization": null,
+        "preimage": null
+      }
+    },
+    {
+      "key": "OverlayKit/overlaykit",
+      "localLocator": "../overlaykit",
+      "commit": "9a5585de196ff972993c7ff81bf9c1461c47eaae",
+      "tree": "214f76e29d7c6a48497a6f26ebd69cfa80dc88ce",
+      "entryCount": 429,
+      "lsTreeSha256": "c2cc0a619e0e1532a6de23e4dc4571e18bb0d5eff7add45d93d9ff6fa13bde28",
+      "refSet": {
+        "sha256": "51bcea856b0d74b10907203040bbeb9245ee11fb0c8b6bc8bf19f4be6182439e",
+        "preimageStatus": "unavailable",
+        "canonicalization": null,
+        "preimage": null
+      }
+    }
+  ],
+  "target": {
+    "imageReference": "ghcr.io/bitfocus/companion/companion:v4.3.3",
+    "imageId": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e",
+    "hostRole": "spec-0001-linux-production-host",
+    "hostRoleSpecification": "SPEC-0001",
+    "hostRoleSpecificationContentHash": "917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179",
+    "imageInterpretation": "historical-evidence-selector"
+  },
+  "predicateOrder": [
+    "effectiveAcceptedProductionAuthority",
+    "exactImageReferenceAndId",
+    "spec0001LinuxHostBinding",
+    "deploymentPresenceAndCardinality",
+    "repositoryDeclaredLifecycleOwner",
+    "reconcilerMechanism",
+    "absenceToConvergenceRule",
+    "explicitLinkClosure"
+  ],
+  "outcomePolicy": {
+    "invalid": "Any anchor, schema, source, archive, or artifact integrity failure is invalid evidence.",
+    "inconclusive": "Any opaque, omitted, ambiguous, conflicting, unresolved, or unreviewed source or potentially semantic relationship prevents supported or refuted.",
+    "supported": "Complete coverage, zero unknowns, and at least one fully linked eight-predicate desired-state chain.",
+    "refuted": "Complete coverage, zero unknowns, and zero fully linked eight-predicate desired-state chains."
+  },
+  "claimBoundary": {
+    "includes": [
+      "the exact two nominated Git main trees",
+      "tracked archive members reachable from those trees",
+      "explicit repository-local and cross-repository indirections admitted by the review map",
+      "the accepted repo-set and ref-set anchors only when their exact preimages are available"
+    ],
+    "excludes": [
+      "inaccessible organization variables and secrets",
+      "unreported or inaccessible private sources",
+      "wikis, issues, projects, deleted refs, runbooks, and CMDB",
+      "host configuration, current host state, live observation, intent, compliance, drift, cause, and remedy",
+      "actual external operational ownership",
+      "installation, configuration, start, stop, restart, signaling, reconciliation, publication, ADR, SPEC, and production policy"
+    ],
+    "authority": "none",
+    "action": null
+  }
+}

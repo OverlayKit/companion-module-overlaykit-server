@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0024",
+  "title": "Test desired-state authority in the nominated OverlayKit Git boundary",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0003", "ADR-0005", "ADR-0006"],
+  "specifications": [],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the evidence-producing agent for CHG-0024 under the human principal @rodrigoteamx; the agent cannot approve its own classifications, create action authority, select production desired state, or expand the accepted boundary.",
+      "evidence": "Repository AGENTS.md, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, ADR-0001, and the principal's explicit H-048 governed-discovery acceptance on 2026-07-27.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal nominated only the accessible Git/GitHub surface of the OverlayKit organization as the H-048 experiment boundary and bound that nomination to repo-set SHA-256 c7d16003f59e7aab2d22dbdbed0812ea2096060215c9a67592caf11e00a97ee5.",
+      "evidence": "The exact human motion accepted on 2026-07-27 enumerates the repo-set digest, both repository identities, both main source anchors, their tree manifests, and their ref-set digests.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The nominated Companion subject is OverlayKit/companion-module-overlaykit-server commit 2d46d1c60e7aced224b47a8857d93015c5fb5c91, tree 1ea80375569a43bf7d1ef53b719cf878658ad3c7, 250 entries, NUL-safe tree-manifest SHA-256 418f8d2ea8b50416c04f87a3dcc73caaf8b9360cf3bdaa6ffae6b80b0f90944d, and accepted ref-set SHA-256 ef9b9c863e0061925eb58fb85882a2d56484d18b7cd811873f9c814a834f39f1.",
+      "evidence": "Human-accepted source anchor; local read-only git rev-parse and git ls-tree reproduction at protected-main merge 2d46d1c60e7aced224b47a8857d93015c5fb5c91.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The nominated OverlayKit server subject is OverlayKit/overlaykit commit 9a5585de196ff972993c7ff81bf9c1461c47eaae, tree 214f76e29d7c6a48497a6f26ebd69cfa80dc88ce, 429 entries, NUL-safe tree-manifest SHA-256 c2cc0a619e0e1532a6de23e4dc4571e18bb0d5eff7add45d93d9ff6fa13bde28, and accepted ref-set SHA-256 51bcea856b0d74b10907203040bbeb9245ee11fb0c8b6bc8bf19f4be6182439e.",
+      "evidence": "Human-accepted source anchor; local read-only git rev-parse and git ls-tree reproduction at accepted OverlayKit commit 9a5585de196ff972993c7ff81bf9c1461c47eaae.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The two main trees contain 679 repository-qualified entries and 76 relative paths that occur in both repositories, so all source identities, citations, archive routes, atoms, and edges must include the repository identity.",
+      "evidence": "Deterministic comparison of the exact two git ls-tree streams at the nominated commits.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The Companion main tree contains three tracked tar+gzip roots and the OverlayKit main tree contains none; archive contents remain source evidence and cannot be discarded merely because they are nested or historical.",
+      "evidence": "Exact nominated main-tree path inventory: evidence/h042/f4996a0d46c54fd337601e43ae7e0afa5e44d911c72c4888c0d1ae067fe0dc88/replay-15b2589976cb3a4cff95af807d52728fee83a2f5b9983969f61e0663bfcc3b36.tar.gz, evidence/h043/64bf41f30dc2d51a2475e6f2e9b79ddebc225c076a87b83c384b3848b1bbecb8/replay-fbe7e841a7319328b253e414f93abd3a17ab47506b783b652c6624aae3b68dec.tar.gz, and vendor/overlaykit-protocol-0.1.0.tgz.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Accepted SPEC-0001 and ADR-0003 govern the Linux adapter and server-authority boundary, while accepted ADR-0005 and ADR-0006 bind exact Companion identities only to bounded laboratory or mechanism evidence and explicitly do not select production deployment or recovery policy.",
+      "evidence": "SPEC-0001 content hash 917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179; ADR-0003 content hash 8d10bfca940203cfa8fcfe96640d3c4c22ff25a14692a4a6ac459a3dc3743ce2; ADR-0005 content hash f59ff9a71f87864fcb2478ce17a92b2f0dc4aa133ca6d01c56fb90ab682cb2d6; ADR-0006 content hash 619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Implemented CHG-0023 preserves the human-reviewed H-047 conclusion as refuted only inside its earlier repository boundary and explicitly leaves external desired state unknown with authority none and action null.",
+      "evidence": "CHG-0023 content hash 99db59f15b1a4850b9c043ffe687c354bf33762c23f141a10f0e53474b5c2266 at nominated Companion commit 2d46d1c60e7aced224b47a8857d93015c5fb5c91.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The accepted H-048 motion supplies the repo-set and ref-set digest strings but does not supply their exact byte preimages or canonicalization algorithms; no nominated source may be substituted for those missing bytes.",
+      "evidence": "Exact H-048 human motion accepted on 2026-07-27 and the literal unavailable-preimage states in the H-048 subject lock.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human authorization permits only local offline read-only Git inspection and local ignored evidence writes; it prohibits network access, live host observation, Docker, USB or hidraw access, signals, restart, installation, configuration, ADR, specification or production-policy creation, raw publication, commit, push, and merge.",
+      "evidence": "Exact H-048 human authorization accepted on 2026-07-27.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "A repository-qualified, content-addressed inventory of both nominated main trees, strict archive expansion, explicit indirection review, and an independent eight-predicate classifier is the smallest offline Slice that can test the nominated authority question without designing or exercising a reconciler.",
+      "evidence": "D³ reorder accepted by the principal, ADR-0001 evidence-before-decision rule, and the fail-closed source-closure lessons preserved by H-047.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-048: within the exact human-nominated OverlayKit Git boundary there exists at least one current, explicit, unambiguous, and fully linked desired-state chain rooted in effective accepted production authority that binds the exact Companion image to the SPEC-0001 Linux production-host role with deployment presence and cardinality, a repository-declared lifecycle owner, a reconciler mechanism, an absence-to-convergence rule, and complete link closure.",
+      "evidence": "This is the refutable positive-existence hypothesis; all eight predicates are required and historical evidence, laboratory resources, proposed records, implementation code alone, inferred proximity, and sources outside the nominated boundary cannot satisfy it.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "The accepted repo-set and ref-set digests cannot be independently admitted until their exact byte preimages and canonicalization algorithms are available or the human principal nominates a new explicit content-addressed manifest.",
+      "evidence": "A digest without its preimage cannot establish set membership, ordering, field selection, or completeness; substituting a newly invented serialization would change the accepted boundary.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "The final H-048 harness source-set digest, candidate review-map digest, independent verification result, and canonical outcome remain unknown until the local source closure is frozen and executed twice.",
+      "evidence": "Any change to CHG-0024, the subject lock, producer, schema, review map, tests, or verifier changes the local no-commit source closure.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Inaccessible organization variables and secrets, unreported private sources, wikis, issues, projects, deleted refs, runbooks, CMDB, host configuration, current host state, external operational ownership, intent, compliance, drift, cause, and remedy remain outside the accepted H-048 boundary.",
+      "evidence": "The human principal explicitly preserved these surfaces as out of scope and unknown; no H-048 outcome may generalize beyond the nominated Git boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Any authority to install, configure, start, stop, restart, signal, reconcile, retry, publish, create an ADR, change a product specification, or otherwise mutate production remains unknown pending a separate governed human transition.",
+      "evidence": "CHG-0024 is proposed and non-authorizing; every valid H-048 outcome is fixed to authority none and action null.",
+      "blocking": true
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The precontract records the exact human-nominated repo-set digest, both repository identities, commits, trees, entry counts, tree-manifest digests, ref-set digests, prohibited surfaces, and external unknowns without substituting local observations for accepted anchors.",
+      "verification": "Strict subject-lock schema, exact comparison with CHG-0024 and the accepted motion, and independent verifier constants."
+    },
+    {
+      "id": "SC-002",
+      "statement": "Each main subject is independently reconstructed only from its exact Git object database by commit, tree, NUL-safe ls-tree stream, repository-qualified path, mode, OID, length, and SHA-256; every cat-file payload must independently reproduce its ls-tree Git blob OID, and all 679 entries are covered exactly once.",
+      "verification": "Read-only git rev-parse, ls-tree, and cat-file under an exact command allowlist with no lazy fetch or optional locks; independent Git blob framing plus hostile omission, duplicate, path-collision, substituted blob, mode, OID, tree, count, and digest tests."
+    },
+    {
+      "id": "SC-003",
+      "statement": "Accepted repo-set and ref-set anchors are admitted only from their exact declared byte preimages and canonicalization rules; absent preimages force H-048 inconclusive with reason accepted-source-anchor-opaque, while a present hash mismatch is invalid evidence before semantic classification.",
+      "verification": "Preflight outcome matrix and hostile tests for absent, malformed, reordered, truncated, substituted, and digest-mismatched set manifests."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Repository identity is part of every path, citation, archive virtual route, atom, edge, and digest frame so the 76 cross-repository relative-path collisions cannot alias sources.",
+      "verification": "Repo-qualified uniqueness checks and hostile fixtures that substitute the same relative path, OID, or blob hash from the other repository."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Every tracked archive is expanded in-process under one exact strict global policy; traversal, absolute or duplicate routes, links, unsupported members, extension or signature mismatch, trailing bytes, nested-depth or resource-budget excess, and opaque relied-upon content force invalid or inconclusive evidence.",
+      "verification": "Exact archive root-set comparison, content-addressed closure receipts, shared global budgets, and inherited H-047 plus H-048 repository-namespace hostile tests."
+    },
+    {
+      "id": "SC-006",
+      "statement": "A desired-state chain is assembled only from externally human-accepted typed contributions that share one deployment key proven by the same exact UTF-8 byte span in every cited source; each contribution binds a repository, exact subject commit, source kind, path, SHA-256, predicate, supports-or-contradicts disposition, and byte-span receipt. All eight predicates require exactly one uncontradicted support, and explicit link closure additionally requires an exact atomic cross-repository repo-plus-commit receipt owned by that contribution's source.",
+      "verification": "Typed-chain tests for one complete chain, exact source-byte binding, no Cartesian mixing across bindings, partial chains, duplicate supports, contradictions, source-anchor swaps, inferred or borrowed links, historical identities, and multiple independent chains."
+    },
+    {
+      "id": "SC-007",
+      "statement": "Outcome precedence is fail closed: invalid source admission is rejected; any opaque, omitted, ambiguous, conflicting, unresolved, or unreviewed source or potentially semantic relationship inside the nominated boundary makes H-048 inconclusive. Complete tree and archive inventory closes local content targets, while every relationship capable of contributing to a chain must either have typed source-byte evidence or be covered by an externally content-addressed human acceptance of the complete default indirection dismissal. That acceptance must bind the exact non-circular review-universe preimage containing the policy, all source receipts, all default-candidate identities, and every indirection receipt. A literal target outside the nominated boundary is preserved as a terminal excluded receipt and is never fetched or treated as a dependency; a GitHub pull-request target remains unresolved because it was not excluded by the human motion. Only complete zero-chain coverage refutes H-048 and only one or more complete chains with zero unknowns support it.",
+      "verification": "Strict schema cross-field invariants, exact review-universe artifact reconstruction, producer and verifier parity, and hostile outcome-matrix tests."
+    },
+    {
+      "id": "SC-008",
+      "statement": "The independent verifier reconstructs subject identities, source maps, archive closures, content-addressed human-review admission, typed predicates, candidate chains, outcome, authority, and the exact claim boundary without importing the producer or classifier or trusting producer-supplied candidate or outcome fields. The producer and verifier may share only the source-closed strict low-level archive decoder.",
+      "verification": "Static import-boundary test, independent semantic reconstruction above the captured archive decoder, byte comparison, and adversarial artifact mutation tests."
+    },
+    {
+      "id": "SC-009",
+      "statement": "Because commit is prohibited, the H-048 harness uses an explicit local unsigned content-addressed source closure with exact repo-qualified path, mode, length, and SHA-256; absence of a source signature is represented honestly and never weakened into signed evidence. The writer is pinned to the repository-local artifacts/h048 boundary, and the exact .gitignore bytes plus its artifacts/ rule are part of the source closure.",
+      "verification": "Canonical local source manifest, pinned artifact root, captured ignore-rule invariant, immutable snapshot directory modes 0700/0600, no symlinks, exclusive writes, double source snapshots, and exact source-set digest comparison."
+    },
+    {
+      "id": "SC-010",
+      "statement": "Two local producer runs yield byte-identical semantic evidence and the independent verifier reproduces their source maps, candidate maps, outcome, and semantic digest.",
+      "verification": "Separate ignored run directories, byte and SHA-256 comparison, independent verification outputs, and source stability checks."
+    },
+    {
+      "id": "SC-011",
+      "statement": "The harness executes with no network and only exact read-only Git commands plus writes pinned to the repository-local ignored artifacts/h048 boundary; it performs no Docker, USB, procfs, sysfs, devfs, systemd, hidraw, signal, lifecycle, installation, configuration, publication, or production access.",
+      "verification": "Zero-inheritance subprocess environment, exact executable and argument allowlist, source inspection, hostile command tests, capability receipt, and repository diff."
+    },
+    {
+      "id": "SC-012",
+      "statement": "No accepted ADR, accepted specification, implemented change, profile, compiled plan, product code, production configuration, or prior H-047 source is edited; only CHG-0024, its H-048 lab sources, and the deterministically regenerated manifest may change.",
+      "verification": "Base-ref byte comparison, governance compiler output, plan/profile hash identity, source allowlist, and repository diff."
+    },
+    {
+      "id": "SC-013",
+      "statement": "Governance, focused H-048 tests, repository quality checks, and build gates pass before local evidence is handed to the human principal.",
+      "verification": "npm run governance:verify, npm run governance:check, pinned Node 22.20.0 focused tests, npm run check with npm_config_offline=true, and npm run build."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0024 records the accepted boundary, D³ reorder, positive H-048 hypothesis, typed epistemic state, eight predicates, three outcomes, claim boundary, and prohibited capabilities before execution.",
+      "evidence": "This proposed contract and its deterministic manifest entry."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "An exact subject lock names both accepted repositories, main commits and trees, 679-entry closure, accepted opaque set digests, local locator policy, and external exclusions without pretending to possess missing preimages.",
+      "evidence": "Pending lab/h048/subject-lock.json and strict schema/tests."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "A producer, strict schema, agent-proposed review map, exact non-circular review-universe artifact, focused hostile tests, and independent verifier cover both main trees, tracked archives, semantic candidates, indirections, and eight-predicate classification using repository-qualified identities.",
+      "evidence": "Pending local content-addressed H-048 source closure and focused test receipts."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "Two canonical local offline runs and independent verifications agree byte-for-byte and report the exact fail-closed H-048 outcome with authority none and action null.",
+      "evidence": "Pending artifacts/h048 run.json, source-map.json, review-universe.json, candidate-index.json, verification.json, and semantic evidence SHA-256."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "Missing accepted set-manifest preimages are preserved as accepted-source-anchor-opaque and cannot be normalized into complete coverage, zero chains, or a refuted result.",
+      "evidence": "Pending producer and independent verifier outcome plus hostile preflight tests."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "Every artifact states that any result applies only to the nominated Git boundary and cannot establish policy outside it, operator intent, compliance, drift, cause, actual external ownership, remedy, or action authority.",
+      "evidence": "Strict schema constants, claim-boundary comparison, negative overclaim tests, and independent verifier."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "No accepted or implemented record is edited or deleted; CHG-0022, CHG-0023, ADR-0001 through ADR-0006, SPEC-0001, SPEC-0002, profile 1.6.0, compiled plan, product code, and prior H-047 sources remain byte-identical.",
+      "evidence": "Base-ref hash comparison, manifest compilation, plan/profile identity, and repository diff."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "The experiment performs no live or host observation and no network, Docker, USB, procfs, sysfs, devfs, systemd, hidraw, signal, lifecycle, installation, configuration, reconciliation, raw publication, or production mutation.",
+      "evidence": "Capability audit, command allowlist, pinned writer root, source-closed ignore rule, implementation inspection, ignored artifact boundary, and repository diff."
+    },
+    {
+      "id": "DOD-009",
+      "statement": "The ADR assessment creates no candidate because this Slice selects no desired-state authority, lifecycle owner, reconciler, convergence policy, product behavior, or production action.",
+      "evidence": "Pending H-048 candidate assessment against ADR-0001, ADR-0005, ADR-0006, SPEC-0001, SPEC-0002, and the exact experiment outcome."
+    },
+    {
+      "id": "DOD-010",
+      "statement": "All required governance, focused, quality, and build gates pass at the local source boundary before evidence handoff.",
+      "evidence": "Pending final local gate receipts; npm audit is permitted only with npm_config_offline=true and must fail rather than access the network if cache evidence is unavailable."
+    },
+    {
+      "id": "DOD-011",
+      "statement": "CHG-0024 remains proposed and all raw evidence remains local until separate human review; no acceptance, ADR, specification, action authority, commit, push, merge, release, publication, or production policy follows automatically.",
+      "evidence": "Repository and remote state, proposed status, local ignored evidence boundary, and separate human-transition requirement."
+    }
+  ]
+}

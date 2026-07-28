@@ -1,0 +1,1180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h048-external-desired-state-run/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "boundary",
+    "localSourceClosure",
+    "target",
+    "artifacts",
+    "summary",
+    "outcome",
+    "adrAssessment",
+    "capabilityAudit",
+    "authority",
+    "action",
+    "claimBoundary",
+    "claimBoundaryCanonicalSha256",
+    "semanticEvidenceSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h048-external-desired-state-run/v1"
+    },
+    "hypothesis": {
+      "const": "H-048"
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acceptedAt", "acceptedBy", "repoSet", "repositories"],
+      "properties": {
+        "acceptedAt": {
+          "const": "2026-07-27"
+        },
+        "acceptedBy": {
+          "const": "@rodrigoteamx"
+        },
+        "repoSet": {
+          "$ref": "#/$defs/setAnchor"
+        },
+        "repositories": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/repository"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "const": "OverlayKit/companion-module-overlaykit-server"
+                    },
+                    "commit": {
+                      "const": "2d46d1c60e7aced224b47a8857d93015c5fb5c91"
+                    },
+                    "tree": {
+                      "const": "1ea80375569a43bf7d1ef53b719cf878658ad3c7"
+                    },
+                    "entryCount": {
+                      "const": 250
+                    },
+                    "lsTreeSha256": {
+                      "const": "418f8d2ea8b50416c04f87a3dcc73caaf8b9360cf3bdaa6ffae6b80b0f90944d"
+                    },
+                    "refSet": {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/refSetAnchor"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "sha256": {
+                              "const": "ef9b9c863e0061925eb58fb85882a2d56484d18b7cd811873f9c814a834f39f1"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/repository"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "const": "OverlayKit/overlaykit"
+                    },
+                    "commit": {
+                      "const": "9a5585de196ff972993c7ff81bf9c1461c47eaae"
+                    },
+                    "tree": {
+                      "const": "214f76e29d7c6a48497a6f26ebd69cfa80dc88ce"
+                    },
+                    "entryCount": {
+                      "const": 429
+                    },
+                    "lsTreeSha256": {
+                      "const": "c2cc0a619e0e1532a6de23e4dc4571e18bb0d5eff7add45d93d9ff6fa13bde28"
+                    },
+                    "refSet": {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/refSetAnchor"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "sha256": {
+                              "const": "51bcea856b0d74b10907203040bbeb9245ee11fb0c8b6bc8bf19f4be6182439e"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "localSourceClosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "signatureStatus",
+        "commit",
+        "sourceCount",
+        "uniqueBlobCount",
+        "sourceSetSha256"
+      ],
+      "properties": {
+        "kind": {
+          "const": "local-content-addressed-unsigned"
+        },
+        "signatureStatus": {
+          "const": "absent-not-authorized"
+        },
+        "commit": {
+          "type": "null"
+        },
+        "sourceCount": {
+          "const": 14
+        },
+        "uniqueBlobCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 14
+        },
+        "sourceSetSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "imageReference",
+        "imageId",
+        "hostRole",
+        "hostRoleSpecification",
+        "hostRoleSpecificationContentHash",
+        "imageInterpretation"
+      ],
+      "properties": {
+        "imageReference": {
+          "const": "ghcr.io/bitfocus/companion/companion:v4.3.3"
+        },
+        "imageId": {
+          "const": "sha256:2ff41215ab2ed77b5ec3dd74c5e6ec3b01354f57a7ca301b16017444d395544e"
+        },
+        "hostRole": {
+          "const": "spec-0001-linux-production-host"
+        },
+        "hostRoleSpecification": {
+          "const": "SPEC-0001"
+        },
+        "hostRoleSpecificationContentHash": {
+          "const": "917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179"
+        },
+        "imageInterpretation": {
+          "const": "historical-evidence-selector"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceClosure", "sourceMap", "reviewUniverse", "candidateIndex"],
+      "properties": {
+        "sourceClosure": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "source-closure.json"
+                }
+              }
+            }
+          ]
+        },
+        "sourceMap": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "source-map.json"
+                }
+              }
+            }
+          ]
+        },
+        "reviewUniverse": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "review-universe.json"
+                }
+              }
+            }
+          ]
+        },
+        "candidateIndex": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "const": "candidate-index.json"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repositories",
+        "mainTreeEntries",
+        "trackedArchiveRoots",
+        "expandedArchiveOccurrences",
+        "expandedArchiveMembers",
+        "candidates",
+        "indirections",
+        "unresolvedIndirections",
+        "unknowns",
+        "eligibleChains",
+        "missingPredicates",
+        "coverageComplete"
+      ],
+      "properties": {
+        "repositories": {
+          "const": 2
+        },
+        "mainTreeEntries": {
+          "const": 679
+        },
+        "trackedArchiveRoots": {
+          "const": 3
+        },
+        "expandedArchiveOccurrences": {
+          "const": 4
+        },
+        "expandedArchiveMembers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "candidates": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "indirections": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unresolvedIndirections": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknowns": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eligibleChains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missingPredicates": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/predicate"
+          }
+        },
+        "coverageComplete": {
+          "type": "boolean"
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "stage", "reasonCode"],
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "reasonCode": {
+          "type": "string"
+        }
+      },
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "inconclusive"
+            },
+            "stage": {
+              "const": "source-admission"
+            },
+            "reasonCode": {
+              "const": "accepted-source-anchor-opaque"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "inconclusive"
+            },
+            "stage": {
+              "const": "semantic-coverage"
+            },
+            "reasonCode": {
+              "const": "incomplete-ambiguous-or-unreviewed-coverage"
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "supported"
+            },
+            "stage": {
+              "const": "desired-state-chain"
+            },
+            "reasonCode": {
+              "const": "eligible-chain-present"
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "refuted"
+            },
+            "stage": {
+              "const": "complete-nominated-git-boundary"
+            },
+            "reasonCode": {
+              "const": "complete-zero-eligible-chain-coverage"
+            }
+          }
+        }
+      ]
+    },
+    "adrAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "rationaleCode", "futureDecisionQuestion", "authority", "action"],
+      "properties": {
+        "status": {
+          "const": "no-decision-candidate-activated"
+        },
+        "rationaleCode": {
+          "const": "offline-boundary-inventory-selects-no-new-architecture"
+        },
+        "futureDecisionQuestion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority": {
+          "const": "none"
+        },
+        "action": {
+          "type": "null"
+        }
+      }
+    },
+    "capabilityAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "nodeVersion",
+        "gitExecutable",
+        "commandPolicy",
+        "observedRepositories",
+        "gitNoLazyFetch",
+        "gitOptionalLocks",
+        "repositoryObjectReadsOnly",
+        "localIgnoredEvidenceWriteOnly",
+        "sourceSignatureStatus",
+        "networkObserved",
+        "dockerObserved",
+        "usbObserved",
+        "procfsObserved",
+        "sysfsObserved",
+        "devfsObserved",
+        "systemdObserved",
+        "hidrawObserved",
+        "signalObserved",
+        "productionMutationObserved"
+      ],
+      "properties": {
+        "mode": {
+          "const": "two-repository-offline-read-only"
+        },
+        "nodeVersion": {
+          "const": "22.20.0"
+        },
+        "gitExecutable": {
+          "const": "/usr/bin/git"
+        },
+        "commandPolicy": {
+          "const": [
+            "git cat-file blob <oid>",
+            "git ls-tree -rz --full-tree <commit>",
+            "git rev-parse <commit>^{tree}"
+          ]
+        },
+        "observedRepositories": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["repository", "invocationCounts"],
+            "properties": {
+              "repository": {
+                "enum": ["OverlayKit/companion-module-overlaykit-server", "OverlayKit/overlaykit"]
+              },
+              "invocationCounts": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["cat-file-blob", "ls-tree", "rev-parse-tree"],
+                "properties": {
+                  "cat-file-blob": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "ls-tree": {
+                    "const": 1
+                  },
+                  "rev-parse-tree": {
+                    "const": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "gitNoLazyFetch": {
+          "const": true
+        },
+        "gitOptionalLocks": {
+          "const": false
+        },
+        "repositoryObjectReadsOnly": {
+          "const": true
+        },
+        "localIgnoredEvidenceWriteOnly": {
+          "const": true
+        },
+        "sourceSignatureStatus": {
+          "const": "absent-not-authorized"
+        },
+        "networkObserved": {
+          "const": false
+        },
+        "dockerObserved": {
+          "const": false
+        },
+        "usbObserved": {
+          "const": false
+        },
+        "procfsObserved": {
+          "const": false
+        },
+        "sysfsObserved": {
+          "const": false
+        },
+        "devfsObserved": {
+          "const": false
+        },
+        "systemdObserved": {
+          "const": false
+        },
+        "hidrawObserved": {
+          "const": false
+        },
+        "signalObserved": {
+          "const": false
+        },
+        "productionMutationObserved": {
+          "const": false
+        }
+      }
+    },
+    "authority": {
+      "const": "none"
+    },
+    "action": {
+      "type": "null"
+    },
+    "claimBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["includes", "excludes", "authority", "action"],
+      "properties": {
+        "includes": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {
+              "const": "the exact two nominated Git main trees"
+            },
+            {
+              "const": "tracked archive members reachable from those trees"
+            },
+            {
+              "const": "explicit repository-local and cross-repository indirections admitted by the review map"
+            },
+            {
+              "const": "the accepted repo-set and ref-set anchors only when their exact preimages are available"
+            }
+          ],
+          "items": false
+        },
+        "excludes": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "prefixItems": [
+            {
+              "const": "inaccessible organization variables and secrets"
+            },
+            {
+              "const": "unreported or inaccessible private sources"
+            },
+            {
+              "const": "wikis, issues, projects, deleted refs, runbooks, and CMDB"
+            },
+            {
+              "const": "host configuration, current host state, live observation, intent, compliance, drift, cause, and remedy"
+            },
+            {
+              "const": "actual external operational ownership"
+            },
+            {
+              "const": "installation, configuration, start, stop, restart, signaling, reconciliation, publication, ADR, SPEC, and production policy"
+            }
+          ],
+          "items": false
+        },
+        "authority": {
+          "const": "none"
+        },
+        "action": {
+          "type": "null"
+        }
+      }
+    },
+    "claimBoundaryCanonicalSha256": {
+      "const": "3493ff642bc71755e0e2f4c492c552267ec15efd7500b473b477c11e00058224"
+    },
+    "semanticEvidenceSha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "boundary": {
+                "type": "object",
+                "properties": {
+                  "repoSet": {
+                    "type": "object",
+                    "properties": {
+                      "preimageStatus": {
+                        "const": "unavailable"
+                      }
+                    },
+                    "required": ["preimageStatus"]
+                  }
+                },
+                "required": ["repoSet"]
+              }
+            },
+            "required": ["boundary"]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "boundary": {
+                "type": "object",
+                "properties": {
+                  "repositories": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "prefixItems": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "refSet": {
+                            "type": "object",
+                            "properties": {
+                              "preimageStatus": {
+                                "const": "unavailable"
+                              }
+                            },
+                            "required": ["preimageStatus"]
+                          }
+                        },
+                        "required": ["refSet"]
+                      },
+                      {}
+                    ],
+                    "items": false
+                  }
+                },
+                "required": ["repositories"]
+              }
+            },
+            "required": ["boundary"]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "boundary": {
+                "type": "object",
+                "properties": {
+                  "repositories": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "prefixItems": [
+                      {},
+                      {
+                        "type": "object",
+                        "properties": {
+                          "refSet": {
+                            "type": "object",
+                            "properties": {
+                              "preimageStatus": {
+                                "const": "unavailable"
+                              }
+                            },
+                            "required": ["preimageStatus"]
+                          }
+                        },
+                        "required": ["refSet"]
+                      }
+                    ],
+                    "items": false
+                  }
+                },
+                "required": ["repositories"]
+              }
+            },
+            "required": ["boundary"]
+          }
+        ]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "coverageComplete": {
+                "const": false
+              },
+              "unknowns": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "inconclusive"
+              },
+              "stage": {
+                "const": "source-admission"
+              },
+              "reasonCode": {
+                "const": "accepted-source-anchor-opaque"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "not": {
+          "type": "object",
+          "properties": {
+            "outcome": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "const": "inconclusive"
+                },
+                "stage": {
+                  "const": "source-admission"
+                },
+                "reasonCode": {
+                  "const": "accepted-source-anchor-opaque"
+                }
+              },
+              "required": ["status", "stage", "reasonCode"]
+            }
+          },
+          "required": ["outcome"]
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "supported"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "coverageComplete": {
+                "const": true
+              },
+              "unknowns": {
+                "const": 0
+              },
+              "eligibleChains": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "missingPredicates": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "refuted"
+              }
+            },
+            "required": ["status"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "coverageComplete": {
+                "const": true
+              },
+              "unknowns": {
+                "const": 0
+              },
+              "eligibleChains": {
+                "const": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "inconclusive"
+              },
+              "stage": {
+                "const": "semantic-coverage"
+              }
+            },
+            "required": ["status", "stage"]
+          }
+        },
+        "required": ["outcome"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "coverageComplete": {
+                "const": false
+              },
+              "unknowns": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "coverageComplete": {
+                "const": true
+              }
+            },
+            "required": ["coverageComplete"]
+          }
+        },
+        "required": ["summary"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "unknowns": {
+                "const": 0
+              },
+              "unresolvedIndirections": {
+                "const": 0
+              }
+            }
+          },
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "enum": ["supported", "refuted"]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "coverageComplete": {
+                "const": false
+              }
+            },
+            "required": ["coverageComplete"]
+          }
+        },
+        "required": ["summary"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "unknowns": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "inconclusive"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "unresolvedIndirections": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": ["unresolvedIndirections"]
+          }
+        },
+        "required": ["summary"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object",
+            "properties": {
+              "coverageComplete": {
+                "const": false
+              },
+              "unknowns": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "inconclusive"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gitOid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "setAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "preimageStatus", "canonicalization", "preimage"],
+      "properties": {
+        "sha256": {
+          "const": "c7d16003f59e7aab2d22dbdbed0812ea2096060215c9a67592caf11e00a97ee5"
+        },
+        "preimageStatus": {},
+        "canonicalization": {},
+        "preimage": {}
+      },
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "preimageStatus": {
+              "const": "unavailable"
+            },
+            "canonicalization": {
+              "type": "null"
+            },
+            "preimage": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "preimageStatus": {
+              "const": "available"
+            },
+            "canonicalization": {
+              "const": "exact-base64-decoded-bytes/v1"
+            },
+            "preimage": {
+              "type": "string",
+              "minLength": 1,
+              "contentEncoding": "base64"
+            }
+          }
+        }
+      ]
+    },
+    "refSetAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "preimageStatus", "canonicalization", "preimage"],
+      "properties": {
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "preimageStatus": {},
+        "canonicalization": {},
+        "preimage": {}
+      },
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "preimageStatus": {
+              "const": "unavailable"
+            },
+            "canonicalization": {
+              "type": "null"
+            },
+            "preimage": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "preimageStatus": {
+              "const": "available"
+            },
+            "canonicalization": {
+              "const": "exact-base64-decoded-bytes/v1"
+            },
+            "preimage": {
+              "type": "string",
+              "minLength": 1,
+              "contentEncoding": "base64"
+            }
+          }
+        }
+      ]
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "commit", "tree", "entryCount", "lsTreeSha256", "refSet"],
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "tree": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "entryCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lsTreeSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "refSet": {
+          "$ref": "#/$defs/refSetAnchor"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "byteLength", "sha256"],
+      "properties": {
+        "file": {
+          "enum": [
+            "source-closure.json",
+            "source-map.json",
+            "review-universe.json",
+            "candidate-index.json"
+          ]
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "predicate": {
+      "enum": [
+        "effectiveAcceptedProductionAuthority",
+        "exactImageReferenceAndId",
+        "spec0001LinuxHostBinding",
+        "deploymentPresenceAndCardinality",
+        "repositoryDeclaredLifecycleOwner",
+        "reconcilerMechanism",
+        "absenceToConvergenceRule",
+        "explicitLinkClosure"
+      ]
+    }
+  }
+}

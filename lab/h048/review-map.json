@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "overlaykit-h048-semantic-review/v1",
+  "hypothesis": "H-048",
+  "status": "agent-proposed-pending-human-acceptance",
+  "humanAcceptanceRef": null,
+  "reviewUniverse": {
+    "schemaVersion": "overlaykit-h048-review-universe-ref/v1",
+    "file": "review-universe.json",
+    "canonicalization": "canonical-json-sorted-object-keys-utf8-lf/v1",
+    "policySha256": "cd6004caba0548cb4fc6b8511c185a2baa2c22cdacc25498a2c7957ad8976863",
+    "sourceCount": 904,
+    "sourceSha256": "bd8fb7d310a7d6769e49035896d1976c506d599d8dfa3418412eabe1f5c73055",
+    "defaultCandidateCount": 599,
+    "defaultCandidateSha256": "e548035bd163435e244c6780cca92efce46b5b9a4ac60f79d59174107d0f2a25",
+    "indirectionCount": 1508,
+    "indirectionSha256": "2e95f80e1433c8ac11fa31b30618f9bcfda9138102238b65fc959f4c99630882",
+    "byteLength": 1526993,
+    "sha256": "0ec6250798859bafa5228f4eb1b64995f51ce78b506abfe1f7c28e16bbb60f5e"
+  },
+  "defaultDisposition": {
+    "classification": "no-eligible-predicate-contribution",
+    "rationale": "A source not listed below may be inventoried and signal-scanned but contributes no desired-state predicate unless a human-reviewed exact entry admits it.",
+    "authority": "none",
+    "action": null
+  },
+  "defaultIndirectionDisposition": {
+    "classification": "no-eligible-semantic-indirection",
+    "rationale": "A potential repository-local or cross-repository relationship not materialized below as a typed chain contribution with exact source-byte binding evidence and, for cross-repository closure, an exact repo-plus-commit receipt, is dismissed as ineligible only if a human accepts this complete default over the closed source inventory.",
+    "authority": "none",
+    "action": null
+  },
+  "sources": [
+    {
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "commit": "2d46d1c60e7aced224b47a8857d93015c5fb5c91",
+      "path": ".overlaykit/governance/specifications/SPEC-0001.json",
+      "sourceKind": "git-blob",
+      "sha256": "917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179",
+      "classification": "accepted-linux-product-contract-without-deployment-lifecycle",
+      "predicateContributions": [
+        "effectiveAcceptedProductionAuthority",
+        "spec0001LinuxHostBinding"
+      ],
+      "eligibleForChain": false,
+      "rationale": "SPEC-0001 governs the Linux product role and server-authority boundary but does not select an image, deployment presence or cardinality, lifecycle owner, reconciler, or absence-to-convergence rule."
+    },
+    {
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "commit": "2d46d1c60e7aced224b47a8857d93015c5fb5c91",
+      "path": ".overlaykit/governance/specifications/SPEC-0002.json",
+      "sourceKind": "git-blob",
+      "sha256": "d15b1cbf7e97bd92aadf40342421161a0955e210b8566f7ae870dc78c05e89f6",
+      "classification": "accepted-ephemeral-laboratory-contract",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "SPEC-0002 governs reproducible clean-room evidence and cleanup, not persistent production deployment."
+    },
+    {
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "commit": "2d46d1c60e7aced224b47a8857d93015c5fb5c91",
+      "path": ".overlaykit/governance/decisions/ADR-0005.json",
+      "sourceKind": "git-blob",
+      "sha256": "f59ff9a71f87864fcb2478ce17a92b2f0dc4aa133ca6d01c56fb90ab682cb2d6",
+      "classification": "accepted-clean-room-evidence-boundary",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "ADR-0005 binds complete Companion laboratory identities and explicitly excludes cloud deployment and broader production claims."
+    },
+    {
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "commit": "2d46d1c60e7aced224b47a8857d93015c5fb5c91",
+      "path": ".overlaykit/governance/decisions/ADR-0006.json",
+      "sourceKind": "git-blob",
+      "sha256": "619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360",
+      "classification": "accepted-historical-image-identity-without-production-policy",
+      "predicateContributions": ["exactImageReferenceAndId"],
+      "eligibleForChain": false,
+      "rationale": "ADR-0006 contains the exact image reference and ID only inside H-042 mechanism evidence and explicitly selects no trigger, supervisor, restart policy, reconciler, or complete recovery mechanism."
+    },
+    {
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "commit": "2d46d1c60e7aced224b47a8857d93015c5fb5c91",
+      "path": ".overlaykit/governance/changes/CHG-0022.json",
+      "sourceKind": "git-blob",
+      "sha256": "240c33df684ec75c52c9dd542ba6c1c6f4451be06dcacc1a60bf7a8ae6d8b647",
+      "classification": "proposed-prior-repository-experiment",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "A proposed experiment contract is neither current accepted production authority nor evidence of desired state."
+    },
+    {
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "commit": "2d46d1c60e7aced224b47a8857d93015c5fb5c91",
+      "path": ".overlaykit/governance/changes/CHG-0023.json",
+      "sourceKind": "git-blob",
+      "sha256": "99db59f15b1a4850b9c043ffe687c354bf33762c23f141a10f0e53474b5c2266",
+      "classification": "implemented-prior-refutation-with-explicit-external-unknown",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "CHG-0023 records authority none, action null, and no source of production desired state, lifecycle owner, reconciler, or convergence policy."
+    },
+    {
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "commit": "2d46d1c60e7aced224b47a8857d93015c5fb5c91",
+      "path": "AGENTS.md",
+      "sourceKind": "git-blob",
+      "sha256": "cd3339941b0d7f8463ff6b36f62e0e871d180e2fdc38c341bb37ef316bdf96a1",
+      "classification": "agent-operating-contract-not-product-deployment-policy",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "AGENTS.md governs agent conduct and normative-source precedence, not Companion deployment desired state."
+    },
+    {
+      "repository": "OverlayKit/companion-module-overlaykit-server",
+      "commit": "2d46d1c60e7aced224b47a8857d93015c5fb5c91",
+      "path": "README.md",
+      "sourceKind": "git-blob",
+      "sha256": "baa62e253b1e0ed7e33b87fc2a35e50d0f26e3a3070cbe6c8c4e6e7271eddbc2",
+      "classification": "informative-project-documentation",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "README prose is informative and does not supersede accepted governance or establish deployment lifecycle policy."
+    },
+    {
+      "repository": "OverlayKit/overlaykit",
+      "commit": "9a5585de196ff972993c7ff81bf9c1461c47eaae",
+      "path": ".overlaykit/governance/specifications/SPEC-0001.json",
+      "sourceKind": "git-blob",
+      "sha256": "c0dc8cd59249be7f8c2ed8abec9f686ab03f8f52efaae2b5df49b1140121213b",
+      "classification": "accepted-product-contract-selecting-adapter-not-deployment",
+      "predicateContributions": [
+        "effectiveAcceptedProductionAuthority",
+        "spec0001LinuxHostBinding"
+      ],
+      "eligibleForChain": false,
+      "rationale": "The parent specification selects Companion as the first Linux Stream Deck adapter and treats Companion availability as a precondition; it does not declare exact image identity, desired deployment presence or cardinality, lifecycle owner, reconciler, or convergence."
+    },
+    {
+      "repository": "OverlayKit/overlaykit",
+      "commit": "9a5585de196ff972993c7ff81bf9c1461c47eaae",
+      "path": ".overlaykit/governance/decisions/ADR-0035.json",
+      "sourceKind": "git-blob",
+      "sha256": "a9c2c0e20dcb571f3d405a700d40f0637309d1949a010c8c6be315072c1da412",
+      "classification": "accepted-adapter-authority-and-cross-repository-link",
+      "predicateContributions": [
+        "effectiveAcceptedProductionAuthority",
+        "spec0001LinuxHostBinding"
+      ],
+      "eligibleForChain": false,
+      "rationale": "ADR-0035 names the module repository and governs one module instance per Show, but it does not atomically bind that repository to the accepted subject commit; the cardinality is adapter binding rather than deployment presence or cardinality."
+    },
+    {
+      "repository": "OverlayKit/overlaykit",
+      "commit": "9a5585de196ff972993c7ff81bf9c1461c47eaae",
+      "path": ".overlaykit/governance/changes/CHG-0040.json",
+      "sourceKind": "git-blob",
+      "sha256": "d84a4130dcf563bbe52001dec4f928fddf7c1a8025cb8ec4f60cfa075e942bd9",
+      "classification": "implemented-adapter-evidence",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "CHG-0040 links historical implementation evidence but does not atomically bind the current accepted Companion subject commit; an implemented change is not by itself current production desired-state authority and declares no deployment lifecycle."
+    },
+    {
+      "repository": "OverlayKit/overlaykit",
+      "commit": "9a5585de196ff972993c7ff81bf9c1461c47eaae",
+      "path": ".overlaykit/governance/decisions/ADR-0036.json",
+      "sourceKind": "git-blob",
+      "sha256": "92d1f0acae97b231036b964189bec34759a17f4c16b04c2a9bb6e4c651ef17b9",
+      "classification": "accepted-supplemental-laboratory-evidence",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "ADR-0036 uses Companion 4.3.3 only in a supplemental laboratory and explicitly excludes canonical LAN and physical hardware claims."
+    },
+    {
+      "repository": "OverlayKit/overlaykit",
+      "commit": "9a5585de196ff972993c7ff81bf9c1461c47eaae",
+      "path": ".overlaykit/governance/changes/CHG-0041.json",
+      "sourceKind": "git-blob",
+      "sha256": "0ee8b76a1b2f8c85ceb78d787984bf8126a27ac8e4c744cd5dc931cfdd609dcc",
+      "classification": "implemented-supplemental-laboratory-evidence",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "CHG-0041 is bounded command-correlation evidence rather than desired deployment lifecycle."
+    },
+    {
+      "repository": "OverlayKit/overlaykit",
+      "commit": "9a5585de196ff972993c7ff81bf9c1461c47eaae",
+      "path": "README.md",
+      "sourceKind": "git-blob",
+      "sha256": "811f596e8ca0fdf25d27f632b5aa9d35cbd8403ec63924e690455d31f6cb0535",
+      "classification": "informative-cross-repository-documentation",
+      "predicateContributions": [],
+      "eligibleForChain": false,
+      "rationale": "README names the module repository without atomically binding the accepted subject commit; it is not accepted production authority and declares no lifecycle policy."
+    }
+  ],
+  "chainContributions": [],
+  "pendingHumanJudgments": [
+    "acceptance or rejection of the complete generated candidate map and every default source and indirection dismissal",
+    "whether accepted adapter selection constitutes deployment-scoped authority; the proposed map limits it to adapter scope",
+    "whether one module instance per Show is deployment cardinality; the proposed map classifies it only as adapter binding cardinality",
+    "whether generic Owner language establishes lifecycle ownership; the proposed map says no",
+    "whether implementation or laboratory restart language establishes a reconciler and absence-to-convergence rule; the proposed map says no"
+  ],
+  "authority": "none",
+  "action": null
+}
