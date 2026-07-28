@@ -1,0 +1,758 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlaykit-h051-specification-readiness-map/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "hypothesis",
+    "status",
+    "normative",
+    "sourceLock",
+    "mappingPolicy",
+    "mappings",
+    "predicateReceipts",
+    "coverage",
+    "carrierAssessment",
+    "outcome",
+    "claimBoundary",
+    "adrAssessment",
+    "authority",
+    "action"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "overlaykit-h051-specification-readiness-map/v1"
+    },
+    "hypothesis": {
+      "const": "H-051"
+    },
+    "status": {
+      "const": "agent-proposed-pending-human-acceptance"
+    },
+    "normative": {
+      "const": false
+    },
+    "sourceLock": {
+      "const": {
+        "path": "lab/h051/subject-lock.json",
+        "rawSha256": "e95b3c806c512fd116e169be3bd02c8673e8fc39c72f28b245e8ab28fabe0a0a"
+      }
+    },
+    "mappingPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceForm",
+        "targetForm",
+        "specificationFixturePermitted",
+        "proseCarrierCountsAsResolved",
+        "machineReadableRelationshipRequiredByAgent",
+        "humanAdjudicationRequired",
+        "exhaustivenessBoundary",
+        "abstractSlotUniverse"
+      ],
+      "properties": {
+        "sourceForm": {
+          "const": "exact-source-json-pointers-only"
+        },
+        "targetForm": {
+          "const": "abstract-product-specification-slots-only"
+        },
+        "specificationFixturePermitted": {
+          "const": false
+        },
+        "proseCarrierCountsAsResolved": {
+          "const": false
+        },
+        "machineReadableRelationshipRequiredByAgent": {
+          "const": false
+        },
+        "humanAdjudicationRequired": {
+          "const": true
+        },
+        "exhaustivenessBoundary": {
+          "const": "coverage is exact only over this finite abstract-slot universe; arbitrary prose semantics cannot be exhaustively refuted without human judgment"
+        },
+        "abstractSlotUniverse": {
+          "type": "array",
+          "minItems": 41,
+          "maxItems": 41,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/abstractSlot"
+          }
+        }
+      }
+    },
+    "mappings": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/mappedAutomaticRecovery"
+        },
+        {
+          "$ref": "#/$defs/mappedLinuxScope"
+        },
+        {
+          "$ref": "#/$defs/mappedTrigger"
+        },
+        {
+          "$ref": "#/$defs/mappedDelivery"
+        },
+        {
+          "$ref": "#/$defs/mappedDeadline"
+        },
+        {
+          "$ref": "#/$defs/mappedDegraded"
+        },
+        {
+          "$ref": "#/$defs/mappedSafety"
+        },
+        {
+          "$ref": "#/$defs/mappedAcceptance"
+        },
+        {
+          "$ref": "#/$defs/ambiguousRelationship"
+        }
+      ],
+      "items": false
+    },
+    "predicateReceipts": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/receiptMappedAutomaticRecovery"
+        },
+        {
+          "$ref": "#/$defs/receiptMappedLinuxScope"
+        },
+        {
+          "$ref": "#/$defs/receiptMappedTrigger"
+        },
+        {
+          "$ref": "#/$defs/receiptMappedDelivery"
+        },
+        {
+          "$ref": "#/$defs/receiptMappedDeadline"
+        },
+        {
+          "$ref": "#/$defs/receiptMappedDegraded"
+        },
+        {
+          "$ref": "#/$defs/receiptMappedSafety"
+        },
+        {
+          "$ref": "#/$defs/receiptMappedAcceptance"
+        },
+        {
+          "$ref": "#/$defs/receiptAmbiguousRelationship"
+        },
+        {
+          "$ref": "#/$defs/receiptProjection"
+        },
+        {
+          "$ref": "#/$defs/receiptSchemaCompiler"
+        }
+      ],
+      "items": false
+    },
+    "coverage": {
+      "const": {
+        "expectedMappingCount": 9,
+        "mappedCount": 8,
+        "ambiguousCount": 1,
+        "omittedCount": 0,
+        "expectedPredicateCount": 11,
+        "satisfiedPredicateCount": 9,
+        "ambiguousPredicateCount": 1,
+        "unresolvedPredicateCount": 1,
+        "conflicts": [],
+        "unresolved": ["mapsSpecificationRelationship", "schemaCompilerAdmitsAdditiveLifecycle"]
+      }
+    },
+    "carrierAssessment": {
+      "const": {
+        "predicate": "schemaCompilerCarrier",
+        "status": "pending",
+        "schemaSlotsEnumerated": true,
+        "compilerSourcesClosed": true,
+        "specificationFixturePresent": false,
+        "reasonCode": "spec-shaped-fixture-not-authorized"
+      }
+    },
+    "outcome": {
+      "const": {
+        "status": "inconclusive",
+        "stage": "pre-review-specification-readiness",
+        "reasonCode": "relationship-carrier-ambiguous-and-schema-compiler-pending",
+        "humanAcceptanceRequired": true
+      }
+    },
+    "claimBoundary": {
+      "const": {
+        "conclusion": "the map classifies only whether exact H-050 decision text has a source-cited abstract specification slot and exposes the unresolved relationship-carrier choice",
+        "nonAuthority": "the map is agent-proposed evidence and is neither a specification nor authority to draft, accept, activate, or implement one",
+        "excluded": "field prose, requirement identifiers, actors, terms, user stories, workflows, a SPEC-shaped fixture, mechanism selection, ADR creation, profile mutation, and product behavior"
+      }
+    },
+    "adrAssessment": {
+      "const": {
+        "candidateActivated": false,
+        "reason": "H-051 examines representation readiness and selects no durable architecture or mechanism."
+      }
+    },
+    "authority": {
+      "const": "none"
+    },
+    "action": {
+      "type": "null"
+    }
+  },
+  "$defs": {
+    "abstractSlot": {
+      "enum": [
+        "acceptance.authoritative-effect",
+        "acceptance.forbidden-effects",
+        "acceptance.identity-receipts",
+        "acceptance.monotonic-timing",
+        "acceptance.physical-actuation-receipt",
+        "acceptance.scenarios",
+        "authority.prohibited-top-level-mutation",
+        "authority.server-remains-authoritative",
+        "degraded.intervention-limit",
+        "degraded.manual-diagnosis",
+        "degraded.operator-reset",
+        "degraded.terminal-condition",
+        "degraded.visibility-deadline",
+        "identity.rejected-substitutes",
+        "identity.serial-continuity",
+        "obligation.failure-semantics",
+        "obligation.mode",
+        "obligation.operator-independence",
+        "relationship.activation",
+        "relationship.extends-existing-scope",
+        "relationship.preserves-accepted-predecessors",
+        "relationship.references-virtual-segment",
+        "safety.no-duplicate-command",
+        "safety.single-flight",
+        "safety.target-revalidation",
+        "scope.excluded-devices",
+        "scope.nominated-device",
+        "scope.runtime-role",
+        "security.identity-and-credentials",
+        "success.authoritative-state-effect",
+        "success.authorized-command",
+        "success.configuration-continuity",
+        "success.physical-actuation",
+        "success.rejected-proxies",
+        "timing.actuation-window",
+        "timing.clock",
+        "timing.maximum",
+        "timing.start-event",
+        "timing.stop-event",
+        "trigger.absence",
+        "trigger.return-or-reenumeration"
+      ]
+    },
+    "sourceCitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "pointer"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*\\\\).+\\.json$"
+        },
+        "pointer": {
+          "type": "string",
+          "pattern": "^/(?:[^~/]|~0|~1)+(?:/(?:[^~/]|~0|~1)+)*$"
+        }
+      }
+    },
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sourceCitations",
+        "abstractSlots",
+        "classification",
+        "ambiguity",
+        "rationale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "sourceCitations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sourceCitation"
+          }
+        },
+        "abstractSlots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/abstractSlot"
+          }
+        },
+        "classification": {
+          "enum": ["mapped", "ambiguous"]
+        },
+        "ambiguity": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "evidence"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "enum": ["satisfied", "ambiguous", "unresolved"]
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "mappedAutomaticRecovery": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/mapping"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsAutomaticRecoveryObligation"
+            },
+            "classification": {
+              "const": "mapped"
+            },
+            "ambiguity": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "mappedLinuxScope": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/mapping"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsLinuxRoleAndPhysicalMk2Scope"
+            },
+            "classification": {
+              "const": "mapped"
+            },
+            "ambiguity": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "mappedTrigger": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/mapping"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsTriggerAndIdentityContinuity"
+            },
+            "classification": {
+              "const": "mapped"
+            },
+            "ambiguity": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "mappedDelivery": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/mapping"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsRestoredPhysicalCommandDelivery"
+            },
+            "classification": {
+              "const": "mapped"
+            },
+            "ambiguity": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "mappedDeadline": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/mapping"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsRecoveryDeadlineAndClock"
+            },
+            "classification": {
+              "const": "mapped"
+            },
+            "ambiguity": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "mappedDegraded": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/mapping"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsDegradedFailureAndManualFallback"
+            },
+            "classification": {
+              "const": "mapped"
+            },
+            "ambiguity": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "mappedSafety": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/mapping"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsSafetySecurityAndAuthorityBoundary"
+            },
+            "classification": {
+              "const": "mapped"
+            },
+            "ambiguity": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "mappedAcceptance": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/mapping"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsAcceptanceEvidenceAndScenarioCoverage"
+            },
+            "classification": {
+              "const": "mapped"
+            },
+            "ambiguity": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "ambiguousRelationship": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/mapping"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsSpecificationRelationship"
+            },
+            "classification": {
+              "const": "ambiguous"
+            },
+            "ambiguity": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "receiptMappedAutomaticRecovery": {
+      "$ref": "#/$defs/satisfiedReceiptAutomaticRecovery"
+    },
+    "receiptMappedLinuxScope": {
+      "$ref": "#/$defs/satisfiedReceiptLinuxScope"
+    },
+    "receiptMappedTrigger": {
+      "$ref": "#/$defs/satisfiedReceiptTrigger"
+    },
+    "receiptMappedDelivery": {
+      "$ref": "#/$defs/satisfiedReceiptDelivery"
+    },
+    "receiptMappedDeadline": {
+      "$ref": "#/$defs/satisfiedReceiptDeadline"
+    },
+    "receiptMappedDegraded": {
+      "$ref": "#/$defs/satisfiedReceiptDegraded"
+    },
+    "receiptMappedSafety": {
+      "$ref": "#/$defs/satisfiedReceiptSafety"
+    },
+    "receiptMappedAcceptance": {
+      "$ref": "#/$defs/satisfiedReceiptAcceptance"
+    },
+    "satisfiedReceiptAutomaticRecovery": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsAutomaticRecoveryObligation"
+            },
+            "status": {
+              "const": "satisfied"
+            }
+          }
+        }
+      ]
+    },
+    "satisfiedReceiptLinuxScope": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsLinuxRoleAndPhysicalMk2Scope"
+            },
+            "status": {
+              "const": "satisfied"
+            }
+          }
+        }
+      ]
+    },
+    "satisfiedReceiptTrigger": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsTriggerAndIdentityContinuity"
+            },
+            "status": {
+              "const": "satisfied"
+            }
+          }
+        }
+      ]
+    },
+    "satisfiedReceiptDelivery": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsRestoredPhysicalCommandDelivery"
+            },
+            "status": {
+              "const": "satisfied"
+            }
+          }
+        }
+      ]
+    },
+    "satisfiedReceiptDeadline": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsRecoveryDeadlineAndClock"
+            },
+            "status": {
+              "const": "satisfied"
+            }
+          }
+        }
+      ]
+    },
+    "satisfiedReceiptDegraded": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsDegradedFailureAndManualFallback"
+            },
+            "status": {
+              "const": "satisfied"
+            }
+          }
+        }
+      ]
+    },
+    "satisfiedReceiptSafety": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsSafetySecurityAndAuthorityBoundary"
+            },
+            "status": {
+              "const": "satisfied"
+            }
+          }
+        }
+      ]
+    },
+    "satisfiedReceiptAcceptance": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsAcceptanceEvidenceAndScenarioCoverage"
+            },
+            "status": {
+              "const": "satisfied"
+            }
+          }
+        }
+      ]
+    },
+    "receiptAmbiguousRelationship": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "mapsSpecificationRelationship"
+            },
+            "status": {
+              "const": "ambiguous"
+            }
+          }
+        }
+      ]
+    },
+    "receiptProjection": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "projectionIsNonInventiveAndConflictFree"
+            },
+            "status": {
+              "const": "satisfied"
+            }
+          }
+        }
+      ]
+    },
+    "receiptSchemaCompiler": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/receipt"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "schemaCompilerAdmitsAdditiveLifecycle"
+            },
+            "status": {
+              "const": "unresolved"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

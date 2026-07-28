@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0030",
+  "title": "Record the local H-050 human product-intent post-review closure",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root materializes only the local H-050 post-review evidence closure under the human principal @rodrigoteamx; neither the agent nor this successor can create product, mechanism, normative, live, publication, or Git authority.",
+      "evidence": "Repository AGENTS.md, ADR-0001, compiled plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, the accepted candidate limits, and the exact exhaustive human closure authorization.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immutable H-050 context remains protected-main commit 2810e63defe37025f575ebea37be7e1c5e97c18e, tree 421ae43dbac2b52fe4dc7f594fda795a870b4c10, with thirteen-source set SHA-256 a9b0c3a354fbdea6867f4343d69a051763395a882ae2dea8c76ff8ff6c20732b.",
+      "evidence": "Subject-lock raw SHA-256 6588b1d31321ecf77616a9952a68620383de4a3b336829074ec632980a68239e and independent local Git reconstruction.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0029, its pre-successor manifest, the pending non-normative docket, schema, subject lock, verifier, and tests remain byte-identical to the pre-review boundary, whose mechanical result remains inconclusive at human-product-intent for exact-human-motion-absent.",
+      "evidence": "CHG-0029 SHA-256 36c74c9c45104f28cd0a019a4e5433c7e836f61daaac26d8de6be3987be92f05; pre-successor manifest SHA-256 f14bb6b9de145ad9acf292f6b4ccaa00c86ba2af9528a4894d91c0883f41f0ed; docket 7a145c440af25f5bbbb71c111381f886dccba387e6a0880853e666ceabea6684; schema 730a7a5b8fb35ace3704916dae4ff3408af84f86a5d6a8cf4ca4cbb53af223ed; subject lock 6588b1d31321ecf77616a9952a68620383de4a3b336829074ec632980a68239e; verifier 35938cf8a47cffd98e2c266508465ddb4a1a20221ae06deb0e71a2b12ab7439c; tests bdb2cf6f318067bc7554a9638001befacbf95c96741060d2e6fc1667a37757dc.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The exact candidate content and digest were proposed before human acceptance, while its later local file materialization preserves canonical minified JSON plus one LF at exactly 4,139 UTF-8 bytes and the nominated SHA-256.",
+      "evidence": "lab/h050/canonical-candidate-motion.json and its closure copy both have SHA-256 20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28 and byte length 4139.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal accepted the exact candidate and docket digests, including all nine decisions and limits, and exhaustively authorized only local post-review closure while expressly withholding SPEC, ADR, implementation, live observation, commit, push, and merge.",
+      "evidence": "Human-acceptance record SHA-256 d392ec651f80cdd715ef7482a829b823631fc94ceb8abf926e957c7f7f690602; displayed Markdown representation SHA-256 613d3dae98b5e028a784c27706a29e6be5bcf437496964566e869e847b1c37f8; semantic-folded representation SHA-256 da18adfb60bb11bb8237b0772ae3d16e2e52a3784c0ca06199eda6acf5eafa84; transport bytes explicitly unclaimed.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Applying the exact accepted human motion to the unchanged docket supports H-050 only inside its non-normative product-intent boundary because require-automatic and all nine explicit, unambiguous, conflict-free decisions are selected.",
+      "evidence": "Candidate verification result supported/closed-human-product-intent/human-require-automatic-nine-of-nine with selectedPredicateCount 9, subsequent exact human acceptance, and post-review assessment SHA-256 a324a4fbce441c32ceba2d92aebba4323b747151a1f2b845de4601a9db40ca23.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The post-review assessment preserves the distinct inconclusive pre-review state and records a separate supported human-intent result without mutating the docket, granting action authority, or representing the result as current product law.",
+      "evidence": "Post-review assessment SHA-256 a324a4fbce441c32ceba2d92aebba4323b747151a1f2b845de4601a9db40ca23; docket status pending-human-decision, normative false, humanDecision null; authority none; action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "A deterministic restricted local closure preserves eight exact pre-review sources, five post-review sources, fourteen payload members plus one manifest member, and seven external files in an acyclic pre-successor hash graph.",
+      "evidence": "Local unsigned source-anchor SHA-256 770a69fc0356854b5a086422b39885ec0b93b2e619bc0f5753e5577c167d4343; pre-review source-set e5e38e36ba2bd78650b926898717d176dc5df833e9fe337b1675675d8189e650; post-review source-set 38db3f4dfdeeb887f3beedaa6062bd8608d13809e1443176f8e81c1bf54f29d6; payload manifest 6b967d57d90fd63f503f61a648598f7ba7f41cbdc8bc3956a7748b9239459f3f; POSIX ustar 52e20e817f6e6a6b3fb2d512ce9571296e9bd2098123ab24eab0488f602c1725, 203264 bytes; external closure 2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The closure verifier reconstructs canonical records, normalized ustar bytes, exact manifest-to-archive bijection, source identities, temporal boundaries, outcome, exclusions, and authority from the admitted bytes without trusting the stored closure envelope, and fails closed on drift and unsafe filesystem shapes.",
+      "evidence": "Post-review source SHA-256 99f6c34a382b61fe87b4d5cf3d8c76b5d6be6bcb297c66982c30a3c46c86036a; test SHA-256 bd69e590e45248a6c5e088a57c63d0b1e345fc87503c29bf6e058143d64bffc6; sixteen of sixteen post-review tests and twenty-eight of twenty-eight combined H-050 tests pass; closure directory mode 0700 and all seven files mode 0600 with link count one.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "H-050 activates no ADR candidate because the accepted intent selects no recovery mechanism, controller, signal, supervisor, deployment architecture, or other durable technical decision.",
+      "evidence": "Candidate mechanismSelected false and adrAuthorized false; assessment ADR candidateActivated false; accepted ADR-0006 requires a later governed safety Slice before any production recovery proposal.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The accepted intent indicates that a later new specification should extend SPEC-0001 and reference SPEC-0002, but neither specification is edited and authority to draft or accept that successor remains false.",
+      "evidence": "Accepted specificationRelationship value; candidate specificationAuthorized false; post-review specification assessment draftingAuthorized false and acceptanceAuthorized false; exact accepted SPEC-0001 and SPEC-0002 hashes remain unchanged.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The human withholding of implementation is interpreted as withholding product or mechanism implementation; the implemented lifecycle status of CHG-0030 denotes only that the separately authorized local evidentiary closure now exists.",
+      "evidence": "The exhaustive authorization permits local post-review closure, the accepted candidate sets implementationAuthorized false, and implemented post-review successors CHG-0023, CHG-0025, and CHG-0027 distinguish evidentiary lifecycle completion from product implementation.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether any mechanism can safely satisfy the accepted intent, including exact trigger behavior, PID and race handling, repeated recovery, multiple devices, long outages, configuration continuity, security, and the accepted deadline, remains unproven.",
+      "evidence": "No mechanism is selected or exercised; ADR-0006 production-recovery-requires-successor-slice remains effective; no live, USB, hidraw, Docker, signal, configuration, or product capability is used.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Authority to draft or accept a successor specification, create an ADR, implement a mechanism, observe or mutate the live host, publish, commit, push, merge, release, or open another hypothesis remains absent.",
+      "evidence": "The exact exhaustive human authorization, candidate flags, post-review assessment, closure envelope, authority none, and action null.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "Every pre-review H-050 source remains byte-identical and the immutable pre-review result remains inconclusive rather than being rewritten as supported.",
+      "verification": "Recompute the eight pre-review source hashes and source-set SHA-256 e5e38e36ba2bd78650b926898717d176dc5df833e9fe337b1675675d8189e650; inspect unchanged docket status, null humanDecision, and canonical no-motion verification."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The accepted candidate is admitted only at exactly 4,139 canonical UTF-8 bytes, SHA-256 20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28, require-automatic, and nine unique explicit decisions.",
+      "verification": "Run the pre-review independent verifier with the exact candidate bytes and require supported/closed-human-product-intent/human-require-automatic-nine-of-nine, selectedPredicateCount 9, authority none, and action null."
+    },
+    {
+      "id": "SC-003",
+      "statement": "Human acceptance binds the exact candidate and docket while honestly labeling its visible and semantic representations and making no raw transport-byte claim.",
+      "verification": "Recompute human-acceptance, displayed-Markdown, and semantic-folded hashes; inspect exhaustive local-closure-only authority, transport claimed false, authority none, and action null."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The post-review result is supported only as non-normative human product intent, temporally separate from the immutable inconclusive pre-review result.",
+      "verification": "Run node lab/h050/post-review.mjs and inspect proposal-before-acceptance, later local materialization, nine-of-nine, supported outcome, claim boundary, authority none, and action null."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The local closure has an exact seven-file external roster, exact fifteen-member normalized ustar, manifest-to-archive bijection, byte-identical double build, and reconstructed closure envelope.",
+      "verification": "Run verifyPostReviewClosure; require archive SHA-256 52e20e817f6e6a6b3fb2d512ce9571296e9bd2098123ab24eab0488f602c1725, manifest 6b967d57d90fd63f503f61a648598f7ba7f41cbdc8bc3956a7748b9239459f3f, anchor 770a69fc0356854b5a086422b39885ec0b93b2e619bc0f5753e5577c167d4343, closure 2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e, directory 0700, files 0600, and link count one."
+    },
+    {
+      "id": "SC-006",
+      "statement": "No ADR candidate, accepted specification, product source, product configuration, production policy, live state, or action authority is introduced.",
+      "verification": "ADR and specification assessments, accepted-record and product diffs, capability audit, compiled plan hash, authority none, and action null."
+    },
+    {
+      "id": "SC-007",
+      "statement": "Focused hostile tests, governance, quality, build, formatting, and repository-integrity gates pass under an allowed Node 22 runtime.",
+      "verification": "Twenty-eight H-050 tests; npm run governance:verify; npm run governance:check; npm_config_offline=true npm run check; npm run build; scoped Prettier; and git diff --check."
+    },
+    {
+      "id": "SC-008",
+      "statement": "CHG-0030 and all closure sources remain local and uncommitted, while the restricted raw closure remains ignored and no remote, live, publication, or next-cycle transition occurs.",
+      "verification": "Git status, branch and remote inspection, git check-ignore, archive disclosure field, absence of a successor commit, no live capability, and exact exhaustive human authorization."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0030 records only the local H-050 human-intent post-review closure and preserves CHG-0029 as the byte-identical proposed pre-review contract.",
+      "evidence": "Exact CHG-0029 hash, successor contract, pre-successor source anchor, compiled successor manifest, and scoped repository diff."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The exact candidate, human acceptance, and post-review assessment form a temporally honest chain without claiming inaccessible transport bytes or retroactively materializing the candidate file before acceptance.",
+      "evidence": "Candidate, acceptance, assessment, temporal fields, labeled representation hashes, and post-review verifier."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "H-050 is supported only inside the non-normative product-intent boundary with all nine decisions accepted, authority none, and action null.",
+      "evidence": "Candidate verifier result, human acceptance, post-review assessment, deterministic closure, and external closure verification."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The deterministic restricted closure preserves every admitted byte and rejects roster drift, source drift, traversal, alternate separators, duplicate members, symlinks, hardlinks, widened modes, archive tampering, unmanifested members, and normative or authority overclaims.",
+      "evidence": "Post-review implementation and sixteen hostile tests; exact source, archive, manifest, anchor, and closure hashes."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "The ADR assessment remains no-decision-candidate-activated and the indicated future specification remains unauthorized for drafting or acceptance.",
+      "evidence": "Candidate flags, accepted motion limits, post-review assessments, unchanged accepted ADRs and specifications, and compiled plan."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "All accepted ADRs and specifications, product source, product configuration, profile, and compiled plan remain unchanged.",
+      "evidence": "Accepted-record hashes, product and configuration diff, profile identity, plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, and governance verification."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "All focused, governance, quality, build, formatting, and repository-integrity gates pass locally under Node 22.",
+      "evidence": "Final local gate outputs after deterministic successor manifest compilation."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "No SPEC, ADR, mechanism, product change, live observation, live-host or runtime mutation, publication, commit, push, merge, release, or next hypothesis follows from this local closure.",
+      "evidence": "Exact exhaustive human authorization, repository and remote state, ignored restricted closure, successor claims, authority none, and action null."
+    }
+  ]
+}

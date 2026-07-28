@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0031",
+  "title": "Frame H-051 additive successor-specification representability",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the local H-051 discovery-producing agent under the human principal @rodrigoteamx; the agent cannot approve its own hypothesis, create product law, select a mechanism, or grant any later transition.",
+      "evidence": "Repository AGENTS.md, accepted ADR-0001, and compiled plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The immutable Git layer for H-051 is main commit 2810e63defe37025f575ebea37be7e1c5e97c18e with tree 421ae43dbac2b52fe4dc7f594fda795a870b4c10; the current uncommitted worktree, mutable successor manifest, and CHG-0031 are not retroactively part of that subject.",
+      "evidence": "Read-only git rev-parse and git ls-tree against the nominated commit and tree.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The exact admitted Git-law boundary at the nominated subject contains plan raw SHA-256 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243 with planHash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, manifest raw SHA-256 1a32305c13fedf67a1a0e76cd8d9040dc91e39da16df5719fa889187f89c98d9, ADR-0001 through ADR-0006, SPEC-0001 raw SHA-256 917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179, SPEC-0002 raw SHA-256 d15b1cbf7e97bd92aadf40342421161a0955e210b8566f7ae870dc78c05e89f6, and the accepted H-049 conclusion in CHG-0027 raw SHA-256 db9063cd01d280a1f3481b6374eafa62dd406e1f5ff1e04ea3cc3d7efa15620d.",
+      "evidence": "Exact Git blobs at main@2810e63defe37025f575ebea37be7e1c5e97c18e and their independently recomputed raw SHA-256 values.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The exact specification-representation surface at the nominated Git subject is profile raw SHA-256 e61fde755b80c66742df144d5e7bcb4309629542e3bdba666a347f65d3341787, specification schema raw SHA-256 056bc1460849ece13839cd635f0ce1e2e93cd7d00bf9c0e6622e0a2440f720fc, compiler raw SHA-256 d5b22afddb6e1611a2d29c5dffd082afcc21dae0c4d9d14078219c2b35368acb, validator raw SHA-256 177330ac2915cab64953812ad01e8af162e50e7de0fd236b53669e323763a475, types raw SHA-256 b8b7508ac6b35d16409ab447d71b511263e61953ce56e9a14667becb8db07e14, and governance test raw SHA-256 a01c6a4d82dd1c039bd2328d4b2d1c771d48d26bedfe61e845d04547e4411357.",
+      "evidence": "Exact blobs for .overlaykit/governance/profile.json, specification.schema.json, tools/governance/src/compiler.ts, validator.ts, types.ts, and tools/governance/tests/governance.test.ts at the nominated subject.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The separately admitted unsigned local H-050 layer is bound to subject-lock SHA-256 6588b1d31321ecf77616a9952a68620383de4a3b336829074ec632980a68239e, docket 7a145c440af25f5bbbb71c111381f886dccba387e6a0880853e666ceabea6684, canonical motion 20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28, human acceptance d392ec651f80cdd715ef7482a829b823631fc94ceb8abf926e957c7f7f690602, post-review assessment a324a4fbce441c32ceba2d92aebba4323b747151a1f2b845de4601a9db40ca23, CHG-0029 36c74c9c45104f28cd0a019a4e5433c7e836f61daaac26d8de6be3987be92f05, CHG-0030 fdf68ebab17501486fd2418e5a2c91099c50cbe2c36a6e69e69b94a506b713f7, and restricted closure 2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e.",
+      "evidence": "Exact local H-050 files and the verified content-addressed closure under artifacts/h050/post-review-closures/20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "H-050 is supported only as non-normative human product intent: require-automatic and all nine decisions were accepted, while specification drafting or acceptance, ADR creation, mechanism selection or implementation, live observation, and Git or publication transitions remained unauthorized.",
+      "evidence": "Canonical H-050 motion, human acceptance, post-review assessment, restricted closure, and CHG-0030 at the exact hashes admitted above.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "ProductSpecification/v1 exposes supersedes but no dedicated extends or references field, while governance host v2 can compile multiple independently active accepted specifications selected by the profile and can derive explicit linear supersession.",
+      "evidence": "Specification schema 056bc1460849ece13839cd635f0ce1e2e93cd7d00bf9c0e6622e0a2440f720fc; compiler d5b22afddb6e1611a2d29c5dffd082afcc21dae0c4d9d14078219c2b35368acb; validator 177330ac2915cab64953812ad01e8af162e50e7de0fd236b53669e323763a475; and governance test a01c6a4d82dd1c039bd2328d4b2d1c771d48d26bedfe61e845d04547e4411357.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The next load-bearing question is specification representability rather than drafting SPEC-0003 or investigating a recovery controller, because inability to express the accepted additive relationship would require resolving the representation boundary before either later activity.",
+      "evidence": "H-050 specificationRelationship, the exact current specification schema and compiler behavior, ADR-0001 evidence-before-decision ordering, and ADR-0006 production-recovery-requires-successor-slice.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-051: within the exact H-050 human-accepted closure and the normative and representation surface at main@2810e63defe37025f575ebea37be7e1c5e97c18e, there exists a non-normative, additive, lossless, schema-valid future-specification projection that preserves all nine H-050 decisions, keeps SPEC-0001 and SPEC-0002 accepted, effective, and byte-identical, and requires zero new product, architecture, or mechanism decisions.",
+      "evidence": "This is the falsifiable H-051 claim; it has not yet been exercised or accepted.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The exact H-051 predicates are mapsAutomaticRecoveryObligation, mapsLinuxRoleAndPhysicalMk2Scope, mapsTriggerAndIdentityContinuity, mapsRestoredPhysicalCommandDelivery, mapsRecoveryDeadlineAndClock, mapsDegradedFailureAndManualFallback, mapsSafetySecurityAndAuthorityBoundary, mapsAcceptanceEvidenceAndScenarioCoverage, mapsSpecificationRelationship, projectionIsNonInventiveAndConflictFree, and schemaCompilerAdmitsAdditiveLifecycle.",
+      "evidence": "The first nine predicates correspond one-to-one with the canonical H-050 decisions; the final two test reverse traceability, conflict freedom, schema admission, deterministic counterfactual compilation, additive lifecycle, and predecessor immutability.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "H-051 is supported only with exact source closure, all eleven predicates true, no ambiguous, contradictory, opaque, or unknown mapping, authority none, and action null; it is refuted only when exact closure and exhaustive consideration of every legal schema placement prove at least one predicate false; it is inconclusive on any omission, opacity, drift, unresolved paraphrase, relationship ambiguity, or required additional decision; and it is invalid on source or temporal drift, predecessor mutation, improper supersession, authority or action overclaim, or mechanism selection.",
+      "evidence": "Fail-closed D3 outcome policy derived from ADR-0001, the finite H-050 predicate set, accepted-record immutability, and the distinction between one failed projection and exhaustive representability refutation.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The current contextual instruction adelante con lo que sigue authorizes exactly one local offline governed-discovery precontract and its bounded read-only harness and verification for H-051 when bound to the immediately preceding H-050 closure and the named H-051/CHG-0031 target; the phrase bytes or a digest of the phrase alone are not a unique or replayable authority identifier and authorize no live or product experiment or later transition.",
+      "evidence": "Immediate conversational ordering after the H-050 local-only handoff, H-050 closure SHA-256 2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e, the explicit H-051 target and CHG-0031 identity, and prior contextual-transition governance practice.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether a prose reference preserved by a specification content hash is sufficient to express extends SPEC-0001 and references SPEC-0002, or an explicit machine-readable relation is required, remains unresolved.",
+      "evidence": "The accepted H-050 relationship language, ProductSpecification/v1 additionalProperties false with only supersedes as a relationship field, and absence of an accepted composition rule deciding prose versus machine-readable linkage.",
+      "blocking": true
+    },
+    {
+      "kind": "inference",
+      "statement": "The expected H-051 pre-review outcome is inconclusive/specification-relationship-representation-ambiguous because the prose-versus-machine-readable interpretation is unresolved before any projection experiment or human adjudication.",
+      "evidence": "The blocking unknown and the exact H-051 inconclusive rule.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether all nine accepted decisions can be mapped without semantic strengthening, weakening, omission, contradiction, or a tenth normative decision remains unproven until the bounded H-051 traceability audit and later human review close every mapping.",
+      "evidence": "Before the H-051 harness executes, no verified projection matrix, exhaustive placement audit, independent verification, or human review exists.",
+      "blocking": true
+    },
+    {
+      "kind": "fact",
+      "statement": "No ADR candidate is activated by this framing because H-051 selects no durable composition rule, recovery mechanism, controller, trigger, signal, supervisor, deployment architecture, or production policy.",
+      "evidence": "The H-051 representability-only claim, expected inconclusive pre-review state, explicit exclusions, authority none, and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Authority exists only to implement and execute the bounded local offline/read-only H-051 evidence harness and compile its deterministic local manifest; authority to persist a specification-shaped projection, draft or accept SPEC-0003, change schema, compiler, validator, profile, or plan, create an ADR, select or implement a mechanism, observe or mutate the live host, commit, push, merge, publish, release, or open another hypothesis remains absent.",
+      "evidence": "The contextual grant is limited to one local offline governed-discovery cycle and verification, H-050 explicitly separated every later transition, and this contract retains authority none and action null.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0031 records the exact H-051 claim as an untested proposed assumption and does not present H-050 human intent as current product law.",
+      "verification": "Inspect the hypothesis claim, proposed lifecycle, H-050 boundary, authority none, and action null semantics."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The source boundary has two non-conflated layers: immutable Git law and representation sources at main@2810e63defe37025f575ebea37be7e1c5e97c18e, plus the exact unsigned local content-addressed H-050 chain.",
+      "verification": "Recompute the nominated commit, tree, Git blob hashes, H-050 hashes, and restricted closure while rejecting current-manifest or CHG-0031 circular admission."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The eleven predicates are named exactly and preserve one-to-one coverage of all nine H-050 decisions plus non-invention, conflict freedom, schema admission, deterministic compilation, additive lifecycle, and predecessor immutability.",
+      "verification": "Compare the predicate roster and descriptions against the canonical H-050 motion and the H-051 assumption."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The outcome policy distinguishes existence support from exhaustive refutation and forces inconclusive on omitted, opaque, ambiguous, contradictory, or not-classifiable evidence.",
+      "verification": "Inspect all four outcome branches and require that one failed projection cannot refute representability."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The pre-review outcome remains inconclusive because prose-versus-machine-readable representation of extends and references is a blocking unknown.",
+      "verification": "Inspect the exact expected outcome inference, blocking unknown, current schema surface, and absence of a projection or human adjudication."
+    },
+    {
+      "id": "SC-006",
+      "statement": "The D3 reorder changes the first move from drafting SPEC-0003 or investigating a controller to an offline representability audit; support could only lead to a separate drafting request, refutation to a separate composition question, and inconclusive to focused human clarification.",
+      "verification": "Inspect the load-bearing inference, H-050 limits, and H-051 claim and outcome boundaries."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The contextual continuation is admitted only as predecessor-and-target-bound authority for this local precontract and cannot be replayed or broadened from its short text or digest alone.",
+      "verification": "Require the H-050 closure identity, immediate context, H-051 identity, CHG-0031 identity, and exact no-later-transition boundary together."
+    },
+    {
+      "id": "SC-008",
+      "statement": "No ADR candidate, specification draft, schema or compiler change, mechanism, live or product experiment, live capability, product behavior, Git transition, or publication is created.",
+      "verification": "Scoped file diff, contract claims and exclusions, repository status, and absence of any authorized action."
+    },
+    {
+      "id": "SC-009",
+      "statement": "The bounded task introduces only CHG-0031, the non-normative lab/h051 source-lock, docket, review map, schemas, verifier and tests, plus the deterministically compiled manifest entry.",
+      "verification": "Path-scoped Git status and diff before handoff, with accepted law, profile, schema, compiler, validator, specifications, and product paths unchanged."
+    },
+    {
+      "id": "SC-010",
+      "statement": "CHG-0031 and the H-051 evidence harness are valid, the contract conforms to the v2 change schema, the pre-review result remains fail-closed, and all focused, governance, formatting, quality, build, and repository-integrity gates pass.",
+      "verification": "Focused H-051 tests and verifier; governance compile, verify, and check; scoped Prettier excluding the byte-exact H-050 motion; npm run check; npm run build; and git diff --check."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "The H-051 hypothesis, exact eleven predicates, fail-closed outcome rules, claim boundary, expected pre-review outcome, and D3 reorder are captured in CHG-0031.",
+      "evidence": "This proposed change contract."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The immutable Git-law layer and unsigned local H-050 layer are exact, separate, and non-circular.",
+      "evidence": "Nominated commit, tree, exact source hashes, H-050 closure identity, and exclusion of the mutable successor manifest and CHG-0031 from their own source boundary."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "After its bounded offline audit, H-051 remains pre-review inconclusive/specification-relationship-representation-ambiguous with authority none and action null until exact human semantic review.",
+      "evidence": "Blocking relationship unknown, non-normative traceability map, focused verifier result, outcome rules, and this contract's proposed lifecycle."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The continuation grant is context-bound to the closed H-050 predecessor and H-051/CHG-0031 successor rather than treated as a reusable text-hash capability.",
+      "evidence": "Contextual authority inference and SC-007."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "No ADR candidate is activated and no product or governance representation decision is selected.",
+      "evidence": "ADR assessment claim, untested hypothesis, blocking ambiguity, and exact exclusions."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No SPEC, ADR, specification-shaped projection, mechanism, live observation, host mutation, commit, push, merge, publication, release, or next hypothesis follows from CHG-0031 or its bounded evidence harness.",
+      "evidence": "Scoped repository diff, contextual authority boundary, authority none, and action null."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "Only CHG-0031, lab/h051 evidence sources, and the deterministic CHG-0031 manifest entry are added by this task; accepted law, profile, schema, compiler, validator, specifications, product source, and H-050 bytes remain untouched.",
+      "evidence": "Path-scoped Git diff and status, source-lock postflight, and accepted-record hash comparison."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "Focused H-051, governance, formatting, quality, build, and whitespace gates pass at the correct temporal boundaries.",
+      "evidence": "Final scoped local validation commands and deterministic governance compilation."
+    }
+  ]
+}

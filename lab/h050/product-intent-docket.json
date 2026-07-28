@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "overlaykit-h050-product-intent-docket/v1",
+  "hypothesis": "H-050",
+  "title": "Physical MK.2 automatic-recovery product-intent docket",
+  "status": "pending-human-decision",
+  "normative": false,
+  "subject": {
+    "commit": "2810e63defe37025f575ebea37be7e1c5e97c18e",
+    "tree": "421ae43dbac2b52fe4dc7f594fda795a870b4c10",
+    "sourceCount": 13,
+    "sourceSetSha256": "a9b0c3a354fbdea6867f4343d69a051763395a882ae2dea8c76ff8ff6c20732b"
+  },
+  "question": "Does the human principal require automatic physical Stream Deck MK.2 command-delivery recovery, and if so what exact nine-part product boundary must a later specification express?",
+  "predicates": [
+    {
+      "id": "automaticRecoveryObligation",
+      "question": "Is recovery after the nominated physical interruption mandatory and automatic rather than optional, investigatory, best-effort, or manual?",
+      "decision": null
+    },
+    {
+      "id": "linuxRoleAndPhysicalMk2Scope",
+      "question": "Which SPEC-0001 Linux production role and which physical Stream Deck MK.2 surface are governed by the obligation?",
+      "decision": null
+    },
+    {
+      "id": "triggerAndIdentityContinuity",
+      "question": "Which post-login disconnect, return, or re-enumeration event starts the obligation, and how is the same governed physical device identified?",
+      "decision": null
+    },
+    {
+      "id": "restoredPhysicalCommandDelivery",
+      "question": "Which observable physical-key-to-Companion-to-authorized-OverlayKit-command outcome proves recovery rather than descriptor or marker reacquisition alone?",
+      "decision": null
+    },
+    {
+      "id": "recoveryDeadlineAndClock",
+      "question": "What maximum recovery duration applies, and what exact observable event starts and stops its monotonic clock?",
+      "decision": null
+    },
+    {
+      "id": "degradedFailureAndManualFallback",
+      "question": "What visible degraded state, retry limit, terminal failure, and manual fallback are required when automatic recovery does not converge?",
+      "decision": null
+    },
+    {
+      "id": "safetySecurityAndAuthorityBoundary",
+      "question": "What identity, race, repeated-intervention, credential, configuration, and server-authority constraints must recovery preserve?",
+      "decision": null
+    },
+    {
+      "id": "acceptanceEvidenceAndScenarioCoverage",
+      "question": "Which causal observations and scenarios, including repeated recovery, long outage, and multiple-device cases, are required for product acceptance?",
+      "decision": null
+    },
+    {
+      "id": "specificationRelationship",
+      "question": "Must a later product specification supersede, extend, or remain separate from SPEC-0001 and SPEC-0002 without rewriting either accepted record?",
+      "decision": null
+    }
+  ],
+  "outcomePolicy": {
+    "supported": "exact-content-addressed-human-motion-with-require-automatic-and-nine-of-nine-explicit-predicate-decisions",
+    "refuted": "exact-content-addressed-human-motion-with-explicit-no-obligation-decision",
+    "inconclusive": "human-motion-absent-incomplete-or-ambiguous",
+    "invalid": "source-or-docket-drift-authority-action-or-implementation-overclaim"
+  },
+  "humanDecision": null,
+  "claimBoundary": {
+    "conclusion": "this docket can classify only whether an exact human product-intent motion selects automatic recovery and all nine product decisions, explicitly rejects the obligation, or leaves the question unresolved",
+    "nonAuthority": "the docket is a non-normative question artifact and cannot itself create product law, a specification, an ADR, implementation authority, or production policy",
+    "excluded": "mechanism selection, controller design, live safety, host state, USB or hidraw behavior, implementation, publication, and every operational action"
+  },
+  "authority": "none",
+  "action": null
+}

@@ -1,0 +1,361 @@
+{
+  "schemaVersion": "overlaykit-h051-specification-readiness-map/v1",
+  "hypothesis": "H-051",
+  "status": "agent-proposed-pending-human-acceptance",
+  "normative": false,
+  "sourceLock": {
+    "path": "lab/h051/subject-lock.json",
+    "rawSha256": "e95b3c806c512fd116e169be3bd02c8673e8fc39c72f28b245e8ab28fabe0a0a"
+  },
+  "mappingPolicy": {
+    "sourceForm": "exact-source-json-pointers-only",
+    "targetForm": "abstract-product-specification-slots-only",
+    "specificationFixturePermitted": false,
+    "proseCarrierCountsAsResolved": false,
+    "machineReadableRelationshipRequiredByAgent": false,
+    "humanAdjudicationRequired": true,
+    "exhaustivenessBoundary": "coverage is exact only over this finite abstract-slot universe; arbitrary prose semantics cannot be exhaustively refuted without human judgment",
+    "abstractSlotUniverse": [
+      "acceptance.authoritative-effect",
+      "acceptance.forbidden-effects",
+      "acceptance.identity-receipts",
+      "acceptance.monotonic-timing",
+      "acceptance.physical-actuation-receipt",
+      "acceptance.scenarios",
+      "authority.prohibited-top-level-mutation",
+      "authority.server-remains-authoritative",
+      "degraded.intervention-limit",
+      "degraded.manual-diagnosis",
+      "degraded.operator-reset",
+      "degraded.terminal-condition",
+      "degraded.visibility-deadline",
+      "identity.rejected-substitutes",
+      "identity.serial-continuity",
+      "obligation.failure-semantics",
+      "obligation.mode",
+      "obligation.operator-independence",
+      "relationship.activation",
+      "relationship.extends-existing-scope",
+      "relationship.preserves-accepted-predecessors",
+      "relationship.references-virtual-segment",
+      "safety.no-duplicate-command",
+      "safety.single-flight",
+      "safety.target-revalidation",
+      "scope.excluded-devices",
+      "scope.nominated-device",
+      "scope.runtime-role",
+      "security.identity-and-credentials",
+      "success.authoritative-state-effect",
+      "success.authorized-command",
+      "success.configuration-continuity",
+      "success.physical-actuation",
+      "success.rejected-proxies",
+      "timing.actuation-window",
+      "timing.clock",
+      "timing.maximum",
+      "timing.start-event",
+      "timing.stop-event",
+      "trigger.absence",
+      "trigger.return-or-reenumeration"
+    ]
+  },
+  "mappings": [
+    {
+      "id": "mapsAutomaticRecoveryObligation",
+      "sourceCitations": [
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "pointer": "/predicateDecisions/0/value"
+        }
+      ],
+      "abstractSlots": [
+        "obligation.mode",
+        "obligation.operator-independence",
+        "obligation.failure-semantics"
+      ],
+      "classification": "mapped",
+      "ambiguity": null,
+      "rationale": "The accepted intent explicitly selects mandatory unattended recovery and rejects optional, best-effort, investigatory, and manual-only substitutes."
+    },
+    {
+      "id": "mapsLinuxRoleAndPhysicalMk2Scope",
+      "sourceCitations": [
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "pointer": "/predicateDecisions/1/value"
+        },
+        {
+          "path": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/scope"
+        },
+        {
+          "path": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/outOfScope/3"
+        },
+        {
+          "path": ".overlaykit/governance/specifications/SPEC-0001.json",
+          "pointer": "/outOfScope/4"
+        }
+      ],
+      "abstractSlots": ["scope.runtime-role", "scope.nominated-device", "scope.excluded-devices"],
+      "classification": "mapped",
+      "ambiguity": null,
+      "rationale": "The accepted intent identifies the Linux production-host role, one serial-nominated MK.2, and the excluded device surfaces while preserving SPEC-0001's current exclusions."
+    },
+    {
+      "id": "mapsTriggerAndIdentityContinuity",
+      "sourceCitations": [
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "pointer": "/predicateDecisions/2/value"
+        }
+      ],
+      "abstractSlots": [
+        "trigger.absence",
+        "trigger.return-or-reenumeration",
+        "identity.serial-continuity",
+        "identity.rejected-substitutes"
+      ],
+      "classification": "mapped",
+      "ambiguity": null,
+      "rationale": "The accepted intent fixes the post-login absence and return trigger and makes serial identity mandatory while rejecting topology and model-only substitution."
+    },
+    {
+      "id": "mapsRestoredPhysicalCommandDelivery",
+      "sourceCitations": [
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "pointer": "/predicateDecisions/3/value"
+        },
+        {
+          "path": ".overlaykit/governance/specifications/SPEC-0002.json",
+          "pointer": "/requirements/4/statement"
+        }
+      ],
+      "abstractSlots": [
+        "success.physical-actuation",
+        "success.configuration-continuity",
+        "success.authorized-command",
+        "success.authoritative-state-effect",
+        "success.rejected-proxies"
+      ],
+      "classification": "mapped",
+      "ambiguity": null,
+      "rationale": "The accepted intent defines a causal physical-to-authoritative outcome and preserves the virtual command segment without accepting descriptor or readiness markers as success."
+    },
+    {
+      "id": "mapsRecoveryDeadlineAndClock",
+      "sourceCitations": [
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "pointer": "/predicateDecisions/4/value"
+        },
+        {
+          "path": ".overlaykit/governance/specifications/SPEC-0002.json",
+          "pointer": "/requirements/4/statement"
+        }
+      ],
+      "abstractSlots": [
+        "timing.clock",
+        "timing.start-event",
+        "timing.actuation-window",
+        "timing.stop-event",
+        "timing.maximum"
+      ],
+      "classification": "mapped",
+      "ambiguity": null,
+      "rationale": "The accepted intent supplies a monotonic start, controlled press window, authoritative stop, and maximum while keeping SPEC-0002's virtual timer distinct."
+    },
+    {
+      "id": "mapsDegradedFailureAndManualFallback",
+      "sourceCitations": [
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "pointer": "/predicateDecisions/5/value"
+        }
+      ],
+      "abstractSlots": [
+        "degraded.visibility-deadline",
+        "degraded.intervention-limit",
+        "degraded.terminal-condition",
+        "degraded.operator-reset",
+        "degraded.manual-diagnosis"
+      ],
+      "classification": "mapped",
+      "ambiguity": null,
+      "rationale": "The accepted intent fixes degraded-state timing, retry cardinality, terminal behavior, reset boundary, and a separately approved diagnostic fallback."
+    },
+    {
+      "id": "mapsSafetySecurityAndAuthorityBoundary",
+      "sourceCitations": [
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "pointer": "/predicateDecisions/6/value"
+        },
+        {
+          "path": ".overlaykit/governance/decisions/ADR-0001.json",
+          "pointer": "/decision"
+        },
+        {
+          "path": ".overlaykit/governance/decisions/ADR-0006.json",
+          "pointer": "/policies/1/statement"
+        }
+      ],
+      "abstractSlots": [
+        "safety.single-flight",
+        "safety.target-revalidation",
+        "safety.no-duplicate-command",
+        "security.identity-and-credentials",
+        "authority.server-remains-authoritative",
+        "authority.prohibited-top-level-mutation"
+      ],
+      "classification": "mapped",
+      "ambiguity": null,
+      "rationale": "The accepted intent and current ADR boundary identify preserved identities, race constraints, command uniqueness, server authority, and prohibited implicit restart or configuration mutation."
+    },
+    {
+      "id": "mapsAcceptanceEvidenceAndScenarioCoverage",
+      "sourceCitations": [
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "pointer": "/predicateDecisions/7/value"
+        }
+      ],
+      "abstractSlots": [
+        "acceptance.scenarios",
+        "acceptance.identity-receipts",
+        "acceptance.monotonic-timing",
+        "acceptance.physical-actuation-receipt",
+        "acceptance.authoritative-effect",
+        "acceptance.forbidden-effects"
+      ],
+      "classification": "mapped",
+      "ambiguity": null,
+      "rationale": "The accepted intent enumerates baseline, repetition, outage, interruption, and second-device scenarios with exact causal evidence classes and zero-tolerance outcomes."
+    },
+    {
+      "id": "mapsSpecificationRelationship",
+      "sourceCitations": [
+        {
+          "path": "lab/h050/canonical-candidate-motion.json",
+          "pointer": "/predicateDecisions/8/value"
+        },
+        {
+          "path": ".overlaykit/governance/schemas/specification.schema.json",
+          "pointer": "/properties/supersedes"
+        },
+        {
+          "path": ".overlaykit/governance/schemas/profile.schema.json",
+          "pointer": "/properties/specificationIds"
+        },
+        {
+          "path": ".overlaykit/governance/profile.json",
+          "pointer": "/specificationIds"
+        }
+      ],
+      "abstractSlots": [
+        "relationship.extends-existing-scope",
+        "relationship.references-virtual-segment",
+        "relationship.preserves-accepted-predecessors",
+        "relationship.activation"
+      ],
+      "classification": "ambiguous",
+      "ambiguity": "The accepted intent says extend SPEC-0001 and reference SPEC-0002 without editing or deleting either. The current JSON carrier exposes a single supersedes relation and an active specification-id set but no typed extends or references relation. The agent cannot decide whether prose is sufficient or a machine-readable carrier is required.",
+      "rationale": "Both prose placement and a new typed relation remain plausible within the closed sources; choosing either would add policy not accepted by H-050."
+    }
+  ],
+  "predicateReceipts": [
+    {
+      "id": "mapsAutomaticRecoveryObligation",
+      "status": "satisfied",
+      "evidence": "mapping mapsAutomaticRecoveryObligation has exact source citations and only admitted abstract slots"
+    },
+    {
+      "id": "mapsLinuxRoleAndPhysicalMk2Scope",
+      "status": "satisfied",
+      "evidence": "mapping mapsLinuxRoleAndPhysicalMk2Scope has exact source citations and only admitted abstract slots"
+    },
+    {
+      "id": "mapsTriggerAndIdentityContinuity",
+      "status": "satisfied",
+      "evidence": "mapping mapsTriggerAndIdentityContinuity has exact source citations and only admitted abstract slots"
+    },
+    {
+      "id": "mapsRestoredPhysicalCommandDelivery",
+      "status": "satisfied",
+      "evidence": "mapping mapsRestoredPhysicalCommandDelivery has exact source citations and only admitted abstract slots"
+    },
+    {
+      "id": "mapsRecoveryDeadlineAndClock",
+      "status": "satisfied",
+      "evidence": "mapping mapsRecoveryDeadlineAndClock has exact source citations and only admitted abstract slots"
+    },
+    {
+      "id": "mapsDegradedFailureAndManualFallback",
+      "status": "satisfied",
+      "evidence": "mapping mapsDegradedFailureAndManualFallback has exact source citations and only admitted abstract slots"
+    },
+    {
+      "id": "mapsSafetySecurityAndAuthorityBoundary",
+      "status": "satisfied",
+      "evidence": "mapping mapsSafetySecurityAndAuthorityBoundary has exact source citations and only admitted abstract slots"
+    },
+    {
+      "id": "mapsAcceptanceEvidenceAndScenarioCoverage",
+      "status": "satisfied",
+      "evidence": "mapping mapsAcceptanceEvidenceAndScenarioCoverage has exact source citations and only admitted abstract slots"
+    },
+    {
+      "id": "mapsSpecificationRelationship",
+      "status": "ambiguous",
+      "evidence": "mapping mapsSpecificationRelationship exposes the unresolved prose-versus-machine-readable carrier choice"
+    },
+    {
+      "id": "projectionIsNonInventiveAndConflictFree",
+      "status": "satisfied",
+      "evidence": "all nine decision mappings cite exact admitted JSON pointers, use the finite abstract-slot universe, select no mechanism, and report no source conflict"
+    },
+    {
+      "id": "schemaCompilerAdmitsAdditiveLifecycle",
+      "status": "unresolved",
+      "evidence": "schema and compiler sources are closed, but no SPEC-shaped fixture is authorized, so additive lifecycle admission is not executed or claimed"
+    }
+  ],
+  "coverage": {
+    "expectedMappingCount": 9,
+    "mappedCount": 8,
+    "ambiguousCount": 1,
+    "omittedCount": 0,
+    "expectedPredicateCount": 11,
+    "satisfiedPredicateCount": 9,
+    "ambiguousPredicateCount": 1,
+    "unresolvedPredicateCount": 1,
+    "conflicts": [],
+    "unresolved": ["mapsSpecificationRelationship", "schemaCompilerAdmitsAdditiveLifecycle"]
+  },
+  "carrierAssessment": {
+    "predicate": "schemaCompilerCarrier",
+    "status": "pending",
+    "schemaSlotsEnumerated": true,
+    "compilerSourcesClosed": true,
+    "specificationFixturePresent": false,
+    "reasonCode": "spec-shaped-fixture-not-authorized"
+  },
+  "outcome": {
+    "status": "inconclusive",
+    "stage": "pre-review-specification-readiness",
+    "reasonCode": "relationship-carrier-ambiguous-and-schema-compiler-pending",
+    "humanAcceptanceRequired": true
+  },
+  "claimBoundary": {
+    "conclusion": "the map classifies only whether exact H-050 decision text has a source-cited abstract specification slot and exposes the unresolved relationship-carrier choice",
+    "nonAuthority": "the map is agent-proposed evidence and is neither a specification nor authority to draft, accept, activate, or implement one",
+    "excluded": "field prose, requirement identifiers, actors, terms, user stories, workflows, a SPEC-shaped fixture, mechanism selection, ADR creation, profile mutation, and product behavior"
+  },
+  "adrAssessment": {
+    "candidateActivated": false,
+    "reason": "H-051 examines representation readiness and selects no durable architecture or mechanism."
+  },
+  "authority": "none",
+  "action": null
+}

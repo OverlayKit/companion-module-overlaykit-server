@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "overlaykit-h051-subject-lock/v1",
+  "hypothesis": "H-051",
+  "normativeGit": {
+    "admission": "exact-local-git-objects",
+    "commit": "2810e63defe37025f575ebea37be7e1c5e97c18e",
+    "tree": "421ae43dbac2b52fe4dc7f594fda795a870b4c10",
+    "sourceCount": 18,
+    "restrictedLsTreeSha256": "ba367b8da57e42b985fc6a1bcfe41f2f947f4e33f253f6ef8621588f94d2b3bd",
+    "sourceSetSha256": "08eb7c113f2ecb7836b1def73ac5443ab9e2bea95b313fa7262d4b867f2c646d",
+    "planRawSha256": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243",
+    "planHash": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4"
+  },
+  "localPredecessorEvidence": {
+    "admission": "local-content-addressed-unsigned",
+    "signatureStatus": "absent-not-authorized",
+    "signedCommit": null,
+    "durabilityClaimed": false,
+    "sourceCount": 8,
+    "sourceSetSha256": "7d913e55e09df8c6cb86fdd12bc70fc59b41b61a620aefb22ede0af3085e29f8",
+    "closureRawSha256": "2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e"
+  },
+  "combinedSourceSetSha256": "6d54e3ca53b02dc31495f3d1e2cdd965f48f04b24f1460e7a5149267c8921317",
+  "gitSources": [
+    {
+      "path": ".overlaykit/governance/changes/CHG-0027.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "f89f99ed193a309f4128de32f875b913d076f1f3",
+      "byteLength": 17459,
+      "sha256": "db9063cd01d280a1f3481b6374eafa62dd406e1f5ff1e04ea3cc3d7efa15620d"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0001.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "658d9a65b692eda327c7c0467e43e341e6805496",
+      "byteLength": 6660,
+      "sha256": "e597cbaa8c69d53e197eb82f3baf71a7626f96db0d28a2b54e91c035bef917d6"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0002.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "279b8ec2585d1a45a13e61ff64a7f86359c7274d",
+      "byteLength": 4974,
+      "sha256": "6e99edcf98a6ec3a91c1d74be8fbe2f87b5108de6cc2f240671451b635875a00"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0003.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "96c92e1b597e351df2979bd47c3d651ac9033880",
+      "byteLength": 6030,
+      "sha256": "8d10bfca940203cfa8fcfe96640d3c4c22ff25a14692a4a6ac459a3dc3743ce2"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0004.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "b79e367a4c42fabef33c44c636e8d9d202345455",
+      "byteLength": 4421,
+      "sha256": "9eb30ec5ed70d282bb4e96674ea44e9796f95cb3fbd41b45f1f77da51f40812d"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0005.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "f9500d868b051ff1c3e19eb3e5b8583e09bb5eac",
+      "byteLength": 7550,
+      "sha256": "f59ff9a71f87864fcb2478ce17a92b2f0dc4aa133ca6d01c56fb90ab682cb2d6"
+    },
+    {
+      "path": ".overlaykit/governance/decisions/ADR-0006.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "46d087824a500f9dc6bf5fadbd2171fbe1f4aeb9",
+      "byteLength": 6334,
+      "sha256": "619fbfe60cc8c4c298c6c1eaaa25825b514b1d36bc0b8ec6588d4c3718b9f360"
+    },
+    {
+      "path": ".overlaykit/governance/manifest.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "c56f7f24f28671cef1461ca4a3fea2673a6cedf2",
+      "byteLength": 4188,
+      "sha256": "1a32305c13fedf67a1a0e76cd8d9040dc91e39da16df5719fa889187f89c98d9"
+    },
+    {
+      "path": ".overlaykit/governance/plan.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "750f5694f9e3abd5025b3a380fe7df8972529761",
+      "byteLength": 22610,
+      "sha256": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243"
+    },
+    {
+      "path": ".overlaykit/governance/profile.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "a8160c8da0609979304ae1118c57dec62e63cb1d",
+      "byteLength": 2547,
+      "sha256": "e61fde755b80c66742df144d5e7bcb4309629542e3bdba666a347f65d3341787"
+    },
+    {
+      "path": ".overlaykit/governance/schemas/profile.schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "ef2d654ab57aace24649059b95c07505a28526f9",
+      "byteLength": 6879,
+      "sha256": "82360a0c3d3f9e60cf8a5c00bc0d9b0d5eee6de149bba5485db140e3683f5dd2"
+    },
+    {
+      "path": ".overlaykit/governance/schemas/specification.schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "0b859e302a34caea0e63dfd0430a0451da604b0c",
+      "byteLength": 5189,
+      "sha256": "056bc1460849ece13839cd635f0ce1e2e93cd7d00bf9c0e6622e0a2440f720fc"
+    },
+    {
+      "path": ".overlaykit/governance/specifications/SPEC-0001.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "45a1452e51681107005db9119c9724d29b29e23e",
+      "byteLength": 10127,
+      "sha256": "917f1ca2febe17f8901ab71f91a0b0135402f9be972a876f233fcd5c789b8179"
+    },
+    {
+      "path": ".overlaykit/governance/specifications/SPEC-0002.json",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "4ee3541194fd13b5e68f141504a87b915823795d",
+      "byteLength": 10804,
+      "sha256": "d15b1cbf7e97bd92aadf40342421161a0955e210b8566f7ae870dc78c05e89f6"
+    },
+    {
+      "path": "tools/governance/src/compiler.ts",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "dae622d5aa26dd8359fe2175e3b7c45a1aeb57e8",
+      "byteLength": 7028,
+      "sha256": "d5b22afddb6e1611a2d29c5dffd082afcc21dae0c4d9d14078219c2b35368acb"
+    },
+    {
+      "path": "tools/governance/src/types.ts",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "8dee3fe789f715f598c67c20080f00bd6cb343be",
+      "byteLength": 12487,
+      "sha256": "b8b7508ac6b35d16409ab447d71b511263e61953ce56e9a14667becb8db07e14"
+    },
+    {
+      "path": "tools/governance/src/validator.ts",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "c9aa5c15eb7e3e95cc437d642bbe12797a728118",
+      "byteLength": 13226,
+      "sha256": "177330ac2915cab64953812ad01e8af162e50e7de0fd236b53669e323763a475"
+    },
+    {
+      "path": "tools/governance/tests/governance.test.ts",
+      "mode": "100644",
+      "type": "blob",
+      "oid": "e80a745db4b098f5b96bbf36c02f4a5153e96d4d",
+      "byteLength": 20130,
+      "sha256": "a01c6a4d82dd1c039bd2328d4b2d1c771d48d26bedfe61e845d04547e4411357"
+    }
+  ],
+  "localSources": [
+    {
+      "path": ".overlaykit/governance/changes/CHG-0029.json",
+      "mode": "0644",
+      "byteLength": 13751,
+      "sha256": "36c74c9c45104f28cd0a019a4e5433c7e836f61daaac26d8de6be3987be92f05"
+    },
+    {
+      "path": ".overlaykit/governance/changes/CHG-0030.json",
+      "mode": "0644",
+      "byteLength": 15687,
+      "sha256": "fdf68ebab17501486fd2418e5a2c91099c50cbe2c36a6e69e69b94a506b713f7"
+    },
+    {
+      "path": "lab/h050/subject-lock.json",
+      "mode": "0644",
+      "byteLength": 5584,
+      "sha256": "6588b1d31321ecf77616a9952a68620383de4a3b336829074ec632980a68239e"
+    },
+    {
+      "path": "lab/h050/product-intent-docket.json",
+      "mode": "0644",
+      "byteLength": 3880,
+      "sha256": "7a145c440af25f5bbbb71c111381f886dccba387e6a0880853e666ceabea6684"
+    },
+    {
+      "path": "lab/h050/canonical-candidate-motion.json",
+      "mode": "0644",
+      "byteLength": 4139,
+      "sha256": "20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28"
+    },
+    {
+      "path": "lab/h050/human-acceptance.json",
+      "mode": "0644",
+      "byteLength": 3598,
+      "sha256": "d392ec651f80cdd715ef7482a829b823631fc94ceb8abf926e957c7f7f690602"
+    },
+    {
+      "path": "lab/h050/post-review-assessment.json",
+      "mode": "0644",
+      "byteLength": 5664,
+      "sha256": "a324a4fbce441c32ceba2d92aebba4323b747151a1f2b845de4601a9db40ca23"
+    },
+    {
+      "path": "artifacts/h050/post-review-closures/20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28/closure.json",
+      "mode": "0600",
+      "byteLength": 3362,
+      "sha256": "2fe8d261ac60594ca4700002758af23b2a8455bc2152bbc19475ce54611f7d1e"
+    }
+  ],
+  "sourceRoles": {
+    "acceptedLaw": [
+      ".overlaykit/governance/decisions/ADR-0001.json",
+      ".overlaykit/governance/decisions/ADR-0002.json",
+      ".overlaykit/governance/decisions/ADR-0003.json",
+      ".overlaykit/governance/decisions/ADR-0004.json",
+      ".overlaykit/governance/decisions/ADR-0005.json",
+      ".overlaykit/governance/decisions/ADR-0006.json",
+      ".overlaykit/governance/plan.json",
+      ".overlaykit/governance/specifications/SPEC-0001.json",
+      ".overlaykit/governance/specifications/SPEC-0002.json"
+    ],
+    "acceptedPredecessorFinding": [".overlaykit/governance/changes/CHG-0027.json"],
+    "representationCarrier": [
+      ".overlaykit/governance/manifest.json",
+      ".overlaykit/governance/profile.json",
+      ".overlaykit/governance/schemas/profile.schema.json",
+      ".overlaykit/governance/schemas/specification.schema.json",
+      "tools/governance/src/compiler.ts",
+      "tools/governance/src/types.ts",
+      "tools/governance/src/validator.ts",
+      "tools/governance/tests/governance.test.ts"
+    ],
+    "h050PreReview": [
+      ".overlaykit/governance/changes/CHG-0029.json",
+      "lab/h050/subject-lock.json",
+      "lab/h050/product-intent-docket.json"
+    ],
+    "h050AcceptedIntent": [
+      "lab/h050/canonical-candidate-motion.json",
+      "lab/h050/human-acceptance.json",
+      "lab/h050/post-review-assessment.json"
+    ],
+    "h050EvidenceClosure": [
+      ".overlaykit/governance/changes/CHG-0030.json",
+      "artifacts/h050/post-review-closures/20aa95c65dd0fb05bc21d7d98e7ba839895de5ded959b781db9d32893e1e1e28/closure.json"
+    ]
+  },
+  "excludedSources": {
+    "mutableWorktreeManifest": ".overlaykit/governance/manifest.json",
+    "immutableMainManifestIncluded": true,
+    "successorChange": ".overlaykit/governance/changes/CHG-0031.json",
+    "selfPrefix": "lab/h051/"
+  },
+  "boundary": {
+    "question": "whether the exact accepted H-050 intent can be mapped losslessly to abstract product-specification slots under the current accepted law and representation carrier",
+    "nonAuthority": "the source lock admits evidence only; it does not create, draft, accept, activate, or authorize a specification or ADR",
+    "excluded": "SPEC-shaped fixtures, arbitrary-prose exhaustiveness claims, product or mechanism implementation, profile or schema mutation, live observation, host mutation, publication, commit, push, and merge"
+  },
+  "authority": "none",
+  "action": null
+}
