@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "overlaykit-h054-subject-lock/v1",
+  "hypothesis": "H-054",
+  "normative": false,
+  "acceptedAt": "2026-07-28",
+  "acceptedBy": "@rodrigoteamx",
+  "purpose": "Inventory the executable boundary required by a possible successor to H-053 without executing H-053 or selecting a runtime.",
+  "canonicalization": {
+    "encoding": "UTF-8",
+    "serialization": "compact JSON",
+    "objectKeyOrder": "recursive bytewise UTF-8 order using Buffer.compare(Buffer.from(key, 'utf8'))",
+    "arrayOrder": "preserved",
+    "whitespace": "none outside JSON string values"
+  },
+  "humanNominatedAnchors": {
+    "main": {
+      "commit": "161554b968b6dc38fb1cc055c829b414ba5b85ae",
+      "tree": "d8087b92796a8be07ee5779a5847e0e3859930a0",
+      "recursiveEntryCount": 319,
+      "recursiveLsTreeSha256": "9c5dc303da5ed8da64ee59c78e5cd5a3efaab617e93ab502925a884364d9cde1",
+      "guardedSurfaceEntryCount": 40,
+      "guardedSurfaceLsTreeSha256": "4c06c282e4c5e063bb5dfdeee9a1f28512fbba7b2c524552ae7a174423554f0d",
+      "planRawSha256": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243",
+      "manifestRawSha256": "69781c1d92fa9fc689270f42a837789dd14daaee4b16d2c813be99fbb579754d"
+    },
+    "h053PostReviewClosure": {
+      "path": "artifacts/h053/post-review-closures/5a55fc6ec2dff653858d4c8a70a22d3085400b423b8c93e265f14774078bf14f/closure.json",
+      "rawSha256": "e84b9faeb4858549eec513c3a08f19da566987665f4c79a448102dbc957b4911",
+      "directoryFileCount": 6,
+      "replayFormat": "POSIX-ustar",
+      "replayMemberCount": 49
+    },
+    "h053CanonicalRun": {
+      "path": "artifacts/h053/runs/0e979b5191acbf68a865d6f9c651d8683e93fbcc26cfd44bbf06ad363a3b29d4/run.json",
+      "runId": "h053-0e979b5191acbf68a865d6f9",
+      "rawSha256": "5a55fc6ec2dff653858d4c8a70a22d3085400b423b8c93e265f14774078bf14f",
+      "semanticSha256": "0e979b5191acbf68a865d6f9c651d8683e93fbcc26cfd44bbf06ad363a3b29d4",
+      "status": "inconclusive",
+      "reasonCode": "source-execution-closure-incomplete"
+    }
+  },
+  "preflightObservations": {
+    "status": "facts-to-be-independently-reconstructed",
+    "packageJson": {
+      "path": "package.json",
+      "rawSha256": "b2abc860816de570d3dc9c71e2aaa7c29bd1cbfde76a9e8f080012456872de35",
+      "declaredNodeEngine": "^22.20"
+    },
+    "packageLock": {
+      "path": "package-lock.json",
+      "rawSha256": "9f948eeea2c4c42507ba2d67d59c070bd2cd70d0e9340529d84a7fed874a83ff"
+    },
+    "errorsTs": {
+      "path": "tools/governance/src/errors.ts",
+      "rawSha256": "23f0c8e843f655a61dae807709c75670a42ef4b851beb0d8cacd584d0e0578b4",
+      "h053Admission": "executed-unadmitted"
+    },
+    "git": {
+      "locator": "/usr/bin/git",
+      "rawSha256": "8d8d470218586c27909c9b6ae77d18df32a9e05e725044ae2052d60254791c26"
+    },
+    "dynamicLibraryInspector": {
+      "locator": "/usr/bin/ldd",
+      "rawSha256": "60d313f3b91f60e7869aa59c5404510a5493bfb3df91d83b7ac3c53858d93cf3",
+      "closure": "opaque-not-recursively-closed"
+    }
+  },
+  "identityPolicy": {
+    "entryKeyFields": ["layerId", "logicalPath"],
+    "pathOnlyIdentityForbidden": true,
+    "duplicateCompositeKeysForbidden": true,
+    "ordering": "bytewise UTF-8 layerId, then bytewise UTF-8 logicalPath",
+    "symlinkObservation": "lstat every hop, preserve link text, and bind the final regular-file target separately",
+    "implicitSymlinkFollowingForbidden": true
+  },
+  "layerRoster": [
+    "apparatus/h053",
+    "apparatus/h054-producer",
+    "cache/tsx-global-current",
+    "configuration/loader-and-package-resolution",
+    "evidence/h053-canonical-run",
+    "evidence/h053-post-review-closure",
+    "host/context",
+    "native/esbuild-linux-x64@0.28.1",
+    "package/@esbuild/linux-x64@0.28.1",
+    "package/ajv@8.20.0",
+    "package/esbuild@0.28.1",
+    "package/fast-deep-equal@3.1.3",
+    "package/fast-uri@3.1.4",
+    "package/json-schema-traverse@1.0.0",
+    "package/require-from-string@2.0.2",
+    "package/tsx@4.23.1",
+    "process/environment",
+    "process/invocation",
+    "runtime/node22-candidate",
+    "runtime/node24-candidate",
+    "source/errors-ts",
+    "source/guarded-worktree",
+    "source/main-git-tree",
+    "tool/git-repository-state",
+    "tool/git-runtime"
+  ],
+  "inventoryCategoryRoster": [
+    "source-anchors",
+    "guarded-surface",
+    "executed-first-party-sources",
+    "experimental-apparatus",
+    "package-trees-and-transitives",
+    "native-binaries",
+    "candidate-runtimes",
+    "git-runtime",
+    "dynamic-libraries-and-loader",
+    "process-invocation",
+    "environment-selectors",
+    "locale",
+    "cache"
+  ],
+  "trackedApparatusPaths": [
+    "lab/h054/fixtures/adversarial-boundary.synthetic.json",
+    "lab/h054/inventory-lib.mjs",
+    "lab/h054/inventory-lib.test.mjs",
+    "lab/h054/run.mjs",
+    "lab/h054/run.test.mjs",
+    "lab/h054/subject-lock.json",
+    "lab/h054/verify.mjs",
+    "lab/h054/verify.test.mjs"
+  ],
+  "packageRootRoster": [
+    "node_modules/@esbuild/linux-x64",
+    "node_modules/ajv",
+    "node_modules/esbuild",
+    "node_modules/fast-deep-equal",
+    "node_modules/fast-uri",
+    "node_modules/json-schema-traverse",
+    "node_modules/require-from-string",
+    "node_modules/tsx"
+  ],
+  "packageSeedRoster": ["ajv", "tsx"],
+  "packageTraversalPolicy": "Follow all installed dependencies and installed optionalDependencies from the human-nominated H-053 seeds; classify each absent optional dependency explicitly and fail on any absent required dependency.",
+  "packageEntryPointPolicy": "Content-address declared exports and bin values inside complete installed trees; per-import and conditional export resolution remains not enumerated and methodologically incomplete.",
+  "environmentSelectorRoster": [
+    "ESBUILD_BINARY_PATH",
+    "ESBUILD_MAX_BUFFER",
+    "ESBUILD_WORKER_THREADS",
+    "FORCE_COLOR",
+    "HOME",
+    "LANG",
+    "LC_ALL",
+    "LC_COLLATE",
+    "LC_CTYPE",
+    "LC_MESSAGES",
+    "LD_AUDIT",
+    "LD_LIBRARY_PATH",
+    "LD_PRELOAD",
+    "NODE_ICU_DATA",
+    "NODE_OPTIONS",
+    "NODE_PATH",
+    "NO_COLOR",
+    "OPENSSL_CONF",
+    "OPENSSL_MODULES",
+    "PATH",
+    "SSL_CERT_DIR",
+    "SSL_CERT_FILE",
+    "TEMP",
+    "TMP",
+    "TMPDIR",
+    "TSX_DEBUG",
+    "TSX_DISABLE_CACHE",
+    "TSX_TSCONFIG_PATH",
+    "TZ",
+    "XDG_CACHE_HOME"
+  ],
+  "environmentValuePolicy": {
+    "allowlistedValuesMayBeRecordedInLocalRawEvidence": true,
+    "nonAllowlistedValuesMayBeRecorded": false,
+    "nonAllowlistedNamesMayBeRecorded": true,
+    "unclassifiedPotentialSelectorDisposition": "unknown"
+  },
+  "runtimePolicy": {
+    "selection": null,
+    "selectionAuthority": "separate-human-review-required",
+    "candidateOrderHasNoPreferenceSemantics": true,
+    "candidates": [
+      {
+        "id": "node22",
+        "role": "repository-supported-runtime-candidate",
+        "versionObservation": "v22.22.2",
+        "locator": "/usr/bin/node",
+        "symlinkTarget": "node-22",
+        "resolvedLocator": "/usr/bin/node-22",
+        "executableByteLength": 27944,
+        "executableRawSha256": "1a1ebcd93dc90cf3e3dc37493e8efc04a1f60bddada1402453094214af03e33d",
+        "declaredEngineCompatible": true,
+        "matchesH053ObservedRuntime": false
+      },
+      {
+        "id": "node24",
+        "role": "h053-historical-runtime-candidate",
+        "versionObservation": "v24.16.0",
+        "locator": "/home/rod/.local/share/nodejs/node-v24.16.0-linux-x64/bin/node",
+        "symlinkTarget": null,
+        "resolvedLocator": "/home/rod/.local/share/nodejs/node-v24.16.0-linux-x64/bin/node",
+        "executableByteLength": 123438592,
+        "executableRawSha256": "b2959781cc5a74c357ffa02367efa8a0330cbb1c9cb347732fdfaaaca381cbcd",
+        "declaredEngineCompatible": false,
+        "matchesH053ObservedRuntime": true
+      }
+    ]
+  },
+  "controlIds": [
+    "omit-errors-ts",
+    "omit-ajv-transitive",
+    "omit-esbuild-native",
+    "omit-node-final-or-libnode",
+    "omit-git-or-library",
+    "omit-env-cache-selector",
+    "stale-main-anchor",
+    "stale-h053-closure",
+    "stale-apparatus",
+    "symlink-retarget",
+    "symlink-cycle-escape",
+    "flatten-layer-collision"
+  ],
+  "producerVerifierPolicy": {
+    "producerMayImportVerifier": false,
+    "verifierMayImportProducer": false,
+    "verifierMayImportRunWriter": false,
+    "sharedCanonicalizerAllowed": false,
+    "sharedMutationHelperAllowed": false,
+    "verifierMustReapplyEveryControl": true,
+    "coherentlyRehashedTamperMustBeRejected": true
+  },
+  "outcomePolicy": {
+    "invalid": "Any anchor, evidence-envelope, apparatus, path-safety, authorization, or integrity failure is invalid evidence.",
+    "inconclusive": "Any omitted, opaque, ambiguous, contradictory, dynamically unresolved, irrecoverable, non-deterministic, or non-classifiable required input prevents support or refutation.",
+    "supported": "Both runtime candidates remain separate, every requested inventory category is deterministically reconstructed with zero unknown or irrecoverable entries, and every control is independently reproduced.",
+    "refuted": "An exact independently reproducible required dependency omission, layer collision, symlink ambiguity, or non-deterministic reconstruction demonstrates that the nominated inventory method cannot close the requested boundary."
+  },
+  "successorReadinessPolicy": {
+    "runtimeSelectionRequired": true,
+    "h055AuthorizationRequiredSeparately": true,
+    "defaultStatus": "withheld-not-nominated",
+    "h054SupportDoesNotSelectRuntime": true
+  },
+  "claimBoundary": {
+    "includes": [
+      "the exact nominated main Git commit and tree",
+      "the exact local H-053 post-review closure and canonical run",
+      "the H-053 guarded surface and errors.ts executed-unadmitted observation",
+      "the content-addressed H-054 apparatus",
+      "installed package trees and transitive runtime inputs reachable by the inventory methods",
+      "Node 22 and Node 24 as separate unselected candidates",
+      "Git, native binaries, observed dynamic libraries, invocation, allowlisted environment selectors, locale, and cache"
+    ],
+    "excludes": [
+      "execution or reinterpretation of H-053",
+      "execution or opening of H-055",
+      "runtime selection",
+      "network or live observation",
+      "USB or hidraw access",
+      "Docker, signals, services, installation, or configuration",
+      "host or product mutation other than authorized ignored raw evidence",
+      "ADR, SPEC, production policy, commit, push, merge, or publication"
+    ],
+    "authority": "none",
+    "action": null
+  },
+  "authority": "none",
+  "action": null
+}

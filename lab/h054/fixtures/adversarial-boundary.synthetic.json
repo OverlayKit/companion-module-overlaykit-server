@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "overlaykit-h054-adversarial-boundary-fixture/v1",
+  "hypothesis": "H-054",
+  "normative": false,
+  "synthetic": true,
+  "purpose": "Exercise omission, staleness, symlink, and layer-collision detection without representing a real runtime or authorizing a successor.",
+  "identityPolicy": {
+    "entryKeyFields": ["layerId", "logicalPath"],
+    "pathOnlyIdentityForbidden": true,
+    "ordering": "bytewise UTF-8 layerId, then bytewise UTF-8 logicalPath"
+  },
+  "baseGraph": {
+    "layers": [
+      "git-runtime",
+      "h053-execution-only",
+      "h053-frame",
+      "h053-local-predecessor",
+      "h053-nominated-git",
+      "h053-post-review-closure",
+      "h054-apparatus",
+      "native-binaries",
+      "node22-candidate",
+      "node24-candidate",
+      "package-runtime",
+      "process-environment",
+      "shared-libraries"
+    ],
+    "entries": [
+      {
+        "layerId": "git-runtime",
+        "logicalPath": "bin/git",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-git-executable\n",
+        "sha256": "f8d6b3fb7e0be63fc1150f10466bd642a3462624dde39cb5fe01defa54c52449"
+      },
+      {
+        "layerId": "h053-execution-only",
+        "logicalPath": "tools/governance/src/errors.ts",
+        "kind": "regular-file",
+        "contentUtf8": "export class SyntheticGovernanceError extends Error {}\n",
+        "sha256": "5a2a9507dc1ac943b220f546a875b7157286765b9d8c97cba0c4adbae6ef9939"
+      },
+      {
+        "layerId": "h053-frame",
+        "logicalPath": ".overlaykit/governance/manifest.json",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-h053-frame-manifest\n",
+        "sha256": "05f3b666bee616f827e515fc43487a11b670363b09f0c406a3e36926a2326607"
+      },
+      {
+        "layerId": "h053-local-predecessor",
+        "logicalPath": ".overlaykit/governance/manifest.json",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-predecessor-manifest\n",
+        "sha256": "5798e9ee09664532b86f31e1fe92e95db8b354a56161984a242369576f019293"
+      },
+      {
+        "layerId": "h053-nominated-git",
+        "logicalPath": ".overlaykit/governance/manifest.json",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-main-manifest\n",
+        "sha256": "8642736f4c1e5e8599b8379ed41d0c250d77250612bbcb1b069e309ff9806d2f"
+      },
+      {
+        "layerId": "h053-post-review-closure",
+        "logicalPath": "closure.json",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-h053-closure\n",
+        "sha256": "ac4d97afe2faf0940526882e752fd3de790cb03eb77996ca0843896b2443f1c4"
+      },
+      {
+        "layerId": "h054-apparatus",
+        "logicalPath": "inventory-lib.mjs",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-h054-apparatus\n",
+        "sha256": "3624db2af2755754c3a0c781fd429cd66078578a66fb9de871478957f590cea4"
+      },
+      {
+        "layerId": "native-binaries",
+        "logicalPath": "node_modules/@esbuild/linux-x64/bin/esbuild",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-esbuild-native-binary\n",
+        "sha256": "90c3e8c8e78c32c3128362aa198f22bba54e05f8fe43578f08cbd963ba13d984"
+      },
+      {
+        "layerId": "node22-candidate",
+        "logicalPath": "usr/bin/node",
+        "kind": "symbolic-link",
+        "linkText": "node-22",
+        "targetLayerId": "node22-candidate",
+        "targetLogicalPath": "usr/bin/node-22"
+      },
+      {
+        "layerId": "node22-candidate",
+        "logicalPath": "usr/bin/node-22",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-node22-executable\n",
+        "sha256": "4e7721f1ff00ad36902afb2f9efc7ef25125aa05acd0e3d72d5b6a217b7b9671"
+      },
+      {
+        "layerId": "node24-candidate",
+        "logicalPath": "distribution/bin/node",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-node24-executable\n",
+        "sha256": "dbebf1f1df86277150184712de260864330728c10c0149bd7420c13accefb6bb"
+      },
+      {
+        "layerId": "package-runtime",
+        "logicalPath": "node_modules/.bin/tsx",
+        "kind": "symbolic-link",
+        "linkText": "../tsx/dist/cli.mjs",
+        "linkTextSha256": "2e44938895a5830c2cb4da63dacb1333bab7997c2e5518e1656b2f162aef202e",
+        "targetLayerId": "package-runtime",
+        "targetLogicalPath": "node_modules/tsx/dist/cli.mjs"
+      },
+      {
+        "layerId": "package-runtime",
+        "logicalPath": "node_modules/ajv/dist/core.js",
+        "kind": "regular-file",
+        "contentUtf8": "export const syntheticAjvCode = true;\n",
+        "sha256": "88330232f9b4411c2992c2e3ff3909f63a87821343543d07fd8c34fa49ba8e33"
+      },
+      {
+        "layerId": "package-runtime",
+        "logicalPath": "node_modules/tsx/dist/cli.mjs",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-tsx-cli\n",
+        "sha256": "b67c0bd2aa4c3e01364b3a827a2efc86970fefcf076a881ca1e337b504deab0d"
+      },
+      {
+        "layerId": "process-environment",
+        "logicalPath": "TSX_DISABLE_CACHE",
+        "kind": "environment-selector",
+        "contentUtf8": "TSX_DISABLE_CACHE=1\n",
+        "sha256": "fe093ba16268b9efd925564c5a506fb652305e6b4a43ce0f884b76ebe0048a02"
+      },
+      {
+        "layerId": "shared-libraries",
+        "logicalPath": "lib/libgit-synthetic.so",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-git-library\n",
+        "sha256": "d4efc79a781e5cb67c35ed1b20c0a6ca19a4899c12a053066fd0b8c7d9fea798"
+      },
+      {
+        "layerId": "shared-libraries",
+        "logicalPath": "lib/libnode.so",
+        "kind": "regular-file",
+        "contentUtf8": "synthetic-libnode-shared-object\n",
+        "sha256": "eb342f4397522e57b28e62e48629983a92da1471eae5eda9d8b72e711d1e025f"
+      }
+    ],
+    "edges": [
+      {
+        "fromLayerId": "git-runtime",
+        "fromLogicalPath": "bin/git",
+        "kind": "needs",
+        "toLayerId": "shared-libraries",
+        "toLogicalPath": "lib/libgit-synthetic.so"
+      },
+      {
+        "fromLayerId": "node22-candidate",
+        "fromLogicalPath": "usr/bin/node",
+        "kind": "symlink-target",
+        "toLayerId": "node22-candidate",
+        "toLogicalPath": "usr/bin/node-22"
+      },
+      {
+        "fromLayerId": "node22-candidate",
+        "fromLogicalPath": "usr/bin/node-22",
+        "kind": "needs",
+        "toLayerId": "shared-libraries",
+        "toLogicalPath": "lib/libnode.so"
+      },
+      {
+        "fromLayerId": "package-runtime",
+        "fromLogicalPath": "node_modules/.bin/tsx",
+        "kind": "symlink-target",
+        "toLayerId": "package-runtime",
+        "toLogicalPath": "node_modules/tsx/dist/cli.mjs"
+      },
+      {
+        "fromLayerId": "package-runtime",
+        "fromLogicalPath": "node_modules/tsx/dist/cli.mjs",
+        "kind": "loads",
+        "toLayerId": "native-binaries",
+        "toLogicalPath": "node_modules/@esbuild/linux-x64/bin/esbuild"
+      },
+      {
+        "fromLayerId": "package-runtime",
+        "fromLogicalPath": "node_modules/tsx/dist/cli.mjs",
+        "kind": "selected-by",
+        "toLayerId": "process-environment",
+        "toLogicalPath": "TSX_DISABLE_CACHE"
+      }
+    ],
+    "layerCollision": {
+      "logicalPath": ".overlaykit/governance/manifest.json",
+      "expectedLayerIds": ["h053-frame", "h053-local-predecessor", "h053-nominated-git"],
+      "expectedCardinality": 3
+    }
+  },
+  "mutations": [
+    {
+      "id": "omit-errors-ts",
+      "kind": "omit-entry",
+      "target": {
+        "layerId": "h053-execution-only",
+        "logicalPath": "tools/governance/src/errors.ts"
+      },
+      "expectedReasonCode": "required-entry-omitted"
+    },
+    {
+      "id": "omit-ajv-transitive",
+      "kind": "omit-entry",
+      "target": {
+        "layerId": "package-runtime",
+        "logicalPath": "node_modules/ajv/dist/core.js"
+      },
+      "expectedReasonCode": "required-package-entry-omitted"
+    },
+    {
+      "id": "omit-esbuild-native",
+      "kind": "omit-entry",
+      "target": {
+        "layerId": "native-binaries",
+        "logicalPath": "node_modules/@esbuild/linux-x64/bin/esbuild"
+      },
+      "expectedReasonCode": "required-native-binary-omitted"
+    },
+    {
+      "id": "omit-node-final-or-libnode",
+      "kind": "omit-entry-variants",
+      "targets": [
+        {
+          "layerId": "node22-candidate",
+          "logicalPath": "usr/bin/node-22"
+        },
+        {
+          "layerId": "shared-libraries",
+          "logicalPath": "lib/libnode.so"
+        }
+      ],
+      "expectedReasonCode": "runtime-dependency-omitted"
+    },
+    {
+      "id": "omit-git-or-library",
+      "kind": "omit-entry-variants",
+      "targets": [
+        {
+          "layerId": "git-runtime",
+          "logicalPath": "bin/git"
+        },
+        {
+          "layerId": "shared-libraries",
+          "logicalPath": "lib/libgit-synthetic.so"
+        }
+      ],
+      "expectedReasonCode": "git-runtime-dependency-omitted"
+    },
+    {
+      "id": "omit-env-cache-selector",
+      "kind": "omit-entry",
+      "target": {
+        "layerId": "process-environment",
+        "logicalPath": "TSX_DISABLE_CACHE"
+      },
+      "expectedReasonCode": "environment-selector-omitted"
+    },
+    {
+      "id": "stale-main-anchor",
+      "kind": "replace-anchor-digest",
+      "target": "main.tree",
+      "replacement": "ffffffffffffffffffffffffffffffffffffffff",
+      "expectedReasonCode": "main-anchor-stale"
+    },
+    {
+      "id": "stale-h053-closure",
+      "kind": "replace-anchor-digest",
+      "target": "h053PostReviewClosure.rawSha256",
+      "replacement": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "expectedReasonCode": "h053-closure-stale"
+    },
+    {
+      "id": "stale-apparatus",
+      "kind": "replace-entry-content-and-rehash-envelope",
+      "target": {
+        "layerId": "h054-apparatus",
+        "logicalPath": "inventory-lib.mjs"
+      },
+      "replacementContentUtf8": "synthetic-h054-apparatus-drift\n",
+      "expectedReasonCode": "apparatus-stale"
+    },
+    {
+      "id": "symlink-retarget",
+      "kind": "replace-symlink-target",
+      "target": {
+        "layerId": "package-runtime",
+        "logicalPath": "node_modules/.bin/tsx"
+      },
+      "replacementLinkText": "../ajv/dist/core.js",
+      "replacementTarget": {
+        "layerId": "package-runtime",
+        "logicalPath": "node_modules/ajv/dist/core.js"
+      },
+      "expectedReasonCode": "symlink-chain-drift"
+    },
+    {
+      "id": "symlink-cycle-escape",
+      "kind": "symlink-invalid-variants",
+      "target": {
+        "layerId": "node22-candidate",
+        "logicalPath": "usr/bin/node"
+      },
+      "variants": [
+        {
+          "linkText": "node",
+          "expectedReasonCode": "symlink-cycle"
+        },
+        {
+          "linkText": "../../../../etc/passwd",
+          "expectedReasonCode": "symlink-boundary-escape"
+        }
+      ],
+      "expectedReasonCode": "symlink-invalid"
+    },
+    {
+      "id": "flatten-layer-collision",
+      "kind": "deduplicate-by-logical-path",
+      "targetLogicalPath": ".overlaykit/governance/manifest.json",
+      "expectedOriginalCardinality": 3,
+      "expectedFlattenedCardinality": 1,
+      "expectedReasonCode": "layer-qualified-cardinality-drift"
+    }
+  ],
+  "runtimeSelection": null,
+  "authority": "none",
+  "action": null
+}
