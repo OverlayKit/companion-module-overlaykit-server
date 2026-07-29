@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0036",
+  "title": "Formalize the selected Node 22 successor-boundary preflight",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "high",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root is the evidence-producing agent for this local preflight under human principal @rodrigoteamx; its authority is none and its action is null, and delegated agents can neither approve the result nor authorize a successor transition.",
+      "evidence": "Repository AGENTS.md, accepted ADR-0001, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, and the exact model-visible human authorization.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The tracked predecessor is protected main commit bb6ce5db53541a7926eb74b3c722fa039ca9dabd with tree 823796b0c9f509cf4ed35b9febeb71c284626036; its compiled plan raw SHA-256 is 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243 and its pre-CHG-0036 manifest raw SHA-256 is 8b3fb70d5dc2f8835a2b65b7b882880eb40cdbd58864135ecdaf5b3b105d062e.",
+      "evidence": "Local Git commit and tree inspection, deterministic governance verification, and independent SHA-256 calculation before CHG-0036 creation.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Human review accepted H-054 as inconclusive only inside its nominated inventory boundary, bound to raw SHA-256 250e6115b9e9dc6d9e750788c16626657feca5577c102b84a48e4fb4bf2444f2 and semantic SHA-256 8547552f833c37664099febcc0ad5ab081a277806e129a4b9dba98cdd39b8ec0, with no ADR candidate.",
+      "evidence": "The exact model-visible human review and the byte-exact local H-054 run at artifacts/h054/runs/8547552f833c37664099febcc0ad5ab081a277806e129a4b9dba98cdd39b8ec0/run.json.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal prospectively selected /usr/bin/node-22 version v22.22.2 with executable SHA-256 1a1ebcd93dc90cf3e3dc37493e8efc04a1f60bddada1402453094214af03e33d only for a separate offline and read-only successor-boundary preflight; the accepted H-054 raw evidence retains runtimeSelection null byte-identically.",
+      "evidence": "The exact model-visible runtime-selection motion, local version and SHA-256 observations, and the unchanged H-054 run raw SHA-256 250e6115b9e9dc6d9e750788c16626657feca5577c102b84a48e4fb4bf2444f2.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Selecting an exact runtime resolves only the runtime-candidate ambiguity; it does not by itself close module resolution, native subprocesses, shared objects, environment selectors, filesystem access, kernel mediation, syscalls, or launcher behavior.",
+      "evidence": "H-054's accepted inconclusive classification, its explicit opaque and methodological blockers, ADR-0005 runtime-identity requirements, and static inspection of the tsx, esbuild, Ajv, Node, and bubblewrap execution surfaces.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "NODE22-BOUNDARY-PREFLIGHT-001: the selected Node 22 executable can run a visibly synthetic and non-normative TypeScript, Ajv, and esbuild probe twice with equivalent canonical receipts inside a finite empty-root, offline, read-only boundary whose admitted userspace inputs and launcher declaration are content-addressed and independently reconstructed.",
+      "evidence": "This is the falsifiable preflight claim authorized by the human principal; no result is presumed.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "Outcome precedence is invalid first, then inconclusive, then refuted, then supported. The preflight is invalid on malformed or stale evidence claimed as current, unauthorized tracked mutation, host, product or configuration mutation, write outside explicitly admitted raw evidence, external network use, successor-semantic execution, missing control roster, producer/verifier coupling, integrity failure, or authority overclaim. If valid, any opaque, omitted, ambiguous, irrecoverable, untraced, or methodologically incomplete edge makes it inconclusive. Only with zero blockers is it refuted by exact inability of the selected runtime or admitted toolchain to perform the synthetic probe, an accepted hostile control, an access or execution outside the allowlist, or divergent identical-input attempts. Only with zero blockers and zero refutation witnesses is it supported when every declared predicate passes, every userspace input accessible in the sandbox belongs to the declared mount-to-descriptor bijection, the launcher and effective isolation are independently reconstructed, attempts are canonically equivalent with zero normalization, and all hostile controls fail closed.",
+      "evidence": "ADR-0001 evidence-before-decision ordering, ADR-0005 runtime identity, the accepted H-054 boundary limitation, and the exact human authorization for a fail-closed formal preflight.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The minimum admitted boundary consists of the selected Node executable and every observed shared object; bubblewrap and its exact invocation; an empty root with only enumerated read-only mounts, empty inaccessible proc and dev directories, and private scratch and home mounts remounted read-only; an explicitly cleared and reconstructed environment; the preflight apparatus and synthetic fixture; pinned tsx, esbuild, its native platform binary, Ajv and reached transitive package trees; and the exact compiler configuration selected by TSX_TSCONFIG_PATH.",
+      "evidence": "H-054 inventory observations, Node 22 process reports, package export inspection, and the D3 minimal-slice framing.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The required controls cover runtime, predecessor, apparatus and dependency staleness; omitted mount, package, native binary, shared object and environment selector; symlink retarget, escape, cycle and dangling paths; layer and logical-path collision; contaminated environment, cache or cwd; broadened root mount; weakened Node permission flags; missing network isolation; tampered receipt; and false successor-opened or authority fields. Every hostile capability, mount, namespace, runtime, native-object or forbidden-subject mutation is an in-memory declaration or receipt mutation that must be rejected before positive bubblewrap-boundary execution; the control suite never launches a weakened boundary. A zero launch receipt is scoped only to that positive bubblewrap boundary and does not claim that the verifier avoided its exact host-side Git anchor resolver.",
+      "evidence": "The accepted H-054 control families, the selected runtime boundary, and adversarial review of the proposed preflight.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the observed ESM and CommonJS module graph is exhaustive and whether universal absence of successor execution can be proven without an independently closed open-file and execution trace remain unknown; a self-reported import roster and finite mount roster cannot establish their own universal completeness.",
+      "evidence": "No independently content-addressed exhaustive open-file tracing mechanism is presently admitted.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the effective syscall surface is deny-by-default and independently evidenced remains unknown until a content-addressed seccomp policy or equivalent independently verified mechanism is admitted; namespace and permission flags alone do not close the syscall boundary.",
+      "evidence": "bubblewrap supports a seccomp file descriptor, but no content-addressed seccomp producer, policy, or independent effective-policy receipt is currently admitted.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether every late-loaded shared object, kernel-provided vDSO page, loader decision, and native esbuild child-process dependency can be exhaustively reconstructed remains unknown. Pre/post path hashes can show ordinary stability for Node, bubblewrap and Git, but cannot by themselves eliminate an adversarial path-execution swap-and-restore window or prove the exact executed image.",
+      "evidence": "Static ELF inspection, executable pre/post hashing and Node process.report provide bounded observations but do not alone prove exhaustive runtime loading or close path-execution TOCTOU across every process.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the successor apparatus and mounted package trees are exact against a pre-run governed source lock remains unknown. Accepted H-054 contains content-addressed package and Node 22 inventory layers, but no exact mapping from those predecessor descriptors to the successor mount descriptors, repository-containment chain, package-label/version binding, or newly created preflight apparatus has been admitted.",
+      "evidence": "Accepted H-054 raw SHA-256 250e6115b9e9dc6d9e750788c16626657feca5577c102b84a48e4fb4bf2444f2 contains inventory root 8890252917ffec6bdfeb0dc02aca678859b2f3052c3008bb51c88584e7b61442 and package/runtime layer receipts; the successor currently rewalks and content-addresses its current state pre/post but has no independently governed pre-run mapping.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether every failed launch, malformed probe output, divergent attempt, or exact incompatibility can be preserved safely and classified by the declared four-way outcome lattice remains unknown because the current producer materializes only the successful-observation branch and fails closed before raw preservation on those failure branches.",
+      "evidence": "Static producer-path review: runProbeAttempt validates the positive receipt before the outer content-addressed raw writer, so failed-attempt evidence and general invalidity/refutation derivation are not currently materializable.",
+      "blocking": true
+    },
+    {
+      "kind": "inference",
+      "statement": "The currently known tracing and seccomp gaps make an inconclusive preflight the expected honest classification even if the narrow synthetic compatibility observations pass; those observations may narrow the next boundary but cannot be promoted to support.",
+      "evidence": "The strict outcome policy and the five aggregate blocking-unknown families recorded by this proposed contract.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "No ADR candidate is activated because this one-experiment preflight neither establishes a reusable architectural rule nor authorizes runtime policy, production behavior, or a successor semantic experiment.",
+      "evidence": "ADR-0001 candidacy sequence, explicit human exclusions, blocking unknowns, authority none, and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human authorization permits only this separate proposed change contract, deterministic manifest addition, synthetic apparatus, offline read-only execution, independent verification, focused controls, and ignored local raw evidence; it does not authorize product, profile, schema, compiler, plan, ADR, specification, host configuration, live-device, Docker, network, commit, push, merge, publication, or successor-semantic changes.",
+      "evidence": "The exact model-visible human authorization following the governed-discovery framing; inaccessible transport-byte identity is not claimed.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Authority for human acceptance or rejection, post-review closure, any successor change or experiment, ADR or specification creation, product or host mutation, commit, push, merge, or publication remains absent.",
+      "evidence": "The grant is limited to the local preflight apparatus and run; authority remains none and action remains null.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The preflight subject is non-circularly anchored to protected main, the accepted H-054 raw and semantic identities, the prospective Node 22 selection, and predecessor governance bytes without rewriting any predecessor.",
+      "verification": "Recompute Git, plan, predecessor manifest, CHG-0035, H-054 and runtime identities, and compare the subject lock and path-scoped diff."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The synthetic probe runs under the exact selected Node 22 executable in a bubblewrap empty-root namespace with no broad host-root bind, an isolated network namespace, all capabilities dropped, empty proc and dev directories, a cleared explicit environment, no filesystem-write permission, no addons, read-only scratch and home mounts, and only enumerated mounts.",
+      "verification": "Independently reconstruct the complete launcher argv and environment, reject broadened or missing flags and mounts, and inspect the probe receipt and negative controls."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The admitted userspace boundary content-addresses the apparatus, fixture, Node executable and observed shared objects, bubblewrap, compiler configuration, complete mounted package trees, esbuild native binary and every declared symlink resolution without flattening layer identities.",
+      "verification": "Rewalk each declared source and mount layer independently, compare types, modes, sizes, link texts, resolved targets and SHA-256 values, and require a bijection between declaration, mount and receipt rosters."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The visibly synthetic probe proves only narrow execution observations: TSX loads the exact TypeScript fixture, Ajv accepts one valid and rejects one invalid synthetic value, esbuild produces the expected deterministic transform, and the selected runtime reports the expected identity and shared-object roster.",
+      "verification": "Execute two isolated attempts, validate exact outputs and tool versions, compare canonical receipts, and reject before execution any declaration that admits a product, predecessor-experiment or successor-semantic path; do not infer universal absence beyond the nominated source and mount rosters."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Two isolated attempts with identical admitted inputs produce byte-equivalent canonical probe receipts with an empty normalization roster, and the private scratch boundary is empty before and after each attempt.",
+      "verification": "Compare the two canonical receipt bytes and hashes, exact normalization roster, process outputs, exit statuses, stderr, and scratch pre/post inventories."
+    },
+    {
+      "id": "SC-006",
+      "statement": "The independent verifier imports no producer module, reconstructs anchors, source and mount closures, launcher declaration, semantic identity, attempts, controls, outcome, authority and action, and can rerun the synthetic probe read-only from its own implementation.",
+      "verification": "Inspect the verifier import graph, run it against preserved raw, compare its independently constructed launcher and receipts, and exercise source and evidence tampering."
+    },
+    {
+      "id": "SC-007",
+      "statement": "Every required staleness, omission, environment, cache, cwd, mount-broadening, permission-weakening, network-isolation, symlink, collision, receipt-integrity, successor-state and authority control fails closed with an exact reason code, and every hostile capability mutation is rejected before any sandbox process is launched.",
+      "verification": "Require the complete control roster, mutate one independent in-memory declaration or receipt dimension per control, require executionDisposition reject-before-execution for hostile capability cases, and reject any missing, launched, bypassed, ambiguously passing or differently classified control."
+    },
+    {
+      "id": "SC-008",
+      "statement": "Any missing exhaustive ESM or open-file trace, effective seccomp closure, late-loaded shared-object closure, kernel/vDSO closure, governed successor source lock, executable failure-branch preservation, or other semantically relevant input forces inconclusive even when all narrow compatibility observations pass.",
+      "verification": "Independently derive blocking classifications and reject supported or refuted outcomes while any required unknown is present."
+    },
+    {
+      "id": "SC-009",
+      "statement": "Raw evidence is deterministic, content-addressed, created exclusively under ignored artifacts/node22-boundary-preflight with private 0700 directories and a 0600 single-link regular file, and retains authority none and action null.",
+      "verification": "Recompute semantic and raw SHA-256 identities, inspect modes, link counts, symlink-free containment and Git ignore state, and compare two non-writing builds."
+    },
+    {
+      "id": "SC-010",
+      "statement": "Only CHG-0036, its deterministic manifest addition, and lab/node22-boundary-preflight apparatus are tracked; accepted decisions, specifications, CHG-0035, H-054 raw, profile, schemas, compiler, plan, product, host and Git history remain unchanged. No successor source, import target or execution receipt is observed within the nominated source and mount boundary; universal absence is not claimed without exhaustive tracing.",
+      "verification": "Audit the exact path-scoped diff and hashes, reconstruct the nominated source, mount, import and execution-receipt rosters, retain universalAbsenceProved false, and run focused, governance, quality and build gates offline."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "The preflight claim, exact temporal anchors, selected runtime, four-way outcome policy, authority and exclusions are recorded in this proposed contract and a deterministic subject lock.",
+      "evidence": "CHG-0036 and lab/node22-boundary-preflight/subject-lock.json."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The fixture is visibly synthetic and non-normative, and neither imports nor executes predecessor or successor experiment semantics.",
+      "evidence": "Fixture bytes, static import audit and isolated probe receipt."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The external producer launches two exact Node 22 attempts in an empty-root read-only namespace and preserves deterministic local raw using exclusive creation.",
+      "evidence": "Launcher declaration, two attempt receipts, semantic comparison, raw receipt and filesystem metadata."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The independent verifier reconstructs the evidence without importing producer code and reruns the isolated synthetic probe with an independently declared launcher.",
+      "evidence": "Verifier import audit, reconstruction receipt, rerun hashes and focused tests."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "All negative controls fail closed with their expected exact reason codes, and hostile boundary mutations are rejected before positive bubblewrap-boundary execution.",
+      "evidence": "Control roster, positive-boundary-scoped zero-launch receipts, exact host-side anchor-resolver disclosure and focused producer/verifier tests."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "All admitted userspace sources and mounts are layer-qualified and content-addressed, and every unclosed edge is explicitly blocking.",
+      "evidence": "Source closure, mount closure, symlink receipts, ELF observations and blocking-unknown roster."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "The formal result obeys the strict outcome policy, creates no ADR candidate, records no successor source, import target or execution receipt inside its nominated boundary, does not claim universal absence, and retains authority none and action null pending separate human review.",
+      "evidence": "Raw outcome, boundary-qualified successor-state receipt, independent verifier receipt and explicit human-review gate."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "The tracked scope is limited to CHG-0036, its manifest entry and the preflight lab, while every protected predecessor and product byte remains unchanged and raw stays local and ignored.",
+      "evidence": "Path-scoped diff, predecessor hash ledger, Git ignore receipt and repository status."
+    },
+    {
+      "id": "DOD-009",
+      "statement": "Focused tests, deterministic reconstruction, governance check, repository check, build, formatting, whitespace and scope gates pass offline.",
+      "evidence": "Final local gate outputs and hash ledger."
+    }
+  ]
+}
