@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0037",
+  "title": "Authorize signed publication of the bounded Node 22 preflight review",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the publication-producing agent for CHG-0037 under human principal @rodrigoteamx; the agent cannot close any preflight blocker, open H-055, create product or operational authority, or approve an architectural rule.",
+      "evidence": "Repository AGENTS.md, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, accepted ADR-0001 through ADR-0006, and the exact contextual Git transition recorded by this successor.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Immediately before CHG-0037, the publication branch remains at protected-main commit bb6ce5db53541a7926eb74b3c722fa039ca9dabd with tree 823796b0c9f509cf4ed35b9febeb71c284626036 and contains exactly twelve pending reviewed tracked paths whose canonical descriptor-set SHA-256 is c0db6742e86bee2e2963a242386bf687a6c710d70d36a71c90e02c1190008710.",
+      "evidence": "Read-only Git status and object inspection plus the byte length, SHA-256, mode, and repository-relative path of CHG-0036, the pre-publication manifest, and all ten files under lab/node22-boundary-preflight.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0036 remains proposed and byte-identical at raw SHA-256 2ff88d94d8768b23548e64d066922aec3e1d0b8ba7aaab27907f8af0432bf492, and its pre-publication governance manifest remains preserved in the local closure at raw SHA-256 5f4f3882371e7f504c15b25d5e3fa7a9bc11c77d34fb51412d0b2bf10c4589d0.",
+      "evidence": "Independent SHA-256 calculation, the Node 22 post-review source anchor and replay archive, and the deterministic pre-CHG-0037 manifest.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The accepted canonical Node 22 preflight remains inconclusive for known-boundary-completeness-blockers-remain, with raw SHA-256 7840707ad717258316355745f27536414074cc1922eadf260ecfa2e1770ac3d2, semantic SHA-256 4101216b06f6ba66eb02f80e919b9718c412968a3b936afcd5ddedf23b8dc164, exactly ten blockers, no ADR candidate, authority none, and action null.",
+      "evidence": "The byte-exact canonical run, external human review, post-review assessment 328f47b09fbca6049c2bc0e2cb85e16aa22c3f968a71eadee451790af434432b, and closure 2ba4571e27b59e1e4aa59482ff752405d206d87f1713346302c60866b3424ca9.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The canonical producer raw truthfully retains humanReview.accepted null and all 31 controls deferred, while the later review separately accepts two deterministic producer attempts, two independent reruns, and 31 of 31 independent controls only inside the nominated boundary.",
+      "evidence": "Canonical raw SHA-256 7840707ad717258316355745f27536414074cc1922eadf260ecfa2e1770ac3d2 and post-review human-acceptance SHA-256 7c31039768172edcadd9296e4954125eb6a1df1e661d370290c35335f7817f3e; independent rerun transport bytes are not claimed or published.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The local unsigned closure remains byte-exact at SHA-256 2ba4571e27b59e1e4aa59482ff752405d206d87f1713346302c60866b3424ca9 with archive e891e09ade7c7801653677e8624e1e0b615cf37ed84f18d923e624d224a633c3, acceptance 7c31039768172edcadd9296e4954125eb6a1df1e661d370290c35335f7817f3e, assessment 328f47b09fbca6049c2bc0e2cb85e16aa22c3f968a71eadee451790af434432b, source anchor 7bdec54f47264b9b9c4c1fa81ee4e6cfa8e5c52eafe0291f7ed92c23cdafb410, and manifest 2663a3075b887e7e42d03783f28e88f2452db29f9a4944c67f988c54274fabc6.",
+      "evidence": "Independent local verification of the six-file 0700/0600 closure, seventeen-payload manifest, eighteen-member deterministic POSIX-ustar replay, and acyclic content-addressed envelope.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0036 and the local closure remain truthful when they state that commit, push, merge, signature, publication, a successor, and H-055 were unauthorized at their exact earlier temporal boundaries.",
+      "evidence": "Byte-identical CHG-0036, raw, human-acceptance, post-review assessment, local source anchor, local manifest, replay archive, and external closure captured before the later Git grant.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "After the complete Node 22 closure handoff, the registered human principal supplied the model-visible text 'dale commit merge y lo que sigue', represented as 32 UTF-8 bytes with SHA-256 b333198077fe4bd0dbce41b88c59baaf612fe5b05c5742c5ba9667a8e9bd98df; this record makes no claim about inaccessible transport bytes.",
+      "evidence": "The immediately preceding handoff names the exact closure, outcome, hashes, modes, verification results, and withheld transitions; the subsequent response is bound to that predecessor context and this publication successor.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "In this exact context, the later response authorizes a signed commit, instrumental non-force push of a feature branch, protected pull request, required validation, allowed merge commit, and continuation only to a separately governed read-only discovery after merge.",
+      "evidence": "Immediate handoff and response ordering, CHG-0028 and CHG-0032 contextual-publication precedents, repository ruleset 19629576, and ADR-0001 evidence-before-decision ordering.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The authorized atomic tracked publication boundary contains exactly fourteen paths: the governance manifest, CHG-0036, CHG-0037, all ten files under lab/node22-boundary-preflight, and one non-authorizing Node 22 bounded-review receipt.",
+      "evidence": "Exact deterministic manifest compilation, explicit staged-path roster, pre-successor descriptor set c0db6742e86bee2e2963a242386bf687a6c710d70d36a71c90e02c1190008710, and receipt raw SHA-256 1444e6e62af274f6a85e4076acfdbce2346c83dd6da57a91219539523dde20fe.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The tracked receipt preserves only content identities, outcome boundaries, and the later Git transition while exposing no raw replay member and conferring no authority of its own.",
+      "evidence": "evidence/node22-boundary-preflight/4101216b06f6ba66eb02f80e919b9718c412968a3b936afcd5ddedf23b8dc164/README.md has 5,512 bytes and raw SHA-256 1444e6e62af274f6a85e4076acfdbce2346c83dd6da57a91219539523dde20fe.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The raw Node 22 run, accepted H-054 raw, post-review metadata, replay archive, and external closure remain under artifacts, ignored and excluded from Git publication.",
+      "evidence": "Repository artifacts ignore rule at .gitignore raw SHA-256 2c42503834e61def3bf5840b5c553a73b2d569cee732c69e7420f75ce5e6f1fc, exact staged roster, zero artifacts paths in the index, and local closure modes 0700/0600.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The publication transition changes no accepted ADR, accepted specification, profile rule, compiled plan, product source, product configuration, runtime selection, recovery mechanism, host state, or live state, and activates no ADR candidate.",
+      "evidence": "Scoped repository diff; unchanged ADR-0001 through ADR-0006, SPEC-0001 through SPEC-0002, profile, and plan hash bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4; accepted inconclusive review; authority none; action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "A later Git signature can establish provenance only for the exact tracked publication tree; it cannot retroactively sign or publish the local closure, convert current-state source hashing into a precontract source lock, or promote bounded compatibility observations into normative product law.",
+      "evidence": "The closure declares local-unsigned-not-published, its source anchor has signatureStatus absent-not-authorized and signedCommit null, and this successor preserves those temporal claims.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "If the exact fourteen-path tree receives a valid configured identity signature, passes the protected validate and observe workflows, and merges only through the allowed merge-commit method, the resulting protected-main commit and tree can serve as the immutable tracked source anchor for the next read-only discovery.",
+      "evidence": "Repository ruleset 19629576, recent signed PR and merge precedent, and the separately observable criteria in SC-006 and SC-007; no successful remote transition is presumed.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Remote durability, signed-commit admission, workflow results, pull-request mergeability, merge provenance, post-merge checks, and the final protected-main commit and tree remain unproven until the authorized Git and GitHub transitions complete successfully.",
+      "evidence": "Pre-publication local branch state and the future observable requirements in SC-006 and SC-007.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Continuation authority applies only after protected merge and only to governed read-only discovery of the exact source-lock and failure-preservation questions; it authorizes no new harness, experiment, H-055, ADR, SPEC, policy, product implementation, live observation, or host mutation.",
+      "evidence": "The phrase 'lo que sigue', the accepted ten-blocker boundary, closure exclusions, CHG-0028 and CHG-0032 continuation precedents, and ADR-0001 evidence-before-decision ordering.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0036, all ten Node 22 lab files, the canonical raw, accepted H-054 raw, and the complete local post-review closure remain byte-identical to their reviewed boundaries.",
+      "verification": "Recompute CHG-0036 2ff88d94d8768b23548e64d066922aec3e1d0b8ba7aaab27907f8af0432bf492, the ten apparatus hashes, raw 7840707ad717258316355745f27536414074cc1922eadf260ecfa2e1770ac3d2, H-054 raw 250e6115b9e9dc6d9e750788c16626657feca5577c102b84a48e4fb4bf2444f2, and closure 2ba4571e27b59e1e4aa59482ff752405d206d87f1713346302c60866b3424ca9."
+    },
+    {
+      "id": "SC-002",
+      "statement": "CHG-0037 records the exact contextual Git transition without editing or retroactively reinterpreting CHG-0036, the producer raw, or the local closure.",
+      "verification": "Recompute the model-visible response SHA-256 b333198077fe4bd0dbce41b88c59baaf612fe5b05c5742c5ba9667a8e9bd98df; inspect its predecessor binding, transport disclaimer, temporal claims, receipt, and byte-identical predecessor hashes."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The staged and committed tree contains exactly the fourteen authorized tracked paths and contains no artifacts member, product change, accepted-record change, repository configuration change, or unrelated worktree path.",
+      "verification": "Compare git diff --cached --name-only against the exact governance, evidence receipt, and Node 22 lab roster; require zero artifacts paths, exact modes and hashes, a clean whitespace check, and zero disclosure findings."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The preflight remains inconclusive with the exact ten blockers, raw humanReview.accepted null, externally accepted review observations, no ADR candidate, authority none, and action null.",
+      "verification": "Verify the raw and closure without rerunning the preflight; compare blocker order, review-layer provenance, sourceClosureQualification, failureBranch, outcome, authority, and action."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Current-tree governance, quality, build, formatting, integrity, static focused checks, non-rerun raw verification, closure reconstruction, and bounded disclosure gates pass before Git publication.",
+      "verification": "Run governance:verify, governance:check, npm run check, npm run build, path-scoped Prettier, node --check, the contract suite, the non-launching static run tests, canonical raw verification without --rerun, closure bijection and ustar reconstruction, git diff --check, and a bounded secret-pattern scan; do not execute the preflight producer or rerun boundary."
+    },
+    {
+      "id": "SC-006",
+      "statement": "The exact authorized tracked tree is committed with a valid configured identity signature, pushed without rewriting history, reviewed through a protected pull request, and merged only by an allowed merge commit after required checks succeed.",
+      "verification": "git verify-commit, signature fingerprint, remote branch ancestry, pull-request head and base identities, unresolved-thread inspection, strict validate check, observe check, mergeability, protected-main merge method, and post-merge ancestry."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The merged main tree receives successful post-merge governance evidence while every raw artifact remains absent from Git and the remote feature branch remains retained.",
+      "verification": "Post-merge workflow state and attestation, origin/main tree inspection, git ls-files artifacts, remote branch inspection, and local ignored-closure verification."
+    },
+    {
+      "id": "SC-008",
+      "statement": "Any continuation begins only after merge as a separate governed read-only discovery bound to the actual protected-main commit and tree and creates no successor artifact or experiment.",
+      "verification": "Record a separate post-merge D3 frame for source-lock and failure-preservation discovery with explicit unknowns, no CHG allocation, no harness, no H-055, no ADR or SPEC, authority none, and action null."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0037 records the later contextual grant for signed commit, instrumental branch push, protected pull request, allowed merge, and separate post-merge read-only discovery without rewriting CHG-0036 or any accepted evidence.",
+      "evidence": "Exact predecessor closure identities, response representation and hash, immutable predecessor hashes, contextual-transition precedents, receipt, and this implemented successor."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "Only the exact fourteen tracked publication paths are published, and every raw or replay byte remains local, ignored, mode-restricted, and absent from Git.",
+      "evidence": "Staged and committed path rosters, artifacts ignore proof, closure roster and modes, remote tree inspection, and bounded disclosure scan."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The Node 22 preflight remains bounded and inconclusive; no blocker, ADR candidate, specification, runtime policy, recovery mechanism, product change, host action, or live claim is created by publication.",
+      "evidence": "Canonical run, human review, post-review assessment, closure, immutable CHG-0036, unchanged accepted law, authority none, and action null."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "All current-tree governance, quality, build, formatting, integrity, static focused, non-rerun verification, closure, and disclosure gates pass before publication.",
+      "evidence": "Final local gate outputs at the frozen source boundary and current publication-successor tree."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "The authorized tree is committed with a valid identity signature and merged through the protected GitHub workflow only after strict validate and observe checks complete successfully.",
+      "evidence": "Signed commit identity, pull-request state, resolved review threads, workflow conclusions, allowed merge commit, post-merge workflows, and attestation."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "After merge, main contains the exact bounded tracked review, every raw artifact remains local-only, and the resulting commit and tree are captured as the sole immutable Git anchor for successor discovery.",
+      "evidence": "origin/main ancestry and tree, remote and local tracked rosters, ignored raw verification, and post-merge object inspection."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "The phrase 'lo que sigue' is consumed only by a separate post-merge governed read-only discovery and does not authorize a failure-branch harness, H-055, another CHG, ADR, SPEC, product implementation, live observation, or host mutation.",
+      "evidence": "Post-merge discovery frame, exact continuation exclusions, authority none, and action null."
+    }
+  ]
+}

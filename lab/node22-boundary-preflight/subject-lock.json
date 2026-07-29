@@ -1,0 +1,527 @@
+{
+  "schemaVersion": "overlaykit-node22-boundary-preflight-subject/v1",
+  "id": "NODE22-BOUNDARY-PREFLIGHT-001",
+  "normative": false,
+  "temporalBoundary": {
+    "trackedPredecessor": {
+      "commit": "bb6ce5db53541a7926eb74b3c722fa039ca9dabd",
+      "tree": "823796b0c9f509cf4ed35b9febeb71c284626036",
+      "planRawSha256": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243",
+      "planHash": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4",
+      "predecessorManifestRawSha256": "8b3fb70d5dc2f8835a2b65b7b882880eb40cdbd58864135ecdaf5b3b105d062e",
+      "chg0035RawSha256": "c745964d4d2277dfb88a5893ef971df87a849dfe2266563268603e77f98f7922"
+    },
+    "acceptedH054": {
+      "classification": "inconclusive",
+      "rawSha256": "250e6115b9e9dc6d9e750788c16626657feca5577c102b84a48e4fb4bf2444f2",
+      "semanticSha256": "8547552f833c37664099febcc0ad5ab081a277806e129a4b9dba98cdd39b8ec0",
+      "adrCandidate": false,
+      "preserveByteIdentical": true
+    },
+    "prospectiveRuntimeSelection": {
+      "id": "node22",
+      "commandPath": "/usr/bin/node-22",
+      "version": "v22.22.2",
+      "executableSha256": "1a1ebcd93dc90cf3e3dc37493e8efc04a1f60bddada1402453094214af03e33d",
+      "authorizedUse": "offline-read-only-successor-boundary-preflight-only",
+      "rewritesAcceptedH054": false
+    }
+  },
+  "hypothesis": {
+    "statement": "The selected Node 22 executable can run a visibly synthetic TypeScript, Ajv, and esbuild probe twice with equivalent canonical receipts inside a finite empty-root, offline, read-only boundary whose admitted userspace inputs and launcher declaration are content-addressed and independently reconstructed.",
+    "supportThreshold": "zero invalidity conditions, zero blockers, zero refutation witnesses, every userspace input accessible in the sandbox belongs to the declared mount-to-descriptor bijection, every predicate passes, launcher and effective isolation are independently reconstructed, attempts are canonically equivalent with zero normalization, and all hostile controls fail closed",
+    "refutationThreshold": "only after the boundary is independently proven complete: exact inability of the selected runtime or admitted toolchain to perform the synthetic probe, an accepted hostile control, an access or execution outside the allowlist, or divergent identical-input attempts",
+    "inconclusiveThreshold": "any relevant edge is opaque, omitted, ambiguous, irrecoverable, untraced, or methodologically incomplete",
+    "invalidThreshold": "malformed or stale evidence claimed current, unauthorized tracked mutation, host or product mutation, governance or host configuration mutation outside the authorized lab and manifest addition, write outside explicitly admitted raw evidence, external network use, successor-semantic execution, missing exact controls, producer/verifier coupling, integrity failure, or authority overclaim",
+    "outcomePrecedence": ["invalid", "inconclusive", "refuted", "supported"]
+  },
+  "requiredPredicates": [
+    "trackedPredecessorExact",
+    "acceptedH054ExactAndUnchanged",
+    "selectedNode22Exact",
+    "apparatusSourceClosureExact",
+    "emptyRootMountClosureExact",
+    "environmentClosureExact",
+    "nodePermissionEnvelopeExact",
+    "isolatedNetworkNamespaceExact",
+    "syntheticTsxObservationExact",
+    "syntheticAjvObservationExact",
+    "syntheticEsbuildObservationExact",
+    "attemptsCanonicallyEquivalent",
+    "failureBranchEvidenceMaterializable",
+    "independentVerifierReconstructs",
+    "allControlsFailClosed",
+    "exhaustiveOpenFileAndModuleClosure",
+    "effectiveSyscallClosure",
+    "nativeAndLateLoadedObjectClosure",
+    "noSuccessorHypothesisOpenedOrExecuted",
+    "authorityNoneAndActionNull"
+  ],
+  "knownBlockingUnknowns": [
+    "exhaustive-esm-and-open-file-trace-not-admitted",
+    "content-addressed-effective-seccomp-policy-not-admitted",
+    "kernel-vdso-and-late-loaded-object-closure-not-established",
+    "bubblewrap-host-dynamic-library-and-effective-kernel-enforcement-not-independently-traced",
+    "worker-and-child-process-cardinality-not-independently-traced",
+    "universal-successor-absence-not-provable-without-exhaustive-trace",
+    "anchor-resolver-host-dynamic-library-and-git-object-read-closure-not-independently-traced",
+    "path-execution-image-identity-not-atomically-bound",
+    "successor-apparatus-and-accepted-h054-layer-source-lock-not-established",
+    "failed-attempt-evidence-preservation-and-outcome-derivation-not-established"
+  ],
+  "executionContract": {
+    "normalizations": [],
+    "expectedInputs": {
+      "fixture": {
+        "locator": "lab/node22-boundary-preflight/fixtures/synthetic-probe.ts",
+        "sha256": "99e2e5d85d058cc357a030bde230267982a35306e67e22d75e4871d9d7062136"
+      },
+      "tsconfig": {
+        "extends": null,
+        "locator": "lab/node22-boundary-preflight/fixtures/tsconfig.json",
+        "sha256": "0947c5ba6762c9ec613c48b9fa55df51d6a4c72783b5870f4abaff0ee82aaac0"
+      }
+    },
+    "anchorResolver": {
+      "executable": "/usr/bin/git",
+      "version": "git version 2.55.0",
+      "sha256": "8d8d470218586c27909c9b6ae77d18df32a9e05e725044ae2052d60254791c26",
+      "environment": {
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_CONFIG_SYSTEM": "/dev/null",
+        "GIT_NO_LAZY_FETCH": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "GIT_OPTIONAL_LOCKS": "0",
+        "GIT_TERMINAL_PROMPT": "0",
+        "HOME": "/nonexistent",
+        "LANG": "C",
+        "LC_ALL": "C",
+        "PATH": "/usr/bin"
+      },
+      "headCommitCommand": ["rev-parse", "HEAD^{commit}"],
+      "headTreeCommand": ["rev-parse", "HEAD^{tree}"],
+      "predecessorManifestCommand": [
+        "show",
+        "bb6ce5db53541a7926eb74b3c722fa039ca9dabd:.overlaykit/governance/manifest.json"
+      ]
+    },
+    "launcher": {
+      "executable": "/usr/bin/bwrap",
+      "version": "bubblewrap 0.11.0",
+      "sha256": "b3708edde1d80e5f570f2e15d692e49c1d96dc8f411896c60abd489c13368390",
+      "hostCwd": "/home/rod/Web/projects/TeamX/BRAIN/TeamX/internal-proyects/companion-module-overlaykit-server",
+      "hostDynamicLibraryClosure": null,
+      "effectiveKernelEnforcementTrace": null
+    },
+    "environment": {
+      "ESBUILD_BINARY_PATH": "/workspace/node_modules/@esbuild/linux-x64/bin/esbuild",
+      "ESBUILD_WORKER_THREADS": "0",
+      "HOME": "/home/probe",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "NODE_DISABLE_COLORS": "1",
+      "NODE_DISABLE_COMPILE_CACHE": "1",
+      "NO_COLOR": "1",
+      "PATH": "/usr/bin",
+      "PWD": "/workspace",
+      "TERM": "dumb",
+      "TMPDIR": "/tmp",
+      "TSX_DISABLE_CACHE": "1",
+      "TSX_TSCONFIG_PATH": "/workspace/lab/node22-boundary-preflight/fixtures/tsconfig.json",
+      "TZ": "UTC",
+      "XDG_CACHE_HOME": "/tmp"
+    },
+    "nodeArgv": [
+      "/usr/bin/node-22",
+      "--permission",
+      "--allow-fs-read=/workspace",
+      "--allow-fs-read=/WORKSPACE",
+      "--allow-fs-read=/tmp",
+      "--allow-worker",
+      "--allow-child-process",
+      "--no-addons",
+      "--no-warnings",
+      "/workspace/lab/node22-boundary-preflight/probe.mjs"
+    ],
+    "bubblewrapRequiredFlags": [
+      "--die-with-parent",
+      "--new-session",
+      "--unshare-all",
+      "--unshare-user",
+      "--disable-userns",
+      "--assert-userns-disabled",
+      "--hostname",
+      "node22-preflight",
+      "--cap-drop",
+      "ALL",
+      "--tmpfs",
+      "/",
+      "--remount-ro",
+      "/home",
+      "--remount-ro",
+      "/tmp",
+      "--remount-ro",
+      "/",
+      "--clearenv",
+      "--chdir",
+      "/workspace"
+    ],
+    "bubblewrapForbiddenFlags": [
+      "--bind",
+      "--bind-try",
+      "--dev",
+      "--proc",
+      "--ro-bind-try",
+      "--share-net"
+    ],
+    "orderedSegments": [
+      "fixed-isolation-preamble",
+      "empty-root",
+      "empty-directory-roster",
+      "private-home-and-scratch-mounts",
+      "runtime-file-mounts",
+      "apparatus-and-package-directory-mounts",
+      "private-mount-remounts-read-only",
+      "root-remount-read-only",
+      "clear-environment",
+      "sorted-exact-environment",
+      "working-directory",
+      "exact-node-argv"
+    ],
+    "unexpectedArgumentsRejected": true,
+    "emptyDirectories": [
+      "/dev",
+      "/proc",
+      "/usr",
+      "/usr/bin",
+      "/lib64",
+      "/workspace",
+      "/workspace/lab",
+      "/workspace/node_modules",
+      "/workspace/node_modules/@esbuild"
+    ],
+    "readOnlyPrivateMounts": [
+      {
+        "create": ["--tmpfs", "/home"],
+        "childrenBeforeRemount": [["--dir", "/home/probe"]],
+        "remount": ["--remount-ro", "/home"]
+      },
+      {
+        "create": ["--tmpfs", "/tmp"],
+        "childrenBeforeRemount": [],
+        "remount": ["--remount-ro", "/tmp"]
+      }
+    ],
+    "readOnlyDirectoryMounts": [
+      {
+        "source": "lab/node22-boundary-preflight",
+        "target": "/workspace/lab/node22-boundary-preflight",
+        "layerId": "apparatus"
+      },
+      {
+        "source": "node_modules/tsx",
+        "target": "/workspace/node_modules/tsx",
+        "layerId": "package/tsx@4.23.1"
+      },
+      {
+        "source": "node_modules/esbuild",
+        "target": "/workspace/node_modules/esbuild",
+        "layerId": "package/esbuild@0.28.1"
+      },
+      {
+        "source": "node_modules/@esbuild/linux-x64",
+        "target": "/workspace/node_modules/@esbuild/linux-x64",
+        "layerId": "package/@esbuild/linux-x64@0.28.1"
+      },
+      {
+        "source": "node_modules/ajv",
+        "target": "/workspace/node_modules/ajv",
+        "layerId": "package/ajv@8.20.0"
+      },
+      {
+        "source": "node_modules/fast-deep-equal",
+        "target": "/workspace/node_modules/fast-deep-equal",
+        "layerId": "package/fast-deep-equal@3.1.3"
+      },
+      {
+        "source": "node_modules/fast-uri",
+        "target": "/workspace/node_modules/fast-uri",
+        "layerId": "package/fast-uri@3.1.4"
+      },
+      {
+        "source": "node_modules/json-schema-traverse",
+        "target": "/workspace/node_modules/json-schema-traverse",
+        "layerId": "package/json-schema-traverse@1.0.0"
+      },
+      {
+        "source": "node_modules/require-from-string",
+        "target": "/workspace/node_modules/require-from-string",
+        "layerId": "package/require-from-string@2.0.2"
+      }
+    ],
+    "runtimeFileMounts": [
+      "/usr/bin/node-22",
+      "/lib64/libnode.so.127",
+      "/lib64/libc.so.6",
+      "/lib64/libz.so.1",
+      "/lib64/libuv.so.1",
+      "/lib64/libbrotlidec.so.1",
+      "/lib64/libbrotlienc.so.1",
+      "/lib64/libcares.so.2",
+      "/lib64/libsqlite3.so.0",
+      "/lib64/libcrypto.so.3",
+      "/lib64/libssl.so.3",
+      "/lib64/libstdc++.so.6",
+      "/lib64/libm.so.6",
+      "/lib64/libgcc_s.so.1",
+      "/lib64/ld-linux-x86-64.so.2",
+      "/lib64/libbrotlicommon.so.1"
+    ],
+    "moduleResolution": {
+      "tsxSpecifier": "tsx/esm/api",
+      "tsxNamespace": "node22-boundary-preflight",
+      "tsxConfig": "/workspace/lab/node22-boundary-preflight/fixtures/tsconfig.json",
+      "esbuildBinary": "/workspace/node_modules/@esbuild/linux-x64/bin/esbuild",
+      "fixture": "/workspace/lab/node22-boundary-preflight/fixtures/synthetic-probe.ts"
+    },
+    "knownAbsentReadPaths": [
+      {
+        "path": "/WORKSPACE",
+        "reason": "TSX case-sensitivity probe against the case-inverted workspace path",
+        "mustRemainAbsent": true
+      }
+    ],
+    "expectedObservations": {
+      "runtime": {
+        "version": "v22.22.2",
+        "arch": "x64",
+        "platform": "linux",
+        "execPath": "/usr/bin/node-22",
+        "modules": "127",
+        "napi": "10"
+      },
+      "tsx": {
+        "namespace": "node22-boundary-preflight",
+        "configMode": "explicit-register-option",
+        "scopedRegistration": true,
+        "syntheticNonNormative": true,
+        "answer": 42,
+        "importUrls": [
+          "file:///workspace/lab/node22-boundary-preflight/fixtures/synthetic-probe.ts"
+        ]
+      },
+      "ajv": {
+        "validInput": {
+          "answer": 42,
+          "synthetic": true
+        },
+        "invalidInput": {
+          "answer": 41,
+          "synthetic": true
+        },
+        "validAccepted": true,
+        "invalidAccepted": false,
+        "invalidKeywords": ["const"]
+      },
+      "esbuild": {
+        "input": "/workspace/lab/node22-boundary-preflight/fixtures/synthetic-probe.ts",
+        "options": {
+          "charset": "utf8",
+          "format": "esm",
+          "legalComments": "none",
+          "loader": "ts",
+          "minify": false,
+          "sourcemap": false,
+          "target": "es2022",
+          "treeShaking": true
+        },
+        "codeByteLength": 156,
+        "codeSha256": "4c00f4280b91ec851a19f0f046b4f05cafcc107399f03de18c4f6a9c8e30b197",
+        "warningCount": 0
+      },
+      "tsconfig": {
+        "extends": null
+      }
+    },
+    "executionTopology": {
+      "workerPermissionGranted": true,
+      "childProcessPermissionGranted": true,
+      "expectedNativeChildExecutable": "/workspace/node_modules/@esbuild/linux-x64/bin/esbuild",
+      "observedWorkerCardinality": null,
+      "observedChildCardinality": null,
+      "independentlyTraced": false
+    },
+    "seccompPolicy": null,
+    "expectedAttemptCount": 2
+  },
+  "controlContract": [
+    {
+      "id": "stale-temporal-anchor",
+      "expectedReasonCode": "temporal-anchor-stale"
+    },
+    {
+      "id": "substitute-node22",
+      "expectedReasonCode": "runtime-identity-drift"
+    },
+    {
+      "id": "stale-apparatus",
+      "expectedReasonCode": "apparatus-source-set-drift"
+    },
+    {
+      "id": "omit-apparatus-entry",
+      "expectedReasonCode": "apparatus-source-set-drift"
+    },
+    {
+      "id": "omit-package-mount",
+      "expectedReasonCode": "module-universe-incomplete"
+    },
+    {
+      "id": "omit-import-target",
+      "expectedReasonCode": "module-universe-incomplete"
+    },
+    {
+      "id": "stale-ajv-entry",
+      "expectedReasonCode": "module-universe-incomplete"
+    },
+    {
+      "id": "enable-tsconfig-fallback",
+      "expectedReasonCode": "loader-config-escape"
+    },
+    {
+      "id": "add-tsconfig-extends-chain",
+      "expectedReasonCode": "loader-config-escape"
+    },
+    {
+      "id": "inject-environment-selector",
+      "expectedReasonCode": "environment-closure-drift"
+    },
+    {
+      "id": "weaken-node-permission-flags",
+      "expectedReasonCode": "permission-envelope-drift"
+    },
+    {
+      "id": "broaden-root-bind",
+      "expectedReasonCode": "mount-boundary-broadened"
+    },
+    {
+      "id": "add-write-bind",
+      "expectedReasonCode": "mount-boundary-broadened"
+    },
+    {
+      "id": "share-network-namespace",
+      "expectedReasonCode": "isolation-policy-drift"
+    },
+    {
+      "id": "omit-shared-object",
+      "expectedReasonCode": "native-closure-drift"
+    },
+    {
+      "id": "substitute-esbuild-native",
+      "expectedReasonCode": "native-closure-drift"
+    },
+    {
+      "id": "symlink-retarget",
+      "expectedReasonCode": "path-resolution-invalid"
+    },
+    {
+      "id": "symlink-escape",
+      "expectedReasonCode": "path-resolution-invalid"
+    },
+    {
+      "id": "symlink-cycle",
+      "expectedReasonCode": "path-resolution-invalid"
+    },
+    {
+      "id": "symlink-dangling",
+      "expectedReasonCode": "path-resolution-invalid"
+    },
+    {
+      "id": "scratch-residue",
+      "expectedReasonCode": "mutable-state-observed"
+    },
+    {
+      "id": "enable-loader-cache",
+      "expectedReasonCode": "mutable-state-observed"
+    },
+    {
+      "id": "working-directory-drift",
+      "expectedReasonCode": "ambient-capability-observed"
+    },
+    {
+      "id": "layer-logical-path-collision",
+      "expectedReasonCode": "layer-collision"
+    },
+    {
+      "id": "cross-layer-mount-target-collision",
+      "expectedReasonCode": "layer-collision"
+    },
+    {
+      "id": "duplicate-attempt-divergence",
+      "expectedReasonCode": "determinism-failure"
+    },
+    {
+      "id": "forbidden-subject-import",
+      "expectedReasonCode": "forbidden-subject-path"
+    },
+    {
+      "id": "claim-supported-with-blocker",
+      "expectedReasonCode": "outcome-policy-violation"
+    },
+    {
+      "id": "receipt-tamper",
+      "expectedReasonCode": "evidence-integrity-drift"
+    },
+    {
+      "id": "authority-tamper",
+      "expectedReasonCode": "authority-overclaim"
+    },
+    {
+      "id": "false-successor-state",
+      "expectedReasonCode": "successor-state-overclaim"
+    }
+  ],
+  "controlExecutionPolicy": {
+    "mutationMedium": "in-memory declaration or receipt only",
+    "hostileBoundaryMutationDisposition": "reject-before-execution",
+    "weakenedSandboxMayLaunch": false,
+    "forbiddenSubjectMayBeImportedOrExecuted": false,
+    "onlyPositiveBoundaryMayLaunch": true,
+    "launchCountScope": "positive-bubblewrap-boundary-only"
+  },
+  "rawEvidencePolicy": {
+    "evidenceRootLocator": "artifacts/",
+    "gitignore": {
+      "locator": ".gitignore",
+      "rawSha256": "2c42503834e61def3bf5840b5c553a73b2d569cee732c69e7420f75ce5e6f1fc",
+      "requiredPattern": "artifacts/"
+    },
+    "mustRemainIgnored": true
+  },
+  "authorization": {
+    "allowed": [
+      "CHG-0036 proposed",
+      "deterministic manifest addition",
+      "synthetic non-normative fixture and apparatus",
+      "offline read-only isolated preflight execution",
+      "independent verification and hostile controls",
+      "ignored local content-addressed raw evidence"
+    ],
+    "prohibited": [
+      "predecessor experiment execution",
+      "successor hypothesis opening or semantic execution",
+      "product, profile, schema, compiler or plan mutation",
+      "ADR or specification creation",
+      "network or live-device observation",
+      "USB, hidraw, Docker or host configuration mutation",
+      "commit, push, merge or publication",
+      "human acceptance by the producing agent"
+    ]
+  },
+  "agent": {
+    "identity": "Codex /root",
+    "humanPrincipal": "@rodrigoteamx",
+    "authority": "none",
+    "action": null
+  }
+}
