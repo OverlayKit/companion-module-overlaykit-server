@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "overlaykit-node22-source-lock-preflight-subject/v1",
+  "study": "NODE22-SOURCE-LOCK-PREFLIGHT-001",
+  "normative": false,
+  "syntheticOnly": true,
+  "realSourceClosureClaim": false,
+  "hypothesisOutcome": "not-executed",
+  "authority": "none",
+  "action": null,
+  "predecessorAnchor": {
+    "commit": "d63172f80c9a4a5ec4b27363e0ec4f956c1badcf",
+    "tree": "0f2cfb6eac7c359e900efc467e2fb7c3407f93bd"
+  },
+  "discoveryDocket": {
+    "sha256": "91f486bd1de994ace58e12f6df61c29a4ee4efd325dd9a6c84043bddebf3523e",
+    "bytesMaterialized": false,
+    "byteLength": null,
+    "transportBytesClaimed": false
+  },
+  "apparatusAnchor": {
+    "state": "source-defined-unanchored-pending-separate-git-transition",
+    "commit": null,
+    "tree": null,
+    "realSourceUseEligible": false
+  },
+  "apparatusBindings": {
+    "fixtureModule": {
+      "path": "lab/node22-source-lock-preflight/fixtures/synthetic-boundary.mjs",
+      "rawSha256": "b965e3996799b9d81409dabb9eb80b70f80aa33f5bcdae533ee5a1af7c5b3813"
+    },
+    "producer": {
+      "path": "lab/node22-source-lock-preflight/producer.mjs",
+      "rawSha256": "909f7b0fff8001c21ed3d8774f3f1f59b0dbf8de0cb52fb535fbf7d88d2547d5"
+    },
+    "verifier": {
+      "path": "lab/node22-source-lock-preflight/verify.mjs",
+      "rawSha256": "dfa1cff1f937a74c4138b92accdbc5d51758c03f309b5bc5bd387621307e795a"
+    },
+    "candidateExpectationCanonicalSha256": "1605865d02f6d462e99038df2e1c1b776b3fc9bf8fb0581982b69f2a5f518df2",
+    "syntheticObservationCanonicalSha256": "3eb1a5fb23b7c57aa8b70294c1e6518f3e165c38cfa82a69c558302c7ff66e0c",
+    "baselineEvidenceSemanticSha256": "bdcb8d49f6b3b34605a868b4f12b07766bb612d536a716cbe6d14967ee28e983"
+  },
+  "exactTopology": {
+    "layers": 25,
+    "mounts": 25,
+    "descriptors": 687,
+    "regularFiles": 613,
+    "directories": 74,
+    "symbolicLinkDescriptors": 0,
+    "indirectionOccurrences": 26,
+    "uniqueSyntheticLinkNodes": 12,
+    "runtimeLayers": 16,
+    "directoryTreeLayers": 9,
+    "descriptorDistribution": [
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 56, 10, 5, 511, 13, 42, 17, 5
+    ],
+    "indirectionDistribution": [0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2],
+    "sharedPrefixOccurrences": 15,
+    "uniqueTerminalOccurrences": 11
+  },
+  "expectationPolicy": {
+    "temporalRole": "candidate-precontract-expectation",
+    "reviewStatus": "agent-authored-pending-human-review",
+    "wholeEnvelopePinRequired": true,
+    "callerSuppliedPinForbidden": true,
+    "producerDerivedExpectationForbidden": true,
+    "sameMutableStateDerivationForbidden": true,
+    "realUseRequiresLaterImmutableGitAnchor": true
+  },
+  "producerPolicy": {
+    "input": "caller-supplied-synthetic-observation-object-only",
+    "filesystemReads": false,
+    "filesystemWrites": false,
+    "childProcesses": false,
+    "network": false,
+    "automaticMain": false,
+    "rawMaterialization": false,
+    "realSourceDefaults": false
+  },
+  "verifierPolicy": {
+    "importsProducer": false,
+    "importsFixture": false,
+    "sharedExecutableIdentityCode": false,
+    "reconstructsCanonicalization": true,
+    "pinsWholeCandidateExpectationEnvelope": true,
+    "hypothesisDecisionAuthority": false
+  },
+  "controls": [
+    {
+      "id": "omission",
+      "mutations": ["layer", "mount", "descriptor", "indirection"],
+      "execution": "in-memory"
+    },
+    {
+      "id": "staleness",
+      "mutations": ["coherently-rehashed-descriptor", "expectation-envelope"],
+      "execution": "in-memory"
+    },
+    {
+      "id": "symlink-drift",
+      "mutations": ["retarget", "chain-reorder"],
+      "execution": "in-memory"
+    },
+    {
+      "id": "collision",
+      "mutations": ["layer-id", "descriptor-key", "mount-target"],
+      "execution": "in-memory"
+    },
+    {
+      "id": "path-rebinding",
+      "mutations": ["source-locator-and-real-path", "mount-layer-content"],
+      "execution": "in-memory"
+    },
+    {
+      "id": "same-mutable-state-expectation",
+      "mutations": ["coherent-expectation-and-evidence", "observation-as-expectation"],
+      "execution": "in-memory"
+    }
+  ],
+  "prohibited": [
+    "real-source producer execution",
+    "raw creation",
+    "payload preservation",
+    "H-055",
+    "failure-branch implementation",
+    "product mutation",
+    "profile mutation",
+    "schema mutation",
+    "compiler mutation",
+    "plan mutation",
+    "ADR or SPEC creation",
+    "network or live observation",
+    "USB or hidraw access",
+    "Docker",
+    "commit, push, merge, or publication"
+  ]
+}

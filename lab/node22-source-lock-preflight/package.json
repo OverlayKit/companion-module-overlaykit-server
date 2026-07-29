@@ -1,0 +1,5 @@
+{
+  "name": "@overlaykit/node22-source-lock-preflight",
+  "private": true,
+  "type": "module"
+}

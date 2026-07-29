@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0039",
+  "title": "Record human acceptance and anchor the Node 22 source-lock apparatus",
+  "status": "implemented",
+  "changeClass": "governance",
+  "risk": "high",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root acts only as the acceptance-recording and publication-producing agent for CHG-0039 under human principal @rodrigoteamx; the agent cannot approve its own apparatus, authorize a real-source run, create product or operational authority, or select an architectural rule.",
+      "evidence": "Repository AGENTS.md, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, accepted ADR-0001 through ADR-0006, and the exact model-visible human review and transition motion recorded by this successor.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The first authorized signed commit is cdda9120bf40f5c00f16d0001c1d6ff743659af9 with tree 37fd7cc61e91a301c89c36746227dab4720a6211 and direct parent d63172f80c9a4a5ec4b27363e0ec4f956c1badcf. It changes exactly eleven paths: CHG-0038, the pre-successor manifest, and the nine files under lab/node22-source-lock-preflight.",
+      "evidence": "Local Git object inspection, exact d63172f80c9a4a5ec4b27363e0ec4f956c1badcf..cdda9120bf40f5c00f16d0001c1d6ff743659af9 path roster, tree inspection, and a valid configured-key signature from BE7554E982E2CA5A0213B6067D72DEBDA1D36D34.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "At the first signed anchor, CHG-0038 has raw SHA-256 3b0a2fb3dfbfa08d59df881df5f097bf66758eb6563e223012f790aaa8c8d77e; its manifest has raw SHA-256 3ec32a50c8dee2f02b9740f1ac1c3a452c7dbce99b8902d6c63d74ecbdedd0c9 and contentHash a38c6974658521063285d62da1168e9ceb2202e21bee8c836fde9f1fea3ede91; and its subject lock has raw SHA-256 20c402988dddcc958c234afd9411885e54976472ab3eab2a7516e1518f6012ef.",
+      "evidence": "Independent SHA-256 calculations over the exact blobs in commit cdda9120bf40f5c00f16d0001c1d6ff743659af9, deterministic governance-manifest verification, and the human-accepted review identities.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal accepted the nine-file apparatus source-set SHA-256 11995d26b9eafa20bb6d93204805f3f651b8798c1d54e4b7a0ba472007652ded and candidate expectation SHA-256 1605865d02f6d462e99038df2e1c1b776b3fc9bf8fb0581982b69f2a5f518df2 as the canonical reviewed identities for NODE22-SOURCE-LOCK-PREFLIGHT-001.",
+      "evidence": "The exact model-visible human review dated 2026-07-29; independent source-set reconstruction as compact JSON.stringify of an array of nine objects whose keys are inserted path then sha256, with array entries sorted by repository-relative path using UTF-8 byte order, lowercase SHA-256 over raw file bytes, no whitespace or trailing newline, and SHA-256 over the resulting UTF-8 JSON; candidate-expectation reconstruction; subject-lock bindings; verifier-owned pin; and commit cdda9120bf40f5c00f16d0001c1d6ff743659af9.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal accepted 23 of 23 synthetic tests and the exact synthetic topology of 25 layers, 25 mounts, 687 descriptors, and 26 indirection occurrences only as an apparatus candidate eligible for Git anchoring.",
+      "evidence": "The exact model-visible human review, deterministic Node 22 v22.22.2 test output, subject-lock exactTopology, candidate expectation, synthetic observation, baseline evidence, and the independently reviewed apparatus sources.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "NODE22-SOURCE-LOCK-PREFLIGHT-001 remains not-executed against real sources, with neither support nor refutation of a real source-lock claim, no ADR candidate, authority none, and action null.",
+      "evidence": "Human review boundary, unchanged CHG-0038 blocking unknowns, subject-lock hypothesisOutcome not-executed, syntheticOnly true, realSourceClosureClaim false, apparatusAnchor realSourceUseEligible false, and absence of any CHG-0038 raw.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0038 and its subject remain truthful when they state that Git anchoring and real-source use were absent and unauthorized at their exact pre-review boundary; the later human motion and CHG-0039 create a successor transition without rewriting those earlier bytes.",
+      "evidence": "Byte-identical CHG-0038 and subject-lock blobs in signed commit cdda9120bf40f5c00f16d0001c1d6ff743659af9, ADR-0002 temporal immutability, and this distinct implemented successor.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The registered human principal authorized exactly two signed source commits for this transition: first the eleven reviewed paths and then only CHG-0039 plus the deterministic successor manifest. The same motion authorizes required local gates, local build outputs, npm/Git/GitHub network use, a non-force feature-branch push, protected pull request, and permitted merge.",
+      "evidence": "The exact model-visible human motion dated 2026-07-29 and its explicit ordered path, gate, network, push, pull-request, and merge boundaries; inaccessible transport bytes are not claimed.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "A valid signature on the first commit establishes immutable Git provenance for the exact reviewed apparatus tree, but it does not convert synthetic compatibility into real-source evidence or make real-source use eligible without the separately required later grant.",
+      "evidence": "ADR-0001 evidence-before-decision ordering, ADR-0004 exact-subject selection, ADR-0005 runtime-identity requirements, CHG-0038 temporal-ordering claim, human review boundary, and the exact first commit and tree.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "This acceptance transition changes no accepted ADR, accepted specification, profile, schema, compiler, compiled plan, product source, product configuration, failure branch, runtime policy, operational host configuration, USB or hidraw device state, or live production state, and it creates no raw or preserved payload.",
+      "evidence": "Exact two-commit path rosters, unchanged ADR-0001 through ADR-0006 and SPEC-0001 through SPEC-0002, plan raw SHA-256 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243, scoped repository diff, ignored artifacts inspection, authority none, and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "No ADR candidate is activated because the accepted observation concerns only the eligibility of a synthetic apparatus for immutable source anchoring and does not compare or select a production mechanism, establish real-source behavior, or create doctrine.",
+      "evidence": "Human review statement, CHG-0038 ADR assessment, unchanged accepted decision set, not-executed outcome, and ADR-0001 decision-ordering rule.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Remote durability, GitHub signature admission, pull-request workflow results, mergeability, merge provenance, post-merge attestation, and the final protected-main commit and tree remain unproven until the authorized remote transitions complete successfully.",
+      "evidence": "Pre-push local branch state and the future observable requirements in SC-006 and SC-007.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the Git-anchored apparatus can later close all nominated real layers, mounts, descriptors, and indirections remains unknown; no future real-source attempt is authorized until a separate human grant names the actual final protected-main commit and tree.",
+      "evidence": "The explicit final sentence of the human transition motion, CHG-0038 blocking real-source unknowns, and absence of any real-source execution or result.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The first signed commit preserves exactly the eleven human-reviewed paths and all accepted CHG-0038, manifest, subject, source-set, and expectation identities.",
+      "verification": "Verify commit cdda9120bf40f5c00f16d0001c1d6ff743659af9, tree 37fd7cc61e91a301c89c36746227dab4720a6211, direct parent d63172f80c9a4a5ec4b27363e0ec4f956c1badcf, its signature, exact path roster, and the five accepted SHA-256 identities."
+    },
+    {
+      "id": "SC-002",
+      "statement": "CHG-0039 records the human acceptance and ordered Git grant without editing or retroactively reinterpreting CHG-0038, its subject lock, or any apparatus source; the first-anchor manifest remains historically preserved while only its deterministic successor changes.",
+      "verification": "Compare CHG-0038 and all nine apparatus files byte-for-byte before and after CHG-0039; retain the first-anchor manifest identity in commit cdda9120bf40f5c00f16d0001c1d6ff743659af9; permit only the deterministic successor-manifest addition; and inspect the structured human-review facts, transport disclaimer, temporal claims, exclusions, authority none, and action null."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The second signed source commit is the direct child of the first and changes exactly two paths: CHG-0039 and the deterministic successor manifest.",
+      "verification": "Inspect second-commit parentage, signature and name-only diff; require the staged and committed delta to contain exactly .overlaykit/governance/changes/CHG-0039.json and .overlaykit/governance/manifest.json, zero tracked artifacts or payload paths, and no newly created raw, payload, or ignored apparatus path; keep authorized build outputs outside the index and inventory them separately."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The successor manifest binds CHG-0039 deterministically while plan.json, profile, schemas, compiler, accepted ADRs, accepted specifications, predecessor changes, product, and repository configuration remain byte-identical.",
+      "verification": "Recompute CHG-0039 raw SHA-256 and manifest contentHash using the governance canonicalizer; run governance verification; require plan raw SHA-256 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243 and an empty diff for every excluded path."
+    },
+    {
+      "id": "SC-005",
+      "statement": "All authorized synthetic, governance, quality, build, formatting, integrity, and bounded-disclosure gates pass without executing a real-source producer or creating raw.",
+      "verification": "Run the 23-test Node 22 synthetic suite, governance:verify, governance:check, npm run check, npm run build, scoped Prettier, syntax checks, git diff --check, exact path audits, and a bounded secret-pattern scan; confirm no real-source or write-capable apparatus path is invoked."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Both source commits retain valid configured identity signatures, the feature branch is pushed without rewriting history, and a protected pull request reaches successful validate and observe outcomes with all review threads resolved.",
+      "verification": "git verify-commit for both commits, GitHub verified-signature state, remote ancestry, pull-request head/base identities, unresolved-thread inspection, and Constitution validate and observe conclusions."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The pull request merges only by the allowed merge-commit method, both source commits remain separate ancestors, post-merge governance evidence succeeds, and no raw or payload enters Git.",
+      "verification": "Protected-main merge parentage and method, origin/main ancestry and tree, post-merge workflow and attestation state, git ls-files artifacts, and remote feature-branch retention."
+    },
+    {
+      "id": "SC-008",
+      "statement": "Any real-source execution remains separately governed and requires a new explicit human grant bound to the actual final protected-main commit and tree.",
+      "verification": "Require no H-055, real-source raw, failure branch, successor apparatus, live observation, operational host-configuration mutation, USB or hidraw device-state mutation, or live-production mutation in this transition and record the final main identities only as a future grant prerequisite."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "The reviewed eleven-path apparatus is preserved in its own signed immutable commit before any acceptance-successor bytes exist.",
+      "evidence": "Signed commit cdda9120bf40f5c00f16d0001c1d6ff743659af9, tree 37fd7cc61e91a301c89c36746227dab4720a6211, exact parent, exact path roster, and accepted identities."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "CHG-0039 truthfully records human acceptance of the synthetic apparatus and its Git-anchor eligibility while preserving not-executed, no real support or refutation, no ADR candidate, authority none, and action null.",
+      "evidence": "Model-visible human review, CHG-0038, subject lock, 23-test synthetic suite, unchanged accepted law, and this implemented successor."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The second signed commit contains only CHG-0039 and its successor-manifest binding, leaves CHG-0038 and all nine apparatus files byte-identical, and preserves the first manifest as an immutable blob in the direct parent.",
+      "evidence": "Second-commit direct parentage, exact two-path diff, signature verification, ten unchanged predecessor blobs, historical first-manifest identity, and deterministic successor-manifest verification."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "All required local synthetic, governance, quality, build, formatting, integrity, and disclosure gates pass without a real-source run or raw creation.",
+      "evidence": "Final local gate outputs and before/after exact path and artifacts audits."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "The two signed commits are published without force through a protected pull request, pass validate and observe, and merge only by merge commit while retaining both commits in history.",
+      "evidence": "Remote branch ancestry, GitHub signatures, pull-request checks and threads, merge object parentage, and protected-main ancestry."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No real-source producer, raw, payload, H-055, failure branch, product/profile/schema/compiler/plan change, ADR, SPEC, live action, USB/hidraw access, or Docker use occurs.",
+      "evidence": "Exact source and remote diffs, artifacts and tracked-path audits, unchanged governance and product hashes, human exclusions, authority none, and action null."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "The final protected-main commit and tree are recorded only as the immutable prerequisite for a separately authorized future attempt and are not themselves treated as real-source evidence or action authority.",
+      "evidence": "Post-merge Git object inspection, human future-grant condition, not-executed boundary, and absence of any successor run."
+    }
+  ]
+}

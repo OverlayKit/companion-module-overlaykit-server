@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0038",
+  "title": "Stage the non-executing Node 22 source-lock preflight",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "high",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root is the source-producing agent for CHG-0038 under human principal @rodrigoteamx. The agent cannot approve this apparatus, authorize a real-source run, select an ADR, or grant any transition; authority is none and action is null.",
+      "evidence": "Repository AGENTS.md, accepted ADR-0001, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, and the exact model-visible human authorization.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The authorized predecessor is local main commit d63172f80c9a4a5ec4b27363e0ec4f956c1badcf with tree 0f2cfb6eac7c359e900efc467e2fb7c3407f93bd. Its compiled plan raw SHA-256 is 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243, planHash is bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, predecessor manifest raw SHA-256 is dcd11d2ed427556a7c0705081b03c8a31c9445a84dd3f77fba85adaa070d3675, and predecessor manifest contentHash is d8aa0dbf296b8c1fbf801db843877fadd98a89375b4fad16600f8c23313fde68.",
+      "evidence": "Local Git object inspection, independent SHA-256 calculation, and successful npm run governance:verify before CHG-0038 creation.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0036 remains proposed and byte-identical at raw SHA-256 2ff88d94d8768b23548e64d066922aec3e1d0b8ba7aaab27907f8af0432bf492, while CHG-0037 remains implemented and byte-immutable at raw SHA-256 40a67f31b648cd28c84953df65ba11ba5cf65781526dc30796f74a98356bd3cb.",
+      "evidence": "Current deterministic manifest, local raw hashing, ADR-0002, and the unchanged predecessor files.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The accepted local Node 22 run remains bound to raw SHA-256 7840707ad717258316355745f27536414074cc1922eadf260ecfa2e1770ac3d2 and semantic SHA-256 4101216b06f6ba66eb02f80e919b9718c412968a3b936afcd5ddedf23b8dc164. Its source closure contains exactly 25 layers, 25 mounts, 687 entry descriptors and 26 resolution-chain occurrences, with source root ef647fc46402021191054e33ee5ce2182e0980f94b20efc3109da37813b6653a.",
+      "evidence": "Read-only reconstruction of the accepted local run at artifacts/node22-boundary-preflight/runs/4101216b06f6ba66eb02f80e919b9718c412968a3b936afcd5ddedf23b8dc164/run.json; the descriptor count is the sum of entries and the indirection count is the separate sum of resolutionChain lengths.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal authorized only CHG-0038 proposed, its deterministic manifest addition, and a synthetic producer, independent verifier, fixtures and in-memory controls under lab/node22-source-lock-preflight, nominating discovery docket SHA-256 91f486bd1de994ace58e12f6df61c29a4ee4efd325dd9a6c84043bddebf3523e. The docket preimage and inaccessible transport bytes are not materialized or claimed by this change.",
+      "evidence": "The exact model-visible human authorization and lab/node22-source-lock-preflight/subject-lock.json, which records bytesMaterialized false and transportBytesClaimed false.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The historical source root ef647fc46402021191054e33ee5ce2182e0980f94b20efc3109da37813b6653a demonstrates bounded pre/post stability in that accepted observation but is not a precontractual expectation, because the current producer and verifier reconstructed it from the same mutable filesystem state.",
+      "evidence": "Accepted inconclusive Node 22 review, CHG-0036 sourceClosureQualification, static inspection of the predecessor producer and verifier, and ADR-0001 evidence-before-decision ordering.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Executing a real-source producer from the same unanchored worktree that defines its expectation would repeat the temporal-authority defect. The safe order is source definition, separate immutable Git anchoring, a later grant bound to that anchor, and only then any real-source lock attempt.",
+      "evidence": "ADR-0001, ADR-0004 exact-subject selection, ADR-0005 runtime identity, the accepted Node 22 blocker, and governed discovery of the source-lock ordering.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "NODE22-SOURCE-LOCK-PREFLIGHT-001: before any real successor-producer execution, a Git-anchored non-executing apparatus can accept an externally established immutable expectation and independently verify a layer-qualified content-addressed lock for exactly 25 layers, 25 mounts, 687 descriptors and 26 indirections without deriving expected identities from the same mutable state being observed.",
+      "evidence": "This is the falsifiable apparatus claim explicitly authorized by the human principal; no real-source outcome is presumed.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The synthetic topology preserves 613 regular-file descriptors and 74 directory descriptors inside the 687-descriptor total, sixteen runtime layers with indirection lengths 0, four times 1 and eleven times 2, one twelve-descriptor apparatus tree, eight package-shaped trees with descriptor counts 56, 10, 5, 511, 13, 42, 17 and 5, one read-only mount per layer, fifteen occurrences of one common alias and eleven unique terminal aliases. Indirections are not counted as descriptors.",
+      "evidence": "The authorized exact cardinalities, read-only reconstruction of the accepted run topology, and the visibly synthetic fixture and subject lock.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The producer is a pure object-to-object function with no filesystem, child-process, network, CLI, raw-writer or real-source default. It emits an unassessed synthetic closure containing observed identities but receives no content-identity expectation, expected root, verdict, non-none authority or decision authority.",
+      "evidence": "lab/node22-source-lock-preflight/producer.mjs, its static contract checks, and focused synthetic tests.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The verifier imports neither producer nor fixture code, implements canonicalization and validation independently, pins the complete agent-authored candidate expectation envelope pending human review to SHA-256 1605865d02f6d462e99038df2e1c1b776b3fc9bf8fb0581982b69f2a5f518df2, and rejects any caller-selected inexact or coherently rewritten expectation before comparing it with evidence.",
+      "evidence": "lab/node22-source-lock-preflight/verify.mjs, subject-lock bindings, static import checks, and the same-mutable-state adversarial tests.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The apparatus must reject omission, staleness, symlink drift, layer, descriptor or mount collision, source or mount path rebinding, and expectation derived from the same mutable state. Every control mutates only a fresh in-memory synthetic object and creates no raw or failure-branch artifact.",
+      "evidence": "The exact human authorization, subject-lock control roster, test-local independent hash refresh, and focused producer and verifier control suites.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether a later producer whose exact source is first anchored by an immutable Git transition can close all 25 real layers, 25 real mounts, 687 real descriptors and 26 real indirections remains unknown because this change neither reads nor executes against those real sources.",
+      "evidence": "The explicit no-real-source-execution limit, accepted Node 22 inconclusive classification, and absence of any CHG-0038 raw.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether immutable payload authority can be established for the sixteen runtime layers remains unknown. Their accepted descriptors are bound to installed host bytes and current RPMDB observations, while CHG-0038 explicitly preserves no payload.",
+      "evidence": "Read-only layer-materiality discovery, the discovery docket hash, and the exact payload-preservation prohibition.",
+      "blocking": true
+    },
+    {
+      "kind": "inference",
+      "statement": "No ADR candidate is activated by this synthetic apparatus. It tests whether a non-circular carrier is representable but does not compare or select a production mechanism, create real-source evidence, or receive human acceptance.",
+      "evidence": "ADR-0001 decision ordering, synthetic-only scope, hypothesisOutcome not-executed, and absence of any accepted CHG-0038 observation.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The initial apparatus source set contains nine paths under lab/node22-source-lock-preflight and has canonical path-and-raw-hash set SHA-256 11995d26b9eafa20bb6d93204805f3f651b8798c1d54e4b7a0ba472007652ded. Its subject remains explicitly unanchored, synthetic-only and ineligible for real-source use.",
+      "evidence": "Deterministic sorted path-and-SHA-256 calculation over the nine lab files and lab/node22-source-lock-preflight/subject-lock.json.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "This authorization excludes real-source producer execution, raw creation, payload preservation, H-055, failure-branch implementation, product, profile, schema, compiler or plan mutation, ADR or SPEC creation, network, live, USB, hidraw or Docker use, and commit, push, merge or publication. authority is none and action is null.",
+      "evidence": "The exact model-visible human authorization and the prohibited roster in lab/node22-source-lock-preflight/subject-lock.json.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "A future signed commit, protected merge, resulting immutable apparatus commit and tree, separate one-shot real-source grant, raw, human review and any successor transition are all absent and unauthorized at this boundary.",
+      "evidence": "Current uncommitted worktree state, apparatusAnchor commit and tree null, explicit Git-transition prohibition, and no real-source execution.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0038 and the subject bind the exact predecessor commit, tree, governance hashes and human-nominated docket hash without claiming unavailable docket bytes or a future apparatus Git anchor.",
+      "verification": "Recompute predecessor Git, plan, manifest and CHG hashes; inspect discoveryDocket bytesMaterialized false, transportBytesClaimed false and apparatusAnchor commit and tree null."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The synthetic apparatus closes exactly 25 layers, 25 mounts, 687 descriptors, 613 regular files, 74 directories and 26 separate indirection occurrences while preserving the exact layer, descriptor and 15-plus-11 alias distributions.",
+      "verification": "Construct only the synthetic fixture in memory, sum independent layer entries and resolution chains, inspect the mount bijection and compare the fixed expectation and evidence hashes."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The producer has no filesystem, child-process, network, raw-writer, automatic-main or real-source-default surface and never receives a content-identity expectation, expected root, verdict, non-none authority or decision authority.",
+      "verification": "Static import and token audit plus direct pure-function tests using only fresh synthetic observation objects."
+    },
+    {
+      "id": "SC-004",
+      "statement": "The verifier shares no executable module with the producer or fixture, reconstructs canonical identities independently, pins the whole agent-authored candidate expectation envelope pending human review and returns only a synthetic verification with hypothesisOutcome not-executed, authority none and action null.",
+      "verification": "Static import audit, private pin comparison, baseline verifier-only test and producer-to-verifier integration test."
+    },
+    {
+      "id": "SC-005",
+      "statement": "Omission, coherent staleness, symlink drift, layer, descriptor and mount collision, path rebinding, observation-as-expectation and coherently mutated expectation plus evidence all fail closed with exact reason codes.",
+      "verification": "Run the in-memory producer and verifier control suites; each control mutates a fresh synthetic object and no test creates a file, child process or raw artifact."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Two fresh synthetic constructions and two producer calls yield the same fixed candidate expectation, observation and evidence identities without normalization or ambient input.",
+      "verification": "Compare candidate expectation SHA-256 1605865d02f6d462e99038df2e1c1b776b3fc9bf8fb0581982b69f2a5f518df2, observation SHA-256 3eb1a5fb23b7c57aa8b70294c1e6518f3e165c38cfa82a69c558302c7ff66e0c and evidence semantic SHA-256 bdcb8d49f6b3b34605a868b4f12b07766bb612d536a716cbe6d14967ee28e983."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The sixteen real runtime payloads, real paths and historical root remain unresolved and are never copied, imported, read by the producer or elevated into the synthetic expectation.",
+      "verification": "Inspect fixture namespace and identifiers, core-module imports, no artifacts or host path reference, subject realSourceUseEligible false and the two blocking unknowns."
+    },
+    {
+      "id": "SC-008",
+      "statement": "No raw, payload, evidence file, temporary fixture, host mutation or real-source observation is created; all apparatus output and hostile controls remain in memory.",
+      "verification": "Audit repository status and authorized path diff before and after focused tests, inspect core and test write surfaces, and require zero artifacts additions."
+    },
+    {
+      "id": "SC-009",
+      "statement": "The tracked diff is limited to CHG-0038, its deterministic manifest entry and lab/node22-source-lock-preflight; plan, profile, schemas, compiler, accepted ADRs and SPECs, predecessor changes, product and repository configuration remain byte-identical.",
+      "verification": "Compare git diff name roster and predecessor hashes, require an empty plan diff and plan raw SHA-256 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243, then run deterministic governance verification."
+    },
+    {
+      "id": "SC-010",
+      "statement": "The apparatus remains proposed and not-executed, activates no ADR candidate, opens no H-055 or failure branch, and performs no commit, push, merge or publication.",
+      "verification": "Inspect CHG status, subject outcome and exclusions, Git status and history, and the absence of successor artifacts or remote transitions."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0038 proposed records the exact non-executing source-lock question, anchors, epistemic claims, blocking unknowns, exclusions, authority none and action null.",
+      "evidence": "This schema-valid change contract and deterministic manifest binding."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The subject and synthetic fixture encode the exact 25, 25, 687 and 26 topology without copying real payloads, real path identities or a historical raw.",
+      "evidence": "subject-lock.json, fixture source, fixed canonical identities and exact topology tests."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The pure producer emits the deterministic unassessed synthetic closure and has no capability to inspect or write a real source.",
+      "evidence": "producer.mjs, static capability audit and producer tests."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The independent verifier owns an agent-authored candidate whole-expectation pin pending human review, reconstructs identities without producer or fixture imports, and rejects same-mutable-state expectation fraud.",
+      "evidence": "verify.mjs, private candidate expectation pin, verifier-only baseline and coherent-fraud controls."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "All authorized in-memory control families reject with exact reason codes while the candidate synthetic baseline remains deterministic.",
+      "evidence": "Focused producer, verifier, integration and static-contract test results."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "Only the exact authorized governance and lab paths change, the compiled plan and every protected predecessor remain byte-identical, and no raw or payload is created.",
+      "evidence": "Path-scoped diff, hash ledger, empty artifacts delta and successful governance verification."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "No real-source result, H-055, failure branch, ADR candidate, SPEC, product law, Git transition or publication is claimed or performed.",
+      "evidence": "Blocking unknowns, subject apparatusAnchor null, exact exclusions, Git status and authority none/action null."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "Any real-source use remains gated on a later human grant bound to a separately established immutable apparatus commit and tree.",
+      "evidence": "Temporal-ordering inference, apparatusAnchor realSourceUseEligible false and the explicit absent-future-transition claim."
+    }
+  ]
+}
