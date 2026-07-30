@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "overlaykit-node22-failure-preservation-preflight-subject/v1",
+  "study": "NODE22-FAILURE-PRESERVATION-PREFLIGHT-001",
+  "hypothesis": "A synthetic-only successor apparatus can reserve before attempting and preserve one deterministic content-addressed replayable terminal envelope for each of launch-failure, malformed-output, divergent-attempts, exact-incompatibility, and success before semantic validation, without reading real sources or creating authority.",
+  "normative": false,
+  "syntheticOnly": true,
+  "realSourceExecution": false,
+  "payloadAcquisition": false,
+  "h055Opened": false,
+  "authority": "none",
+  "action": null,
+  "agentIdentity": {
+    "agent": "Codex /root",
+    "humanPrincipal": "@rodrigoteamx"
+  },
+  "sourceAnchor": {
+    "mainCommit": "d1caa3bff1b47b61c661e4ec4582add4f9c795c3",
+    "mainTree": "d83fa14a3c25189260921a0c08862e6540a52baf",
+    "planRawSha256": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243",
+    "planHash": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4",
+    "profileHash": "9b55c034c16a653d497672374c12d94f6f609c77f23aecd0f0d437e230cb4ebd",
+    "predecessorManifestRawSha256": "dc2666418b273d752f3f9d06ebe354515dad5eb06ec5d1aa597732806bf2b465",
+    "predecessorManifestContentHash": "efa010a5c268dca8b364d0efe669f8315d415ad19ead95b75e8b155d664d92a1",
+    "chg0036RawSha256": "2ff88d94d8768b23548e64d066922aec3e1d0b8ba7aaab27907f8af0432bf492",
+    "chg0038RawSha256": "3b0a2fb3dfbfa08d59df881df5f097bf66758eb6563e223012f790aaa8c8d77e",
+    "chg0039RawSha256": "6d062d4a1aa236d441481845549bea65d3a2b3b11498b34361b9a18c4a6d5a85",
+    "blockingRunnerRawSha256": "5c5bd2b73500c98779e8b0fea8b9d149f7d66815ef601a2bd5944b54f8bf457b"
+  },
+  "terminalPartition": {
+    "precedence": [
+      "launch-failure",
+      "malformed-output",
+      "divergent-attempts",
+      "exact-incompatibility",
+      "success"
+    ],
+    "expectedCaseCount": 5,
+    "exactlyOneTerminalPerCase": true,
+    "scope": "the exact sealed synthetic fixture only"
+  },
+  "persistencePolicy": {
+    "evidenceRoot": "artifacts/node22-failure-preservation-preflight",
+    "gitignoreLocator": ".gitignore",
+    "gitignoreRawSha256": "2c42503834e61def3bf5840b5c553a73b2d569cee732c69e7420f75ce5e6f1fc",
+    "reservationBeforeAttempt": true,
+    "exclusiveCreate": true,
+    "noFollow": true,
+    "directoryMode": "0700",
+    "fileMode": "0600",
+    "regularFileLinkCount": 1,
+    "replayFormat": "POSIX-ustar",
+    "clockPidRandomLocaleAndAbsoluteRootExcluded": true
+  },
+  "outcomePolicy": {
+    "supportedOnlyIf": "all five terminal branches are preserved and independently reconstructed and every nominated control rejects or proves deterministic equality",
+    "refutedOnlyIf": "the nominated boundary is closed and at least one terminal branch is not representable",
+    "inconclusiveIf": "any required source, branch, control, artifact, or interpretation is omitted, opaque, or ambiguous",
+    "invalidIf": "integrity, scope, authority, reservation-ordering, or evidence-preservation rules are breached",
+    "humanReviewRequired": true
+  },
+  "controls": [
+    "partial-write",
+    "duplicate-reservation",
+    "staleness",
+    "collision",
+    "symlink",
+    "hardlink",
+    "containment",
+    "directory-permission",
+    "file-mode",
+    "determinism"
+  ],
+  "knownLimits": [
+    "The partial-write control is an injected recoverability and rejection test, not a universal power-loss or storage-durability claim.",
+    "Real source expectations and immutable payload authority remain absent.",
+    "Runtime tracing, effective seccomp, late-loaded objects, loader state, kernel state, and TOCTOU closure remain outside this apparatus.",
+    "The apparatus source is not Git-anchored by this authorization and requires separate human review before any publication."
+  ],
+  "prohibited": [
+    "real-source execution or observation",
+    "payload acquisition or preservation",
+    "H-055 creation or execution",
+    "network or live observation",
+    "USB or hidraw access",
+    "Docker",
+    "product, profile, schema, compiler, plan, configuration, ADR, or SPEC mutation",
+    "commit, push, merge, or publication"
+  ]
+}

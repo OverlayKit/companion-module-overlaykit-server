@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0040",
+  "title": "Formalize deterministic Node 22 failure-preservation evidence",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "high",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root is the source-producing and synthetic-evidence-producing agent for CHG-0040 under human principal @rodrigoteamx. The agent cannot accept its own hypothesis, open or execute H-055, authorize real-source use, create an ADR or SPEC, or grant a Git transition; authority is none and action is null.",
+      "evidence": "Repository AGENTS.md, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, accepted ADR-0001 through ADR-0006, accepted SPEC-0001 and SPEC-0002, and the exact model-visible human authorization.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The authorized predecessor is protected-main commit d1caa3bff1b47b61c661e4ec4582add4f9c795c3 with tree d83fa14a3c25189260921a0c08862e6540a52baf. Its plan raw SHA-256 is 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243, planHash is bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, predecessor manifest raw SHA-256 is dc2666418b273d752f3f9d06ebe354515dad5eb06ec5d1aa597732806bf2b465, and predecessor manifest contentHash is efa010a5c268dca8b364d0efe669f8315d415ad19ead95b75e8b155d664d92a1.",
+      "evidence": "Read-only Git object inspection, independent raw hashing, deterministic manifest inspection, and successful npm run governance:verify before CHG-0040 creation.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0036, CHG-0038, and CHG-0039 remain byte-identical at raw SHA-256 2ff88d94d8768b23548e64d066922aec3e1d0b8ba7aaab27907f8af0432bf492, 3b0a2fb3dfbfa08d59df881df5f097bf66758eb6563e223012f790aaa8c8d77e, and 6d062d4a1aa236d441481845549bea65d3a2b3b11498b34361b9a18c4a6d5a85 respectively.",
+      "evidence": "Current deterministic predecessor manifest, local raw hashing, ADR-0002 temporal immutability, and an empty diff for the three predecessor paths.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The predecessor Node 22 runner has raw SHA-256 5c5bd2b73500c98779e8b0fea8b9d149f7d66815ef601a2bd5944b54f8bf457b and constructs and semantically validates the positive observation before preserveBoundaryEvidence is called. A launch, parse, divergence, compatibility, or construction failure before that call can therefore terminate without an admissible raw envelope.",
+      "evidence": "Static read-only inspection of lab/node22-boundary-preflight/run.mjs, its buildBoundaryEvidence, runProbeAttempt, validateObservation, preserveBoundaryEvidence, and automatic-main ordering; CHG-0036 already records failureBranch not-materializable-by-current-producer.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal authorized only CHG-0040 proposed, its deterministic manifest addition, producer, independent verifier, fixtures, controls under lab/node22-failure-preservation-preflight, and synthetic local ignored raw with reservation before attempt, exclusive creation, directories 0700 and files 0600.",
+      "evidence": "The exact model-visible human authorization immediately preceding this change; inaccessible transport bytes are not claimed or materialized.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The pre-run apparatus source set contains exactly eleven paths under lab/node22-failure-preservation-preflight and has canonical descriptor-set SHA-256 09227c0fea256a6be1fa1ad6001869a4bb637f5a7240bf51bd463ed71a30c7d8. Descriptors contain repository-relative path, raw SHA-256, byte length and four-digit mode, are sorted by UTF-8 byte order, and are hashed as compact bytewise-key-canonical JSON.",
+      "evidence": "Independent reconstruction after scoped formatting and before CHG-0040 manifest compilation; the exact path roster is frozen by lab/node22-failure-preservation-preflight/run.mjs and includes subject, package, fixture, producer, verifier, runner and five test files.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The pre-run subject has raw SHA-256 32faedd0bf9202190ee9fdbae0c84baff05764dd637dcf4b2dfd6d4487aca144; producer raw SHA-256 is 2848db007609e95087cd0df2225eb07a3f175057785a3f4f9abf006b4251689c; verifier raw SHA-256 is 5849228381d14e3f022b7ab4024eb99382f33d9f4db89f0004d9a36b0b832a47; and runner raw SHA-256 is fd4148c6bae7ea8b9b6335928a6a54a5b7aae7040911cbd5ab786681dba20e61.",
+      "evidence": "Independent raw hashing of the frozen source set after formatting and before any canonical reservation.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "The minimal falsifiable Slice for the known failureBranch blocker is a synthetic terminal carrier whose durable reservation precedes every attempt and whose raw envelope is persisted before an independent semantic verifier runs. It is not a real-source or H-055 experiment.",
+      "evidence": "ADR-0001 evidence-before-decision ordering, CHG-0036 failureBranch blocker, governed-discovery reorder check, and the human-nominated boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "NODE22-FAILURE-PRESERVATION-PREFLIGHT-001: a synthetic-only successor apparatus can reserve before attempting and preserve one deterministic content-addressed replayable terminal envelope for each of launch-failure, malformed-output, divergent-attempts, exact-incompatibility, and success before semantic validation, without reading real sources or creating authority.",
+      "evidence": "This is the falsifiable hypothesis explicitly accepted for implementation by the human principal; no outcome is presumed before the canonical synthetic run and independent reconstruction.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The terminal precedence is launch-failure with zero attempts, malformed-output with one attempt, divergent-attempts with two valid distinct outputs, exact-incompatibility with two valid identical non-matching outputs, and success with two valid identical exact outputs. Exactly one branch must be derived for each sealed fixture case.",
+      "evidence": "Human authorization, frozen subject terminalPartition, synthetic fixture, producer mechanical cardinality checks, and verifier-owned semantic precedence.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The producer parses no stdout semantics and preserves binary stdout and stderr as base64, byte length and SHA-256. The independent verifier imports neither producer, fixture nor runner, pins the exact subject and expected protocol, re-derives each branch, and reconstructs each two-member POSIX-ustar replay byte-identically.",
+      "evidence": "Frozen producer and verifier sources, static import and capability audits, 29 focused tests, exact binary mutation tests, and producer-to-verifier integration.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The apparatus must reject injected partial writes, duplicate reservations before callback execution, stale anchors, terminal collisions, symlinks, hardlinks, containment escapes, directory mode drift, file mode drift and replay nondeterminism with exact reason-bearing receipts.",
+      "evidence": "Human authorization, frozen subject control roster, filesystem writer and reader checks, independent verifier, and focused hostile tests.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Before canonical execution, 29 of 29 focused contract, producer, runner, integration and independent-verifier tests pass. This observation is apparatus evidence only and is not human acceptance of the hypothesis.",
+      "evidence": "Local node --test lab/node22-failure-preservation-preflight/*.test.mjs output after source freezing; subject humanReview authority remains external, authority none and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the exact frozen apparatus can materialize and independently reconstruct all five canonical local terminal ledgers while every nominated hostile control passes remains unknown until the separately authorized synthetic --write execution completes.",
+      "evidence": "No canonical artifacts/node22-failure-preservation-preflight run exists at this pre-run boundary.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Power-loss tolerance, permanent filesystem failure, arbitrary kernel corruption and recovery of a crash between an exclusive partial file write and later verification remain outside the nominated boundary. The partial-write control tests deterministic injected rejection and preservation of the consumed reservation only.",
+      "evidence": "Frozen subject knownLimits and exact human control boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Real pre-observation expectations, immutable payload authority, exhaustive tracing, effective seccomp, late-loaded objects, loader and kernel closure, a real observer successor, and a one-shot grant bound to a later final main remain absent and blocking for any future H-055 or real-source run.",
+      "evidence": "Accepted Node 22 blockers, CHG-0038 and CHG-0039 real-source exclusions, post-CHG-0039 governed discovery, and this change's synthetic-only boundary.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "No ADR candidate is activated by creating or executing this proposed synthetic apparatus. It tests a failure carrier but does not compare or select a production mechanism, establish reusable accepted doctrine, or receive human review.",
+      "evidence": "ADR-0001 decision ordering, synthetic non-normative scope, proposed lifecycle, human-review requirement, authority none and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "This authorization excludes real sources, payload acquisition, H-055, network or live observation, USB or hidraw, Docker, product, profile, schema, compiler, plan, configuration, ADR, SPEC, commit, push, merge and publication. Raw must remain local, private, ignored and absent from Git.",
+      "evidence": "Exact human authorization, frozen subject prohibited roster, .gitignore raw SHA-256 2c42503834e61def3bf5840b5c553a73b2d569cee732c69e7420f75ce5e6f1fc and authority none/action null.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0040 and the subject bind the exact predecessor, plan, manifest, CHG-0036, CHG-0038, CHG-0039, blocker-runner and frozen eleven-path apparatus identities before canonical reservation.",
+      "verification": "Recompute every named raw and canonical identity, compare the exact source roster and require source-set SHA-256 09227c0fea256a6be1fa1ad6001869a4bb637f5a7240bf51bd463ed71a30c7d8."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The five sealed cases obey the exact mutually exclusive terminal precedence and attempt cardinalities 0, 1, 2, 2 and 2.",
+      "verification": "Inspect fixture bytes, producer mechanical receipts and independent branch derivation for launch-failure, malformed-output, divergent-attempts, exact-incompatibility and success in that order."
+    },
+    {
+      "id": "SC-003",
+      "statement": "Each case creates and fsyncs exactly one exclusive private reservation before its callback and finishes with exactly one content-addressed terminal envelope and one content-addressed deterministic replay.",
+      "verification": "Instrument reservation-durable and attempt-start ordering, inspect exclusive path roster, file metadata and branch receipts, then require duplicate reservation to reject with zero callback executions."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Reservation, terminal, transports, run and replay identities contain no clock, PID, randomness, locale result or absolute evidence-root identity and reconstruct byte-identically from the same sealed inputs.",
+      "verification": "Execute duplicate in-memory constructions, reverse replay input order, recompute raw and semantic hashes and require byte equality."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The verifier imports neither producer, fixture nor runner and independently reconstructs subject, source anchor, reservation, binary transport hashes, semantic terminal branch and POSIX-ustar bytes for all five cases.",
+      "verification": "Static import audit, verifier-owned constants and canonicalization, five branch receipts and archive-only reconstruction."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Every created evidence directory is 0700 and every evidence file is a same-owner regular file at 0600 with nlink one, exclusive creation, no symlink following and real containment.",
+      "verification": "Filesystem metadata receipts, O_EXCL and O_NOFOLLOW static checks, pre/post descriptor reads and symlink, hardlink, containment and mode controls."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The exact ten-control roster rejects injected partial write, duplicate reservation, staleness, collision, symlink, hardlink, containment, directory permission and file mode attacks and proves deterministic byte equality.",
+      "verification": "Require ten ordered control receipts with passed true and exact observed reason codes; constrain partial-write interpretation to injected rejection and durable reservation preservation."
+    },
+    {
+      "id": "SC-008",
+      "statement": "The candidate is support-eligible only with five of five independently reconstructed branches and all ten controls passed; refutation requires a closed boundary and an unrepresentable branch; any omitted, opaque or ambiguous input remains inconclusive; integrity or authority breach is invalid.",
+      "verification": "Inspect frozen outcome policy, raw counts, control receipts, awaiting-human-review state, humanReview.accepted null, authority none and action null."
+    },
+    {
+      "id": "SC-009",
+      "statement": "Canonical raw exists only below artifacts/node22-failure-preservation-preflight, remains ignored, local, private and absent from the Git index.",
+      "verification": "Check fixed CLI root, .gitignore identity and rule, directory and file modes, git check-ignore and git ls-files."
+    },
+    {
+      "id": "SC-010",
+      "statement": "The tracked diff is limited to CHG-0040, its deterministic manifest entry and the eleven-path lab source set; plan, profile, schemas, compiler, accepted ADRs and SPECs, predecessor changes, product, repository configuration and Git history remain unchanged.",
+      "verification": "Compare the exact path roster and predecessor hashes, require plan raw SHA-256 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243, successful governance verification and no commit."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0040 proposed and the subject lock record the exact hypothesis, terminal precedence, raw policy, controls, outcome lattice, epistemic limits, exclusions, authority none and action null before canonical execution.",
+      "evidence": "This schema-valid change, frozen subject raw SHA-256 and deterministic manifest binding."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The exact eleven-path source set is frozen and content-addressed before the first canonical reservation.",
+      "evidence": "Canonical source-set SHA-256 09227c0fea256a6be1fa1ad6001869a4bb637f5a7240bf51bd463ed71a30c7d8 and exact individual source hashes."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The producer preserves five complete deterministic reservations, terminal envelopes and replays without parsing stdout semantics or claiming authority.",
+      "evidence": "Canonical raw branch receipts, producer capability audit and content-addressed local files."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The independent verifier reconstructs all five branches and every replay without importing producer, fixture or runner.",
+      "evidence": "Verifier import audit, five verification receipts, semantic branch derivation and byte-identical ustar reconstruction."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "All ten nominated controls pass with exact reason-bearing receipts, while partial-write evidence remains explicitly bounded to deterministic injected rejection rather than universal storage durability.",
+      "evidence": "Raw control roster, focused hostile tests and frozen subject knownLimits."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "Raw remains private, local, ignored and absent from Git, and only the exact authorized governance and lab paths change.",
+      "evidence": "Filesystem modes, fixed raw root, ignore receipt, exact diff roster and Git index audit."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "Focused tests, deterministic reconstruction, governance checks, repository checks, build, scoped formatting, whitespace, source-stability and boundary-disclosure gates pass without network.",
+      "evidence": "Final local offline gate outputs, pre/post source hashes and raw verifier receipts."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "No H-055, real source, payload, product or governance-law mutation, ADR candidate, SPEC, commit, push, merge or publication occurs, and any interpretation remains pending separate human review.",
+      "evidence": "Exact exclusions, tracked and ignored path audits, unchanged protected hashes, raw humanReview.accepted null, authority none and action null."
+    }
+  ]
+}
