@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0043",
+  "title": "Repair the governance runtime audit lockfile floor",
+  "status": "proposed",
+  "changeClass": "security",
+  "risk": "medium",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root is the source-producing agent for CHG-0043 under human principal @rodrigoteamx. The agent cannot approve this change, create an ADR or SPEC, reinterpret future registry state as current evidence, or claim a broader dependency update policy.",
+      "evidence": "Repository AGENTS.md, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, accepted ADR-0001 and ADR-0002, and the model-visible human instruction to commit, push, and continue.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "After CHG-0042 was signed and pushed at commit 7166ed2175647db9252a2a925ae9f6b4fbe5f2c6, the repository quality gate failed at npm audit --omit=dev --audit-level=high because registry-backed audit reported brace-expansion 5.0.8 vulnerable below 5.0.9 and fast-uri 3.1.4 vulnerable below 3.1.5.",
+      "evidence": "Local npm run check output, registry-backed npm audit --omit=dev --json, PR #18 draft validation notes, and dependency inspection through @overlaykit/governance-host -> minimatch -> brace-expansion and @overlaykit/governance-host -> ajv -> fast-uri.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The pre-change package-lock.json raw SHA-256 at CHG-0042 commit 7166ed2175647db9252a2a925ae9f6b4fbe5f2c6 is 9f948eeea2c4c42507ba2d67d59c070bd2cd70d0e9340529d84a7fed874a83ff.",
+      "evidence": "git show HEAD:package-lock.json | sha256sum before the CHG-0043 lockfile update.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The CHG-0043 lockfile delta changes only package-lock entries for node_modules/brace-expansion from 5.0.8 to 5.0.9 and node_modules/fast-uri from 3.1.4 to 3.1.5, including their resolved tarball URLs and integrity values. package.json and tools/governance/package.json remain byte-identical at SHA-256 b2abc860816de570d3dc9c71e2aaa7c29bd1cbfde76a9e8f080012456872de35 and d76a1cc52ce5aa175237084f56d9e1e35ae70a125b941d153f2ef80705e9d120.",
+      "evidence": "Minimal package-lock.json diff after npm audit fix --package-lock-only, manual metadata-order normalization against HEAD, sha256sum, and git diff -- package-lock.json.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "A lockfile-only floor update for brace-expansion and fast-uri is the smallest current remediation for the enforced audit gate because the declared dependency ranges already admit the fixed versions and no package manifest, product source, governance compiler, ADR, SPEC, or CHG-0042 apparatus source needs to change.",
+      "evidence": "npm audit fix --package-lock-only under explicit Node 22 invocation, package-lock diff, unchanged manifests, ADR-0001 quality gate, and governed-discovery reorder analysis.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "Under the repository's Node 22 runtime, the updated lockfile will make npm audit --omit=dev --audit-level=high and the full npm run check gate pass without executing the CHG-0042 pre-attempt apparatus or changing product behavior.",
+      "evidence": "The package-lock-only remediation result reported found 0 vulnerabilities; final Node 22 gates remain to be executed after CHG-0043 manifest compilation.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Future registry advisories, dependency yanks, integrity changes, or npm resolver behavior could change the audit result. CHG-0043 proves only the current lockfile remediation against current registry evidence and does not establish a general dependency update policy.",
+      "evidence": "Audit advisories are registry-backed external evidence and ADR-0001 forbids reinterpreting stale evidence as current.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0043 does not execute the CHG-0042 apparatus, open H-055, close CHG-0041 blockers, change accepted ADRs or SPECs, alter product code, or grant operational authority. Authority remains none and action remains null.",
+      "evidence": "Path-scoped diff, CHG-0042 subject-lock exclusions, AGENTS.md operational authority boundary, and unchanged accepted governance records.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "Only package-lock.json, CHG-0043, and the deterministic governance manifest entry change after the CHG-0042 commit.",
+      "verification": "git diff --name-status against 7166ed2175647db9252a2a925ae9f6b4fbe5f2c6."
+    },
+    {
+      "id": "SC-002",
+      "statement": "package-lock.json upgrades brace-expansion to 5.0.9 and fast-uri to 3.1.5 without changing package.json or tools/governance/package.json.",
+      "verification": "Inspect package-lock.json, npm dependency inspection, and sha256sum for both package manifests."
+    },
+    {
+      "id": "SC-003",
+      "statement": "npm audit --omit=dev --audit-level=high reports zero high or critical vulnerabilities under Node 22 at the reviewed lockfile.",
+      "verification": "Run the registry-backed audit with the explicit Node 22 npm CLI."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Governance, quality, and build gates pass without executing the CHG-0042 source-only apparatus or changing product behavior.",
+      "verification": "Run npm run governance:check, npm run check, npm run build, git diff --check, and path/static audits."
+    },
+    {
+      "id": "SC-005",
+      "statement": "CHG-0043 creates no ADR candidate, SPEC successor, H-055 opening, production authority, or dependency policy beyond the exact two-package lockfile remediation.",
+      "verification": "Inspect CHG-0043 claims, unchanged decisions/specifications, unchanged planHash, and absence of product source changes."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0043 records the audit failure, current registry remediation, exact lockfile boundary, typed claims, deferred unknowns, authority none and action null.",
+      "evidence": "This schema-valid change contract and deterministic manifest binding."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The lockfile remediation is limited to brace-expansion 5.0.9 and fast-uri 3.1.5, with package manifests, CHG-0042 apparatus source, accepted law and product source unchanged.",
+      "evidence": "Package-lock diff, sha256sum ledger, path-scoped diff, and governance verification."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "The enforced gates pass under the repository Node 22 runtime before CHG-0043 is committed and pushed.",
+      "evidence": "Final npm run governance:check, npm run check, npm run build, and git diff --check outputs."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "PR #18 is updated with the CHG-0043 commit and no longer carries the audit gate blocker in its validation notes.",
+      "evidence": "Pushed branch, PR update, and current validation summary."
+    }
+  ]
+}
