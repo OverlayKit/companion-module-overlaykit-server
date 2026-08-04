@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "overlaykit-node22-pre-attempt-binding-preflight-subject/v1",
+  "study": "NODE22-PRE-ATTEMPT-BINDING-PREFLIGHT-001",
+  "hypothesis": "A source-defined synthetic stage-0 can durably reserve an externally supplied content-addressed Git, governance, subject, and source-set binding before any stage-1 module load or callback, while failing closed before stage-1 on an injected partial reservation write.",
+  "normative": false,
+  "syntheticOnly": true,
+  "sourceOnly": true,
+  "realSourceExecution": false,
+  "payloadAcquisition": false,
+  "h055Opened": false,
+  "hypothesisOutcome": "not-executed",
+  "authority": "none",
+  "action": null,
+  "agentIdentity": {
+    "agent": "Codex /root",
+    "humanPrincipal": "@rodrigoteamx"
+  },
+  "predecessorAnchor": {
+    "commit": "1121f1dd86114da8560f31122743ae20f8d53b03",
+    "tree": "52bf8023a628d85683417bf67c42d7b7effcd912",
+    "planRawSha256": "2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243",
+    "planHash": "bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4"
+  },
+  "apparatusAnchor": {
+    "state": "source-defined-unanchored-pending-separate-git-transition",
+    "commit": null,
+    "tree": null,
+    "chg0042RawSha256": null,
+    "manifestRawSha256": null,
+    "manifestContentHash": null,
+    "subjectRawSha256": null,
+    "sourceSetSha256": null,
+    "executionEligible": false
+  },
+  "sourceRoster": [
+    "lab/node22-pre-attempt-binding-preflight/contract.test.mjs",
+    "lab/node22-pre-attempt-binding-preflight/fixtures/synthetic-precontract.mjs",
+    "lab/node22-pre-attempt-binding-preflight/integration.test.mjs",
+    "lab/node22-pre-attempt-binding-preflight/package.json",
+    "lab/node22-pre-attempt-binding-preflight/stage0.mjs",
+    "lab/node22-pre-attempt-binding-preflight/stage0.test.mjs",
+    "lab/node22-pre-attempt-binding-preflight/stage1.mjs",
+    "lab/node22-pre-attempt-binding-preflight/subject-lock.json",
+    "lab/node22-pre-attempt-binding-preflight/verify.mjs",
+    "lab/node22-pre-attempt-binding-preflight/verify.test.mjs"
+  ],
+  "branchBoundary": {
+    "branches": ["launch-failure"],
+    "expectedAttemptCount": 0,
+    "stage": "stage-0-before-stage-1"
+  },
+  "controlBoundary": {
+    "controls": ["partial-write"],
+    "partialWriteSemantics": "an injected strict-prefix reservation write consumes the exclusive reservation slot and permits zero stage-1 loads or callbacks",
+    "powerLossClaim": false
+  },
+  "stage0Policy": {
+    "staticImports": "node:* only",
+    "staticStage1Import": false,
+    "stage1LoadAfterDurableReservationOnly": true,
+    "exclusiveCreate": true,
+    "noFollow": true,
+    "directoryMode": "0700",
+    "fileMode": "0600",
+    "fsyncBeforeStage1": true,
+    "automaticMain": false,
+    "cli": false,
+    "canonicalExecution": false
+  },
+  "bindingPolicy": {
+    "predecessorMainRequired": true,
+    "apparatusCommitAndTreeRequired": true,
+    "chg0042RawSha256Required": true,
+    "manifestRawAndContentHashRequired": true,
+    "planRawAndContentHashRequired": true,
+    "subjectRawSha256Required": true,
+    "exactTenPathSourceDescriptorsAndSetHashRequired": true,
+    "externalContentAddressedGrantRequired": true,
+    "sameMutableStateExpectationForbidden": true,
+    "externalGrantOriginAuthenticatedByStage0": false,
+    "globalGrantConsumptionEnforced": false
+  },
+  "verifierPolicy": {
+    "importsStage0": false,
+    "importsStage1": false,
+    "importsFixture": false,
+    "sharedExecutableIdentityCode": false,
+    "reconstructsCanonicalization": true,
+    "verifiesOnlyIndividualCandidateEnvelopes": true,
+    "globalRunAndControlReceiptPreserved": false,
+    "hypothesisDecisionAuthority": false
+  },
+  "execution": {
+    "status": "not-executed",
+    "canonicalRun": null,
+    "rawEvidence": null,
+    "humanReview": null
+  },
+  "outcomePolicy": {
+    "supportedOnlyIf": "a separately authorized future experiment starts from an immutable apparatus anchor and independently proves the exact reservation-before-stage-1 and partial-write predicates",
+    "refutedOnlyIf": "that separately authorized closed boundary proves at least one nominated predicate unrepresentable",
+    "inconclusiveIf": "any binding, ordering event, control observation, or independent verification is omitted, opaque, stale, ambiguous, or unpreserved",
+    "invalidIf": "scope, integrity, temporal ordering, authority, or evidence-preservation rules are breached",
+    "currentOutcome": "not-executed"
+  },
+  "knownLimits": [
+    "This source-only apparatus contains no canonical runner, automatic main, fixed artifact root, raw evidence, preserved receipt, or execution result.",
+    "Synthetic candidate precontract values are representational fixtures and are not the absent future Git or governance anchor.",
+    "Stage-0 validates content-addressed consistency relative to a supplied grant token but does not authenticate that token's human origin or enforce consumption across distinct evidence roots.",
+    "Stage-0 does not resolve Git objects or prove that its dynamically loaded stage-1 bytes match the supplied source descriptors; a later external launcher receipt must close that execution-identity edge.",
+    "The partial-write verifier consumes externally preserved operation, retry, and stage-1 event receipts; this Slice does not preserve or verify a global run-and-control receipt.",
+    "Injected partial-write behavior is not a power-loss, permanent-storage, kernel-integrity, or universal durability claim.",
+    "The separate blocker independent-global-run-and-control-verification-not-preserved remains unresolved and outside this slice.",
+    "Real sources, payload authority, H-055, live state, USB, hidraw, Docker, product behavior, and production policy remain unknown and outside this slice."
+  ],
+  "prohibited": [
+    "canonical apparatus execution",
+    "raw or artifact creation",
+    "real-source execution or observation",
+    "payload acquisition or preservation",
+    "H-055 creation or execution",
+    "network or live observation",
+    "USB or hidraw access",
+    "Docker",
+    "product, profile, schema, compiler, plan, configuration, ADR, or SPEC mutation",
+    "commit, push, merge, or publication"
+  ]
+}
