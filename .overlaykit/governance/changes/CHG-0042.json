@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0042",
+  "title": "Stage the non-executing Node 22 pre-attempt binding preflight",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "high",
+  "owner": "@rodrigoteamx",
+  "decisions": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005", "ADR-0006"],
+  "specifications": ["SPEC-0001", "SPEC-0002"],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root is the source-producing agent for CHG-0042 under human principal @rodrigoteamx. The agent cannot approve this apparatus, authorize its execution, open H-055, create an ADR or SPEC, or grant a Git transition; authority is none and action is null.",
+      "evidence": "Repository AGENTS.md, accepted ADR-0001 through ADR-0006, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, and the exact model-visible human authorization.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The authorized predecessor is protected-main merge commit 1121f1dd86114da8560f31122743ae20f8d53b03 with tree 52bf8023a628d85683417bf67c42d7b7effcd912. Its plan raw SHA-256 is 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243, planHash is bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, predecessor manifest raw SHA-256 is b1988c39fab11828d9106e610fef1a30532d25b8016c76e09e77ff0e7aacfbe8, and predecessor manifest contentHash is 1d1ba70cbc9e6232897e95e1f36e4c311a343f78015f234fef066c342677f209.",
+      "evidence": "Read-only local Git object inspection, independent SHA-256 calculation, deterministic manifest inspection, and the exact human-nominated main and tree.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "CHG-0040 and CHG-0041 remain byte-identical at raw SHA-256 ea1a8460132d90226c4e73acb56f913852081e9d85c41713edeb1364944761bd and 58f96a94a85b2f1a9a41eb48d7616154c04ce20286573e0b0adadfaee4204ebb. NODE22-FAILURE-PRESERVATION-PREFLIGHT-001 remains human-accepted as inconclusive exclusively for pre-attempt-reservation-governance-and-source-set-binding-absent and independent-global-run-and-control-verification-not-preserved.",
+      "evidence": "Current deterministic manifest, local raw hashing, CHG-0041, accepted run raw SHA-256 ef2470af9b71b9a6659c56166fbacfec2a3d8469064bb339c9a8c4010ee41610, and its externally preserved human review.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The predecessor runner materializes its synthetic terminal cases and controls before it calculates the current source set and governance anchors; each reservation binds the predecessor subject sourceAnchor rather than CHG-0040, its current manifest, or the eleven-file apparatus source set before the attempt.",
+      "evidence": "Static read-only inspection of buildSyntheticFailurePreservationRun, materializeTerminalCase, sourceSet and governanceAnchors in lab/node22-failure-preservation-preflight/run.mjs, plus the accepted first blocker in CHG-0041.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal authorized only CHG-0042 proposed, its deterministic manifest entry, and a source-only, not-executed apparatus under lab/node22-pre-attempt-binding-preflight limited to stage-0, one launch-failure branch, one partial-write control, and an independent verifier.",
+      "evidence": "The exact model-visible human authorization immediately preceding this change.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "A reservation cannot truthfully bind the final apparatus commit and tree before those immutable identities exist. The safe temporal order is to define this inert source boundary, establish a later separately authorized immutable Git anchor, obtain a later grant bound to that anchor, and only then execute any stage-0 attempt.",
+      "evidence": "ADR-0001 evidence-before-decision ordering, ADR-0004 exact-subject selection, the accepted first blocker, protected-main Git identity, and governed-discovery reorder analysis.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "NODE22-PRE-ATTEMPT-BINDING-PREFLIGHT-001: an inert source-defined stage-0 can require a complete externally supplied immutable binding envelope and, in a separately authorized future execution, durably materialize and read back one private exclusive reservation before any stage-1 module load or callback.",
+      "evidence": "This is the falsifiable source-level apparatus claim authorized by the human principal; no execution result is presumed.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The complete binding envelope must name the actual apparatus commit and tree, CHG-0042 raw SHA-256, successor manifest raw SHA-256 and contentHash, plan raw SHA-256 and planHash, subject raw SHA-256, and the exact ten-path source-set descriptors and canonical descriptor-set SHA-256. Stage-0 must reject null, omitted, malformed or internally inconsistent bindings relative to the exact externally fixed grant; authenticating that grant's human origin and proving it was not derived from the same mutable observation remain external prerequisites.",
+      "evidence": "Accepted first blocker, ADR-0002 manifest binding, ADR-0004 exact provenance, source-only stage-0 contract, subject lock, and the explicit absence of an authenticated future grant.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "Stage-0 statically imports only Node built-ins. Stage-1 is reachable only through a dynamic load point ordered after exclusive 0600 reservation creation, file fsync, parent-directory fsync, stable readback, and exact reservation verification.",
+      "evidence": "lab/node22-pre-attempt-binding-preflight/stage0.mjs and static contract assertions; behavioral execution remains unauthorized.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The only branch represented is launch-failure with zero completed attempts. The only hostile control is an injected partial reservation write that consumes the selected slot, leaves no eligible sealed reservation, and must leave the stage-1 load count at zero.",
+      "evidence": "Exact human boundary, subject lock, synthetic precontract fixture, stage-0 source and source-only test definitions.",
+      "blocking": false
+    },
+    {
+      "kind": "assumption",
+      "statement": "The independent verifier imports neither stage-0, stage-1, fixture nor test code; owns its canonicalization and validation; re-derives binding and reservation identities from supplied bytes; and rejects omission, staleness, rebinding relative to the externally fixed grant, malformed partial bytes and authority overclaim. For partial-write it can classify only candidate-envelope consistency; it cannot prove that caller-supplied retry and stage-1 event receipts occurred independently.",
+      "evidence": "lab/node22-pre-attempt-binding-preflight/verify.mjs, its assessed false candidate status, subject verifierPolicy, and static import and token audit; the verifier is not executed by this change.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The source-only apparatus boundary contains exactly ten paths: package.json, subject-lock.json, stage0.mjs, stage1.mjs, verify.mjs, fixtures/synthetic-precontract.mjs, contract.test.mjs, stage0.test.mjs, verify.test.mjs and integration.test.mjs under lab/node22-pre-attempt-binding-preflight. Its canonical path, Git blob OID, Git mode, raw SHA-256 and byte-length descriptor-set SHA-256 is be0f3db52c34b2ee982df09cb5195c229684604c62b784d8b8c70477fab7948b. It contains no run.mjs, root script, CLI or automatic-main entry point.",
+      "evidence": "Independent deterministic reconstruction over the sorted ten-path roster after scoped formatting and static source inspection, using the same descriptor keys required by stage-0 and the independent verifier.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Whether the source-defined stage-0 can actually create, fsync, read back and independently verify a completely bound reservation before stage-1 loading remains unknown because this authorization permits no import, test, verifier invocation, canonical execution or raw.",
+      "evidence": "The exact source-only and not-executed authorization, absent run, absent raw and absent execution receipts.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "The immutable apparatus commit and tree, a separately anchored CHG-0042 and successor manifest, a future execution grant bound to those identities, and an external launcher proof that the loaded stage-0 and stage-1 bytes match that anchor do not exist at this boundary. Authentication of the grant's human origin and any globally one-shot consumption rule are also absent. The subject must therefore remain unanchored and execution-ineligible.",
+      "evidence": "Current no-commit authorization, source-defined apparatusAnchor null, no Git resolver or launcher receipt in this Slice, no future authenticated grant, and ADR-0001 temporal ordering.",
+      "blocking": true
+    },
+    {
+      "kind": "unknown",
+      "statement": "Independent global run-and-control verification preservation remains unresolved and outside this minimal slice. Closing pre-attempt binding alone would not make H-055 or any real-source execution eligible.",
+      "evidence": "The second accepted CHG-0041 blocker, governed-discovery reorder, and the exact stage-0-only authorization.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "No ADR candidate is activated by this proposed source-only apparatus. It selects no production mechanism, creates no accepted reusable doctrine, executes no experiment and leaves both prior evidence blockers unresolved at this boundary.",
+      "evidence": "ADR-0001 decision ordering, proposed lifecycle, not-executed scope, unchanged decision set, authority none and action null.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "This authorization excludes canonical or synthetic apparatus execution, raw creation, H-055, real sources, commit, push, merge, ADR, SPEC, live observation, host mutation and any product, profile, schema, compiler, plan or configuration change. Authority is none and action is null.",
+      "evidence": "The exact model-visible human authorization and the prohibited roster in the source-defined subject lock.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "CHG-0042 and the subject bind the exact protected-main predecessor, plan, manifest, CHG-0040, CHG-0041 and accepted blocker identities without claiming a future apparatus anchor.",
+      "verification": "Recompute the named Git and raw identities read-only; inspect apparatusAnchor commit and tree null and executionEligible false."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The source boundary contains exactly the ten authorized lab paths and no run.mjs, root package script, CLI, automatic-main entry point, canonical raw-writer entry point or fixed artifact locator.",
+      "verification": "Perform a sorted path roster and static import, token, package-script and entry-point audit without importing or executing any new lab module."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The subject declares source-defined, unanchored and not-executed; records one launch-failure branch, one partial-write control, authority none and action null; and leaves future apparatus commit, tree and human review null.",
+      "verification": "Inspect subject-lock.json statically and compare its exact keys, enums, nulls, limits and prohibited roster."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Stage-0 admits only a complete external binding envelope declaring apparatus commit and tree, CHG-0042, successor manifest, plan, subject and exact ten-path source-set identities, with no ambient Git or filesystem derivation of expected values. Correspondence of those declarations to actual Git blobs remains an external future-launcher prerequisite.",
+      "verification": "Static capability and data-flow audit of stage0.mjs, fixture and test definitions; require no child_process, Git invocation, repository scan or expectation-from-observation path."
+    },
+    {
+      "id": "SC-005",
+      "statement": "The source-level ordering places exclusive private reservation creation, file and directory fsync, stable readback and exact verification before the sole dynamic stage-1 load point and callback surface.",
+      "verification": "Static call-graph, import and token audit only; no behavioral execution or timing claim is admitted."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Only launch-failure with zero completed attempts and injected partial-write with zero stage-1 loads are representable; all other terminal branches and controls are absent.",
+      "verification": "Inspect subject, fixture, stage modules and unexecuted test definitions for exact branch and control rosters and fail-closed cardinalities."
+    },
+    {
+      "id": "SC-007",
+      "statement": "The verifier has no executable dependency on stage-0, stage-1, fixture or tests, owns canonicalization, and source-defines rejection of missing, stale, grant-relative rebound, malformed partial or authority-overclaiming reservation bytes while classifying partial-write receipts only as unassessed candidate consistency.",
+      "verification": "Static import graph, exact token and duplicate-canonicalization audit of verify.mjs without invoking it."
+    },
+    {
+      "id": "SC-008",
+      "statement": "No new lab module, test, verifier or CLI is imported or executed and no raw, temporary output, reservation, evidence receipt or artifact is created.",
+      "verification": "Compare process, repository, ignored-path and artifacts rosters before and after source creation; run only governance compilation/verification that does not import the new lab."
+    },
+    {
+      "id": "SC-009",
+      "statement": "The tracked governance delta is addition-only for CHG-0042 and its deterministic manifest entry; plan.json, profile, schemas, compiler, ADRs, SPECs, predecessor changes, product and repository configuration remain byte-identical.",
+      "verification": "Inspect the exact path diff, recompute protected hashes, require plan raw SHA-256 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243 and run deterministic governance verification."
+    },
+    {
+      "id": "SC-010",
+      "statement": "CHG-0042 remains proposed, the apparatus remains not-executed and unanchored, no ADR candidate or H-055 is opened, and no commit, push, merge or publication occurs.",
+      "verification": "Inspect change and subject states, Git status and history, absent raw, absent future anchor and exact exclusions."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "CHG-0042 proposed records the exact pre-attempt binding question, source boundary, typed claims, blocking unknowns, exclusions, authority none and action null.",
+      "evidence": "This schema-valid change contract and deterministic manifest binding."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "The ten-path apparatus is source-defined with no CLI, automatic-main or canonical runner entry point and records its exact unanchored, not-executed subject.",
+      "evidence": "Sorted path roster, subject-lock.json, package.json and static entry-point audit."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "Stage-0 source requires the complete future immutable binding and places its only dynamic stage-1 boundary after private exclusive durable reservation verification.",
+      "evidence": "stage0.mjs and static call-graph and capability inspection."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "The source boundary represents exactly launch-failure with zero completed attempts after an eligible reservation and partial-write with zero stage-1 loads or callbacks.",
+      "evidence": "subject-lock.json, synthetic-precontract fixture, stage1.mjs and unexecuted source-level test definitions."
+    },
+    {
+      "id": "DOD-005",
+      "statement": "The independent verifier source shares no executable module with stage-0, stage-1 or the fixture, owns fail-closed canonical binding checks and does not elevate caller-supplied partial-write receipts beyond unassessed candidate consistency.",
+      "evidence": "verify.mjs and static import, canonicalization and rejection-roster audit."
+    },
+    {
+      "id": "DOD-006",
+      "statement": "No apparatus code or test is executed and no raw, reservation, receipt, artifact or test-result claim is created.",
+      "evidence": "Pre/post process, filesystem, artifacts, ignored-path and Git status audit."
+    },
+    {
+      "id": "DOD-007",
+      "statement": "Only CHG-0042, its manifest addition and the exact ten lab paths change; compiled law, protected predecessors, product and configuration remain byte-identical.",
+      "evidence": "Exact diff roster, protected hash ledger and deterministic governance verification."
+    },
+    {
+      "id": "DOD-008",
+      "statement": "Any immutable anchor, apparatus execution, blocker closure, human review, H-055, Git transition or publication requires a separate explicit human grant bound to the future actual identities.",
+      "evidence": "Two blocking unknowns, apparatusAnchor null, not-executed state and exact authorization limits."
+    }
+  ]
+}
