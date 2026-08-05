@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "overlaykit-governance-change/v2",
+  "id": "CHG-0044",
+  "title": "Record the identity-bound CHG-0042 pre-attempt execution",
+  "status": "proposed",
+  "changeClass": "governance",
+  "risk": "high",
+  "owner": "@rodrigoteamx",
+  "decisions": [
+    "ADR-0001",
+    "ADR-0002",
+    "ADR-0003",
+    "ADR-0004",
+    "ADR-0005",
+    "ADR-0006"
+  ],
+  "specifications": [
+    "SPEC-0001",
+    "SPEC-0002"
+  ],
+  "claims": [
+    {
+      "kind": "fact",
+      "statement": "Codex /root is the execution-recording agent for CHG-0044 under human principal @rodrigoteamx. The agent cannot approve its own evidence, close H-055, create an ADR or SPEC, grant operational authority, or reinterpret this synthetic run as production behavior.",
+      "evidence": "Repository AGENTS.md, accepted ADR-0001 through ADR-0006, accepted SPEC-0001 and SPEC-0002, compiled governance plan bae4dad18ef70e54e5a6c0f28109d20b27de0840cd0c94d86a9381b4521699e4, and the model-visible human authorization.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "Immediately before execution, main was clean at commit 05b7726ab5ce42501544777bcf4b2ef6f2b4be64 with tree 62a3709375d450f4c5706a519f3da454e7770635. The identity-bound grant inputs matched plan raw SHA-256 2c63fbcb2e5d5c4a763080ac174783582960edb70a48b29a97b000c5aff0f243, manifest raw SHA-256 bd786dcbe38a5b5cfc6a76c80b5b5fb7836eb6092fababfca8bc21109daefdd1, manifest contentHash 705bce8d515fdd20366b4ecf356bada7195a03b99f699f8eee0217152acb4688, CHG-0042 raw SHA-256 1d4e674bbbfc770a6de9c6d9902e8f1153374ee2d2c65d193ece39e613319774, subject raw SHA-256 e10b666bb6eef1f954f5fce70df6c43b491a75877af658d269b4c000db6c30cd, and source-set descriptor SHA-256 be0f3db52c34b2ee982df09cb5195c229684604c62b784d8b8c70477fab7948b.",
+      "evidence": "Read-only git status, git rev-parse, sha256sum, manifest inspection, and npm run governance:verify under Node 22.20.0 before execution.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The human principal supplied the model-visible text \"autorizo\" immediately after being asked to authorize CHG-0042 execution bound to those exact identities and excluding H-055, ADR, SPEC, product changes and blocker closure by extrapolation. No inaccessible transport bytes or external identity signature are claimed.",
+      "evidence": "The immediately preceding model-visible grant request and response in this session.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "A one-use external launcher with raw SHA-256 a8d847cf867773705d93de69c27a34a4d230eb913e41da79a0170f2ab26e62a4 executed under /tmp/node-v22.20.0-linux-x64/bin/node. It refused dirty or mismatched Git state, rebuilt the precontract from current Git blob descriptors, imported stage0.mjs and verify.mjs from the authorized source set, and wrote local ignored raw artifacts under artifacts/node22-pre-attempt-binding-preflight/b428e93e70f8e9e7b275c4c1135ee77b2b8ebc3f5bc9eac6220fd2f3ae95ccbe/.",
+      "evidence": "/tmp/overlaykit-chg0042-launcher.mjs SHA-256 a8d847cf867773705d93de69c27a34a4d230eb913e41da79a0170f2ab26e62a4, launcher output, copied artifact hashes, git check-ignore, and pre/post git status.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The actual canonical precontract raw SHA-256 is bc932b4f45932e140c3b36f8f230b9a7d933643265adfa7e7eb3576a8461a90b. Its grant string hashes to 1055410f721192746f2acca80b75eeded4c0bdf2fbcf3535105fa9bbcab4d4c1 and binds apparatus commit 05b7726ab5ce42501544777bcf4b2ef6f2b4be64, apparatus tree 62a3709375d450f4c5706a519f3da454e7770635, CHG-0042, manifest, plan, subject, and the ten-path source set.",
+      "evidence": "precontract.json raw SHA-256 bc932b4f45932e140c3b36f8f230b9a7d933643265adfa7e7eb3576a8461a90b, summary.json, run.json governanceBindings, apparatusAnchor, and sourceSetSha256.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The launch-failure branch materialized reservation b67b4413447402780ffe58336b8d3c4f3712a9e2ded82b8776c169862ea989a3 before stage-1 load and invocation, observed zero attempts, wrote terminal cbc6ab7f18c99fe9a6ef995f6a79a727e5b1163584b8cdc0e0a1e73dda309772, and the independent verifier reconstructed candidate-launch-failure-reconstructed with terminal semantic SHA-256 5724e2e7d238828ee85b477465ee3ef27f45bbc1233c6f9cd26dc225981ad705.",
+      "evidence": "run.json raw SHA-256 cec0df97eb9bb04aabb08f9bec153ed4b614de95fe359d3e3d0735b34b8b41ac, semantic SHA-256 b428e93e70f8e9e7b275c4c1135ee77b2b8ebc3f5bc9eac6220fd2f3ae95ccbe, launch-failure reservation and terminal files, and verifyLaunchFailure receipt.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "The partial-write control wrote a strict 31-byte reservation prefix with raw SHA-256 5c8a160edbca41e58c061721a9cccfc54509d675330792c40b27001faa6a41eb, returned synthetic-partial-write-injected, consumed the reservation slot so retry returned reservation-already-consumed, and preserved zero stage-1 events. The independent verifier classified this only as candidate-control-envelope-consistent with assessed false.",
+      "evidence": "partial-write reservation prefix, firstWriteReceipt and retryReceipt in run.json, verifyPartialWriteControl receipt, and git ignored local raw artifact copy.",
+      "blocking": false
+    },
+    {
+      "kind": "inference",
+      "statement": "Within only the exact synthetic CHG-0042 launch-failure and partial-write boundary, the first CHG-0042 blocking unknown is now answered: source-defined stage-0 can create, fsync, read back and independently verify a completely bound reservation before stage-1 loading. The answer does not generalize beyond this apparatus, branch, control, commit, tree, source set and grant.",
+      "evidence": "Ordered launch events reservation-durable, stage1-load, stage1-invoke; reservation and terminal hashes; independent verifier receipts; partial-write zero stage-1 events; and the exact bound precontract.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Human review of this new candidate evidence remains pending. CHG-0044 records the candidate execution and its hashes; it does not accept the evidence, create a reusable doctrine, or promote the result into an ADR.",
+      "evidence": "The only human authorization was to execute the identity-bound CHG-0042 attempt, not to approve the resulting evidence or select doctrine.",
+      "blocking": false
+    },
+    {
+      "kind": "unknown",
+      "statement": "Independent global run-and-control verification preservation remains unresolved. This execution does not make H-055 eligible, does not close the second CHG-0041 blocker, and does not establish real-source, production, Companion, USB, Docker, host or operational authority.",
+      "evidence": "CHG-0041 accepted inconclusive boundary, CHG-0042 third unknown, exact CHG-0044 grant boundary, and absence of any real-source or live observation.",
+      "blocking": false
+    },
+    {
+      "kind": "fact",
+      "statement": "This change adds only CHG-0044, a tracked bounded evidence README, and the deterministic governance manifest update. It does not edit CHG-0042, accepted ADRs, accepted specifications, product source, lab source, package files, profile, schemas, compiler, GitHub rules, raw artifacts or ignored artifact bytes.",
+      "evidence": "Scoped diff, unchanged planHash, git check-ignore for artifacts/, and deterministic governance compilation.",
+      "blocking": false
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "SC-001",
+      "statement": "The CHG-0042 execution is bound to the exact post-merge commit, tree, plan, manifest, CHG-0042, subject and source-set identities named in the human-grant request.",
+      "verification": "Inspect run.json, precontract.json, summary.json, CHG-0044 claims, and the tracked evidence README; recompute raw SHA-256 values."
+    },
+    {
+      "id": "SC-002",
+      "statement": "The launch-failure branch proves reservation durability before stage-1 load and zero attempts only within the synthetic boundary.",
+      "verification": "Inspect run.json branchResults.launchFailure, reservationRawSha256 b67b4413447402780ffe58336b8d3c4f3712a9e2ded82b8776c169862ea989a3, terminalRawSha256 cbc6ab7f18c99fe9a6ef995f6a79a727e5b1163584b8cdc0e0a1e73dda309772, and verifier status candidate-launch-failure-reconstructed."
+    },
+    {
+      "id": "SC-003",
+      "statement": "The partial-write control consumes the selected slot with zero stage-1 events and remains an unassessed candidate envelope, not accepted behavioral proof.",
+      "verification": "Inspect partial-write raw prefix, first and retry receipts, stage1Events [], and verifyPartialWriteControl status candidate-control-envelope-consistent with assessed false."
+    },
+    {
+      "id": "SC-004",
+      "statement": "Raw artifacts remain local and ignored while the tracked receipt records only content identities and bounded interpretation.",
+      "verification": "Run git check-ignore on artifacts/node22-pre-attempt-binding-preflight/b428e93e70f8e9e7b275c4c1135ee77b2b8ebc3f5bc9eac6220fd2f3ae95ccbe/*.json and inspect git ls-files/status."
+    },
+    {
+      "id": "SC-005",
+      "statement": "CHG-0044 creates no ADR, SPEC, H-055, operational authority, product change, ruleset change, or blocker closure beyond the exact first CHG-0042 unknown within the synthetic boundary.",
+      "verification": "Inspect unchanged accepted law, unchanged product paths, CHG-0044 claims, and absence of H-055 or real-source artifacts."
+    },
+    {
+      "id": "SC-006",
+      "statement": "Governance, quality and build gates pass after adding the successor record and tracked receipt.",
+      "verification": "Run npm run governance:check, npm run check, npm run build and git diff --check under the repository Node 22 runtime."
+    }
+  ],
+  "definitionOfDone": [
+    {
+      "id": "DOD-001",
+      "statement": "The identity-bound CHG-0042 execution produced a candidate run, precontract and summary with the exact raw and semantic hashes recorded in CHG-0044.",
+      "evidence": "Local ignored artifacts under artifacts/node22-pre-attempt-binding-preflight/b428e93e70f8e9e7b275c4c1135ee77b2b8ebc3f5bc9eac6220fd2f3ae95ccbe/ and their SHA-256 ledger."
+    },
+    {
+      "id": "DOD-002",
+      "statement": "A tracked evidence README preserves the non-authorizing interpretation and explicitly excludes H-055, ADR, SPEC, product, production and global-blocker claims.",
+      "evidence": "evidence/node22-pre-attempt-binding-preflight/b428e93e70f8e9e7b275c4c1135ee77b2b8ebc3f5bc9eac6220fd2f3ae95ccbe/README.md."
+    },
+    {
+      "id": "DOD-003",
+      "statement": "CHG-0044 records facts, inferences, assumptions and unknowns without mutating CHG-0042 or any accepted decision or specification.",
+      "evidence": "CHG-0044, deterministic manifest update, unchanged CHG-0042 raw SHA-256 1d4e674bbbfc770a6de9c6d9902e8f1153374ee2d2c65d193ece39e613319774, and unchanged planHash."
+    },
+    {
+      "id": "DOD-004",
+      "statement": "All required local gates pass and the tracked change can be committed and pushed without raw artifacts entering Git.",
+      "evidence": "Final gate outputs, git status, git diff --check, git check-ignore, and git ls-files audits."
+    }
+  ]
+}
